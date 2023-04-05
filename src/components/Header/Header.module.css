@@ -1,0 +1,25 @@
+.container {
+    width: 1376px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 278px;
+    height: 43px;
+}
+
+.wrapper {}
+
+.link {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    text-decoration: none;
+    margin-left: 50px;
+}
