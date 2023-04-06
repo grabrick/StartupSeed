@@ -17,8 +17,8 @@ function Header() {
             <NavLink className={m.link}>Контакты</NavLink>
         </div>
         <div className={m.wrapper}>
-            <button>Вход</button>
-            <button>Регистрация</button>
+            <button className={m.buttonLog}>Вход</button>
+            <button className={m.buttonReg}>Регистрация</button>
         </div>
       </div>
     </>

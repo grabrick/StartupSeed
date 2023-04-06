@@ -1,6 +1,91 @@
 .container {
     background-image: url('../../assets/images/384\ 1.svg');
     width: 1920px;
-    height: 960px;
+    height: 772px;
     background-repeat: no-repeat;
+}
+
+.title {
+    width: 286px;
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #D0FF49;
+}
+
+.wrapp {
+    margin-left: 130px;
+}
+
+.girl {
+    position: absolute;
+    top: 45px;
+    left: 1115px;
+}
+
+.wrappBtn {
+    margin-top: 61px;
+    display: flex;
+    align-items: center;
+    margin-left: 130px;
+}
+
+.discription {
+    width: 803px;
+    height: 134px;
+    margin: 0 0 56px 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 55px;
+    line-height: 67px;
+    color: #57595F;
+}
+
+.span {
+    margin: 0;
+    color: #D0FF49;
+}
+
+.text {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 21px;
+}
+
+.button {
+    cursor: pointer;
+    background-color: #D0FF49;
+    width: 165px;
+    height: 48px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    margin-right: 29px;
+}
+
+.more {
+    cursor: pointer;
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.wrapper {
+    margin-top: 149px;
 }

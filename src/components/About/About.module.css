@@ -1,0 +1,53 @@
+.container {
+    width: 1920px;
+    height: 900px;
+}
+
+.title {
+    height: 120px;
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 134px;
+    line-height: 163px;
+    text-shadow: 0px 1px 0 rgb(0, 0, 0, 0.1), 0px -1px 0 rgb(0, 0, 0, 0.1), 1px 0px 0 rgb(0, 0, 0, 0.1), -1px 0px 0 rgb(0, 0, 0, 0.1), 1px 1px 0 rgb(0, 0, 0, 0.1), 1px -1px 0 rgb(0, 0, 0, 0.1), -1px 1px 0 rgb(0, 0, 0, 0.1), -1px -1px 0 rgb(0, 0, 0, 0.1);
+    -webkit-text-shadow: 0px 1px 0 rgb(0, 0, 0, 0.1), 0px -1px 0 rgb(0, 0, 0, 0.1), 1px 0px 0 rgb(0, 0, 0, 0.1), -1px 0px 0 rgb(0, 0, 0, 0.1), 1px 1px 0 rgb(0, 0, 0, 0.1), 1px -1px 0 rgb(0, 0, 0, 0.1), -1px 1px 0 rgb(0, 0, 0, 0.1), -1px -1px 0 rgb(0, 0, 0, 0.1);
+    -moz-text-shadow: 0px 1px 0 rgb(0, 0, 0, 0.1), 0px -1px 0 rgb(0, 0, 0, 0.1), 1px 0px 0 rgb(0, 0, 0, 0.1), -1px 0px 0 rgb(0, 0, 0, 0.1), 1px 1px 0 rgb(0, 0, 0, 0.1), 1px -1px 0 rgb(0, 0, 0, 0.1), -1px 1px 0 rgb(0, 0, 0, 0.1), -1px -1px 0 rgb(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255);
+}
+
+.lowTitle {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 67px;
+    color: #57595F;
+}
+
+.aboutWrapp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aboutInfo {
+    margin-top: 96px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text {
+    position: absolute;
+    top: 1243px;
+    left: 123px;
+    width: 541px;
+    height: 180px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 130.9%;
+}
