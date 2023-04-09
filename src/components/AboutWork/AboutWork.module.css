@@ -1,0 +1,107 @@
+.container {
+    background-image: url(../../assets/images/Frame.svg);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 1920px;
+    height: 1137px;
+}
+
+.titleWrapp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 175px;
+    width: 828px;
+    height: 298px;
+}
+
+.title {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 49px;
+    text-align: center;
+    text-transform: lowercase;
+    color: #FFFFFF;
+}
+
+.span {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 67px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #D0FF49;
+}
+
+.text {
+    margin: 0;
+    margin-top: 118px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 67px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #FFFFFF;
+
+}
+
+.wrapper {
+    display: grid;
+    width: 1573px;
+    height: 294px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 1em;
+    margin-top: 114px;
+}
+
+.blockWrapp {
+    padding-left: 28px;
+    border-left: 1px solid #FFFFFF;
+    width: 313px;
+    height: 294px;
+}
+
+.numb {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 130px;
+    line-height: 130.9%;
+    color: #D0FF49;
+}
+
+.numbText {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 130.9%;
+    color: #FFFFFF;
+}
+
+.button {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    background-color: #D0FF49;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    width: 256px;
+    height: 48px;
+    margin-top: 121px;
+}

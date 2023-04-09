@@ -1,6 +1,8 @@
 .container {
+    background-image: url(../../assets/images/Frame3.svg);
+    display: flex;
     width: 1920px;
-    height: 900px;
+    height: 656px;
 }
 
 .title {
@@ -31,66 +33,4 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.aboutInfo {
-    margin-top: 96px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.text {
-    position: absolute;
-    top: 1243px;
-    left: 123px;
-    width: 541px;
-    height: 180px;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
-    line-height: 130.9%;
-}
-
-.wrappInfo {
-    width: 539px;
-    height: 514px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 55px;
-    grid-row-gap: 7em;
-    margin-left: 315px;
-}
-
-.poligon {
-    padding-top: 50px;
-}
-
-.about {
-    margin: 0;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 100px;
-    line-height: 130.9%;
-    color: #D0FF49;
-}
-
-.smallAbout {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 130.9%;
-    text-align: center;
-    color: #000000;
-    margin: 0;
-}
-
-.wrappText {
-    min-width: auto;
-    height: 203px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
 }

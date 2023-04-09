@@ -1,0 +1,101 @@
+.container {
+    background-image: url(../../assets/images/Frame2.svg);
+    width: 1920px;
+    height: 1009px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.title {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 67px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.span {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 67px;
+    text-align: center;
+    color: #D0FF49;
+}
+
+.textTitle {
+    margin-top: 50px;
+    height: 40px;
+    margin: 0;
+    text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+    -webkit-text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+    -moz-text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+    color: #383838;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 104.944px;
+    line-height: 128px;
+    text-align: center;
+}
+
+.titleWrapp {
+    margin-top: 68px;
+    height: 100px;
+}
+
+.element {
+    border: 1px solid #D0FF49;
+    width: 540px;
+    height: 245px;
+    border-radius: 7px;
+}
+
+.wrapper {
+    width: 1660px;
+    height: 510px;
+    display: grid;
+    grid-template-columns: repeat(3, 540px);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+.numbText {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 28px;
+    color: #FFFFFF;
+}
+
+.smallNumbText {
+    padding-top: 14px;
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.numb {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 100px;
+    line-height: 130.9%;
+    color: #D0FF49;
+}
+
+.elementWrapper {
+    margin-left: 33px;
+}
