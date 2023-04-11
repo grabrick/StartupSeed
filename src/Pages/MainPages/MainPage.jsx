@@ -4,6 +4,8 @@ import AboutProject from "../../components/AboutProject/AboutProject";
 import AboutWork from "../../components/AboutWork/AboutWork";
 import Intro from "../../components/Intro/Intro";
 import Registration from "../../components/Registration/Registration";
+import Slider from "../../components/Slider/Slider";
+import Submit from "../../components/Submit/Submit";
 
 function MainPage() {
     return (
@@ -14,6 +16,9 @@ function MainPage() {
             <AboutInfo />
             <AboutProject />
             <Registration />
+            <Slider />
+            <Submit />
+
         </>
     );
 }
