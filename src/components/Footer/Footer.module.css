@@ -1,0 +1,131 @@
+.container {
+    width: 1920px;
+    height: 300px;
+    background-color: #383838;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoWrapp {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.logo {
+    width: 278px;
+    height: 43px;
+    margin-top: 74px;
+    margin-left: 130px;
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 67px;
+    margin-left: 143px;
+}
+
+.title {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 127.88%;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0 0 24px 0;
+
+}
+
+.text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 127.88%;
+    font-variant: all-small-caps;
+    color: rgba(255, 255, 255, 0.52);
+    margin: 0 0 8px 0;
+}
+
+.numbPhone {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16.429px;
+    line-height: 20px;
+    color: #A19A9A;
+    margin: 0;
+    height: 10px;
+}
+
+.numbMail {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16.429px;
+    line-height: 19px;
+    text-align: center;
+    color: #A19A9A;
+    margin: 0;
+}
+
+.button {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 21px;
+    color: #000000;
+    background-color: #D0FF49;
+    width: 260px;
+    height: 47px;
+    border: none;
+    margin: 30px 0 21px 0;
+}
+
+.numbText {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14.082px;
+    line-height: 127.88%;
+    color: #A19A9A;
+    margin: 0;
+}
+
+.numbSmallText {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 8.2145px;
+    line-height: 127.88%;
+    text-transform: uppercase;
+    color: #A19A9A;
+    margin: 0;
+}
+
+.numbWrapp {
+    display: flex;
+}
+
+.mailWrapp {
+    margin-top: 10px;
+    display: flex;
+}
+
+.imagePhone {
+    padding-right: 12px;
+}
+
+.imageMail {
+    padding-right: 12px;
+}
+
+.socInfo {
+    margin-top: 44px;
+    margin-right: 110px;
+}

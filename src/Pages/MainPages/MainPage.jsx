@@ -2,6 +2,7 @@ import About from "../../components/About/About";
 import AboutInfo from "../../components/AboutInfo/AboutInfo";
 import AboutProject from "../../components/AboutProject/AboutProject";
 import AboutWork from "../../components/AboutWork/AboutWork";
+import Footer from "../../components/Footer/Footer";
 import Intro from "../../components/Intro/Intro";
 import Registration from "../../components/Registration/Registration";
 import Slider from "../../components/Slider/Slider";
@@ -18,7 +19,7 @@ function MainPage() {
             <Registration />
             <Slider />
             <Submit />
-
+            <Footer />
         </>
     );
 }
