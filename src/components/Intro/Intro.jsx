@@ -1,6 +1,5 @@
 import Header from "../Header/Header";
 import m from "./Intro.module.css";
-import girl from "../../assets/images/girl.svg"
 
 function Intro() {
   return (
@@ -18,7 +17,6 @@ function Intro() {
               Расскажи нам о своей бизнесс идеии и мы поможем вам
               <br /> воплотить ваши идеии в реальность
             </p>
-            <img src={girl} alt="" className={m.girl} />
           </div>
 
           <div className={m.wrappBtn}>

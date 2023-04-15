@@ -1,5 +1,5 @@
 .container {
-    background-image: url('../../assets/images/384\ 1.svg');
+    background-image: url('../../assets/images/Frame7.svg');
     width: 1920px;
     height: 772px;
     background-repeat: no-repeat;
@@ -18,12 +18,6 @@
 
 .wrapp {
     margin-left: 130px;
-}
-
-.girl {
-    position: absolute;
-    top: 45px;
-    left: 1115px;
 }
 
 .wrappBtn {
@@ -60,6 +54,7 @@
 }
 
 .button {
+    text-decoration: none;
     cursor: pointer;
     background-color: #D0FF49;
     width: 165px;
@@ -76,6 +71,7 @@
 }
 
 .more {
+    text-decoration: none;
     cursor: pointer;
     margin: 0;
     font-family: 'Montserrat';

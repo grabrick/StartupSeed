@@ -56,6 +56,8 @@
 }
 
 .button {
+    cursor: pointer;
+    text-decoration: none;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
@@ -72,6 +74,7 @@
 }
 
 .input {
+    padding-left: 35px;
     margin-left: 20px;
     width: 540px;
     font-family: 'Montserrat';

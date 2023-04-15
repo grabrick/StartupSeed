@@ -5,7 +5,7 @@ function Submit() {
     <div className={m.container}>
       <div className={m.aboutWrapp}>
         <h1 className={m.title}>Хочешь быть спикером?</h1>
-        <span className={m.lowTitle}>Хочешь быть спикером?</span>
+        <p className={m.lowTitle}>Хочешь быть <span className={m.span}>спикером?</span></p>
       </div>
 
       <div className={m.regWrapp}>

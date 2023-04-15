@@ -92,6 +92,7 @@
 }
 
 .button {
+    text-decoration: none;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;

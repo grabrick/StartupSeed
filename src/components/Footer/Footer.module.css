@@ -15,6 +15,7 @@
 }
 
 .logo {
+    cursor: pointer;
     width: 278px;
     height: 43px;
     margin-top: 74px;
@@ -41,6 +42,7 @@
 }
 
 .text {
+    cursor: pointer;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
@@ -74,6 +76,8 @@
 }
 
 .button {
+    cursor: pointer;
+    text-decoration: none;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -94,7 +98,7 @@
     font-size: 14.082px;
     line-height: 127.88%;
     color: #A19A9A;
-    margin: 0;
+    margin: 0 0 15px 0;
 }
 
 .numbSmallText {
@@ -128,4 +132,18 @@
 .socInfo {
     margin-top: 44px;
     margin-right: 110px;
+}
+
+.socWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.image {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.image:nth-child(1) {
+    margin-left: 50px;
 }
