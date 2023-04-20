@@ -2,13 +2,19 @@ import m from "./Header.module.css";
 import Logo from "../../assets/images/logo.svg";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import Popup from "../Popup/Popup";
+import RegisterPopup from "../AuthUser/RegisterPopup/RegisterPopup";
+import LoginPopup from "../AuthUser/LoginPopup/LoginPopup"
 
 function Header() {
-  const [isPopup, setIsPopup] = useState(false);
+  const [isPopupReg, setIsPopupReg] = useState(false);
+  const [isPopupLog, setIsPopupLog] = useState(false);
   
   const handlePopupRegistrClick = () => {
-    setIsPopup(true);
+    setIsPopupReg(true);
+  };
+
+  const handlePopupLoginClick = () => {
+    setIsPopupLog(true);
   };
 
   return (
@@ -25,10 +31,11 @@ function Header() {
             <NavLink className={m.link}>Контакты</NavLink>
         </div>
         <div className={m.wrapper}>
-            <button className={m.buttonLog}>Вход</button>
+            <button className={m.buttonLog} onClick={handlePopupLoginClick}>Вход</button>
             <button className={m.buttonReg} onClick={handlePopupRegistrClick}>Регистрация</button>
         </div>
-        {isPopup === true && <Popup close={setIsPopup} />}
+        {isPopupLog === true && <LoginPopup close={setIsPopupLog} />}
+        {isPopupReg === true && <RegisterPopup close={setIsPopupReg} />}
       </div>
     </>
   );

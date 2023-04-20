@@ -118,6 +118,9 @@
 }
 
 .popup__register_container-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #DDE1E1;
     border-radius: 10px;
     box-sizing: border-box;
