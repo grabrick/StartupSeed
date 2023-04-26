@@ -1,0 +1,44 @@
+.infoBar {
+    /* width: 838px; */
+    /* height: 507px; */
+    display: flex;
+}
+
+.titleSmall {
+    margin: 0 0 20px 0;
+}
+
+.inputWrapper {
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selector {
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 0.25rem;
+    border: 1px solid #bdbdbd;
+    background-color: transparent;
+    width: 380px;
+    height: 40px;
+    margin: 0;
+}
+
+.selector:focus {
+    /* color: #93b633; */
+    background-color: transparent;
+    border-color: #93b633;
+    outline: 0;
+    /* box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25); */
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.infoWrapp {
+    padding: 20px;
+    width: 838px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}

@@ -4,6 +4,7 @@ import MainPages from "./Pages/MainPages/MainPage";
 import "./App.css";
 import ModifiedMainPage from "./Pages/AuthMainPage/AuthMainPage";
 import MainProfile from "./Pages/MainProfile/MainProfile";
+import EditPages from "./Pages/EditPages/EditPages";
 
 function useRoutes(isAuthticated) {
   if (isAuthticated) {
@@ -12,6 +13,7 @@ function useRoutes(isAuthticated) {
         <Routes>
           <Route path="/" element={<ModifiedMainPage />} />
           <Route path="/profile" element={<MainProfile />} />
+          <Route path="/edit" element={<EditPages />} />
         </Routes>
       </div>
     );

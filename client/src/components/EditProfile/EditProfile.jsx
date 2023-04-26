@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import ModifiedHeader from "../Header/ModifiedHeader/ModifiedHeader";
 import pen from "../../assets/images/edit-line.svg";
 import lines from "../../assets/images/menu-3-line.svg";
@@ -5,10 +6,12 @@ import doors from "../../assets/images/door-open-line.svg";
 import gear from "../../assets/images/settings-5-line.svg";
 import star from "../../assets/images/star-line.svg";
 import cases from "../../assets/images/briefcase-line.svg";
-import m from "./Profile.module.css";
-import { NavLink } from "react-router-dom";
+import m from "./EditProfile.module.css";
+import PersonalForm from "../Form/PersonalForm/PersonalForm";
+import ProfessionalForm from "../Form/ProfessionalForm/ProfessionalForm";
+import ExperienceForm from "../Form/ExperienceForm/ExperienceForm";
 
-function Profile() {
+function EditProfile() {
   return (
     <div className={m.container}>
       <ModifiedHeader />
@@ -17,14 +20,6 @@ function Profile() {
 
       <div className={m.wrapper}>
         <div className={m.bar}>
-          <div className={m.profileWrapp}>
-            <div className={m.avatar}></div>
-            <p className={m.name}>dfdfdfdfd</p>
-          </div>
-          <select className={m.selector} name="" id="">
-            <option value="В поиске проекта">В поиске проекта</option>
-            <option value="Не ищу проект">Не ищу проект</option>
-          </select>
           <NavLink className={m.button} to="/profile">
             <button className={m.button}>
               <div className={m.btnWrapp}>
@@ -69,15 +64,14 @@ function Profile() {
             </button>
           </NavLink>
         </div>
-
-        <div className={m.infoBar}>
-          <div className={m.infoWrapp}>
-            <h3 className={m.infoTitle}>Профессиональная информация</h3>
-          </div>
+        <div className={m.formWrapper}>
+          <PersonalForm />
+          <ProfessionalForm />
+          <ExperienceForm />
         </div>
       </div>
     </div>
   );
 }
 
-export default Profile;
+export default EditProfile;

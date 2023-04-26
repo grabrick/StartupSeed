@@ -1,0 +1,278 @@
+.popup__button_register-save2 {
+    width: 250px;
+    height: 30px;
+    color: #000000;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center; 
+    border: 1px solid #1F1F1F;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin-left: 590px;
+}
+.popup__button_register-save2:hover {
+    border: 2px solid #93b633;
+    transition: linear 0.3s;
+    color: #93b633;
+}
+
+/* VALIDATE */
+
+.text-field__input-reg__error2 .auth__main_input-bio__error2 {
+    border-color: red;
+    background-color: #DDE1E1;
+    /* height: calc(2.5rem + 2px); */
+    padding: 0.5rem 0.75rem;
+}
+
+.auth__main_input-bio__error2 {
+    width: 300px;
+    height: 20px;
+}
+
+.text-field__input-reg__error2 {
+    display: block;
+    /* height: calc(2.25rem + 2px); */
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #DDE1E1;
+    background-clip: padding-box;
+    border: 1px solid red;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    appearance: none;
+}
+
+.text-field__input-reg__error2:focus {
+    color: red;
+    background-color: #DDE1E1;
+    border-color: red;
+    outline: 0;
+    /* box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25); */
+    box-shadow: 0 0 0 0.1rem rgb(255, 0, 0);
+}
+
+.text-field__label-reg__error2 {
+    position: absolute;
+    top: 0%;
+    left: 0.3125rem;
+    display: flex;
+    transform: translateY(-50%);
+    pointer-events: none;
+    border: none;
+    background-color: #DDE1E1;
+    color: red;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    transition: top 0.1s ease-in-out, scale 0.1s ease-in-out;
+}
+.text-field__label-reg__error2 {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* VALIDATE */
+
+.auth__main_reg-text2 {
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+
+.popup__register_container-wrapper2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #DDE1E1;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 25px rgb(0 0 0 / 15%);
+    /* padding: 0 15px; */
+    position: relative;
+    overflow: auto;
+}
+
+.auth__main_reg-input__user_wrapper2 {
+
+}
+
+.auth__popup_wrapp-wrapper2 {
+    padding-top: 5px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.auth__main_register-input__user_wrapper2 {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.auth__main_input-name2 {
+    width: 380px;
+    height: 20px;
+}
+
+.auth__main_input2 {
+    width: 810px;
+    height: 20px;
+}
+
+.auth__main_input-bio2 {
+    width: 300px;
+    height: 20px;
+}
+
+.text-field__input-registr2 {
+    display: block;
+    /* height: calc(2.25rem + 2px); */
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    appearance: none;
+}
+
+
+
+
+
+/* text field */
+.text-field-reg2 {
+    margin-bottom: 1.5rem;
+}
+
+.text-field__label-reg2 {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.text-field__input-reg2 {
+    /* display: block; */
+    /* height: calc(2.25rem + 2px); */
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.text-field__input-reg2[type="search"]::-webkit-search-decoration,
+.text-field__input-reg2[type="search"]::-webkit-search-cancel-button,
+.text-field__input-reg2[type="search"]::-webkit-search-results-button,
+.text-field__input-reg2[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}
+
+.text-field__input-reg2::placeholder {
+    color: transparent;
+    opacity: 0.4;
+}
+
+.text-field__input-reg2:focus {
+    /* color: #93b633; */
+    background-color: transparent;
+    border-color: #93b633;
+    outline: 0;
+    /* box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25); */
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.text-field__input-reg2:disabled,
+.text-field__input-reg2[readonly] {
+    background-color: transparent;
+    opacity: 1;
+}
+
+/* with floating label */
+.text-field_floating-reg2 {
+    position: relative;
+}
+
+.text-field_floating-reg2 .text-field__input-reg2 {
+    background-color: transparent;
+    /* height: calc(2.5rem + 2px); */
+    padding: 0.5rem 0.75rem;
+}
+
+.text-field_floating-reg2 .text-field__label-reg2 {
+    position: absolute;
+    top: 50%;
+    left: 0.3125rem;
+    display: flex;
+    transform: translateY(-50%);
+    pointer-events: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    transition: top 0.1s ease-in-out, scale 0.1s ease-in-out;
+}
+
+.span {
+    position: absolute;
+    transform: translateY(-50%) scale(0.75);
+    left: 10px;
+    top: -10px;
+}
+
+.auth__main_reg-input__user_wrapper2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.text-field_floating-reg2 .text-field__input-reg2::-moz-placeholder {
+    color: transparent;
+}
+
+.text-field_floating-reg2 .text-field__input-reg2::placeholder {
+    color: transparent;
+}
+
+.text-field_floating-reg2 .text-field__input-reg2:focus~.text-field__label-reg2,
+.text-field_floating-reg2 .text-field__input-reg2:not(:placeholder-shown)~.text-field__label-reg2 {
+    top: -10px;
+    transform: translateY(-50%) scale(0.75);
+}
+
+.text-lable-reg2 {
+    font-size: 12px;
+}
+
+.text__field_input2 {
+    width: 551px;
+
+}
+
+.error-text2 {
+    margin: 0;
+    color: red;
+}
