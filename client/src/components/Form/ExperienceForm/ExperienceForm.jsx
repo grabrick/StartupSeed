@@ -3,11 +3,10 @@ import React from "react";
 import "./ExperienceForm.css";
 
 function ExperienceForm() {
-
   return (
     <div className={m.infoBar}>
       <div className={m.infoWrapp}>
-        <h3 className={m.titleSmall}>Профессиональная информация</h3>
+        <h3 className={m.titleSmall}>Опыт работы</h3>
         <form className="popup__form3" name="register">
           <div className="auth__main_reg-input__user_wrapper3">
             <div className={m.inputWrapper}>
@@ -61,21 +60,30 @@ function ExperienceForm() {
               </div>
             </div>
             <div className="text-field-reg3 text-field_floating-reg3 auth__main_input-email_wrapper3">
-                <textarea
-                  type="text"
-                  placeholder="Опешите ваши задачи и достижения"
-                  id="name"
-                  name="email"
-                  className="text-field__input-reg3 auth__main_input-name32 text-input__textarea"
-                />
-              </div>
-            <button
-              type="submit"
-              className="popup__button_register-save3"
-              name="submit"
-            >
-              Сохранить
-            </button>
+              <textarea
+                type="text"
+                placeholder="Опешите ваши задачи и достижения"
+                id="name"
+                name="email"
+                className="text-field__input-reg3 auth__main_input-name32 text-input__textarea"
+              />
+            </div>
+            <div className={m.buttonWrapper}>
+              <button
+                type="submit"
+                className="popup__button_register-cancel3"
+                name="submit"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="popup__button_register-save3"
+                name="submit"
+              >
+                Сохранить
+              </button>
+            </div>
           </div>
         </form>
       </div>

@@ -10,6 +10,9 @@ import m from "./EditProfile.module.css";
 import PersonalForm from "../Form/PersonalForm/PersonalForm";
 import ProfessionalForm from "../Form/ProfessionalForm/ProfessionalForm";
 import ExperienceForm from "../Form/ExperienceForm/ExperienceForm";
+import EducationForm from "../Form/EducationForm/EducationForm";
+import QualificationsForm from "../Form/QualificationsForm/QualificationsForm";
+import AboutForm from "../Form/AboutForm/AboutForm";
 
 function EditProfile() {
   return (
@@ -68,6 +71,9 @@ function EditProfile() {
           <PersonalForm />
           <ProfessionalForm />
           <ExperienceForm />
+          <EducationForm />
+          <QualificationsForm />
+          <AboutForm />
         </div>
       </div>
     </div>

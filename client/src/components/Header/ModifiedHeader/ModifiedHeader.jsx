@@ -9,7 +9,9 @@ function ModifiedHeader() {
     <>
       <div className={m.container}>
         <div className={m.wrapper}>
-          <img src={Logo} alt="" className={m.logo} />
+          <NavLink to="/home">
+            <img src={Logo} alt="" className={m.logo} />
+          </NavLink>
 
           <div className={m.wrapper}>
             <NavLink className={m.link}>Проекты</NavLink>

@@ -1,4 +1,4 @@
-.popup__button_register-save3 {
+.popup__button_register-save4 {
     width: 250px;
     height: 30px;
     color: #000000;
@@ -15,13 +15,13 @@
     margin-bottom: 10px;
     margin-left: 20px;
 }
-.popup__button_register-save3:hover {
+.popup__button_register-save4:hover {
     border: 2px solid #93b633;
     transition: linear 0.3s;
     color: #93b633;
 }
 
-.popup__button_register-cancel3 {
+.popup__button_register-cancel4 {
     width: 250px;
     height: 30px;
     color: #000000;
@@ -37,7 +37,7 @@
     border-radius: 8px;
     margin-bottom: 10px;
 }
-.popup__button_register-cancel3:hover {
+.popup__button_register-cancel4:hover {
     border: 2px solid red;
     transition: linear 0.3s;
     color: red;
@@ -45,19 +45,19 @@
 
 /* VALIDATE */
 
-.text-field__input-reg__error3 .auth__main_input-bio__error3 {
+.text-field__input-reg__error4 .auth__main_input-bio__error4 {
     border-color: red;
     background-color: #DDE1E1;
     /* height: calc(2.5rem + 2px); */
     padding: 0.5rem 0.75rem;
 }
 
-.auth__main_input-bio__error3 {
+.auth__main_input-bio__error4 {
     width: 300px;
     height: 20px;
 }
 
-.text-field__input-reg__error3 {
+.text-field__input-reg__error4 {
     display: block;
     /* height: calc(2.25rem + 2px); */
     padding: 0.375rem 0.75rem;
@@ -74,7 +74,7 @@
     appearance: none;
 }
 
-.text-field__input-reg__error3:focus {
+.text-field__input-reg__error4:focus {
     color: red;
     background-color: #DDE1E1;
     border-color: red;
@@ -83,7 +83,7 @@
     box-shadow: 0 0 0 0.1rem rgb(255, 0, 0);
 }
 
-.text-field__label-reg__error3 {
+.text-field__label-reg__error4 {
     position: absolute;
     top: 0%;
     left: 0.3125rem;
@@ -97,20 +97,20 @@
     padding-right: 0.5rem;
     transition: top 0.1s ease-in-out, scale 0.1s ease-in-out;
 }
-.text-field__label-reg__error3 {
+.text-field__label-reg__error4 {
     display: block;
     margin-bottom: 0.25rem;
 }
 
 /* VALIDATE */
 
-.auth__main_reg-text3 {
+.auth__main_reg-text4 {
     font-size: 16px;
     font-weight: 500;
     padding-bottom: 10px;
 }
 
-.popup__register_container-wrapper3 {
+.popup__register_container-wrapper4 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -123,48 +123,48 @@
     overflow: auto;
 }
 
-.auth__main_reg-input__user_wrapper3 {
+.auth__main_reg-input__user_wrapper4 {
 
 }
 
-.auth__popup_wrapp-wrapper3 {
+.auth__popup_wrapp-wrapper4 {
     padding-top: 5px;
     padding-left: 10px;
     display: flex;
     align-items: center;
 }
 
-.auth__main_register-input__user_wrapper3 {
+.auth__main_register-input__user_wrapper4 {
     margin-top: 30px;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.auth__main_input-name3 {
-    width: 380px;
+.auth__main_input-name4 {
+    width: 810px;
     height: 20px;
 }
-.auth__main_input-name32 {
-    width: 810px;
-    height: 80px;
+.auth__main_input-date4 {
+    width: 380px;
+    height: 20px;
 }
 
 .text-input__textarea {
     resize: none;
 }
 
-.auth__main_input3 {
+.auth__main_input4 {
     width: 810px;
     height: 20px;
 }
 
-.auth__main_input-bio3 {
+.auth__main_input-bio4 {
     width: 300px;
     height: 20px;
 }
 
-.text-field__input-registr3 {
+.text-field__input-registr4 {
     display: block;
     /* height: calc(2.25rem + 2px); */
     padding: 0.375rem 0.75rem;
@@ -186,16 +186,16 @@
 
 
 /* text field */
-.text-field-reg3 {
+.text-field-reg4 {
     margin-bottom: 1.5rem;
 }
 
-.text-field__label-reg3 {
+.text-field__label-reg4 {
     display: block;
     margin-bottom: 0.25rem;
 }
 
-.text-field__input-reg3 {
+.text-field__input-reg4 {
     /* display: block; */
     /* height: calc(2.25rem + 2px); */
     padding: 0.375rem 0.75rem;
@@ -214,19 +214,19 @@
     appearance: none;
 }
 
-.text-field__input-reg3[type="search"]::-webkit-search-decoration,
-.text-field__input-reg3[type="search"]::-webkit-search-cancel-button,
-.text-field__input-reg3[type="search"]::-webkit-search-results-button,
-.text-field__input-reg3[type="search"]::-webkit-search-results-decoration {
+.text-field__input-reg4[type="search"]::-webkit-search-decoration,
+.text-field__input-reg4[type="search"]::-webkit-search-cancel-button,
+.text-field__input-reg4[type="search"]::-webkit-search-results-button,
+.text-field__input-reg4[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
 }
 
-.text-field__input-reg3::placeholder {
+.text-field__input-reg4::placeholder {
     color: black;
     opacity: 0.4;
 }
 
-.text-field__input-reg3:focus {
+.text-field__input-reg4:focus {
     /* color: #93b633; */
     background-color: transparent;
     border-color: #93b633;
@@ -235,24 +235,24 @@
     box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
 }
 
-.text-field__input-reg3:disabled,
-.text-field__input-reg3[readonly] {
+.text-field__input-reg4:disabled,
+.text-field__input-reg4[readonly] {
     background-color: transparent;
     opacity: 1;
 }
 
 /* with floating label */
-.text-field_floating-reg3 {
+.text-field_floating-reg4 {
     position: relative;
 }
 
-.text-field_floating-reg3 .text-field__input-reg3 {
+.text-field_floating-reg4 .text-field__input-reg4 {
     background-color: transparent;
     /* height: calc(2.5rem + 2px); */
     padding: 0.5rem 0.75rem;
 }
 
-.text-field_floating-reg3 .text-field__label-reg3 {
+.text-field_floating-reg4 .text-field__label-reg4 {
     position: absolute;
     top: 50%;
     left: 0.3125rem;
@@ -273,37 +273,37 @@
     top: -10px;
 }
 
-.auth__main_reg-input__user_wrapper3 {
+.auth__main_reg-input__user_wrapper4 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.text-field_floating-reg3 .text-field__input-reg3::-moz-placeholder {
+.text-field_floating-reg4 .text-field__input-reg4::-moz-placeholder {
     color: transparent;
 }
 
-.text-field_floating-reg3 .text-field__input-reg3::placeholder {
+.text-field_floating-reg4 .text-field__input-reg4::placeholder {
     /* color: transparent; */
 }
 
 
-.text-field_floating-reg3 .text-field__input-reg3:focus~.text-field__label-reg3,
-.text-field_floating-reg3 .text-field__input-reg3:not(:placeholder-shown)~.text-field__label-reg3 {
+.text-field_floating-reg4 .text-field__input-reg4:focus~.text-field__label-reg4,
+.text-field_floating-reg4 .text-field__input-reg4:not(:placeholder-shown)~.text-field__label-reg4 {
     top: -10px;
     transform: translateY(-50%) scale(0.75);
 }
 
-.text-lable-reg3 {
+.text-lable-reg4 {
     font-size: 12px;
 }
 
-.text__field_input3 {
+.text__field_input4 {
     width: 551px;
 
 }
 
-.error-text3 {
+.error-text4 {
     margin: 0;
     color: red;
 }

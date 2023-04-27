@@ -5,13 +5,14 @@ import Mail from "../../assets/images/mail.svg";
 import Telega from "../../assets/images/telegram.svg";
 import VK from "../../assets/images/vk.svg";
 import Insta from "../../assets/images/instagram.svg";
+import { NavLink } from "react-router-dom";
 
 function Footer() {
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
         <div className={m.infoWrapp}>
-          <img className={m.logo} src={Logo} alt="" />
+            <img className={m.logo} src={Logo} alt="" />
           <div className={m.textWrapper}>
             <h3 className={m.title}>О проекте</h3>
             <span className={m.text}>
