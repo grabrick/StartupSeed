@@ -20,16 +20,17 @@ function useRoutes(isAuthticated) {
         </Routes>
       </div>
     );
+  } else {
+    return (
+      <div className="container">
+        <Routes>
+          {/* --------- Redirect------- */}
+          <Route path="/edit" element={<Navigate to="/" replace />} />
+          <Route path="/" element={<MainPages />} />
+        </Routes>
+      </div>
+    );
   }
-  return (
-    <div className="container">
-      <Routes>
-        {/* --------- Redirect------- */}
-        <Route path="/edit" element={<Navigate to="/" replace />} />
-        <Route path="/" element={<MainPages />} />
-      </Routes>
-    </div>
-  );
 }
 
 export default useRoutes;

@@ -1,6 +1,5 @@
 .container {
     background-image: url(../../assets/images/Frame2.svg);
-    width: 1920px;
     height: 1009px;
     display: flex;
     justify-content: center;

@@ -1,8 +1,16 @@
 import m from "./ExperienceForm.module.css";
 import React from "react";
 import "./ExperienceForm.css";
+import { changeExp } from "../../../redux/slices/formSlice";
+import { useDispatch } from "react-redux";
 
 function ExperienceForm() {
+  const dispatch = useDispatch()
+
+  const submit = () => {
+    dispatch(changeExp(true))
+  }
+
   return (
     <div className={m.infoBar}>
       <div className={m.infoWrapp}>
@@ -70,9 +78,10 @@ function ExperienceForm() {
             </div>
             <div className={m.buttonWrapper}>
               <button
-                type="submit"
+                type=""
                 className="popup__button_register-cancel3"
                 name="submit"
+                onClick={() => submit()}
               >
                 Отмена
               </button>

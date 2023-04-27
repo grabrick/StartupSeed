@@ -1,8 +1,16 @@
 import m from "./QualificationsForm.module.css";
 import React from "react";
 import "./QualificationsForm.css";
+import { changeQual } from "../../../redux/slices/formSlice";
+import { useDispatch } from "react-redux";
 
 function QualificationsForm() {
+  const dispatch = useDispatch()
+
+  const submit = () => {
+    dispatch(changeQual(true))
+  }
+
   return (
     <div className={m.infoBar}>
       <div className={m.infoWrapp}>
@@ -61,9 +69,10 @@ function QualificationsForm() {
             </div>
             <div className={m.buttonWrapper}>
               <button
-                type="submit"
+                type=""
                 className="popup__button_register-cancel5"
                 name="submit"
+                onClick={() => submit()}
               >
                 Отмена
               </button>

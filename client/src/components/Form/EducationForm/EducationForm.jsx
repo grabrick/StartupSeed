@@ -1,8 +1,16 @@
 import m from "./EducationForm.module.css";
 import React from "react";
 import "./EducationForm.css";
+import { changeProf } from "../../../redux/slices/formSlice";
+import { useDispatch } from "react-redux";
 
 function EducationForm() {
+  const dispatch = useDispatch()
+
+  const submit = () => {
+    dispatch(changeProf(true))
+  }
+
   return (
     <div className={m.infoBar}>
       <div className={m.infoWrapp}>
@@ -61,9 +69,10 @@ function EducationForm() {
             </div>
             <div className={m.buttonWrapper}>
               <button
-                type="submit"
+                type=""
                 className="popup__button_register-cancel4"
                 name="submit"
+                onClick={() => submit()}
               >
                 Отмена
               </button>
