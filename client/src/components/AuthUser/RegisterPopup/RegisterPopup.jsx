@@ -1,30 +1,40 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHttp } from "../../../hooks/http.hook";
 import "./RegisterPopup.css";
+import { AuthContext } from "../../../context/AuthContext";
 
 const Popup = ({ close }) => {
   // const normalInput = "text-field__input-reg auth__main_input-bio";
   // const errorInput = "text-field__input-reg__error auth__main_input-bio__error";
   // const normalLable = "text-field__label-reg text-lable";
   // const errorLable = "text-field__label-reg__error text-lable";
+  const auth = useContext(AuthContext)
   const inactive = "popup__register";
   const active = "popup__register_opened";
   const [popup] = useState(false);
   const { loading, request } = useHttp();
+  const [formL, setFormL] = useState({
+    email: "",
+    password: "",
+});
   const [form, setForm] = useState({
       fname: "",
       lname: "",
       email: "",
       password: "",
+      
   });
 
   const changeHandler = (event) => {
     setForm({...form, [event.target.name]: event.target.value})
+    setFormL({...form, [event.target.name]: event.target.value})
 }
 
   const registerHandler = async () => {
     try {
       const data = await request("/api/auth/register", "POST", { ...form });
+      const login = await request("/api/auth/login", "POST", {...formL})
+      auth.login(login.token, login.userId)
       console.log("Data", data);
     } catch (e) {
       console.log(e);

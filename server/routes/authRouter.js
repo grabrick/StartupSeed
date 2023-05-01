@@ -1,7 +1,8 @@
 const {Router} = require('express')
+const {check} = require('express-validator')
 const router = Router()
 const controller = require('../routes/authController/authController')
-const {check} = require('express-validator')
+const upload = require('../middleware/upload')
 
 router.post(
     '/register',
@@ -22,5 +23,35 @@ router.post(
     controller.login
 )
 
+router.get(
+    '/get',
+    controller.getPerson
+)
+
+router.put(
+    '/edit/person',
+    upload.single('profilePic'),
+    controller.editPerson
+)
+router.put(
+    '/edit/prof',
+    controller.editProf
+)
+router.put(
+    '/edit/exp',
+    controller.editExp
+)
+router.put(
+    '/edit/edu',
+    controller.editEdu
+)
+router.put(
+    '/edit/qual',
+    controller.editQual
+)
+router.put(
+    '/edit/about',
+    controller.editAbout
+)
 
 module.exports = router

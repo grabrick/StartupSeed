@@ -7,8 +7,27 @@ import star from "../../assets/images/star-line.svg";
 import cases from "../../assets/images/briefcase-line.svg";
 import m from "./Profile.module.css";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getPerson } from "../../redux/slices/personalSlice";
+import axios from "axios";
 
 function Profile() {
+  const dispatch = useDispatch()
+  const data = useSelector((state) => state.personal.person)
+  const Person = (items) => {
+    dispatch(getPerson(items))
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/auth/get')
+    .then((items) => {
+      Person(items.data.more.pers)
+    }).catch((e) => {
+      console.log(e)
+    })
+  }, [])
+
   return (
     <div className={m.container}>
       <ModifiedHeader />
@@ -18,8 +37,8 @@ function Profile() {
       <div className={m.wrapper}>
         <div className={m.bar}>
           <div className={m.profileWrapp}>
-            <div className={m.avatar}></div>
-            <p className={m.name}>dfdfdfdfd</p>
+            <img alt="" src={data.profilePic} className={m.avatar}></img>
+            <p className={m.name}><span>{data.fname}</span>  <span>{data.lname}</span></p>
           </div>
           <select className={m.selector} name="" id="">
             <option value="В поиске проекта">В поиске проекта</option>

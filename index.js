@@ -8,6 +8,7 @@ const MongoUrl = "mongodb+srv://startupseed:fPfsQ4SLYHxbGv2Q@startupseed.rlvehoj
 
 app.use(express.json({ extended: true }))
 app.use('/api/auth', require('./server/routes/authRouter'))
+// app.use('/api/', require('./server/routes/authRouter'))
 
 async function start() {
   try {

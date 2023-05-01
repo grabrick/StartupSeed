@@ -21,8 +21,6 @@ function EditProfile() {
   const isVisibleExp = useSelector((state) => state.form.visibleExp);
   const isVisibleEdu = useSelector((state) => state.form.visibleProf);
   const isVisibleQual = useSelector((state) => state.form.visibleQual);
-  console.log(isVisibleExp);
-  // const [visible, isVisible] = useState(true)
 
   const changeExperience = () => {
     dispatch(changeExp(false))

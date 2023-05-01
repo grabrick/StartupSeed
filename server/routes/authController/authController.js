@@ -31,13 +31,17 @@ class authController {
 
 
             const hash = await bcrypt.hash(password, 4);
-            const user = new User({fname, lname, email, password: hash})
+            const date = {
+                fname, lname, email, password: hash,
+                more: {}
+            }
+            const user = new User(date)
 
             await user.save()
 
             res.status(201).json({ message: 'Пользователь создан' })
         } catch (e) {
-            res.status(500).json({ message: 'error???? pizda' })
+            res.status(500).json({ message: e })
         }
     }
 
@@ -54,7 +58,7 @@ class authController {
 
             const {email, password} = req.body
 
-            const user = await User.findOne({ email })
+            const user = await User.findOne({email})
             if(!user) {
                 return res.status(400).json({ message: 'Пользователь не найден' })
             }
@@ -72,6 +76,133 @@ class authController {
         }
     }
 
+    async getPerson(req, res) {
+        try {
+            const find = await User.findOne({})
+            return res.json(find)
+        } catch (e) {
+            res.status(500).json(e)
+        }
+    }
+
+    async editPerson(req, res) {
+        try {
+            const { fname, lname, gender, country, hb, city, profilePic } = req.body;
+            // console.log(profilePic);
+            const update = await User.findOneAndUpdate(
+                {}, 
+                {
+                    "more.pers.fname": fname,
+                    "more.pers.lname": lname,
+                    "more.pers.gender": gender,
+                    "more.pers.country": country,
+                    "more.pers.hb": hb,
+                    "more.pers.city": city,
+                    "more.pers.profilePic": profilePic,
+                }, 
+                {new: true}
+            )
+            
+            // const updatedUser = await update.save();
+            return res.json(update);
+        } catch (e) {
+            res.status(500).json({message: e})
+        }
+    }
+    async editProf(req, res) {
+        try {
+            const { post, postLevel, lang, langLevel, skills, } = req.body
+
+            const update = await User.findOneAndUpdate(
+                {}, 
+                {
+                    "more.job.post": post,
+                    "more.job.postLevel": postLevel,
+                    "more.job.lang": lang,
+                    "more.job.langLevel": langLevel,
+                    "more.job.skills": skills,
+                }, 
+                {new: true}
+            )
+            return res.json(update)
+        } catch (e) {
+            res.status(500).json({message: e})
+        }
+    }
+    async editExp(req, res) {
+        try {
+            const { jobPost, company, startJob, endJob, progress, } = req.body
+
+            const update = await User.findOneAndUpdate(
+                {}, 
+                {
+                    "more.exp.jobPost": jobPost,
+                    "more.exp.company": company,
+                    "more.exp.startJob": startJob,
+                    "more.exp.endJob": endJob,
+                    "more.exp.progress": progress,
+                }, 
+                {new: true}
+            )
+            return res.json(update)
+        } catch (e) {
+            res.status(500).json({message: e})
+        }
+    }
+    async editEdu(req, res) {
+        try {
+            const { specialization, institution, startEdu, endEdu } = req.body
+
+            const update = await User.findOneAndUpdate(
+                {}, 
+                {
+                    "more.edu.specialization": specialization,
+                    "more.edu.institution": institution,
+                    "more.edu.startEdu": startEdu,
+                    "more.edu.endEdu": endEdu,
+                }, 
+                {new: true}
+            )
+            return res.json(update)
+        } catch (e) {
+            res.status(500).json({message: e})
+        }
+    }
+    async editQual(req, res) {
+        try {
+            const { qualName, qualInstitution, startQual, endQual } = req.body
+
+            const update = await User.findOneAndUpdate(
+                {}, 
+                {
+                    "more.qual.qualName": qualName,
+                    "more.qual.qualInstitution": qualInstitution,
+                    "more.qual.startQual": startQual,
+                    "more.qual.endQual": endQual,
+                }, 
+                {new: true}
+            )
+            return res.json(update)
+        } catch (e) {
+            res.status(500).json({message: e})
+        }
+    }
+    async editAbout(req, res) {
+        try {
+            const { aboutMe } = req.body
+
+            const update = await User.findOneAndUpdate(
+                {}, 
+                {
+                    "more.about.aboutMe": aboutMe,
+                }, 
+                {new: true}
+            )
+            return res.json(update)
+        } catch (e) {
+            res.status(500).json({message: e})
+        }
+    }
 }
 
 module.exports = new authController()

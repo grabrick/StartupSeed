@@ -1,8 +1,9 @@
 import m from "./EducationForm.module.css";
-import React from "react";
+import React, { useState } from "react";
 import "./EducationForm.css";
 import { changeProf } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
+import { useHttp } from "../../../hooks/http.hook";
 
 function EducationForm() {
   const dispatch = useDispatch()
@@ -11,6 +12,32 @@ function EducationForm() {
     dispatch(changeProf(true))
   }
 
+  const { loading, request } = useHttp();
+  const [form, setForm] = useState({
+    specialization: "",
+    institution: "",
+    startEdu: "",
+    endEdu: "",
+  });
+
+  const changeHandler = (event) => {
+    setForm({...form, [event.target.name]: event.target.value})
+}
+
+  const registerHandler = async () => {
+    try {
+      const data = await request("/api/auth/edit/edu", "PUT", { ...form });
+      console.log("Data", data);
+      setForm({
+        specialization: "",
+        institution: "",
+        startEdu: "",
+        endEdu: "",
+      })
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className={m.infoBar}>
       <div className={m.infoWrapp}>
@@ -22,8 +49,10 @@ function EducationForm() {
                 type="text"
                 placeholder=" "
                 id="name"
-                name="email"
+                name="specialization"
                 className="text-field__input-reg4 auth__main_input-name4"
+                value={form.specialization}
+                onChange={changeHandler}
               />
               <label className="text-field__label-reg4 text-lable4">
                 Специальность
@@ -34,8 +63,10 @@ function EducationForm() {
                 type="text"
                 placeholder=" "
                 id="name"
-                name="email"
+                name="institution"
                 className="text-field__input-reg4 auth__main_input-name4"
+                value={form.institution}
+                onChange={changeHandler}
               />
               <label className="text-field__label-reg4 text-lable4">
                 Учебное заведение
@@ -47,8 +78,10 @@ function EducationForm() {
                   type="date"
                   placeholder=" "
                   id="name"
-                  name="email"
+                  name="startEdu"
                   className="text-field__input-reg4 auth__main_input-date4"
+                  value={form.startEdu}
+                  onChange={changeHandler}
                 />
                 <label className="text-field__label-reg4 text-lable4">
                   Начало обучения
@@ -59,8 +92,10 @@ function EducationForm() {
                   type="date"
                   placeholder=" "
                   id="name"
-                  name="email"
+                  name="endEdu"
                   className="text-field__input-reg4 auth__main_input-date4"
+                  value={form.endEdu}
+                  onChange={changeHandler}
                 />
                 <label className="text-field__label-reg4 text-lable4">
                   Окончание обучения
@@ -80,6 +115,8 @@ function EducationForm() {
                 type="submit"
                 className="popup__button_register-save4"
                 name="submit"
+                onClick={registerHandler}
+                disabled={loading}
               >
                 Сохранить
               </button>

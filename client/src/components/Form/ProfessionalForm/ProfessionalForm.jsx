@@ -1,8 +1,37 @@
 import m from "./ProfessionalForm.module.css";
-import React from "react";
+import React, { useState } from "react";
 import "./ProfessionalForm.css";
+import { useHttp } from "../../../hooks/http.hook";
 
 function ProfessionalForm() {
+  const { loading, request } = useHttp();
+  const [form, setForm] = useState({
+      post: "",
+      postLevel: "",
+      lang: "",
+      langLevel: "",
+      skills: "",
+  });
+
+  const changeHandler = (event) => {
+    setForm({...form, [event.target.name]: event.target.value})
+}
+
+  const registerHandler = async () => {
+    try {
+      const data = await request("/api/auth/edit/prof", "PUT", { ...form });
+      console.log("Data", data);
+      setForm({
+        post: "",
+        postLevel: "Не указан",
+        lang: "",
+        langLevel: "Не указан",
+        skills: "",
+      })
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className={m.infoBar}>
@@ -16,8 +45,10 @@ function ProfessionalForm() {
                   type="text"
                   placeholder="Желаемая должность"
                   id="name"
-                  name="email"
+                  name="post"
                   className="text-field__input-reg2 auth__main_input-name2"
+                  value={form.post}
+                  onChange={changeHandler}
                 />
                 <label className="text-field__label-reg2 text-lable2">
                   Желаемая должность
@@ -25,7 +56,7 @@ function ProfessionalForm() {
               </div>
               <div className="text-field-reg2 text-field_floating-reg2 auth__main_input-email_wrapper2">
                 <span className="span">Уровень</span>
-                <select className={m.selector} name="" id="">
+                <select className={m.selector} name="postLevel" value={form.postLevel} onChange={changeHandler}>
                   <option value="Не указан">Не указан</option>
                   <option value="Junior">Junior</option>
                   <option value="Middle">Middle</option>
@@ -40,8 +71,10 @@ function ProfessionalForm() {
                   type="text"
                   placeholder="Иностранный язык"
                   id="name"
-                  name="email"
+                  name="lang"
                   className="text-field__input-reg2 auth__main_input-name2"
+                  value={form.lang}
+                  onChange={changeHandler}
                 />
                 <label className="text-field__label-reg2 text-lable2">
                   Иностранный язык
@@ -49,7 +82,7 @@ function ProfessionalForm() {
               </div>
               <div className="text-field-reg2 text-field_floating-reg2 auth__main_input-email_wrapper2">
                 <span className="span">Уровень</span>
-                <select className={m.selector} name="" id="">
+                <select className={m.selector} name="langLevel" value={form.langLevel} onChange={changeHandler}>
                   <option value="Не указан">Не указан</option>
                   <option value="A1">A1</option>
                   <option value="A2">A2</option>
@@ -65,8 +98,10 @@ function ProfessionalForm() {
                 type="text"
                 placeholder="Навыки"
                 id="name"
-                name="email"
+                name="skills"
                 className="text-field__input-reg2 auth__main_input2"
+                value={form.skills}
+                onChange={changeHandler}
               />
               <label className="text-field__label-reg2 text-lable2">
                 Навыки
@@ -76,6 +111,8 @@ function ProfessionalForm() {
               type="submit"
               className="popup__button_register-save2"
               name="submit"
+              onClick={registerHandler}
+              disabled={loading}
             >
               Сохранить
             </button>
