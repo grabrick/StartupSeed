@@ -47,7 +47,7 @@ function Profile() {
           <NavLink className={m.button} to="/profile">
             <button className={m.button}>
               <div className={m.btnWrapp}>
-                <img src={lines} alt="" />
+                <img src={lines} className={m.image} alt="" />
                 <span className={m.span}>Профиль</span>
               </div>
               <NavLink to="/edit">
@@ -58,7 +58,7 @@ function Profile() {
           <NavLink className={m.button} to="/">
             <button className={m.button}>
               <div className={m.btnWrapp}>
-                <img src={cases} alt="" />
+                <img src={cases} className={m.image} alt="" />
                 <span className={m.span}>Мои проекты</span>
               </div>
             </button>
@@ -66,7 +66,7 @@ function Profile() {
           <NavLink className={m.button} to="/">
             <button className={m.button}>
               <div className={m.btnWrapp}>
-                <img src={star} alt="" />
+                <img src={star} className={m.image} alt="" />
                 <span className={m.span}>Избранное</span>
               </div>
             </button>
@@ -74,7 +74,7 @@ function Profile() {
           <NavLink className={m.button} to="/">
             <button className={m.button}>
               <div className={m.btnWrapp}>
-                <img src={gear} alt="" />
+                <img src={gear} className={m.image} alt="" />
                 <span className={m.span}>Настройки</span>
               </div>
             </button>
@@ -82,7 +82,7 @@ function Profile() {
           <NavLink className={m.button} to="/">
             <button className={m.button}>
               <div className={m.btnWrapp}>
-                <img src={doors} alt="" />
+                <img src={doors} className={m.image} alt="" />
                 <span className={m.span}>Выйти</span>
               </div>
             </button>

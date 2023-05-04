@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import "./PersonalForm.css";
 import m from "./PersonalForm.module.css";
 import { useHttp } from "../../../hooks/http.hook";
+import { useSelector } from "react-redux";
 
-function PersonalForm() {  
+function PersonalForm() {
+  const data = useSelector(state => state.personal.person)
   const { loading, request } = useHttp();
   const [form, setForm] = useState({
     profilePic: "",
@@ -46,11 +48,11 @@ function PersonalForm() {
           method="post"
         >
           <div className={m.avatar1}>
-            <input type="button" />
+            <img src={data.profilePic} alt="" />
+            <input type="button" className={m.cameraBtn} />
             <input className={m.camera} name="profilePic" onChange={changeHandler} type="file" />
             {/* <img src={photo} alt="" /> */}
           </div>
-          <img src="" alt="" />
           <div className="auth__main_reg-input__user_wrapper1">
             <div className="text-field-reg1 text-field_floating-reg1 auth__main_input-email_wrapper1">
               <input

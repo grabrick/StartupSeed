@@ -13,20 +13,22 @@ const schema = Schema({
         password: { type: String, required: true },
     more: {
         pers: {
-            fname: { type: String},
-            lname: { type: String},
-            gender: { type: String},
-            country: { type: String},
-            hb: { type: Date},
-            сity: { type: String},
-            profilePic: {type: String},
+            fname: { type: String, default: ''},
+            lname: { type: String, default: ''},
+            gender: { type: String, default: ''},
+            country: { type: String, default: ''},
+            hb: { type: Date, default: ''},
+            сity: { type: String, default: ''},
+            profilePic: {type: String, default: ''},
         },
         job: {
             post: { type: String},
             postLevel: { type: String},
             lang: { type: String},
             langLevel: { type: String},
-            skills: { type: String},
+            skills: [
+                {type: String}
+            ],
         },
         exp: {
             jobPost: { type: String},

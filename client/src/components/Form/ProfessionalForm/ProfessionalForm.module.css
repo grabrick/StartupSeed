@@ -9,6 +9,25 @@
     margin: 0 0 20px 0;
 }
 
+.tagsWrapper {
+    display: flex;
+}
+
+
+.tags {
+    background-color: silver;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.tag {
+    margin-right: 10px;
+}
+
 .inputWrapper {
     width: 1000px;
     display: flex;
@@ -38,7 +57,8 @@
 .infoWrapp {
     padding: 20px;
     width: 838px;
-    height: 260px;
+    /* height: 260px; */
+    height: auto;
     border: 2px solid black;
     border-radius: 10px;
     margin-bottom: 25px;
