@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
@@ -6,7 +7,10 @@ const PORT = port || 5000
 const MongoUrl = "mongodb+srv://startupseed:fPfsQ4SLYHxbGv2Q@startupseed.rlvehoj.mongodb.net/test"
 
 
-app.use(express.json({ extended: true }))
+// app.use(express.json({ extended: true }))
+app.use(bodyParser.json({limit: '50mb', extended: true}))
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}))
+app.use(bodyParser.text({ limit: '200mb' }))
 app.use('/api/auth', require('./server/routes/authRouter'))
 // app.use('/api/', require('./server/routes/authRouter'))
 

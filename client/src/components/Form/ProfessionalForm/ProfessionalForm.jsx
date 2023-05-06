@@ -14,9 +14,6 @@ function ProfessionalForm() {
     langLevel: "",
     skills: [],
   });
-
-  // console.log(tags);
-  console.log(form);
   // text-field__input-reg2 auth__main_input2
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });

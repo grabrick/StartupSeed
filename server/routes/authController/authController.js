@@ -85,10 +85,28 @@ class authController {
         }
     }
 
+    async uploadImage(req, res) {
+        try {
+            const { profilePic } = req.body;
+            const update = await User.findOneAndUpdate(
+                {}, 
+                {
+                    "more.pers.profilePic": profilePic,
+                }, 
+                {new: true}
+            )
+            
+            // const updatedUser = await update.save();
+            return res.json(update);
+        } catch (e) {
+            res.status(500).json(e)
+        }
+    }
+
     async editPerson(req, res) {
         try {
-            const { fname, lname, gender, country, hb, city, profilePic } = req.body;
-            // console.log(profilePic);
+            const { fname, lname, gender, country, hb, city } = req.body;
+
             const update = await User.findOneAndUpdate(
                 {}, 
                 {
@@ -98,7 +116,6 @@ class authController {
                     "more.pers.country": country,
                     "more.pers.hb": hb,
                     "more.pers.city": city,
-                    "more.pers.profilePic": profilePic,
                 }, 
                 {new: true}
             )

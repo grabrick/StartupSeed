@@ -163,6 +163,12 @@
     cursor: pointer;
 }
 
+.profilePic {
+    width: 150px;
+    height: 150px; 
+    border-radius: 7px;
+    object-fit: cover;
+}
 
 .avatar1 input[type="file"] {
     width: 150px;

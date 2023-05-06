@@ -1,6 +1,7 @@
 .slide {
     margin: 0 auto;
     background-image: url(../../assets/images/Frame5.svg);
+    background-repeat: no-repeat;
     background-position: center;
     gap: 200px;
     height: 1856px;

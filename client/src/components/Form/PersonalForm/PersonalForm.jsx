@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-// import camera from "../../../assets/images/camera-2-line.svg";
+import React, { useState } from "react";
 import "./PersonalForm.css";
 import m from "./PersonalForm.module.css";
 import { useHttp } from "../../../hooks/http.hook";
@@ -8,8 +7,10 @@ import { useSelector } from "react-redux";
 function PersonalForm() {
   const data = useSelector(state => state.personal.person)
   const { loading, request } = useHttp();
-  const [form, setForm] = useState({
+  let avatar = {
     profilePic: "",
+  }
+  const [form, setForm] = useState({
     fname: "",
     lname: "",
     gender: "",
@@ -20,6 +21,26 @@ function PersonalForm() {
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
+
+  const converter = (e) => {
+    let reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = () => {
+      const uploadImage = async () => {
+        try {
+          const data = await request("/api/auth/upload", "PUT", {...avatar, profilePic: reader.result});
+          console.log("Data", data);
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      uploadImage()
+    }
+    reader.onerror = (error) => {
+      console.log({message: error});
+    }
+  }
+
   const registerHandler = async () => {
     try {
       const data = await request("/api/auth/edit/person", "PUT", {...form});
@@ -35,22 +56,27 @@ function PersonalForm() {
     } catch (e) {
       console.log(e);
     }
-  };
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    registerHandler();
+  }
 
   return (
     <div className={m.infoBar}>
       <div className={m.infoWrapp}>
         <h3 className={m.titleSmall}>Личная информация</h3>
-        <div className={m.avatar1}></div>
         <form
           className="popup__form1"
           name="register"
+          onSubmit={handleClick}
           method="post"
         >
           <div className={m.avatar1}>
-            <img src={data.profilePic} alt="" />
+            <img className={m.profilePic} src={data.profilePic} alt="" />
             <input type="button" className={m.cameraBtn} />
-            <input className={m.camera} name="profilePic" onChange={changeHandler} type="file" />
+            <input className={m.camera} name="profilePic" onChange={converter} type="file" />
             {/* <img src={photo} alt="" /> */}
           </div>
           <div className="auth__main_reg-input__user_wrapper1">
@@ -139,7 +165,6 @@ function PersonalForm() {
               type="submit"
               className="popup__button_register-save1"
               name="submit"
-              onClick={registerHandler}
               disabled={loading}
             >
               Сохранить

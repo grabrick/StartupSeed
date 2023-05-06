@@ -1,11 +1,5 @@
 const { Schema, model } = require('mongoose')
 
-const fileSchema = new Schema({
-    name: String,
-    data: Buffer,
-    contentType: String
-  });
-
 const schema = Schema({
         fname: { type: String, required: true },
         lname: { type: String, required: true },

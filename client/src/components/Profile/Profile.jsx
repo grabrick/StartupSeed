@@ -23,6 +23,7 @@ function Profile() {
     axios.get('http://localhost:3000/api/auth/get')
     .then((items) => {
       Person(items.data.more.pers)
+      console.log(items.data.more.pers);
     }).catch((e) => {
       console.log(e)
     })
@@ -92,6 +93,10 @@ function Profile() {
         <div className={m.infoBar}>
           <div className={m.infoWrapp}>
             <h3 className={m.infoTitle}>Профессиональная информация</h3>
+
+            <div>
+              <h3>{}</h3>
+            </div>
           </div>
         </div>
       </div>

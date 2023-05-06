@@ -2,7 +2,6 @@ const {Router} = require('express')
 const {check} = require('express-validator')
 const router = Router()
 const controller = require('../routes/authController/authController')
-const upload = require('../middleware/upload')
 
 router.post(
     '/register',
@@ -29,8 +28,12 @@ router.get(
 )
 
 router.put(
+    '/upload',
+    controller.uploadImage
+)
+
+router.put(
     '/edit/person',
-    upload.single('profilePic'),
     controller.editPerson
 )
 router.put(
