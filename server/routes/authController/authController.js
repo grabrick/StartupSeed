@@ -120,7 +120,6 @@ class authController {
                 {new: true}
             )
             
-            // const updatedUser = await update.save();
             return res.json(update);
         } catch (e) {
             res.status(500).json({message: e})

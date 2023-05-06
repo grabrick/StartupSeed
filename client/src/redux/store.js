@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import form from "./slices/formSlice"
-import personal from "./slices/personalSlice";
+import users from "./slices/userSlice";
 
 
 export const store = configureStore({
   reducer: {
     form,
-    personal
+    users,
   },
 });

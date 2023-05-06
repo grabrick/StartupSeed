@@ -17,6 +17,7 @@ function useRoutes(isAuthticated) {
 
           {/* --------- Redirect------- */}
         <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/main" element={<Navigate to="/home" replace />} />
         </Routes>
       </div>
     );
@@ -25,8 +26,9 @@ function useRoutes(isAuthticated) {
       <div className="container">
         <Routes>
           {/* --------- Redirect------- */}
-          <Route path="/edit" element={<Navigate to="/" replace />} />
-          <Route path="/" element={<MainPages />} />
+          <Route path="/profile" element={<Navigate to="/main" replace />} />
+          <Route path="/" element={<Navigate to="/main" replace />} />
+          <Route path="/main" element={<MainPages />} />
         </Routes>
       </div>
     );

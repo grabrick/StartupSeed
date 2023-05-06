@@ -5,7 +5,7 @@ import { useHttp } from "../../../hooks/http.hook";
 import { useSelector } from "react-redux";
 
 function PersonalForm() {
-  const data = useSelector(state => state.personal.person)
+  const data = useSelector(state => state.users.user.pers)
   const { loading, request } = useHttp();
   let avatar = {
     profilePic: "",
@@ -51,7 +51,7 @@ function PersonalForm() {
         gender: "Не указан",
         country: "",
         hb: "",
-        city: "",
+        city: ""
       });
     } catch (e) {
       console.log(e);

@@ -7,27 +7,14 @@ import star from "../../assets/images/star-line.svg";
 import cases from "../../assets/images/briefcase-line.svg";
 import m from "./Profile.module.css";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getPerson } from "../../redux/slices/personalSlice";
-import axios from "axios";
+import { useSelector } from "react-redux";
 
 function Profile() {
-  const dispatch = useDispatch()
-  const data = useSelector((state) => state.personal.person)
-  const Person = (items) => {
-    dispatch(getPerson(items))
+  const data = useSelector((state) => state.users.user.pers)
+  const logout = () => {
+    localStorage.removeItem("userData")
+    window.location.reload()
   }
-
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/auth/get')
-    .then((items) => {
-      Person(items.data.more.pers)
-      console.log(items.data.more.pers);
-    }).catch((e) => {
-      console.log(e)
-    })
-  }, [])
 
   return (
     <div className={m.container}>
@@ -81,7 +68,7 @@ function Profile() {
             </button>
           </NavLink>
           <NavLink className={m.button} to="/">
-            <button className={m.button}>
+            <button className={m.button} onClick={() => logout()}>
               <div className={m.btnWrapp}>
                 <img src={doors} className={m.image} alt="" />
                 <span className={m.span}>Выйти</span>

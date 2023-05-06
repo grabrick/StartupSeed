@@ -12,7 +12,7 @@ const schema = Schema({
             gender: { type: String, default: ''},
             country: { type: String, default: ''},
             hb: { type: Date, default: ''},
-            сity: { type: String, default: ''},
+            city: { type: String},
             profilePic: {type: String, default: ''},
         },
         job: {
