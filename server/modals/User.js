@@ -27,21 +27,21 @@ const schema = Schema({
         exp: {
             jobPost: { type: String},
             company: { type: String},
-            startJob: { type: Date},
-            endJob: { type: Date},
+            startJob: { type: Date,},
+            endJob: { type: Date,},
             progress: { type: String},
         },
         edu: {
             specialization: { type: String},
             institution: { type: String},
-            startEdu: { type: Date},
-            endEdu: { type: Date},
+            startEdu: { type: Date, timestamps: true,},
+            endEdu: { type: Date, timestamps: true,},
         },
         qual: {
             qualName: { type: String},
             qualInstitution: { type: String},
-            startQual: { type: Date},
-            endQual: { type: Date},
+            startQual: { type: Date, timestamps: true,},
+            endQual: { type: Date, timestamps: true,},
         },
         about: {
             aboutMe: { type: String}

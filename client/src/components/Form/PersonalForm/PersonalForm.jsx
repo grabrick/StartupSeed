@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PersonalForm.css";
 import m from "./PersonalForm.module.css";
 import { useHttp } from "../../../hooks/http.hook";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { getUser } from "../../../redux/slices/userSlice";
 
 function PersonalForm() {
   const data = useSelector(state => state.users.user.pers)
+  const dispatch = useDispatch();
+  const User = (items) => {
+    dispatch(getUser(items));
+  };
   const { loading, request } = useHttp();
   let avatar = {
     profilePic: "",
@@ -22,6 +28,17 @@ function PersonalForm() {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/auth/get")
+      .then((items) => {
+        User(items.data.more);
+        console.log(items.data.more);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [])
+
   const converter = (e) => {
     let reader = new FileReader()
     reader.readAsDataURL(e.target.files[0])
@@ -36,9 +53,19 @@ function PersonalForm() {
       }
       uploadImage()
     }
+    setTimeout(() => {
+      axios.get("http://localhost:3000/api/auth/get")
+      .then((items) => {
+        User(items.data.more);
+        console.log(items.data.more);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     reader.onerror = (error) => {
       console.log({message: error});
     }
+    }, 2000)
   }
 
   const registerHandler = async () => {
@@ -74,10 +101,9 @@ function PersonalForm() {
           method="post"
         >
           <div className={m.avatar1}>
-            <img className={m.profilePic} src={data.profilePic} alt="" />
+            <img className={m.profilePic} src={data?.profilePic} alt="" />
             <input type="button" className={m.cameraBtn} />
             <input className={m.camera} name="profilePic" onChange={converter} type="file" />
-            {/* <img src={photo} alt="" /> */}
           </div>
           <div className="auth__main_reg-input__user_wrapper1">
             <div className="text-field-reg1 text-field_floating-reg1 auth__main_input-email_wrapper1">
