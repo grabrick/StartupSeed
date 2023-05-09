@@ -1,0 +1,41 @@
+.image {
+    width: 24px;
+    height: 24px;
+}
+
+.editPen {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.bar {
+    width: 210px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    cursor: pointer;
+    text-decoration: none;
+    height: 30px;
+    width: 210px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnWrapp {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.span {
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.button:nth-last-child(1) {
+    margin-bottom: 0px;
+}

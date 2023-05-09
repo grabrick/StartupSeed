@@ -1,0 +1,298 @@
+.container {
+    background-image: url(../../assets/images/384\ 1.svg);
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    padding-bottom: 105px;
+    /* width: 1376px; */
+}
+
+.title {
+    width: 1096px;
+    font-weight: 700;
+    font-size: 36px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin: 0 0 30px 385px;
+}
+
+.image {
+    width: 24px;
+    height: 24px;
+}
+
+.editPen {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.bar {
+    width: 210px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    cursor: pointer;
+    text-decoration: none;
+    height: 30px;
+    width: 210px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnWrapp {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.span {
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.button:nth-last-child(1) {
+    margin-bottom: 0px;
+}
+
+.selector {
+    width: 210px;
+    margin: 28px 0;
+}
+
+.avatar {
+    border: 2px solid black;
+    border-radius: 100px;
+    width: 124px;
+    height: 124px;
+    object-fit: cover;
+}
+
+.tagsWrapper {
+    display: flex;
+}
+
+.postTitle {
+    margin: 0;
+    margin-top: 30px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.eduTitle {
+    margin: 0;
+    margin-top: 30px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.tags {
+    background-color: silver;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: default;
+}
+
+.tag {
+    font-family: 'Montserrat';
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.postLevel {
+    width: 60px;
+}
+
+.personalInfo {
+    margin-bottom: 50px;
+}
+
+.wrapper {
+    display: flex;
+    grid-column-gap: 50px;
+    justify-content: center;
+}
+
+.profileWrapp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 210px;
+    height: 241px;
+}
+
+.littleWrapp {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.genderText {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    margin: 0;
+}
+
+.location {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    margin: 0;
+}
+
+.infoBar {
+    height: 385px;
+    width: 838px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.span {
+    padding: 0;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.btn {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid black;
+    width: 100px;
+    height: 30px;
+}
+
+.btn:hover {
+    border: 2px solid #93b633;
+    transition: linear 0.3s;
+    color: #93b633;
+}
+
+.inputData {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 17px;
+    margin: 0;
+}
+
+.number {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputWrapper {
+    border-bottom: 2px solid black;
+    display: flex;
+    padding-bottom: 15px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.deleteBtn {
+    cursor: pointer;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    width: 200px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 30px;
+    margin-left: 640px;
+    margin-top: 30px;
+}
+
+.deleteBtn:hover {
+    border: 2px solid red;
+    transition: linear 0.3s;
+    color: red;
+}
+
+.number {
+    background-color: transparent;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.number image {
+    opacity: 0;
+    cursor: pointer;
+    display: flex;
+}
+
+.selectTime {
+    font-size: 15px;
+}
+
+.progress {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+}
+
+.date {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+}
+
+.companyWrapp {
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+.instWrapp {
+    margin: 0;
+}
+
+.aboutInfo {
+    margin-top: 20px;
+}
+
+.aboutText {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+}
+
+.infoTitle {
+    margin: 0;
+}
+
+.name {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 16px;
+}

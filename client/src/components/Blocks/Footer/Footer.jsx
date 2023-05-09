@@ -1,11 +1,11 @@
 import m from "./Footer.module.css";
-import Logo from "../../assets/images/logo.svg";
-import Phone from "../../assets/images/phone.svg";
-import Mail from "../../assets/images/mail.svg";
-import Telega from "../../assets/images/telegram.svg";
-import VK from "../../assets/images/vk.svg";
-import Insta from "../../assets/images/instagram.svg";
-import { NavLink } from "react-router-dom";
+import Logo from "../../../assets/images/logo.svg";
+import Phone from "../../../assets/images/phone.svg";
+import Mail from "../../../assets/images/mail.svg";
+import Telega from "../../../assets/images/telegram.svg";
+import VK from "../../../assets/images/vk.svg";
+import Insta from "../../../assets/images/instagram.svg";
+// import { NavLink } from "react-router-dom";
 
 function Footer() {
   return (

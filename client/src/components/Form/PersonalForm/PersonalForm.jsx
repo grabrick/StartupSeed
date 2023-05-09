@@ -7,7 +7,7 @@ import axios from "axios";
 import { getUser } from "../../../redux/slices/userSlice";
 
 function PersonalForm() {
-  const data = useSelector(state => state.users.user.pers)
+  const data = useSelector(state => state.users.user)
   const dispatch = useDispatch();
   const User = (items) => {
     dispatch(getUser(items));
@@ -31,14 +31,15 @@ function PersonalForm() {
   useEffect(() => {
     axios.get("http://localhost:3000/api/auth/get")
       .then((items) => {
-        User(items.data.more);
-        console.log(items.data.more);
+        User(items.data);
+        console.log(items.data);
       })
       .catch((e) => {
         console.log(e);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
+  
   const converter = (e) => {
     let reader = new FileReader()
     reader.readAsDataURL(e.target.files[0])
@@ -101,7 +102,7 @@ function PersonalForm() {
           method="post"
         >
           <div className={m.avatar1}>
-            <img className={m.profilePic} src={data?.profilePic} alt="" />
+            <img className={m.profilePic} src={data.more?.pers?.profilePic} alt="" />
             <input type="button" className={m.cameraBtn} />
             <input className={m.camera} name="profilePic" onChange={converter} type="file" />
           </div>

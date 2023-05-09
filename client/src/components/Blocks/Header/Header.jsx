@@ -1,9 +1,9 @@
 import m from "./Header.module.css";
-import Logo from "../../assets/images/logo.svg";
+import Logo from "../../../assets/images/logo.svg";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import RegisterPopup from "../AuthUser/RegisterPopup/RegisterPopup";
-import LoginPopup from "../AuthUser/LoginPopup/LoginPopup"
+import RegisterPopup from "../../AuthUser/RegisterPopup/RegisterPopup";
+import LoginPopup from "../../AuthUser/LoginPopup/LoginPopup"
 
 function Header() {
   const [isPopupReg, setIsPopupReg] = useState(false);

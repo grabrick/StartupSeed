@@ -1,5 +1,5 @@
 import EditProfile from "../../components/EditProfile/EditProfile";
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/Blocks/Footer/Footer";
 
 function EditPages() {
     return (

@@ -5,6 +5,7 @@ import "./App.css";
 import ModifiedMainPage from "./Pages/AuthMainPage/AuthMainPage";
 import MainProfile from "./Pages/MainProfile/MainProfile";
 import EditPages from "./Pages/EditPages/EditPages";
+import MainSettings from "./Pages/MainSettings/MainSettings";
 
 function useRoutes(isAuthticated) {
   if (isAuthticated) {
@@ -13,7 +14,8 @@ function useRoutes(isAuthticated) {
         <Routes>
           <Route path="/home" element={<ModifiedMainPage />} />
           <Route path="/profile" element={<MainProfile />} />
-          <Route path="/edit" element={<EditPages />} />
+          <Route path="/profile/edit" element={<EditPages />} />
+          <Route path="/profile/settings" element={<MainSettings />} />
 
           {/* --------- Redirect------- */}
         <Route path="/" element={<Navigate to="/home" replace />} />
@@ -26,7 +28,7 @@ function useRoutes(isAuthticated) {
       <div className="container">
         <Routes>
           {/* --------- Redirect------- */}
-          <Route path="/profile" element={<Navigate to="/main" replace />} />
+          {/* <Route path="/profile" element={<Navigate to="/main" replace />} /> */}
           <Route path="/" element={<Navigate to="/main" replace />} />
           <Route path="/main" element={<MainPages />} />
         </Routes>

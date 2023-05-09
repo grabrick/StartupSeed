@@ -1,5 +1,5 @@
-import arrowLeftIcon from "../../assets/images/arrow_left.svg";
-import arrowRightIcon from "../../assets/images/arrow_right.svg";
+import arrowLeftIcon from "../../../assets/images/arrow_left.svg";
+import arrowRightIcon from "../../../assets/images/arrow_right.svg";
 import s from "./Slider.module.css";
 
 function Slider() {

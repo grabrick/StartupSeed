@@ -76,6 +76,56 @@ class authController {
         }
     }
 
+    async deleteUser(req, res) {
+        try {
+            const {id} = req.params
+    
+            if(!id) {
+                return res.status(400).json({message: "ID not found"})
+            }
+    
+            // const findId = await Tweet.findById(id)
+            const deleteElement = await User.findByIdAndDelete(id)
+            return res.json(deleteElement)
+        } catch (e) {
+            res.status(500).json(e)
+        }   
+    }
+
+    // async changeNumber(req, res) {
+    //     try {
+    //         const {id} = req.params
+    
+    //         if(!id) {
+    //             return res.status(400).json({message: "ID not found"})
+    //         }
+    
+    //         // const findId = await Tweet.findById(id)
+    //         const deleteElement = await User.findByIdAndDelete(id)
+    //         return res.json(deleteElement)
+    //     } catch (e) {
+    //         res.status(500).json(e)
+    //     }   
+    // }
+
+    // async changeEmail(req, res) {
+    //     try {
+    //         const {id} = req.params
+    
+    //         if(!id) {
+    //             return res.status(400).json({message: "ID not found"})
+    //         }
+    
+    //         // const findId = await Tweet.findById(id)
+    //         const deleteElement = await User.findByIdAndDelete(id)
+    //         return res.json(deleteElement)
+    //     } catch (e) {
+    //         res.status(500).json(e)
+    //     }   
+    // }
+
+    // Form controllers //
+
     async getPerson(req, res) {
         try {
             const find = await User.findOne({})

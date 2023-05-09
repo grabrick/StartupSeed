@@ -1,5 +1,5 @@
 .container {
-    background-image: url(../../assets/images/Frame.svg);
+    background-image: url(../../../assets/images/Frame.svg);
     display: flex;
     align-items: center;
     flex-direction: column;

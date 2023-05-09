@@ -1,7 +1,7 @@
 import m from "./ModifiedHeader.module.css";
-import Logo from "../../../assets/images/logo.svg";
-import message from "../../../assets/images/mail-line.svg"
-import profile from "../../../assets/images/user-line.svg"
+import Logo from "../../../../assets/images/logo.svg";
+import message from "../../../../assets/images/mail-line.svg"
+import profile from "../../../../assets/images/user-line.svg"
 import { NavLink } from "react-router-dom";
 
 function ModifiedHeader() {

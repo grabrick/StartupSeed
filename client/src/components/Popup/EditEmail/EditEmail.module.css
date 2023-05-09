@@ -1,0 +1,53 @@
+.popup {
+    width: 450px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    border: 2px solid black;
+    font-family: 'Montserrat';
+    font-size: 14px;
+    width: 400px;
+    height: 30px;
+}
+
+.input:hover {
+    border: 1px solid #93b633;
+    transition: linear 0.3s;
+}
+
+.input:focus {
+        background-color: transparent;
+        border-color: #93b633;
+        outline: 0;
+        box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btnSave {
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 100px;
+    height: 30px;
+}
+
+.btnSave:hover {
+    border: 2px solid #93b633;
+    transition: linear 0.3s;
+    color: #93b633;
+}

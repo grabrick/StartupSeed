@@ -1,0 +1,19 @@
+.popup__change {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    transition: opacity 500ms linear, visibility 0.5s linear;
+}
+
+.popup__change_opened {
+    display: flex;
+    visibility: visible;
+    transition: opacity 700ms linear, visibility 0s linear;
+}

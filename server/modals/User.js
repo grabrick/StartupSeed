@@ -4,6 +4,8 @@ const schema = Schema({
         fname: { type: String, required: true },
         lname: { type: String, required: true },
         email: { type: String, required: true, unique: true },
+        phoneNumber: {type: Number, unique: true},
+        utc: {type: String},
         password: { type: String, required: true },
     more: {
         pers: {

@@ -22,6 +22,21 @@ router.post(
     controller.login
 )
 
+router.delete(
+    '/delete/:id',
+    controller.deleteUser
+)
+
+// router.put(
+//     '/change/email',
+//     controller.changeEmail
+// )
+
+// router.put(
+//     '/change/number',
+//     controller.changeNumber
+// )
+
 router.get(
     '/get',
     controller.getPerson

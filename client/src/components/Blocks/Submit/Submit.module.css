@@ -1,11 +1,15 @@
 .container {
-    background-image: url(../../assets/images/Frame3.svg);
+    background-image: url(../../../assets/images/Frame4.svg);
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* width: 1920px; */
-    height: 570px;
+    display: flex;
+    height: 656px;
+}
+
+.span {
+    color: #D0FF49;
 }
 
 .title {
@@ -30,12 +34,12 @@
     font-size: 55px;
     line-height: 67px;
     color: #57595F;
+    margin-left: 442px;
 }
 
 .aboutWrapp {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .regWrapp {
