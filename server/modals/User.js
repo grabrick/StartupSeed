@@ -5,7 +5,7 @@ const schema = Schema({
         lname: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         phoneNumber: {type: Number, unique: true},
-        utc: {type: String},
+        timeZone: {type: String},
         password: { type: String, required: true },
     more: {
         pers: {

@@ -1,22 +1,26 @@
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
-import m from "./Settings.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import NavBar from "../NavBar/NavBar";
 import { getUser } from "../../redux/slices/userSlice";
 import { useEffect, useState } from "react";
+import { changeEmail, changePassword } from "../../redux/slices/popupSlice";
+import { useDispatch, useSelector } from "react-redux";
+// import { useHttp } from "../../hooks/http.hook";
 import axios from "axios";
+import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
+import NavBar from "../NavBar/NavBar";
+import EditEmail from "../Popup/EditEmail/EditEmail";
+import EditPassword from "../Popup/EditPassword/EditPassword";
 import PhoneInput from "react-phone-number-input";
+import m from "./Settings.module.css";
 import 'react-phone-number-input/style.css'
 import './Settings.css'
-import { useHttp } from "../../hooks/http.hook";
-import EditEmail from "../Popup/EditEmail/EditEmail";
 
 function Settings() {
   const data = useSelector((state) => state.users.user);
+  const isVisibleEmail = useSelector((state) => state.popup.visibleEmail);
+  const isVisiblePassword = useSelector((state) => state.popup.visiblePassword);
   const [number, setNumber] = useState()
-  const [isPopupReg, setIsPopupReg] = useState(false);
-  const [isPopupLog, setIsPopupLog] = useState(false);
-  const { loading, request } = useHttp();
+  // const [isPopupReg, setIsPopupReg] = useState(false);
+  // const [isPopupLog, setIsPopupLog] = useState(false);
+  // const { loading, request } = useHttp();
   const dispatch = useDispatch();
   const User = (items) => {
     dispatch(getUser(items));
@@ -37,28 +41,28 @@ function Settings() {
 
   const [form, setForm] = useState({
     phoneNumber: "",
-    utc: "",
+    timeZone: "",
   });
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
-  const registerHandler = async () => {
-    try {
-      const data = await request("/api/auth/edit/person", "PUT", {...form});
-      console.log("Data", data);
-      setForm({
+  // const registerHandler = async () => {
+  //   try {
+  //     const data = await request("/api/auth/edit/person", "PUT", {...form});
+  //     console.log("Data", data);
+  //     setForm({
 
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    registerHandler();
-  }
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   registerHandler();
+  // }
 
   // const handlePopupEmailClick = (e) => {
   //   if (e.key !== "Enter") return;
@@ -67,7 +71,11 @@ function Settings() {
   // };
 
   const handlePopupEmailClick = () => {
-    setIsPopupLog(true);
+    dispatch(changeEmail(false))
+  };
+
+  const handlePopupPasswordClick = () => {
+    dispatch(changePassword(false))
   };
 
   return (
@@ -111,7 +119,7 @@ function Settings() {
                 <span className={m.span}>E-mail</span>
                 <p className={m.inputData}>{data?.email}</p>
               </div>
-              <button className={m.btn} onClick={handlePopupEmailClick}>Изменить</button>
+              <button className={m.btn} onClick={() => handlePopupEmailClick()}>Изменить</button>
             </div>
             <div className={m.inputWrapper}>
               <div className={m.textWrapper}>
@@ -125,19 +133,19 @@ function Settings() {
                   // value={form.phoneNumber}
                 />
               </div>
-              <button className={m.btn} disabled={loading}>Изменить</button>
+              <button className={m.btn}>Изменить</button>
             </div>
             <div className={m.inputWrapper}>
               <div className={m.textWrapper}>
                 <span className={m.span}>Пароль</span>
                 <p className={m.inputData}>Обновлен</p>
               </div>
-              <button className={m.btn}>Изменить</button>
+              <button className={m.btn} onClick={() => handlePopupPasswordClick()}>Изменить</button>
             </div>
             <div className={m.inputWrapper}>
               <div className={m.textWrapper}>
                 <span className={m.span}>Часовой пояс</span>
-                <select className={m.selectTime} onChange={changeHandler} name="UTC" defaultValue="UTC 0" id="">
+                <select className={m.selectTime} onChange={changeHandler} name="timeZone" defaultValue="UTC 0" id="">
                   <option value="UTC -12">UTC -12</option>
                   <option value="UTC -11">UTC -11</option>
                   <option value="UTC -10">UTC -10</option>
@@ -165,13 +173,13 @@ function Settings() {
                   <option value="UTC +12">UTC +12</option>
                 </select>
               </div>
-              <button className={m.btn} disabled={loading}>Изменить</button>
+              <button className={m.btn}>Изменить</button>
             </div>
             <button className={m.deleteBtn}>Удалить аккаунт</button>
         </div>
       </div>
-      {isPopupLog === true && <EditEmail close={setIsPopupLog} />}
-      {/* {isPopupReg === true && <RegisterPopup close={setIsPopupReg} />} */}
+      {isVisibleEmail ? "" : <EditEmail /> }
+      {isVisiblePassword ? "" : <EditPassword /> }
     </div>
   );
 }
