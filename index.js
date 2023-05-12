@@ -9,6 +9,8 @@ const MongoUrl = "mongodb+srv://startupseed:fPfsQ4SLYHxbGv2Q@startupseed.rlvehoj
 app.use(bodyParser.json({limit: '50mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}))
 app.use(bodyParser.text({ limit: '200mb' }))
+
+// Localhost
 // app.use('/api/auth', require('./server/routes/authRouter'))
 
 // DEPLOY //
