@@ -8,7 +8,7 @@ import EditPages from "./Pages/EditPages/EditPages";
 import MainSettings from "./Pages/MainSettings/MainSettings";
 
 function useRoutes(isAuthticated) {
-  if (!isAuthticated) {
+  if (isAuthticated) {
     return (
       <div className="container">
         <Routes>
