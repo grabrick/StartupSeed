@@ -25,19 +25,19 @@ function Profile() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const startJob = data.more?.exp.startJob;
+  const startJob = data.more?.exp?.startJob;
   const startJ = startJob?.slice(0, 10);
-  const endJob = data.more?.exp.endJob;
+  const endJob = data.more?.exp?.endJob;
   const endJ = endJob?.slice(0, 10);
 
-  const startEdu = data.more?.edu.startEdu;
+  const startEdu = data.more?.edu?.startEdu;
   const startE = startEdu?.slice(0, 10);
-  const endEdu = data.more?.edu.endEdu;
+  const endEdu = data.more?.edu?.endEdu;
   const endE = endEdu?.slice(0, 10);
 
-  const startQual = data.more?.qual.startQual;
+  const startQual = data.more?.qual?.startQual;
   const startQ = startQual?.slice(0, 10);
-  const endQual = data.more?.qual.endQual;
+  const endQual = data.more?.qual?.endQual;
   const endQ = endQual?.slice(0, 10);
 
   return (

@@ -11,7 +11,7 @@ const schema = Schema({
             lname: { type: String, default: ''},
             gender: { type: String, default: ''},
             country: { type: String, default: ''},
-            hb: { type: Date, default: ''},
+            hb: { type: Date, default: Date.now},
             city: { type: String},
             profilePic: {type: String, default: ''},
         },
@@ -27,21 +27,21 @@ const schema = Schema({
         exp: {
             jobPost: { type: String},
             company: { type: String},
-            startJob: { type: Date,},
-            endJob: { type: Date,},
+            startJob: { type: Date },
+            endJob: { type: Date },
             progress: { type: String},
         },
         edu: {
             specialization: { type: String},
             institution: { type: String},
-            startEdu: { type: Date, timestamps: true,},
-            endEdu: { type: Date, timestamps: true,},
+            startEdu: { type: Date},
+            endEdu: { type: Date},
         },
         qual: {
             qualName: { type: String},
             qualInstitution: { type: String},
-            startQual: { type: Date, timestamps: true,},
-            endQual: { type: Date, timestamps: true,},
+            startQual: { type: Date},
+            endQual: { type: Date},
         },
         about: {
             aboutMe: { type: String}

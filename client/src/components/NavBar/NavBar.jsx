@@ -7,6 +7,15 @@ import star from "../../assets/images/star-line.svg";
 import cases from "../../assets/images/briefcase-line.svg";
 import m from "./NavBar.module.css";
 
+
+const logout = () => {
+  localStorage.removeItem("userData")
+  setTimeout(() => {
+    window.location.reload()
+    window.location.replace('/')
+  }, 2000);
+}
+
 function NavBar() {
     return (  
         <div className={m.bar}>
@@ -45,14 +54,12 @@ function NavBar() {
               </div>
             </button>
           </NavLink>
-          <NavLink className={m.button} to="/">
-            <button className={m.button}>
+            <button className={m.button} onClick={() => logout()} >
               <div className={m.btnWrapp}>
                 <img className={m.image} src={doors} alt="" />
                 <span className={m.span}>Выйти</span>
               </div>
             </button>
-          </NavLink>
         </div>
     );
 }
