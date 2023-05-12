@@ -13,7 +13,7 @@ function ModifiedMainPage() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/auth/get")
+    axios.get("/api/auth/get")
       .then((items) => {
         User(items.data);
         console.log(items.data);

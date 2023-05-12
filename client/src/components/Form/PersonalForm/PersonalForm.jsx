@@ -29,7 +29,7 @@ function PersonalForm() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/auth/get")
+    axios.get("/api/auth/get")
       .then((items) => {
         User(items.data);
         console.log(items.data);
@@ -55,7 +55,7 @@ function PersonalForm() {
       uploadImage()
     }
     setTimeout(() => {
-      axios.get("http://localhost:3000/api/auth/get")
+      axios.get("/api/auth/get")
       .then((items) => {
         User(items.data.more);
         console.log(items.data.more);
