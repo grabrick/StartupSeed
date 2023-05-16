@@ -22,10 +22,10 @@ router.post(
     controller.login
 )
 
-router.delete(
-    '/delete/:id',
-    controller.deleteUser
-)
+// router.delete(
+//     '/delete/:id',
+//     controller.deleteUser
+// )
 
 // router.put(
 //     '/change/email',

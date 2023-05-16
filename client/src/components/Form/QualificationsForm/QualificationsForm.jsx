@@ -1,127 +1,171 @@
 import m from "./QualificationsForm.module.css";
-import React, { useState } from "react";
+import React from "react";
 import "./QualificationsForm.css";
 import { changeQual } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
 import { useHttp } from "../../../hooks/http.hook";
+import { Field, Form } from "react-final-form";
 
 function QualificationsForm() {
+  const normalInput = "text-field__input-reg5 auth__main_input-name5";
+  const errorInput =
+    "text-field__input-reg__error2 auth__main_input-bio__error5";
+  const normalLable = "text-field__label-reg5 text-lable5";
+  const errorLable = "text-field__label-reg__error5 text-lable2";
+  const normalInputDate = "text-field__input-reg5 auth__main_input-date5";
+  const errorInputDate =
+    "text-field__input-reg_error5 auth__main_input-date_error5";
   const dispatch = useDispatch()
 
   const submit = () => {
     dispatch(changeQual(true))
   }
   const { loading, request } = useHttp();
-  const [form, setForm] = useState({
-    qualName: "",
-    qualInstitution: "",
-    startQual: "",
-    endQual: "",
-  });
 
-  const changeHandler = (event) => {
-    setForm({...form, [event.target.name]: event.target.value})
-}
+  const validate = (e) => {
+    const errors = {};
 
-  const registerHandler = async () => {
-    try {
-      const data = await request("/api/auth/edit/qual", "PUT", { ...form });
-      console.log("Data", data);
-      setForm({
-        qualName: "",
-        qualInstitution: "",
-        startQual: "",
-        endQual: "",
-      })
-    } catch (e) {
-      console.log(e);
+    if (e.qualName && e.qualName.length < 5) {
+      errors.qualName = "Слишком коротко";
     }
+
+    if (e.qualInstitution && e.qualInstitution.length < 5) {
+      errors.qualInstitution = "Слишком коротко";
+    }
+
+    if (e.progress && e.progress.length < 50) {
+      errors.progress = "Напишите больше о своих достижений";
+    }
+
+    return errors;
+  };
+
+  const onSubmit = async (value) => {
+    try {
+      const data = await request("/api/auth/edit/qual", "PUT", { ...value });
+      console.log("Data", data);
+    } catch (e) {}
   };
   return (
     <div className={m.infoBar}>
       <div className={m.infoWrapp}>
         <h3 className={m.titleSmall}>Курсы и повышение квалификации</h3>
-        <form className="popup__form5">
-          <div className="auth__main_reg-input__user_wrapper5">
-            <div className="text-field-reg5 text-field_floating-reg5 auth__main_input-email_wrapper5">
-              <input
-                type="text"
-                placeholder=" "
-                id="name"
-                name="qualName"
-                className="text-field__input-reg5 auth__main_input-name5"
-                value={form.qualName}
-                onChange={changeHandler}
-              />
-              <label className="text-field__label-reg5 text-lable5">
-                Название
-              </label>
-            </div>
-            <div className="text-field-reg5 text-field_floating-reg5 auth__main_input-email_wrapper5">
-              <input
-                type="text"
-                placeholder=" "
-                id="name"
-                name="qualInstitution"
-                className="text-field__input-reg5 auth__main_input-name5"
-                value={form.qualInstitution}
-                onChange={changeHandler}
-              />
-              <label className="text-field__label-reg5 text-lable5">
-                Учебное заведение/Автор курса
-              </label>
-            </div>
-            <div className={m.inputWrapper}>
+        <Form
+          onSubmit={onSubmit}
+          validate={validate}
+          render={({ handleSubmit }) => (
+            <form className="popup__form4" onSubmit={handleSubmit}>
+              <div className="auth__main_reg-input__user_wrapper4">
               <div className="text-field-reg5 text-field_floating-reg5 auth__main_input-email_wrapper5">
-                <input
-                  type="date"
-                  placeholder=" "
-                  id="name"
-                  name="startQual"
-                  className="text-field__input-reg5 auth__main_input-date5"
-                  value={form.startQual}
-                  onChange={changeHandler}
-                />
-                <label className="text-field__label-reg5 text-lable5">
-                  Начало обучения
-                </label>
+                  <Field name="qualName">
+                    {({ input, meta }) => (
+                      <>
+                        <input
+                          type="text"
+                          placeholder=" "
+                          className={meta.error ? errorInput : normalInput}
+                          {...input}
+                        />
+                        <label
+                          className={meta.error ? errorLable : normalLable}
+                        >
+                          Название
+                        </label>
+                        {meta.touched && meta.error && (
+                          <span className="error-text4">{meta.error}</span>
+                        )}
+                      </>
+                    )}
+                  </Field>
+                </div>
+                <div className="text-field-reg5 text-field_floating-reg5 auth__main_input-email_wrapper5">
+                  <Field name="qualInstitution">
+                    {({ input, meta }) => (
+                      <>
+                        <input
+                          type="text"
+                          placeholder=" "
+                          className={meta.error ? errorInput : normalInput}
+                          {...input}
+                        />
+                        <label
+                          className={meta.error ? errorLable : normalLable}
+                        >
+                          Учебное заведение/Автор курса
+                        </label>
+                        {meta.touched && meta.error && (
+                          <span className="error-text5">{meta.error}</span>
+                        )}
+                      </>
+                    )}
+                  </Field>
+                </div>
+                <div className={m.inputWrapper}>
+                <div className="text-field-reg5 text-field_floating-reg5 auth__main_input-email_wrapper5">
+                    <Field name="startQual">
+                      {({ input, meta }) => (
+                        <>
+                          <input
+                            type="date"
+                            placeholder=" "
+                            className={
+                              meta.error ? errorInputDate : normalInputDate
+                            }
+                            {...input}
+                          />
+                          <label
+                            className={meta.error ? errorLable : normalLable}
+                          >
+                            Начало обучения
+                          </label>
+                        </>
+                      )}
+                    </Field>
+                  </div>
+                  <div className="text-field-reg5 text-field_floating-reg5 auth__main_input-email_wrapper5">
+                    <Field name="endQual">
+                      {({ input, meta }) => (
+                        <>
+                          <input
+                            type="date"
+                            placeholder=" "
+                            className={
+                              meta.error ? errorInputDate : normalInputDate
+                            }
+                            {...input}
+                          />
+                          <label
+                            className={meta.error ? errorLable : normalLable}
+                          >
+                            Окончание обучения
+                          </label>
+                        </>
+                      )}
+                    </Field>
+                  </div>
+                </div>
+                <div className={m.buttonWrapper}>
+                  <button
+                    type=""
+                    className="popup__button_register-cancel4"
+                    name="submit"
+                    onClick={() => submit()}
+                  >
+                    Отмена
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="popup__button_register-save4"
+                    name="submit"
+                  >
+                    Сохранить
+                  </button>
+                </div>
               </div>
-              <div className="text-field-reg5 text-field_floating-reg5 auth__main_input-email_wrapper5">
-                <input
-                  type="date"
-                  placeholder=" "
-                  id="name"
-                  name="endQual"
-                  className="text-field__input-reg5 auth__main_input-date5"
-                  value={form.endQual}
-                  onChange={changeHandler}
-                />
-                <label className="text-field__label-reg5 text-lable5">
-                  Окончание обучения
-                </label>
-              </div>
-            </div>
-            <div className={m.buttonWrapper}>
-              <button
-                type=""
-                className="popup__button_register-cancel5"
-                name="submit"
-                onClick={() => submit()}
-              >
-                Отмена
-              </button>
-              <button
-                type="submit"
-                className="popup__button_register-save5"
-                name="submit"
-                onClick={registerHandler}
-                disabled={loading}
-              >
-                Сохранить
-              </button>
-            </div>
-          </div>
-        </form>
+            </form>
+          )}
+        />
       </div>
     </div>
   );

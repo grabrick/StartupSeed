@@ -14,7 +14,8 @@ function Profile() {
   };
 
   useEffect(() => {
-    axios.get("/api/auth/get")
+    axios
+      .get("/api/auth/get")
       .then((items) => {
         User(items.data);
         console.log(items.data);
@@ -22,8 +23,8 @@ function Profile() {
       .catch((e) => {
         console.log(e);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const startJob = data.more?.exp?.startJob;
   const startJ = startJob?.slice(0, 10);
@@ -49,17 +50,25 @@ function Profile() {
       <div className={m.wrapper}>
         <div className={m.bar}>
           <div className={m.profileWrapp}>
-            <img alt="" src={data.more?.pers?.profilePic} className={m.avatar}></img>
+            <img
+              alt=""
+              src={data.more?.pers?.profilePic}
+              className={m.avatar}
+            ></img>
             <p className={m.name}>
-              <span>{data.more?.pers?.fname}</span> <span>{data.more?.pers?.lname}</span>
+              <span>{data?.fname}</span> <span>{data?.lname}</span>
             </p>
-            <div className={m.littleWrapp}>
-              <p className={m.genderText}>{data.more?.pers?.gender}</p>
-              <p className={m.location}>
-                <span>{data.more?.pers?.country}</span>,{" "}
-                <span>{data.more?.pers?.city}</span>
-              </p>
-            </div>
+            {data.more?.pers?.gender ? (
+              <div className={m.littleWrapp}>
+                <p className={m.genderText}>{data.more?.pers?.gender}</p>
+                <p className={m.location}>
+                  <span>{data.more?.pers?.country}, </span>
+                  <span>{data.more?.pers?.city}</span>
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <select className={m.selector} name="" id="">
             <option value="В поиске проекта">В поиске проекта</option>
@@ -74,14 +83,18 @@ function Profile() {
           <div className={m.persWrapp}>
             <h3 className={m.infoTitle}>Профессиональная информация</h3>
 
-            <div className={m.personalInfo}>
-              <h3 className={m.post}>{data.more?.job?.post}</h3>
-              <span className={m.postLevel}>{data.more?.job?.postLevel}</span>
-              <br />
-              <span className={m.lang}>
-                {data.more?.job?.lang}, {data.more?.job?.langLevel}
-              </span>
-            </div>
+            {data.more?.job?.post ? (
+              <div className={m.personalInfo}>
+                <h3 className={m.post}>{data.more?.job?.post}</h3>
+                <span className={m.postLevel}>{data.more?.job?.postLevel}</span>
+                <br />
+                <span className={m.lang}>
+                  {data.more?.job?.lang}, {data.more?.job?.langLevel}
+                </span>
+              </div>
+            ) : (
+              ""
+            )}
 
             <div className={m.tagsWrapper}>
               {data.more?.job?.skills.map((tag, i) => (
@@ -99,7 +112,8 @@ function Profile() {
               <div className={m.expInfo}>
                 <h3 className={m.postTitle}>{data.more?.exp?.jobPost}</h3>
                 <p className={m.companyWrapp}>
-                  <span className={m.postLevel}>{data.more?.exp?.company}</span>,{" "}
+                  <span className={m.postLevel}>{data.more?.exp?.company}</span>
+                  ,{" "}
                   <span className={m.date}>
                     {startJ} - {endJ}
                   </span>
@@ -118,7 +132,10 @@ function Profile() {
               <div className={m.expInfo}>
                 <h3 className={m.eduTitle}>{data.more?.edu?.specialization}</h3>
                 <p className={m.instWrapp}>
-                  <span className={m.postLevel}>{data.more?.edu?.institution}</span><br/>
+                  <span className={m.postLevel}>
+                    {data.more?.edu?.institution}
+                  </span>
+                  <br />
                   <span className={m.date}>
                     {startE} - {endE}
                   </span>
@@ -136,7 +153,10 @@ function Profile() {
               <div className={m.expInfo}>
                 <h3 className={m.eduTitle}>{data.more?.qual?.qualName}</h3>
                 <p className={m.instWrapp}>
-                  <span className={m.postLevel}>{data.more?.qual?.qualInstitution}</span><br/>
+                  <span className={m.postLevel}>
+                    {data.more?.qual?.qualInstitution}
+                  </span>
+                  <br />
                   <span className={m.date}>
                     {startQ} - {endQ}
                   </span>
@@ -145,7 +165,7 @@ function Profile() {
             </div>
           ) : (
             ""
-          )}  
+          )}
 
           {data.more?.about ? (
             <div className={m.expWrapp}>
@@ -157,7 +177,7 @@ function Profile() {
             </div>
           ) : (
             ""
-          )}  
+          )}
         </div>
       </div>
     </div>

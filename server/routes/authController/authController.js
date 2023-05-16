@@ -46,6 +46,7 @@ class authController {
     }
 
     async login(req, res) {
+        const {email, password} = req.body
         try {
             const errors = validationResult(req)
 
@@ -56,9 +57,10 @@ class authController {
                 })
             }
 
-            const {email, password} = req.body
+            // console.log("email", email);
+            const user = await User.findOne({email: { $regex: new RegExp('^' + email + '$', 'i') }}).exec()
+            // console.log(user);
 
-            const user = await User.findOne({email})
             if(!user) {
                 return res.status(400).json({ message: 'Пользователь не найден' })
             }
@@ -76,23 +78,23 @@ class authController {
         }
     }
 
-    async deleteUser(req, res) {
-        try {
-            const {id} = req.params
-    
-            if(!id) {
-                return res.status(400).json({message: "ID not found"})
-            }
-    
-            // const findId = await Tweet.findById(id)
-            const deleteElement = await User.findByIdAndDelete(id)
-            return res.json(deleteElement)
-        } catch (e) {
-            res.status(500).json(e)
-        }   
-    }
-
     // async changeNumber(req, res) {
+    //     try {
+    //         const {id} = req.params
+    
+    //         if(!id) {
+    //             return res.status(400).json({message: "ID not found"})
+    //         }
+    
+    //         // const findId = await Tweet.findById(id)
+    //         const deleteElement = await User.findByIdAndDelete(id)
+    //         return res.json(deleteElement)
+    //     } catch (e) {
+    //         res.status(500).json(e)
+    //     }   
+    // }
+
+    // async deleteUser(req, res) {
     //     try {
     //         const {id} = req.params
     
@@ -160,8 +162,8 @@ class authController {
             const update = await User.findOneAndUpdate(
                 {}, 
                 {
-                    "more.pers.fname": fname,
-                    "more.pers.lname": lname,
+                    "fname": fname,
+                    "lname": lname,
                     "more.pers.gender": gender,
                     "more.pers.country": country,
                     "more.pers.hb": hb,

@@ -1,128 +1,170 @@
 import m from "./EducationForm.module.css";
-import React, { useState } from "react";
+import React from "react";
 import "./EducationForm.css";
 import { changeProf } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
 import { useHttp } from "../../../hooks/http.hook";
+import { Field, Form } from "react-final-form";
 
 function EducationForm() {
-  const dispatch = useDispatch()
+  const normalInput = "text-field__input-reg4 auth__main_input-name4";
+  const errorInput =
+    "text-field__input-reg__error2 auth__main_input-name_error4";
+  const normalLable = "text-field__label-reg4 text-lable2";
+  const errorLable = "text-field__label-reg__error2 text-lable2";
+  const normalInputDate = "text-field__input-reg4 auth__main_input-date4";
+  const dispatch = useDispatch();
 
   const submit = () => {
-    dispatch(changeProf(true))
-  }
+    dispatch(changeProf(true));
+  };
 
   const { loading, request } = useHttp();
-  const [form, setForm] = useState({
-    specialization: "",
-    institution: "",
-    startEdu: "",
-    endEdu: "",
-  });
 
-  const changeHandler = (event) => {
-    setForm({...form, [event.target.name]: event.target.value})
-}
+  const validate = (e) => {
+    const errors = {};
 
-  const registerHandler = async () => {
-    try {
-      const data = await request("/api/auth/edit/edu", "PUT", { ...form });
-      console.log("Data", data);
-      setForm({
-        specialization: "",
-        institution: "",
-        startEdu: "",
-        endEdu: "",
-      })
-    } catch (e) {
-      console.log(e);
+    if (e.specialization && e.specialization.length < 5) {
+      errors.specialization = "Слишком коротко";
     }
+
+    if (e.institution && e.institution.length < 5) {
+      errors.institution = "Слишком коротко";
+    }
+
+    if (e.progress && e.progress.length < 50) {
+      errors.progress = "Напишите больше о своих достижений";
+    }
+
+    return errors;
+  };
+
+  const onSubmit = async (value) => {
+    try {
+      const data = await request("/api/auth/edit/edu", "PUT", { ...value });
+      console.log("Data", data);
+    } catch (e) {}
   };
   return (
     <div className={m.infoBar}>
       <div className={m.infoWrapp}>
         <h3 className={m.titleSmall}>Образование</h3>
-        <form className="popup__form4">
-          <div className="auth__main_reg-input__user_wrapper4">
-            <div className="text-field-reg4 text-field_floating-reg4 auth__main_input-email_wrapper4">
-              <input
-                type="text"
-                placeholder=" "
-                id="name"
-                name="specialization"
-                className="text-field__input-reg4 auth__main_input-name4"
-                value={form.specialization}
-                onChange={changeHandler}
-              />
-              <label className="text-field__label-reg4 text-lable4">
-                Специальность
-              </label>
-            </div>
-            <div className="text-field-reg4 text-field_floating-reg4 auth__main_input-email_wrapper4">
-              <input
-                type="text"
-                placeholder=" "
-                id="name"
-                name="institution"
-                className="text-field__input-reg4 auth__main_input-name4"
-                value={form.institution}
-                onChange={changeHandler}
-              />
-              <label className="text-field__label-reg4 text-lable4">
-                Учебное заведение
-              </label>
-            </div>
-            <div className={m.inputWrapper}>
-              <div className="text-field-reg4 text-field_floating-reg4 auth__main_input-email_wrapper4">
-                <input
-                  type="date"
-                  placeholder=" "
-                  id="name"
-                  name="startEdu"
-                  className="text-field__input-reg4 auth__main_input-date4"
-                  value={form.startEdu}
-                  onChange={changeHandler}
-                />
-                <label className="text-field__label-reg4 text-lable4">
-                  Начало обучения
-                </label>
+        <Form
+          onSubmit={onSubmit}
+          validate={validate}
+          render={({ handleSubmit }) => (
+            <form className="popup__form4" onSubmit={handleSubmit}>
+              <div className="auth__main_reg-input__user_wrapper4">
+                <div className="text-field-reg4 text-field_floating-reg4 auth__main_input-email_wrapper4">
+                  <Field name="specialization">
+                    {({ input, meta }) => (
+                      <>
+                        <input
+                          type="text"
+                          placeholder=" "
+                          className={meta.error ? errorInput : normalInput}
+                          {...input}
+                        />
+                        <label
+                          className={meta.error ? errorLable : normalLable}
+                        >
+                          Специальность
+                        </label>
+                        {meta.touched && meta.error && (
+                          <span className="error-text4">{meta.error}</span>
+                        )}
+                      </>
+                    )}
+                  </Field>
+                </div>
+                <div className="text-field-reg4 text-field_floating-reg4 auth__main_input-email_wrapper4">
+                  <Field name="institution">
+                    {({ input, meta }) => (
+                      <>
+                        <input
+                          type="text"
+                          placeholder=" "
+                          className={meta.error ? errorInput : normalInput}
+                          {...input}
+                        />
+                        <label
+                          className={meta.error ? errorLable : normalLable}
+                        >
+                          Учебное заведение
+                        </label>
+                        {meta.touched && meta.error && (
+                          <span className="error-text4">{meta.error}</span>
+                        )}
+                      </>
+                    )}
+                  </Field>
+                </div>
+                <div className={m.inputWrapper}>
+                  <div className="text-field-reg4 text-field_floating-reg4 auth__main_input-email_wrapper4">
+                    <Field name="startEdu">
+                      {({ input, meta }) => (
+                        <>
+                          <input
+                            type="date"
+                            placeholder=" "
+                            className={
+                              meta.error ? errorInput : normalInputDate
+                            }
+                            {...input}
+                          />
+                          <label
+                            className={meta.error ? errorLable : normalLable}
+                          >
+                            Начало обучения
+                          </label>
+                        </>
+                      )}
+                    </Field>
+                  </div>
+                  <div className="text-field-reg4 text-field_floating-reg4 auth__main_input-email_wrapper4">
+                    <Field name="endEdu">
+                      {({ input, meta }) => (
+                        <>
+                          <input
+                            type="date"
+                            placeholder=" "
+                            className={
+                              meta.error ? errorInput : normalInputDate
+                            }
+                            {...input}
+                          />
+                          <label
+                            className={meta.error ? errorLable : normalLable}
+                          >
+                            Окончание обучения
+                          </label>
+                        </>
+                      )}
+                    </Field>
+                  </div>
+                </div>
+                <div className={m.buttonWrapper}>
+                  <button
+                    type=""
+                    className="popup__button_register-cancel4"
+                    name="submit"
+                    onClick={() => submit()}
+                  >
+                    Отмена
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="popup__button_register-save4"
+                    name="submit"
+                  >
+                    Сохранить
+                  </button>
+                </div>
               </div>
-              <div className="text-field-reg4 text-field_floating-reg4 auth__main_input-email_wrapper4">
-                <input
-                  type="date"
-                  placeholder=" "
-                  id="name"
-                  name="endEdu"
-                  className="text-field__input-reg4 auth__main_input-date4"
-                  value={form.endEdu}
-                  onChange={changeHandler}
-                />
-                <label className="text-field__label-reg4 text-lable4">
-                  Окончание обучения
-                </label>
-              </div>
-            </div>
-            <div className={m.buttonWrapper}>
-              <button
-                type=""
-                className="popup__button_register-cancel4"
-                name="submit"
-                onClick={() => submit()}
-              >
-                Отмена
-              </button>
-              <button
-                type="submit"
-                className="popup__button_register-save4"
-                name="submit"
-                onClick={registerHandler}
-                disabled={loading}
-              >
-                Сохранить
-              </button>
-            </div>
-          </div>
-        </form>
+            </form>
+          )}
+        />
       </div>
     </div>
   );

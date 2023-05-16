@@ -22,6 +22,6 @@ const popupSlice = createSlice({
   }
 });
 
-export const { changeEmail, changeNumber, changePassword, } = popupSlice.actions;
+export const { changeEmail, changeNumber, changePassword } = popupSlice.actions;
 
 export default popupSlice.reducer;

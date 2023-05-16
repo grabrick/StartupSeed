@@ -47,15 +47,15 @@
 
 .text-field__input-reg__error4 .auth__main_input-bio__error4 {
     border-color: red;
-    background-color: #DDE1E1;
+    background-color: transparent;
     /* height: calc(2.5rem + 2px); */
     padding: 0.5rem 0.75rem;
 }
 
-.auth__main_input-bio__error4 {
-    width: 300px;
+/* .auth__main_input-bio__error4 {
+    width: 800px;
     height: 20px;
-}
+} */
 
 .text-field__input-reg__error4 {
     display: block;
@@ -66,7 +66,7 @@
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    background-color: #DDE1E1;
+    background-color: transparent;
     background-clip: padding-box;
     border: 1px solid red;
     border-radius: 0.25rem;
@@ -74,9 +74,9 @@
     appearance: none;
 }
 
-.text-field__input-reg__error4:focus {
+.text-field__input-reg__error2:focus {
     color: red;
-    background-color: #DDE1E1;
+    background-color: transparent;
     border-color: red;
     outline: 0;
     /* box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25); */
@@ -91,7 +91,7 @@
     transform: translateY(-50%);
     pointer-events: none;
     border: none;
-    background-color: #DDE1E1;
+    background-color: transparent;
     color: red;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -145,6 +145,12 @@
     width: 810px;
     height: 20px;
 }
+
+.auth__main_input-name_error4 {
+    width: 810px;
+    height: 20px;
+}
+
 .auth__main_input-date4 {
     width: 380px;
     height: 20px;
@@ -244,6 +250,8 @@
 /* with floating label */
 .text-field_floating-reg4 {
     position: relative;
+    height: 40px;
+    margin-bottom: 35px;
 }
 
 .text-field_floating-reg4 .text-field__input-reg4 {

@@ -11,10 +11,10 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 app.use(bodyParser.text({ limit: '200mb' }))
 
 // Localhost
-// app.use('/api/auth', require('./server/routes/authRouter'))
+app.use('/api/auth', require('./server/routes/authRouter'))
 
 // DEPLOY //
-app.use('/auth', require('./server/routes/authRouter'))
+// app.use('/auth', require('./server/routes/authRouter'))
 
 async function start() {
   try {
