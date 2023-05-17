@@ -25,8 +25,8 @@ const schema = Schema({
         exp: {
             jobPost: { type: String },
             company: { type: String },
-            startJob: { type: Date },
-            endJob: { type: Date },
+            startJob: { type: String },
+            endJob: { type: String },
             progress: { type: String },
         },
         edu: {

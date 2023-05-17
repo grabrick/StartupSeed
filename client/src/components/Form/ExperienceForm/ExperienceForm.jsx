@@ -1,5 +1,5 @@
 import m from "./ExperienceForm.module.css";
-import React from "react";
+import React, { useState } from "react";
 import "./ExperienceForm.css";
 import { changeExp } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
@@ -17,6 +17,7 @@ function ExperienceForm() {
   const errorInputArea =
     "text-field__input-reg_error auth__main_input-name_error text-input__textarea";
   const dispatch = useDispatch();
+  const [active, isActive] = useState(false)
 
   const submit = () => {
     dispatch(changeExp(true));
@@ -41,11 +42,18 @@ function ExperienceForm() {
     return errors;
   };
 
+  console.log(active);
   const onSubmit = async (value) => {
-    try {
+    console.log(value);
+    if(active === true) {
+      const actualDate = 'По настоящее время'
+      // value.endJob = 'По настоящее время'
+      const data = await request("/api/auth/edit/exp", "PUT", { ...value, endJob: actualDate });
+      console.log("Data", data);
+    } else {
       const data = await request("/api/auth/edit/exp", "PUT", { ...value });
       console.log("Data", data);
-    } catch (e) {}
+    }
   };
   return (
     <div className={m.infoBar}>
@@ -128,9 +136,14 @@ function ExperienceForm() {
                           <input
                             type="date"
                             placeholder=" "
+                            disabled={active ? true : false}
                             className={meta.error ? errorInput : normalInput}
                             {...input}
                           />
+                          <div className="checkbox">
+                            <input type="checkbox" id="color-1" onChange={() => isActive(!active)} className="custom-checkbox" />
+                            <label for="color-1">По настоящее время</label>
+                          </div>
                           <label
                             className={meta.error ? errorLable : normalLable}
                           >

@@ -4,12 +4,22 @@ import "./ProfessionalForm.css";
 import closeIcn from "../../../assets/images/close-line.svg";
 import { useHttp } from "../../../hooks/http.hook";
 import { Field, Form } from "react-final-form";
+import { useDispatch, useSelector } from "react-redux";
+import { addTag, removeTag } from "../../../redux/slices/skillsSlice";
 
 function ProfessionalForm() {
   const normalInput = "text-field__input-reg2 auth__main_input-name2";
   const errorInput = "text-field__input-reg__error2 auth__main_input-bio__error2";
   const normalLable = "text-field__label-reg2 text-lable2";
   const errorLable = "text-field__label-reg__error2 text-lable2";
+  const data = useSelector((state) => state.skills.skills);
+  const dispatch = useDispatch();
+  const addTags = (items) => {
+    dispatch(addTag(items));
+  };
+  const removeTags = (i) => {
+    dispatch(removeTag(i));
+  };
   const { loading, request } = useHttp();
   const [tags, setTags] = useState([]);
   const [form, setForm] = useState({
@@ -26,12 +36,13 @@ function ProfessionalForm() {
     let value = e.target.value;
     if (!value.trim()) return;
     setTags([...tags, value]);
+    addTags([...tags, value])
     setForm({ skills: "" })
   };
 
-  const removeTags = (index) => {
-    setTags(tags.filter((el, i) => i !== index));
-  };
+  // const removeTags = (index) => {
+  //   setTags(tags.filter((el, i) => i !== index));
+  // };
 
   const validate = (e) => {
     const errors = {};
@@ -168,7 +179,7 @@ function ProfessionalForm() {
                   </label>
                 </div>
                 <div className={m.tagsWrapper}>
-                    {tags.map((tag, i) => (
+                    {data.map((tag, i) => (
                       <div key={i} className={m.tags}>
                         <span className={m.tag}>{tag}</span>
                         <img

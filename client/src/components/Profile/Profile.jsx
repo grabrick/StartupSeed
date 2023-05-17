@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { getUser } from "../../redux/slices/userSlice";
 import NavBar from "../NavBar/NavBar";
+import { getSkills } from "../../redux/slices/skillsSlice";
 
 function Profile() {
   const data = useSelector((state) => state.users.user);
@@ -12,12 +13,16 @@ function Profile() {
   const User = (items) => {
     dispatch(getUser(items));
   };
+  const Skills = (items) => {
+    dispatch(getSkills(items));
+  };
 
   useEffect(() => {
     axios
       .get("/api/auth/get")
       .then((items) => {
         User(items.data);
+        Skills(items.data.more.job.skills)
         console.log(items.data);
       })
       .catch((e) => {
@@ -25,11 +30,6 @@ function Profile() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const startJob = data.more?.exp?.startJob;
-  const startJ = startJob?.slice(0, 10);
-  const endJob = data.more?.exp?.endJob;
-  const endJ = endJob?.slice(0, 10);
 
   const startEdu = data.more?.edu?.startEdu;
   const startE = startEdu?.slice(0, 10);
@@ -115,7 +115,7 @@ function Profile() {
                   <span className={m.postLevel}>{data.more?.exp?.company}</span>
                   ,{" "}
                   <span className={m.date}>
-                    {startJ} - {endJ}
+                    {data.more?.exp?.startJob} - {data.more?.exp?.endJob}
                   </span>
                 </p>
                 <p className={m.progress}>{data.more?.exp?.progress}</p>

@@ -9,6 +9,9 @@ import AboutForm from "../Form/AboutForm/AboutForm";
 import { useDispatch, useSelector } from "react-redux";
 import { changeExp, changeProf, changeQual } from "../../redux/slices/formSlice";
 import NavBar from "../NavBar/NavBar";
+import { useEffect } from "react";
+import { getSkills } from "../../redux/slices/skillsSlice";
+import axios from "axios";
 
 function EditProfile() {
   const dispatch = useDispatch()
@@ -25,6 +28,23 @@ function EditProfile() {
   const changeQualifications = () => {
     dispatch(changeQual(false))
   }
+
+  const Skills = (items) => {
+    dispatch(getSkills(items));
+  };
+
+  useEffect(() => {
+    axios
+      .get("/api/auth/get")
+      .then((items) => {
+        Skills(items.data.more.job.skills)
+        console.log(items.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={m.container}>
