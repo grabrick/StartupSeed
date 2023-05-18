@@ -47,29 +47,6 @@ function Settings() {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
-  // const registerHandler = async () => {
-  //   try {
-  //     const data = await request("/api/auth/edit/person", "PUT", {...form});
-  //     console.log("Data", data);
-  //     setForm({
-
-  //     });
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   registerHandler();
-  // }
-
-  // const handlePopupEmailClick = (e) => {
-  //   if (e.key !== "Enter") return;
-  //   e.preventDefault();
-  //   setIsPopupReg(true);
-  // };
-
   const handlePopupEmailClick = () => {
     dispatch(changeEmail(false))
   };
@@ -77,6 +54,18 @@ function Settings() {
   const handlePopupPasswordClick = () => {
     dispatch(changePassword(false))
   };
+
+  const onClickDeleteUser = (id) => {
+    console.log(id);
+    try {
+      axios.get(`/api/auth/delete/${id}`)
+        .then(items => {
+          console.log(items);
+        })
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <div className={m.container}>
@@ -109,7 +98,7 @@ function Settings() {
             <option value="Не ищу проект">Не ищу проект</option>
           </select>
           <>
-            <NavBar />
+            <NavBar currentBtn={"Setting"} />
           </>
         </div>
 
@@ -175,7 +164,7 @@ function Settings() {
               </div>
               <button className={m.btn}>Изменить</button>
             </div>
-            <button className={m.deleteBtn}>Удалить аккаунт</button>
+            <button className={m.deleteBtn} onClick={() => onClickDeleteUser(data._id)}>Удалить аккаунт</button>
         </div>
       </div>
       {isVisibleEmail ? "" : <EditEmail /> }

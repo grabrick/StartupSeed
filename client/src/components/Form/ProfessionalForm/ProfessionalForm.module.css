@@ -29,6 +29,16 @@
     margin-left: 10px;
     margin-bottom: 10px;
 }
+.tags:nth-child(1) {
+    background-color: silver;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 0;
+    margin-bottom: 10px;
+}
 
 .tag {
     margin-right: 10px;

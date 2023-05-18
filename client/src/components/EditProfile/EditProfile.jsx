@@ -53,7 +53,7 @@ function EditProfile() {
       <h1 className={m.title}>Личный кабинет</h1>
 
       <div className={m.wrapper}>
-        <NavBar />
+        <NavBar currentBtn={"Profile"} />
         <div className={m.formWrapper}>
           <PersonalForm />
           <ProfessionalForm />

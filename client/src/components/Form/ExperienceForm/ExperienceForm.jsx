@@ -41,8 +41,7 @@ function ExperienceForm() {
 
     return errors;
   };
-
-  console.log(active);
+  
   const onSubmit = async (value) => {
     console.log(value);
     if(active === true) {

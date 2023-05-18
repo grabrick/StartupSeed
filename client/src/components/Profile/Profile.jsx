@@ -75,7 +75,7 @@ function Profile() {
             <option value="Не ищу проект">Не ищу проект</option>
           </select>
           <>
-            <NavBar />
+            <NavBar currentBtn={"Profile"} />
           </>
         </div>
 

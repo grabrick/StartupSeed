@@ -22,7 +22,8 @@ router.post(
     controller.login
 )
 
-// router.delete(
+// DONE!
+// router.get(
 //     '/delete/:id',
 //     controller.deleteUser
 // )

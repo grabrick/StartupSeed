@@ -14,15 +14,26 @@
     flex-direction: column;
 }
 
+.button1 {
+    background-color: aquamarine;
+}
+
 .button {
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid black;
     cursor: pointer;
     text-decoration: none;
     height: 30px;
     width: 210px;
-    margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.buttonLink {
+    text-decoration: none;
+    margin-bottom: 8px;
 }
 
 .btnWrapp {
@@ -36,6 +47,6 @@
     text-decoration: none;
 }
 
-.button:nth-last-child(1) {
+.buttonLink:nth-last-child(1) {
     margin-bottom: 0px;
 }

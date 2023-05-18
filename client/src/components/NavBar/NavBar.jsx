@@ -6,6 +6,8 @@ import gear from "../../assets/images/settings-5-line.svg";
 import star from "../../assets/images/star-line.svg";
 import cases from "../../assets/images/briefcase-line.svg";
 import m from "./NavBar.module.css";
+import './NavBar.css'
+import { useState } from "react";
 
 
 const logout = () => {
@@ -16,11 +18,32 @@ const logout = () => {
   }, 2000);
 }
 
-function NavBar() {
+function NavBar(props) {
+  const [show, setShow] = useState(props.currentBtn)
+
+  const handleProfileClick = () => {
+    setShow("Profile");
+  }
+
+  const handleProjectClick = () => {
+    setShow("Project");
+  }
+
+  const handleFavoriteClick = () => {
+    setShow("Favorite");
+  }
+
+  const handleSettingClick = () => {
+    setShow("Setting");
+  }
+
+  const activeColor = "button__active";
+
+  const inactiveColor = "button__inactive";
     return (  
         <div className={m.bar}>
-          <NavLink className={m.button} to="/profile">
-            <button className={m.button}>
+          <NavLink className={m.buttonLink} to="/profile">
+            <button className={show === "Profile" ? activeColor : inactiveColor} onClick={handleProfileClick}>
               <div className={m.btnWrapp}>
                 <img className={m.image} src={lines} alt="" />
                 <span className={m.span}>Профиль</span>
@@ -30,31 +53,31 @@ function NavBar() {
               </NavLink>
             </button>
           </NavLink>
-          <NavLink className={m.button} to="/">
-            <button className={m.button}>
+          <NavLink className={m.buttonLink} to="">
+            <button className={show === "Project" ? activeColor : inactiveColor} onClick={handleProjectClick}>
               <div className={m.btnWrapp}>
                 <img className={m.image} src={cases} alt="" />
                 <span className={m.span}>Мои проекты</span>
               </div>
             </button>
           </NavLink>
-          <NavLink className={m.button} to="/">
-            <button className={m.button}>
+          <NavLink className={m.buttonLink} to="">
+            <button className={show === "Favorite" ? activeColor : inactiveColor} onClick={handleFavoriteClick}>
               <div className={m.btnWrapp}>
                 <img className={m.image} src={star} alt="" />
                 <span className={m.span}>Избранное</span>
               </div>
             </button>
           </NavLink>
-          <NavLink className={m.button} to="/profile/settings">
-            <button className={m.button}>
+          <NavLink className={m.buttonLink} to="/profile/settings">
+            <button className={show === "Setting" ? activeColor : inactiveColor} onClick={handleSettingClick}>
               <div className={m.btnWrapp}>
                 <img className={m.image} src={gear} alt="" />
                 <span className={m.span}>Настройки</span>
               </div>
             </button>
           </NavLink>
-            <button className={m.button} onClick={() => logout()} >
+            <button className="button__inactive" onClick={() => logout()} >
               <div className={m.btnWrapp}>
                 <img className={m.image} src={doors} alt="" />
                 <span className={m.span}>Выйти</span>

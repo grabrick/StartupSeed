@@ -94,6 +94,7 @@ class authController {
     //     }   
     // }
 
+    // DONE!
     // async deleteUser(req, res) {
     //     try {
     //         const {id} = req.params
@@ -102,9 +103,10 @@ class authController {
     //             return res.status(400).json({message: "ID not found"})
     //         }
     
-    //         // const findId = await Tweet.findById(id)
-    //         const deleteElement = await User.findByIdAndDelete(id)
-    //         return res.json(deleteElement)
+    //         const findId = await User.findById(id)
+    //         return res.json(findId)
+    //         // const deleteElement = await User.findByIdAndDelete(id)
+    //         // return res.json(deleteElement)
     //     } catch (e) {
     //         res.status(500).json(e)
     //     }   
