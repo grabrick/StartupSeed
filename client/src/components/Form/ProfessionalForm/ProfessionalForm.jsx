@@ -35,8 +35,9 @@ function ProfessionalForm() {
     e.preventDefault()
     let value = e.target.value;
     if (!value.trim()) return;
-    setTags([...tags, value]);
+    setTags([...tags, value])
     addTags([...tags, value])
+    setTags([])
     setForm({ skills: "" })
   };
 
@@ -60,11 +61,11 @@ function ProfessionalForm() {
 
   const onSubmit = async (value) => {
     try {
-      const data = await request("/api/auth/edit/prof", "PUT", {
+      const uploaddata = await request("/api/auth/edit/prof", "PUT", {
         ...value,
-        skills: tags,
+        skills: data,
       });
-      console.log("Data", data);
+      console.log("Data", uploaddata);
     } catch (e) {}
   };
 

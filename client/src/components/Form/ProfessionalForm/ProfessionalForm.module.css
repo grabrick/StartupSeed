@@ -15,6 +15,9 @@
     flex-wrap: wrap;
 }
 
+.tagBtn {
+    cursor: pointer;
+}
 
 .tags {
     background-color: silver;

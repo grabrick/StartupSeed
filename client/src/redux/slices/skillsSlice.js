@@ -12,12 +12,10 @@ const skillsSlice = createSlice({
       state.skills = actions.payload
     },
     addTag(state, actions) {
-      state.skills = actions.payload
+      state.skills.push(...actions.payload)
     },
     removeTag(state, actions) {
       state.skills = state.skills.filter((el, i) => i !== actions.payload);
-      console.log(actions)
-      console.log(state.skills);
     }
   }
 })
