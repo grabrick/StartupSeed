@@ -10,18 +10,18 @@ const popupSlice = createSlice({
   name: "popup",
   initialState,
   reducers: {
-    changeEmail(state, actions) {
+    activeEmail(state, actions) {
         state.visibleEmail = actions.payload
     },
-    changeNumber(state, actions) {
+    activeNumber(state, actions) {
         state.visibleNumber = actions.payload
     },
-    changePassword(state, actions) {
+    activePassword(state, actions) {
         state.visiblePassword = actions.payload
     }
   }
 });
 
-export const { changeEmail, changeNumber, changePassword } = popupSlice.actions;
+export const { activeEmail, changeNumber, activePassword } = popupSlice.actions;
 
 export default popupSlice.reducer;

@@ -1,56 +1,102 @@
-// import { useState } from "react";
-// import { useHttp } from "../../../hooks/http.hook";
 import "./EditEmail.css";
 import m from "./EditEmail.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { changeEmail } from "../../../redux/slices/popupSlice";
+import { activeEmail } from "../../../redux/slices/popupSlice";
 import { useState } from "react";
+import { Field, Form } from "react-final-form";
+import { useHttp } from "../../../hooks/http.hook";
+import axios from "axios";
+import { getUser } from "../../../redux/slices/userSlice";
 
 const EditEmail = () => {
   const isVisibleEmail = useSelector((state) => state.popup.visibleEmail);
+  const email = useSelector((state) => state.users.user.email)
+  const errorInput = `${m.inputError}`;
+  const normalInput = `${m.input}`;
   const [visible, setVisible] = useState(false);
   const inactive = "popup__change";
   const active = "popup__change_opened";
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState({
+  const { loading, request } = useHttp();
+  const [changer, setChanger] = useState({
     email: "",
-    code: "",
+    inputCode: "",
   });
+  const dispatch = useDispatch()
+  const closePopup = () => {
+    dispatch(activeEmail(true))
+  }
+  const User = (items) => {
+    dispatch(getUser(items))
+  }
 
-  const changeHandler = (event) => {
-    setEmail({ ...email, [event.target.name]: event.target.value });
-  };
+  const changeInput = (event) => {
+    setChanger({ ...changer, [event.target.name]: event.target.value });
+  }
 
-  console.log(email);
-
-  const handleVerefEmail = () => {
-    console.log(email.email <= 4);
-    if(email.email <= 4) {
-      setVisible(false)
+  const handleVerefyEmail = (value) => {
+    console.log(value.email <= 6);
+    if (value.email <= 6) {
+      setVisible(false);
+    } else if (!value.email) {
+      setVisible(false);
     } else {
-      setVisible(true)
+      setVisible(true);
     }
   }
 
-  const closePopup = () => {
-    dispatch(changeEmail(true));
-  };
-  //   const { loading, request } = useHttp();
-  // const [form, setForm] = useState({
-  //   email: "",
-  //   password: "",
-  // });
+  const updataData = () => {
+    axios
+      .get("http://localhost:3000/api/auth/get")
+      .then((items) => {
+        User(items.data);
+        console.log(items.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
-  // const changeHandler = (event) => {
-  //   setForm({ ...form, [event.target.name]: event.target.value });
-  // };
+  const validate = (e) => {
+    const errors = {};
 
-  //   const loginHandler = async () => {
-  //     try {
-  //       const data = await request("/api/auth/login", "POST", { ...form });
-  //       auth.login(data.token, data.userId);
-  //     } catch (e) {}
-  //   };
+    if (e.email?.indexOf("@") ===  -1) {
+      errors.email = "В поле email должен быть знак @"
+    } else if (e.email && e.email.length < 10) {
+      errors.email = "Слишком короткая почта"
+    } else if (e.email === email) {
+      errors.email = " почту"
+    }
+
+    return errors;
+  }
+
+  const changeEmail = async () => {
+    try {
+      const data = await request("/api/change", "PUT", {...changer});
+      console.log("Data", data);
+      setTimeout(() => {
+        closePopup()
+        updataData()
+      }, 1000);
+    } catch (e) {}
+  }
+
+  const sentAgainCode = async () => {
+    try {
+      const data = await request("/api/verify", "POST", { ...changer });
+      console.log("Data", data);
+    } catch (e) {}
+  }
+
+  const onSubmit = async (value) => {
+    handleVerefyEmail(value);
+    console.log(value);
+    setChanger({ ...value });
+    try {
+      const data = await request("/api/verify", "POST", { email: value.email });
+      console.log("Data", data);
+    } catch (e) {}
+  }
 
   return (
     <>
@@ -70,51 +116,80 @@ const EditEmail = () => {
                 шаге.
               </p>
             </div>
-            <form className={m.form}>
-              <div className={m.formWrapper}>
-                <input 
-                  type="text"
-                  placeholder="Email" 
-                  name="email"
-                  onChange={changeHandler}
-                  className={m.input}
-                />
-                <br />
-                {visible ? (
-                  <input
-                    type="text"
-                    name="code"
-                    placeholder="Код подтверждения"
-                    onChange={changeHandler}
-                    className={m.inputVeref}
-                  />
-                ) : (
-                  ""
-                )}
-                <div className={m.btnWrapper}>
-                  {visible ? (
-                    <button type="button" className={m.btnVerif}>
-                      Отправить код повторно
-                    </button>
-                  ) : (
-                    <button type="button" onClick={() => handleVerefEmail()} className={m.btnVerif}>
-                      Отправить код подтверждения
-                    </button>
-                  )}
-                  <div>
-                    <button className={m.btnSave} onClick={() => closePopup()}>
-                      Изменить
-                    </button>
-                    <button
-                      className={m.btnCancel}
-                      onClick={() => closePopup()}
-                    >
-                      Отмена
-                    </button>
+            <Form
+              onSubmit={onSubmit}
+              validate={validate}
+              render={({ handleSubmit }) => (
+                <form className={m.form} onSubmit={handleSubmit}>
+                  <div className={m.formWrapper}>
+                    <Field name="email">
+                      {({ input, meta }) => (
+                        <>
+                          <input
+                            type="text"
+                            placeholder="Email"
+                            className={meta.error ? errorInput : normalInput}
+                            {...input}
+                          />
+                          {meta.touched && meta.error && (
+                            <span className="error-text3">{meta.error}</span>
+                          )}
+                        </>
+                      )}
+                    </Field>
+                    <br />
+                    {visible ? (
+                      <input
+                        type="text"
+                        name="inputCode"
+                        placeholder="Код подтверждения"
+                        onChange={changeInput}
+                        className={normalInput}
+                      />
+                    ) : (
+                      ""
+                    )}
+
+                    <div className={m.btnWrapper}>
+                      {visible ? (
+                        <button
+                          type="button"
+                          className={m.btnVerif}
+                          disabled={loading}
+                          onClick={() => sentAgainCode()}
+                        >
+                          Отправить код повторно
+                        </button>
+                      ) : (
+                        <button
+                          type="submit"
+                          className={m.btnVerif}
+                          disabled={loading}
+                        >
+                          Отправить код подтверждения
+                        </button>
+                      )}
+                      <div>
+                        <button
+                          className={m.btnSave}
+                          type="submit"
+                          onClick={() => changeEmail()}
+                          disabled={loading}
+                        >
+                          Изменить
+                        </button>
+                        <button
+                          className={m.btnCancel}
+                          onClick={() => closePopup()}
+                        >
+                          Отмена
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </form>
+                </form>
+              )}
+            />
           </div>
         </div>
       </div>

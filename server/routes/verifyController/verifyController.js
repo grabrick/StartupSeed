@@ -1,0 +1,61 @@
+const nodemailer = require('nodemailer');
+const User = require('../../modals/User')
+const directTransport = require('nodemailer-direct-transport');
+const code = Math.floor(1000 + Math.random() * 9000);
+
+class verifyController {
+    async sentCode(req, res) {
+        try {
+            const { email } = req.body
+            const fromHost = `mail.my`;
+            const from = `Mail@${fromHost}`; //придумываете свою почту(может быть несуществующая)
+            const to = (`Кому отправить: ${email} `).trim();
+            const transport = nodemailer.createTransport(directTransport({
+                name: fromHost
+            }));
+
+            transport.sendMail({
+                from, to,
+                subject: 'Заголовок письма',
+                html: `
+         <h1>Security code: ${code}</h1>
+        `
+            }, (err, data) => {
+                if (err) {
+                    console.error('Ошибка при отправке:', err)
+                } else {
+                    console.log('Письмо отправлено')
+                }
+            })
+            return res.status(201).send('testing')
+        } catch (e) {
+            res.status(500).json({ message: e })
+        }
+    }
+    async changeEmail(req, res) {
+        try {
+            const { inputCode, email } = req.body
+            const convertInputCode = parseInt(inputCode)
+
+            if (convertInputCode !== code) {
+                return res.status(400).json("The code doesn't match")
+            }
+
+            const update = await User.findOneAndUpdate(
+                {},
+                {
+                    "email": email,
+                },
+                { new: true }
+            )
+
+            return res.json(update)
+        } catch (e) {
+            res.status(500).json({ message: e })
+        }
+
+
+    }
+}
+
+module.exports = new verifyController()

@@ -1,6 +1,6 @@
 import { getUser } from "../../redux/slices/userSlice";
 import { useEffect, useState } from "react";
-import { changeEmail, changePassword } from "../../redux/slices/popupSlice";
+import { activeEmail, activePassword } from "../../redux/slices/popupSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useHttp } from "../../hooks/http.hook";
 import axios from "axios";
@@ -48,11 +48,11 @@ function Settings() {
   };
 
   const handlePopupEmailClick = () => {
-    dispatch(changeEmail(false))
+    dispatch(activeEmail(false))
   };
 
   const handlePopupPasswordClick = () => {
-    dispatch(changePassword(false))
+    dispatch(activePassword(false))
   };
 
   const onClickDeleteUser = (id) => {

@@ -3,7 +3,7 @@
 import "./EditPassword.css";
 import m from "./EditPassword.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { changePassword } from "../../../redux/slices/popupSlice";
+import { activePassword } from "../../../redux/slices/popupSlice";
 
 const EditPassword = () => {
   const isVisibleEmail = useSelector((state) => state.popup.visiblePassword);
@@ -12,7 +12,7 @@ const EditPassword = () => {
   const active = "popup__change_opened";
 
   const closePopup = () => {
-    dispatch(changePassword(true))
+    dispatch(activePassword(true))
   }
   //   const { loading, request } = useHttp();
   //   const [form, setForm] = useState({

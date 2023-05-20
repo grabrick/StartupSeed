@@ -12,9 +12,11 @@ app.use(bodyParser.text({ limit: '200mb' }))
 
 // Localhost
 app.use('/api/auth', require('./server/routes/authRouter'))
+app.use('/api', require('./server/routes/verifyRouter'))
 
 // DEPLOY //
 // app.use('/auth', require('./server/routes/authRouter'))
+// app.use('/', require('./server/routes/verifyRouter'))
 
 async function start() {
   try {
