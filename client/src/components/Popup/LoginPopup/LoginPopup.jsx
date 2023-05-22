@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { useHttp } from "../../../hooks/http.hook";
 import { AuthContext } from "../../../context/AuthContext";
 import { Form, Field } from "react-final-form";
 import "./LoginPopup.css";
+import axios from "axios";
 
 const Popup = ({ close }) => {
   const normalInput = "text-field__input-reg auth__main_input-bio";
@@ -13,17 +13,16 @@ const Popup = ({ close }) => {
   const active = "popup__register_opened";
   const [popup] = useState(false);
   const auth = useContext(AuthContext);
-  const { loading, request } = useHttp();
 
   const validate = (e) => {
     const errors = {};
 
-    if (e.email?.indexOf("@") ===  -1) {
-      errors.email = "В поле email должен быть знак @"
+    if (e.email?.indexOf("@") === -1) {
+      errors.email = "В поле email должен быть знак @";
     } else if (e.email && e.email.length < 10) {
-      errors.email = "Слишком короткая почта"
+      errors.email = "Слишком короткая почта";
     }
-  
+
     if (e.password && e.password.length < 5) {
       errors.password = "Пароль должен содержать минимум 5 символов";
     }
@@ -31,12 +30,11 @@ const Popup = ({ close }) => {
     return errors;
   };
 
-  const onSubmit = async (value) => {
-    try {
-      const data = await request("/api/auth/login", "POST", { ...value });
-      console.log(data);
-      auth.login(data.token, data.userId);
-    } catch (e) {}
+  const onSubmit = (value) => {
+    axios.post("/api/auth/login", { ...value }).then((response) => {
+      const login = response.data;
+      auth.login(login.token, login.userId);
+    });
   };
 
   return (
@@ -58,10 +56,7 @@ const Popup = ({ close }) => {
               onSubmit={onSubmit}
               validate={validate}
               render={({ handleSubmit }) => (
-                <form
-                  onSubmit={handleSubmit}
-                  className="popup__form"
-                >
+                <form onSubmit={handleSubmit} className="popup__form">
                   <div className="auth__main_register-input__user_wrapper">
                     <div className="auth__main_reg-input__user_wrapper">
                       <div className="text-field-reg text-field_floating-reg auth__main_input-email_wrapper">
@@ -84,8 +79,8 @@ const Popup = ({ close }) => {
                                 Email
                               </label>
                               {meta.touched && meta.error && (
-                                 <span className="error-text">{meta.error}</span>
-                               )}
+                                <span className="error-text">{meta.error}</span>
+                              )}
                             </>
                           )}
                         </Field>
@@ -110,8 +105,8 @@ const Popup = ({ close }) => {
                                 Пароль
                               </label>
                               {meta.touched && meta.error && (
-                                 <span className="error-text">{meta.error}</span>
-                               )}
+                                <span className="error-text">{meta.error}</span>
+                              )}
                             </>
                           )}
                         </Field>
@@ -121,7 +116,6 @@ const Popup = ({ close }) => {
                       type="submit"
                       className="popup__button_register-save"
                       name="submit"
-                      disabled={loading}
                     >
                       Войти
                     </button>
