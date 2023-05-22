@@ -49,7 +49,7 @@ class verifyController {
                 { new: true }
             )
 
-            return res.json(update)
+            return res.status(200).json(update)
         } catch (e) {
             res.status(500).json({ message: e })
         }

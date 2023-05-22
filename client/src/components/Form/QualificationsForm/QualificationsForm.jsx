@@ -3,8 +3,8 @@ import React from "react";
 import "./QualificationsForm.css";
 import { changeQual } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
-import { useHttp } from "../../../hooks/http.hook";
 import { Field, Form } from "react-final-form";
+import axios from "axios";
 
 function QualificationsForm() {
   const normalInput = "text-field__input-reg5 auth__main_input-name5";
@@ -20,7 +20,6 @@ function QualificationsForm() {
   const submit = () => {
     dispatch(changeQual(true))
   }
-  const { loading, request } = useHttp();
 
   const validate = (e) => {
     const errors = {};
@@ -41,10 +40,7 @@ function QualificationsForm() {
   };
 
   const onSubmit = async (value) => {
-    try {
-      const data = await request("/api/auth/edit/qual", "PUT", { ...value });
-      console.log("Data", data);
-    } catch (e) {}
+    axios.put("/api/auth/edit/qual", { ...value })
   };
   return (
     <div className={m.infoBar}>
@@ -155,7 +151,6 @@ function QualificationsForm() {
                   </button>
                   <button
                     type="submit"
-                    disabled={loading}
                     className="popup__button_register-save4"
                     name="submit"
                   >

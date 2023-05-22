@@ -1,11 +1,11 @@
-const {validationResult} = require('express-validator')
+const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const User = require('../../modals/User')
 
 
 const createToken = (id) => {
-    return jwt.sign({id}, "secret_govno", {
+    return jwt.sign({ id }, "secret_govno", {
         expiresIn: '1h'
     })
 }
@@ -46,7 +46,7 @@ class authController {
     }
 
     async login(req, res) {
-        const {email, password} = req.body
+        const { email, password } = req.body
         try {
             const errors = validationResult(req)
 
@@ -57,52 +57,99 @@ class authController {
                 })
             }
 
-            // console.log("email", email);
-            const user = await User.findOne({email: { $regex: new RegExp('^' + email + '$', 'i') }}).exec()
-            // console.log(user);
+            const user = await User.findOne({ email: { $regex: new RegExp('^' + email + '$', 'i') } }).exec()
 
-            if(!user) {
+            if (!user) {
                 return res.status(400).json({ message: 'Пользователь не найден' })
             }
 
             const isMatch = await bcrypt.compare(password, user.password)
-            if(!isMatch) {
+            if (!isMatch) {
                 res.status(400).json({ message: 'Неверный пароль' })
             }
 
             const token = createToken(user._id)
 
-            res.json({token})
+            res.json({ token })
         } catch (e) {
-            res.status(500).json({message: e})
+            res.status(500).json({ message: e })
         }
     }
 
-    // async changeNumber(req, res) {
-    //     try {
-    //         const {id} = req.params
-    
-    //         if(!id) {
-    //             return res.status(400).json({message: "ID not found"})
-    //         }
-    
-    //         // const findId = await Tweet.findById(id)
-    //         const deleteElement = await User.findByIdAndDelete(id)
-    //         return res.json(deleteElement)
-    //     } catch (e) {
-    //         res.status(500).json(e)
-    //     }   
-    // }
+    async editPassword(req, res) {
+        try {
+            const { hashPassword, oldPassword, newPassword, repeatNewPassword } = req.body
+
+            const passwordMatch = await bcrypt.compare(oldPassword, hashPassword);
+            if (!passwordMatch) {
+                return res.status(401).json({ message: 'Старый пароль неверен' });
+            }
+
+            if (newPassword !== repeatNewPassword) {
+                return res.status(401).json({ message: "Новый пароль не подходит с повторным" })
+            }
+
+            const hashNewPassword = await bcrypt.hash(newPassword, 4);
+
+            const update = await User.findOneAndUpdate(
+                {}, 
+                {
+                    "password": hashNewPassword,
+                }, 
+                {new: true}
+            )
+            return res.status(200).json(update);
+            // return res.status(200).send("dede")
+        } catch (e) {
+            res.status(500).json({ message: e })
+        }
+    }
+
+    async editNumber(req, res) {
+        const { number, currentPhone } = req.body
+
+        if (number === currentPhone) {
+            return res.status(400).json({ message: "Пароль не совпадает" })
+        }
+        try {
+            const update = await User.findOneAndUpdate(
+                {},
+                {
+                    "phoneNumber": number,
+                },
+                { new: true }
+            )
+            return res.json(update);
+        } catch (e) {
+            res.status(500).json({ message: e })
+        }
+    }
+
+    async editTimeZone(req, res) {
+        const { timeZone } = req.body
+        try {
+            const update = await User.findOneAndUpdate(
+                {},
+                {
+                    "timeZone": timeZone,
+                },
+                { new: true }
+            )
+            return res.json(update);
+        } catch (e) {
+            res.status(500).json({ message: e })
+        }
+    }
 
     // DONE!
     // async deleteUser(req, res) {
     //     try {
     //         const {id} = req.params
-    
+
     //         if(!id) {
     //             return res.status(400).json({message: "ID not found"})
     //         }
-    
+
     //         const findId = await User.findById(id)
     //         return res.json(findId)
     //         // const deleteElement = await User.findByIdAndDelete(id)
@@ -115,11 +162,11 @@ class authController {
     // async changeEmail(req, res) {
     //     try {
     //         const {id} = req.params
-    
+
     //         if(!id) {
     //             return res.status(400).json({message: "ID not found"})
     //         }
-    
+
     //         // const findId = await Tweet.findById(id)
     //         const deleteElement = await User.findByIdAndDelete(id)
     //         return res.json(deleteElement)
@@ -143,13 +190,13 @@ class authController {
         try {
             const { profilePic } = req.body;
             const update = await User.findOneAndUpdate(
-                {}, 
+                {},
                 {
                     "more.pers.profilePic": profilePic,
-                }, 
-                {new: true}
+                },
+                { new: true }
             )
-            
+
             // const updatedUser = await update.save();
             return res.json(update);
         } catch (e) {
@@ -162,7 +209,7 @@ class authController {
             const { fname, lname, gender, country, hb, city } = req.body;
 
             const update = await User.findOneAndUpdate(
-                {}, 
+                {},
                 {
                     "fname": fname,
                     "lname": lname,
@@ -170,13 +217,13 @@ class authController {
                     "more.pers.country": country,
                     "more.pers.hb": hb,
                     "more.pers.city": city,
-                }, 
-                {new: true}
+                },
+                { new: true }
             )
-            
+
             return res.json(update);
         } catch (e) {
-            res.status(500).json({message: e})
+            res.status(500).json({ message: e })
         }
     }
     async editProf(req, res) {
@@ -184,19 +231,19 @@ class authController {
             const { post, postLevel, lang, langLevel, skills, } = req.body
 
             const update = await User.findOneAndUpdate(
-                {}, 
+                {},
                 {
                     "more.job.post": post,
                     "more.job.postLevel": postLevel,
                     "more.job.lang": lang,
                     "more.job.langLevel": langLevel,
                     "more.job.skills": skills,
-                }, 
-                {new: true}
+                },
+                { new: true }
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({message: e})
+            res.status(500).json({ message: e })
         }
     }
     async editExp(req, res) {
@@ -204,19 +251,19 @@ class authController {
             const { jobPost, company, startJob, endJob, progress, } = req.body
 
             const update = await User.findOneAndUpdate(
-                {}, 
+                {},
                 {
                     "more.exp.jobPost": jobPost,
                     "more.exp.company": company,
                     "more.exp.startJob": startJob,
                     "more.exp.endJob": endJob,
                     "more.exp.progress": progress,
-                }, 
-                {new: true}
+                },
+                { new: true }
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({message: e})
+            res.status(500).json({ message: e })
         }
     }
     async editEdu(req, res) {
@@ -224,18 +271,18 @@ class authController {
             const { specialization, institution, startEdu, endEdu } = req.body
 
             const update = await User.findOneAndUpdate(
-                {}, 
+                {},
                 {
                     "more.edu.specialization": specialization,
                     "more.edu.institution": institution,
                     "more.edu.startEdu": startEdu,
                     "more.edu.endEdu": endEdu,
-                }, 
-                {new: true}
+                },
+                { new: true }
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({message: e})
+            res.status(500).json({ message: e })
         }
     }
     async editQual(req, res) {
@@ -243,18 +290,18 @@ class authController {
             const { qualName, qualInstitution, startQual, endQual } = req.body
 
             const update = await User.findOneAndUpdate(
-                {}, 
+                {},
                 {
                     "more.qual.qualName": qualName,
                     "more.qual.qualInstitution": qualInstitution,
                     "more.qual.startQual": startQual,
                     "more.qual.endQual": endQual,
-                }, 
-                {new: true}
+                },
+                { new: true }
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({message: e})
+            res.status(500).json({ message: e })
         }
     }
     async editAbout(req, res) {
@@ -262,15 +309,15 @@ class authController {
             const { aboutMe } = req.body
 
             const update = await User.findOneAndUpdate(
-                {}, 
+                {},
                 {
                     "more.about.aboutMe": aboutMe,
-                }, 
-                {new: true}
+                },
+                { new: true }
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({message: e})
+            res.status(500).json({ message: e })
         }
     }
 }

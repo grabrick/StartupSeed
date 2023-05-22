@@ -1,15 +1,14 @@
 import m from "./AboutForm.module.css";
 import React from "react";
 import "./AboutForm.css";
-import { useHttp } from "../../../hooks/http.hook";
 import { Field, Form } from "react-final-form";
+import axios from "axios";
 
 function AboutForm() {
   const normalInputArea =
     "text-field__input-reg6 auth__main_input-name32 text-input__textarea";
   const errorInputArea =
     "text-field__input-reg_error auth__main_input-name_error text-input__textarea";
-  const { loading, request } = useHttp();
 
   const validate = (e) => {
     const errors = {};
@@ -22,10 +21,7 @@ function AboutForm() {
   };
 
   const onSubmit = async (value) => {
-    try {
-      const data = await request("/api/auth/edit/about", "PUT", { ...value });
-      console.log("Data", data);
-    } catch (e) {}
+    axios.put("/api/auth/edit/about", { ...value })
   };
   return (
     <div className={m.infoBar}>
@@ -57,8 +53,7 @@ function AboutForm() {
                   </Field>
                 </div>
                 <button
-                  type="submit"
-                  disabled={loading}
+                  type="submit"ß
                   className="popup__button_register-save6"
                   name="submit"
                 >

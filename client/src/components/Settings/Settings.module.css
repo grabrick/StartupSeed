@@ -82,6 +82,11 @@
     font-size: 24px;
 }
 
+.phone {
+    font-family: 'Montserrat';
+    margin: 0;
+}
+
 .eduTitle {
     margin: 0;
     margin-top: 30px;

@@ -22,20 +22,25 @@ router.post(
     controller.login
 )
 
+router.put(
+    '/edit/password',
+    controller.editPassword
+)
+
+router.put(
+    '/edit/number',
+    controller.editNumber
+)
+
+router.put(
+    '/edit/utc',
+    controller.editTimeZone
+)
+
 // DONE!
 // router.get(
 //     '/delete/:id',
 //     controller.deleteUser
-// )
-
-// router.put(
-//     '/change/email',
-//     controller.changeEmail
-// )
-
-// router.put(
-//     '/change/number',
-//     controller.changeNumber
 // )
 
 router.get(

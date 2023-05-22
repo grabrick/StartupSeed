@@ -72,6 +72,7 @@
 
 .tagsWrapper {
     display: flex;
+    overflow-wrap: break-word;
 }
 
 .postTitle {
@@ -183,6 +184,7 @@
     font-weight: 400;
     font-size: 15px;
     margin: 0;
+    overflow-wrap: break-word;
 }
 
 .date {
@@ -206,10 +208,12 @@
 }
 
 .aboutText {
+    
     font-family: 'Montserrat';
     font-weight: 400;
     font-size: 15px;
     margin: 0;
+    overflow-wrap: break-word;
 }
 
 .infoTitle {

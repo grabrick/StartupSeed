@@ -3,8 +3,8 @@ import React from "react";
 import "./EducationForm.css";
 import { changeProf } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
-import { useHttp } from "../../../hooks/http.hook";
 import { Field, Form } from "react-final-form";
+import axios from "axios";
 
 function EducationForm() {
   const normalInput = "text-field__input-reg4 auth__main_input-name4";
@@ -18,8 +18,6 @@ function EducationForm() {
   const submit = () => {
     dispatch(changeProf(true));
   };
-
-  const { loading, request } = useHttp();
 
   const validate = (e) => {
     const errors = {};
@@ -40,10 +38,7 @@ function EducationForm() {
   };
 
   const onSubmit = async (value) => {
-    try {
-      const data = await request("/api/auth/edit/edu", "PUT", { ...value });
-      console.log("Data", data);
-    } catch (e) {}
+    axios.put("/api/auth/edit/edu", { ...value })
   };
   return (
     <div className={m.infoBar}>
@@ -154,7 +149,6 @@ function EducationForm() {
                   </button>
                   <button
                     type="submit"
-                    disabled={loading}
                     className="popup__button_register-save4"
                     name="submit"
                   >

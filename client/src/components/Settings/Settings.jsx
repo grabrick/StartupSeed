@@ -1,8 +1,12 @@
 import { getUser } from "../../redux/slices/userSlice";
 import { useEffect, useState } from "react";
-import { activeEmail, activePassword } from "../../redux/slices/popupSlice";
+import {
+  activeEmail,
+  activeNumber,
+  activePassword,
+} from "../../redux/slices/popupSlice";
 import { useDispatch, useSelector } from "react-redux";
-// import { useHttp } from "../../hooks/http.hook";
+import { useHttp } from "../../hooks/http.hook";
 import axios from "axios";
 import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
 import NavBar from "../NavBar/NavBar";
@@ -10,20 +14,42 @@ import EditEmail from "../Popup/EditEmail/EditEmail";
 import EditPassword from "../Popup/EditPassword/EditPassword";
 import PhoneInput from "react-phone-number-input";
 import m from "./Settings.module.css";
-import 'react-phone-number-input/style.css'
-import './Settings.css'
+import "react-phone-number-input/style.css";
+import "./Settings.css";
 
 function Settings() {
   const data = useSelector((state) => state.users.user);
   const isVisibleEmail = useSelector((state) => state.popup.visibleEmail);
   const isVisiblePassword = useSelector((state) => state.popup.visiblePassword);
-  const [number, setNumber] = useState()
-  // const [isPopupReg, setIsPopupReg] = useState(false);
-  // const [isPopupLog, setIsPopupLog] = useState(false);
-  // const { loading, request } = useHttp();
+  const isVisibleNumber = useSelector((state) => state.popup.visibleNumber);
+  const { loading, request } = useHttp();
   const dispatch = useDispatch();
+  const [timeZone, setTimeZone] = useState("");
+  const [number, setNumber] = useState("");
+
+  console.log(timeZone);
+  const handlePopupEmailClick = () => {
+    dispatch(activeEmail(false));
+  };
+
+  const handlePopupPasswordClick = () => {
+    dispatch(activePassword(false));
+  };
+
+  const handlePopupNumberClick = () => {
+    dispatch(activeNumber(false));
+  };
+
+  const handlePopupCloseNumberClick = () => {
+    dispatch(activeNumber(true));
+  };
+
   const User = (items) => {
     dispatch(getUser(items));
+  };
+
+  const handleSelectChange = (event) => {
+    setTimeZone(event.target.value);
   };
 
   useEffect(() => {
@@ -36,36 +62,52 @@ function Settings() {
       .catch((e) => {
         console.log(e);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    handlePopupCloseNumberClick();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [form, setForm] = useState({
-    phoneNumber: "",
-    timeZone: "",
-  });
-  const changeHandler = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
+  const updateNumber = () => {
+    axios
+      .get("http://localhost:3000/api/auth/get")
+      .then((items) => {
+        User(items.data);
+        console.log(items.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
-  const handlePopupEmailClick = () => {
-    dispatch(activeEmail(false))
-  };
+  // const onClickDeleteUser = (id) => {
+  //   console.log(id);
+  //   try {
+  //     axios.get(`/api/auth/delete/${id}`).then((items) => {
+  //       console.log(items);
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
-  const handlePopupPasswordClick = () => {
-    dispatch(activePassword(false))
-  };
-
-  const onClickDeleteUser = (id) => {
-    console.log(id);
+  const onClickChangeNumber = async () => {
+    const currentPhone = data.phoneNumber;
     try {
-      axios.get(`/api/auth/delete/${id}`)
-        .then(items => {
-          console.log(items);
-        })
-    } catch (e) {
-      console.log(e);
-    }
-  }
+      const data = await request("/api/auth/edit/number", "PUT", {
+        number,
+        currentPhone,
+      });
+      console.log("data", data);
+      handlePopupCloseNumberClick();
+      updateNumber();
+    } catch (e) {}
+  };
+
+  const ChangeTimeZone = async () => {
+    try {
+      const data = await request("/api/auth/edit/utc", "PUT", { timeZone });
+      console.log("data", data);
+    } catch (e) {}
+  };
 
   return (
     <div className={m.container}>
@@ -103,72 +145,112 @@ function Settings() {
         </div>
 
         <div className={m.infoBar}>
-            <div className={m.inputWrapper}>
-              <div className={m.textWrapper}>
-                <span className={m.span}>E-mail</span>
-                <p className={m.inputData}>{data?.email}</p>
-              </div>
-              <button className={m.btn} onClick={() => handlePopupEmailClick()}>Изменить</button>
+          <div className={m.inputWrapper}>
+            <div className={m.textWrapper}>
+              <span className={m.span}>E-mail</span>
+              <p className={m.inputData}>{data?.email}</p>
             </div>
-            <div className={m.inputWrapper}>
-              <div className={m.textWrapper}>
-                <span className={m.span}>Номер телефона</span>
+            <button className={m.btn} onClick={() => handlePopupEmailClick()}>
+              Изменить
+            </button>
+          </div>
+          <div className={m.inputWrapper}>
+            <div className={m.textWrapper}>
+              <span className={m.span}>Номер телефона</span>
+              {isVisibleNumber ? (
+                <p className={m.phone}>{data.phoneNumber}</p>
+              ) : (
                 <PhoneInput
                   className={m.number}
                   type="text"
                   value={number}
+                  name="number"
                   onChange={setNumber}
-                  // onChange={changeHandler}
-                  // value={form.phoneNumber}
                 />
-              </div>
-              <button className={m.btn}>Изменить</button>
+              )}
             </div>
-            <div className={m.inputWrapper}>
-              <div className={m.textWrapper}>
-                <span className={m.span}>Пароль</span>
-                <p className={m.inputData}>Обновлен</p>
-              </div>
-              <button className={m.btn} onClick={() => handlePopupPasswordClick()}>Изменить</button>
+            {isVisibleNumber ? (
+              <button className={m.btn} onClick={handlePopupNumberClick}>
+                Изменить
+              </button>
+            ) : (
+              <button
+                className={m.btn}
+                disabled={loading}
+                onClick={() => onClickChangeNumber()}
+              >
+                Сохранить
+              </button>
+            )}
+          </div>
+          <div className={m.inputWrapper}>
+            <div className={m.textWrapper}>
+              <span className={m.span}>Пароль</span>
+              <p className={m.inputData}>Обновлен</p>
             </div>
-            <div className={m.inputWrapper}>
-              <div className={m.textWrapper}>
-                <span className={m.span}>Часовой пояс</span>
-                <select className={m.selectTime} onChange={changeHandler} name="timeZone" defaultValue="UTC 0" id="">
-                  <option value="UTC -12">UTC -12</option>
-                  <option value="UTC -11">UTC -11</option>
-                  <option value="UTC -10">UTC -10</option>
-                  <option value="UTC -9">UTC -9</option>
-                  <option value="UTC -8">UTC -8</option>
-                  <option value="UTC -7">UTC -7</option>
-                  <option value="UTC -6">UTC -6</option>
-                  <option value="UTC -5">UTC -5</option>
-                  <option value="UTC -4">UTC -4</option>
-                  <option value="UTC -3">UTC -3</option>
-                  <option value="UTC -2">UTC -2</option>
-                  <option value="UTC -1">UTC -1</option>
-                  <option value="UTC 0">UTC 0</option>
-                  <option value="UTC +1">UTC +1</option>
-                  <option value="UTC +2">UTC +2</option>
-                  <option value="UTC +3">UTC +3</option>
-                  <option value="UTC +4">UTC +4</option>
-                  <option value="UTC +5">UTC +5</option>
-                  <option value="UTC +6">UTC +6</option>
-                  <option value="UTC +7">UTC +7</option>
-                  <option value="UTC +8">UTC +8</option>
-                  <option value="UTC +9">UTC +9</option>
-                  <option value="UTC +10">UTC +10</option>
-                  <option value="UTC +11">UTC +11</option>
-                  <option value="UTC +12">UTC +12</option>
-                </select>
-              </div>
-              <button className={m.btn}>Изменить</button>
+            <button
+              className={m.btn}
+              onClick={() => handlePopupPasswordClick()}
+            >
+              Изменить
+            </button>
+          </div>
+          <div className={m.inputWrapper}>
+            <div className={m.textWrapper}>
+              <span className={m.span}>Часовой пояс</span>
+              <select
+                className={m.selectTime}
+                defaultValue="UTC 0"
+                name="timeZone"
+                value={timeZone}
+                onChange={handleSelectChange}
+              >
+                <option value="UTC -12">UTC -12</option>
+                <option value="UTC -11">UTC -11</option>
+                <option value="UTC -10">UTC -10</option>
+                <option value="UTC -9">UTC -9</option>
+                <option value="UTC -8">UTC -8</option>
+                <option value="UTC -7">UTC -7</option>
+                <option value="UTC -6">UTC -6</option>
+                <option value="UTC -5">UTC -5</option>
+                <option value="UTC -4">UTC -4</option>
+                <option value="UTC -3">UTC -3</option>
+                <option value="UTC -2">UTC -2</option>
+                <option value="UTC -1">UTC -1</option>
+                <option value="UTC 0">UTC 0</option>
+                <option value="UTC +1">UTC +1</option>
+                <option value="UTC +2">UTC +2</option>
+                <option value="UTC +3">UTC +3</option>
+                <option value="UTC +4">UTC +4</option>
+                <option value="UTC +5">UTC +5</option>
+                <option value="UTC +6">UTC +6</option>
+                <option value="UTC +7">UTC +7</option>
+                <option value="UTC +8">UTC +8</option>
+                <option value="UTC +9">UTC +9</option>
+                <option value="UTC +10">UTC +10</option>
+                <option value="UTC +11">UTC +11</option>
+                <option value="UTC +12">UTC +12</option>
+              </select>
             </div>
-            <button className={m.deleteBtn} onClick={() => onClickDeleteUser(data._id)}>Удалить аккаунт</button>
+            <button
+              className={m.btn}
+              disabled={loading}
+              onClick={ChangeTimeZone}
+              type="submit"
+            >
+              Изменить
+            </button>
+          </div>
+          <button
+            className={m.deleteBtn}
+            // onClick={() => onClickDeleteUser(data._id)}
+          >
+            Удалить аккаунт
+          </button>
         </div>
       </div>
-      {isVisibleEmail ? "" : <EditEmail /> }
-      {isVisiblePassword ? "" : <EditPassword /> }
+      {isVisibleEmail ? "" : <EditEmail />}
+      {isVisiblePassword ? "" : <EditPassword />}
     </div>
   );
 }

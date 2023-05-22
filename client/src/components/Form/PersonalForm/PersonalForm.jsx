@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./PersonalForm.css";
 import m from "./PersonalForm.module.css";
-import { useHttp } from "../../../hooks/http.hook";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getUser } from "../../../redux/slices/userSlice";
@@ -17,7 +16,6 @@ function PersonalForm() {
   const User = (items) => {
     dispatch(getUser(items));
   };
-  const { loading, request } = useHttp();
   let avatar = {
     profilePic: "",
   };
@@ -40,15 +38,7 @@ function PersonalForm() {
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       const uploadImage = async () => {
-        try {
-          const data = await request("/api/auth/upload", "PUT", {
-            ...avatar,
-            profilePic: reader.result,
-          });
-          console.log("Data", data);
-        } catch (e) {
-          console.log(e);
-        }
+        axios.put("/api/auth/upload", { ...avatar, profilePic: reader.result })
       };
       uploadImage();
     };
@@ -71,19 +61,19 @@ function PersonalForm() {
   const validate = (e) => {
     const errors = {};
 
-    if (e.fname && e.fname.length < 5) {
+    if (e.fname && e.fname.length < 3) {
       errors.fname = "Слишком короткое имя";
     }
   
-    if (e.lname && e.lname.length < 5) {
+    if (e.lname && e.lname.length < 3) {
       errors.lname = "Слишком короткая фамилия";
     }
 
-    if (e.country && e.country.length < 5) {
+    if (e.country && e.country.length < 3) {
       errors.country = "Слишком короткая запись";
     }
   
-    if (e.city && e.city.length < 5) {
+    if (e.city && e.city.length < 3) {
       errors.city = "Слишком короткая запись";
     }
 
@@ -91,10 +81,7 @@ function PersonalForm() {
   };
 
   const onSubmit = async (value) => {
-    try {
-      const data = await request("/api/auth/edit/person", "PUT", { ...value });
-      console.log("Data", data);
-    } catch (e) {}
+    axios.put("/api/auth/edit/person", { ...value })
   };
 
   return (
@@ -251,7 +238,6 @@ function PersonalForm() {
                   type="submit"
                   className="popup__button_register-save1"
                   name="submit"
-                  disabled={loading}
                 >
                   Сохранить
                 </button>

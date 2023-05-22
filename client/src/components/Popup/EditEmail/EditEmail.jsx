@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { activeEmail } from "../../../redux/slices/popupSlice";
 import { useState } from "react";
 import { Field, Form } from "react-final-form";
-import { useHttp } from "../../../hooks/http.hook";
 import axios from "axios";
 import { getUser } from "../../../redux/slices/userSlice";
 
@@ -16,7 +15,6 @@ const EditEmail = () => {
   const [visible, setVisible] = useState(false);
   const inactive = "popup__change";
   const active = "popup__change_opened";
-  const { loading, request } = useHttp();
   const [changer, setChanger] = useState({
     email: "",
     inputCode: "",
@@ -49,7 +47,6 @@ const EditEmail = () => {
       .get("http://localhost:3000/api/auth/get")
       .then((items) => {
         User(items.data);
-        console.log(items.data);
       })
       .catch((e) => {
         console.log(e);
@@ -70,32 +67,24 @@ const EditEmail = () => {
     return errors;
   }
 
-  const changeEmail = async () => {
-    try {
-      const data = await request("/api/change", "PUT", {...changer});
-      console.log("Data", data);
-      setTimeout(() => {
-        closePopup()
-        updataData()
-      }, 1000);
-    } catch (e) {}
+  const changeEmail = () => {
+    axios.put('/api/change', { ...changer })
+      .then(response => {
+        if(response.status === 200) {
+          closePopup()
+          updataData()
+        }
+      })
   }
 
-  const sentAgainCode = async () => {
-    try {
-      const data = await request("/api/verify", "POST", { ...changer });
-      console.log("Data", data);
-    } catch (e) {}
+  const sentAgainCode = () => {
+    axios.post('/api/verify', { ...changer })
   }
 
-  const onSubmit = async (value) => {
+  const onSubmit = (value) => {
     handleVerefyEmail(value);
-    console.log(value);
     setChanger({ ...value });
-    try {
-      const data = await request("/api/verify", "POST", { email: value.email });
-      console.log("Data", data);
-    } catch (e) {}
+    axios.post('/api/verify', { email: value.email })
   }
 
   return (
@@ -155,7 +144,6 @@ const EditEmail = () => {
                         <button
                           type="button"
                           className={m.btnVerif}
-                          disabled={loading}
                           onClick={() => sentAgainCode()}
                         >
                           Отправить код повторно
@@ -164,7 +152,6 @@ const EditEmail = () => {
                         <button
                           type="submit"
                           className={m.btnVerif}
-                          disabled={loading}
                         >
                           Отправить код подтверждения
                         </button>
@@ -172,9 +159,8 @@ const EditEmail = () => {
                       <div>
                         <button
                           className={m.btnSave}
-                          type="submit"
+                          type="button"
                           onClick={() => changeEmail()}
-                          disabled={loading}
                         >
                           Изменить
                         </button>

@@ -2,10 +2,10 @@ import m from "./ProfessionalForm.module.css";
 import React, { useState } from "react";
 import "./ProfessionalForm.css";
 import closeIcn from "../../../assets/images/close-line.svg";
-import { useHttp } from "../../../hooks/http.hook";
 import { Field, Form } from "react-final-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addTag, removeTag } from "../../../redux/slices/skillsSlice";
+import axios from "axios";
 
 function ProfessionalForm() {
   const normalInput = "text-field__input-reg2 auth__main_input-name2";
@@ -20,8 +20,7 @@ function ProfessionalForm() {
   const removeTags = (i) => {
     dispatch(removeTag(i));
   };
-  const { loading, request } = useHttp();
-  const [tags, setTags] = useState([]);
+  const [skills, setSkills] = useState([]);
   const [form, setForm] = useState({
     skills: [],
   });
@@ -35,15 +34,11 @@ function ProfessionalForm() {
     e.preventDefault()
     let value = e.target.value;
     if (!value.trim()) return;
-    setTags([...tags, value])
-    addTags([...tags, value])
-    setTags([])
+    setSkills([...skills, value])
+    addTags([...skills, value])
+    setSkills([])
     setForm({ skills: "" })
   };
-
-  // const removeTags = (index) => {
-  //   setTags(tags.filter((el, i) => i !== index));
-  // };
 
   const validate = (e) => {
     const errors = {};
@@ -60,13 +55,7 @@ function ProfessionalForm() {
   };
 
   const onSubmit = async (value) => {
-    try {
-      const uploaddata = await request("/api/auth/edit/prof", "PUT", {
-        ...value,
-        skills: data,
-      });
-      console.log("Data", uploaddata);
-    } catch (e) {}
+    axios.put("/api/auth/edit/prof", "PUT", { ...value, skills: data })
   };
 
   return (
@@ -196,7 +185,6 @@ function ProfessionalForm() {
                   type="submit"
                   className="popup__button_register-save2"
                   name="submit"
-                  disabled={loading}
                 >
                   Сохранить
                 </button>

@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import "./ExperienceForm.css";
 import { changeExp } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
-import { useHttp } from "../../../hooks/http.hook";
 import { Field, Form } from "react-final-form";
+import axios from "axios";
 
 function ExperienceForm() {
   const normalInput = "text-field__input-reg3 auth__main_input-name3";
@@ -22,7 +22,6 @@ function ExperienceForm() {
   const submit = () => {
     dispatch(changeExp(true));
   };
-  const { loading, request } = useHttp();
   
   const validate = (e) => {
     const errors = {};
@@ -43,15 +42,12 @@ function ExperienceForm() {
   };
   
   const onSubmit = async (value) => {
-    console.log(value);
     if(active === true) {
       const actualDate = 'По настоящее время'
       // value.endJob = 'По настоящее время'
-      const data = await request("/api/auth/edit/exp", "PUT", { ...value, endJob: actualDate });
-      console.log("Data", data);
+      axios.put("/api/auth/edit/exp", { ...value, endJob: actualDate })
     } else {
-      const data = await request("/api/auth/edit/exp", "PUT", { ...value });
-      console.log("Data", data);
+      axios.put("/api/auth/edit/exp", { ...value })
     }
   };
   return (
@@ -183,7 +179,6 @@ function ExperienceForm() {
                   </button>
                   <button
                     type="submit"
-                    disabled={loading}
                     className="popup__button_register-save3"
                     name="submit"
                   >
