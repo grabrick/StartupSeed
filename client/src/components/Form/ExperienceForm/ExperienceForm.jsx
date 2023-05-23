@@ -17,6 +17,8 @@ function ExperienceForm() {
   const errorInputArea =
     "text-field__input-reg_error auth__main_input-name_error text-input__textarea";
   const dispatch = useDispatch();
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
   const [active, isActive] = useState(false)
 
   const submit = () => {
@@ -45,9 +47,9 @@ function ExperienceForm() {
     if(active === true) {
       const actualDate = 'По настоящее время'
       // value.endJob = 'По настоящее время'
-      axios.put("/api/auth/edit/exp", { ...value, endJob: actualDate })
+      axios.put(`/api/auth/${userId}/edit/exp`, { ...value, endJob: actualDate })
     } else {
-      axios.put("/api/auth/edit/exp", { ...value })
+      axios.put(`/api/auth/${userId}/edit/exp`, { ...value })
     }
   };
   return (

@@ -15,6 +15,8 @@ function QualificationsForm() {
   const normalInputDate = "text-field__input-reg5 auth__main_input-date5";
   const errorInputDate =
     "text-field__input-reg_error5 auth__main_input-date_error5";
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
   const dispatch = useDispatch()
 
   const submit = () => {
@@ -40,7 +42,7 @@ function QualificationsForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put("/api/auth/edit/qual", { ...value })
+    axios.put(`/api/auth/${userId}/edit/qual`, { ...value })
   };
   return (
     <div className={m.infoBar}>
@@ -152,7 +154,6 @@ function QualificationsForm() {
                   <button
                     type="submit"
                     className="popup__button_register-save4"
-                    name="submit"
                   >
                     Сохранить
                   </button>

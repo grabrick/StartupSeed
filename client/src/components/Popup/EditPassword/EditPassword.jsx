@@ -19,6 +19,8 @@ const EditPassword = () => {
   const [currentPas, setCurrentPas] = useState(false);
   const [newPas, setNewPas] = useState(false);
   const [repeatPas, setRepeatPas] = useState(false);
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID
   const dispatch = useDispatch();
 
   const logout = () => {
@@ -31,7 +33,7 @@ const EditPassword = () => {
 
   const updataData = () => {
     axios
-      .get("http://localhost:3000/api/auth/get")
+      .get(`/api/auth/${userId}/get`)
       .then((items) => {
         User(items.data);
       })
@@ -87,7 +89,7 @@ const EditPassword = () => {
 
   const onSubmit = async (value) => {
     axios
-      .put("/api/auth/edit/password", { ...value, hashPassword: hashPassword })
+      .put(`/api/auth/${userId}/edit/password`, { ...value, hashPassword: hashPassword })
       .then((response) => {
         if (response.status === 200) {
           updataData();

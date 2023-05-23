@@ -15,6 +15,8 @@ const EditEmail = () => {
   const [visible, setVisible] = useState(false);
   const inactive = "popup__change";
   const active = "popup__change_opened";
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID
   const [changer, setChanger] = useState({
     email: "",
     inputCode: "",
@@ -44,7 +46,7 @@ const EditEmail = () => {
 
   const updataData = () => {
     axios
-      .get("http://localhost:3000/api/auth/get")
+      .get(`/api/auth/${userId}/get`)
       .then((items) => {
         User(items.data);
       })
@@ -68,7 +70,7 @@ const EditEmail = () => {
   }
 
   const changeEmail = () => {
-    axios.put('/api/change', { ...changer })
+    axios.put(`/api/${userId}/change`, { ...changer })
       .then(response => {
         if(response.status === 200) {
           closePopup()

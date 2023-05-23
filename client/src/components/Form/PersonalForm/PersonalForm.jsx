@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./PersonalForm.css";
 import m from "./PersonalForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,8 @@ function PersonalForm() {
   const errorLable = "text-field__label-reg__error1 text-lable1";
   const data = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
   const User = (items) => {
     dispatch(getUser(items));
   };
@@ -20,38 +22,28 @@ function PersonalForm() {
     profilePic: "",
   };
 
-  useEffect(() => {
+  const update = () => {
     axios
-      .get("/api/auth/get")
+    .get(`/api/auth/${userId}/get`)
       .then((items) => {
         User(items.data);
-        console.log(items.data);
       })
       .catch((e) => {
         console.log(e);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }
 
   const converter = (e) => {
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       const uploadImage = async () => {
-        axios.put("/api/auth/upload", { ...avatar, profilePic: reader.result })
+        axios.put(`/api/auth/${userId}/upload`, { ...avatar, profilePic: reader.result });
       };
       uploadImage();
     };
     setTimeout(() => {
-      axios
-        .get("/api/auth/get")
-        .then((items) => {
-          User(items.data);
-          console.log(items.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      update()
       reader.onerror = (error) => {
         console.log({ message: error });
       };
@@ -64,7 +56,7 @@ function PersonalForm() {
     if (e.fname && e.fname.length < 3) {
       errors.fname = "Слишком короткое имя";
     }
-  
+
     if (e.lname && e.lname.length < 3) {
       errors.lname = "Слишком короткая фамилия";
     }
@@ -72,7 +64,7 @@ function PersonalForm() {
     if (e.country && e.country.length < 3) {
       errors.country = "Слишком короткая запись";
     }
-  
+
     if (e.city && e.city.length < 3) {
       errors.city = "Слишком короткая запись";
     }
@@ -81,7 +73,7 @@ function PersonalForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put("/api/auth/edit/person", { ...value })
+    axios.put(`/api/auth/${userId}/edit/person`, { ...value });
   };
 
   return (

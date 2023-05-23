@@ -39,15 +39,15 @@ class authController {
 
             await user.save()
 
-            res.status(201).json({ message: 'Пользователь создан' })
+            return res.status(201).json({ message: 'Пользователь создан' })
         } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
         }
     }
 
     async login(req, res) {
-        const { email, password } = req.body
         try {
+            const { email, password } = req.body
             const errors = validationResult(req)
 
             if (!errors.isEmpty()) {
@@ -62,24 +62,25 @@ class authController {
             if (!user) {
                 return res.status(400).json({ message: 'Пользователь не найден' })
             }
-
+            
+            
             const isMatch = await bcrypt.compare(password, user.password)
             if (!isMatch) {
-                res.status(400).json({ message: 'Неверный пароль' })
+                return res.status(400).json({ message: 'Неверный пароль' })
             }
 
-            const token = createToken(user._id)
+            const token = createToken(user.id)
 
-            res.json({ token })
+            return res.json({ token, userID: user.id })
         } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
         }
     }
 
     async editPassword(req, res) {
         try {
             const { hashPassword, oldPassword, newPassword, repeatNewPassword } = req.body
-
+            const {id} = req.params
             const passwordMatch = await bcrypt.compare(oldPassword, hashPassword);
             if (!passwordMatch) {
                 return res.status(401).json({ message: 'Старый пароль неверен' });
@@ -91,53 +92,16 @@ class authController {
 
             const hashNewPassword = await bcrypt.hash(newPassword, 4);
 
-            const update = await User.findOneAndUpdate(
-                {}, 
+            const update = await User.findByIdAndUpdate(
+                id, 
                 {
                     "password": hashNewPassword,
                 }, 
                 {new: true}
             )
             return res.status(200).json(update);
-            // return res.status(200).send("dede")
         } catch (e) {
-            res.status(500).json({ message: e })
-        }
-    }
-
-    async editNumber(req, res) {
-        const { number, currentPhone } = req.body
-
-        if (number === currentPhone) {
-            return res.status(400).json({ message: "Пароль не совпадает" })
-        }
-        try {
-            const update = await User.findOneAndUpdate(
-                {},
-                {
-                    "phoneNumber": number,
-                },
-                { new: true }
-            )
-            return res.json(update);
-        } catch (e) {
-            res.status(500).json({ message: e })
-        }
-    }
-
-    async editTimeZone(req, res) {
-        const { timeZone } = req.body
-        try {
-            const update = await User.findOneAndUpdate(
-                {},
-                {
-                    "timeZone": timeZone,
-                },
-                { new: true }
-            )
-            return res.json(update);
-        } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
         }
     }
 
@@ -155,7 +119,7 @@ class authController {
     //         // const deleteElement = await User.findByIdAndDelete(id)
     //         // return res.json(deleteElement)
     //     } catch (e) {
-    //         res.status(500).json(e)
+    //         return res.status(500).json(e)
     //     }   
     // }
 
@@ -171,7 +135,7 @@ class authController {
     //         const deleteElement = await User.findByIdAndDelete(id)
     //         return res.json(deleteElement)
     //     } catch (e) {
-    //         res.status(500).json(e)
+    //         return res.status(500).json(e)
     //     }   
     // }
 
@@ -179,18 +143,21 @@ class authController {
 
     async getPerson(req, res) {
         try {
-            const find = await User.findOne({})
+            const {id} = req.params
+
+            const find = await User.findById(id)
             return res.json(find)
         } catch (e) {
-            res.status(500).json(e)
+            return res.status(500).json(e)
         }
     }
 
     async uploadImage(req, res) {
         try {
             const { profilePic } = req.body;
-            const update = await User.findOneAndUpdate(
-                {},
+            const {id} = req.params
+            const update = await User.findByIdAndUpdate(
+                id,
                 {
                     "more.pers.profilePic": profilePic,
                 },
@@ -200,16 +167,16 @@ class authController {
             // const updatedUser = await update.save();
             return res.json(update);
         } catch (e) {
-            res.status(500).json(e)
+            return res.status(500).json(e)
         }
     }
 
     async editPerson(req, res) {
         try {
             const { fname, lname, gender, country, hb, city } = req.body;
-
-            const update = await User.findOneAndUpdate(
-                {},
+            const {id} = req.params
+            const update = await User.findByIdAndUpdate(
+                id,
                 {
                     "fname": fname,
                     "lname": lname,
@@ -223,15 +190,16 @@ class authController {
 
             return res.json(update);
         } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
         }
     }
+
     async editProf(req, res) {
         try {
             const { post, postLevel, lang, langLevel, skills, } = req.body
-
-            const update = await User.findOneAndUpdate(
-                {},
+            const {id} = req.params
+            const update = await User.findByIdAndUpdate(
+                id,
                 {
                     "more.job.post": post,
                     "more.job.postLevel": postLevel,
@@ -243,15 +211,16 @@ class authController {
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
         }
     }
+
     async editExp(req, res) {
         try {
             const { jobPost, company, startJob, endJob, progress, } = req.body
-
-            const update = await User.findOneAndUpdate(
-                {},
+            const {id} = req.params
+            const update = await User.findByIdAndUpdate(
+                id,
                 {
                     "more.exp.jobPost": jobPost,
                     "more.exp.company": company,
@@ -263,15 +232,16 @@ class authController {
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
         }
     }
+
     async editEdu(req, res) {
         try {
             const { specialization, institution, startEdu, endEdu } = req.body
-
-            const update = await User.findOneAndUpdate(
-                {},
+            const {id} = req.params
+            const update = await User.findByIdAndUpdate(
+                id,
                 {
                     "more.edu.specialization": specialization,
                     "more.edu.institution": institution,
@@ -282,15 +252,16 @@ class authController {
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
         }
     }
+
     async editQual(req, res) {
         try {
             const { qualName, qualInstitution, startQual, endQual } = req.body
-
-            const update = await User.findOneAndUpdate(
-                {},
+            const {id} = req.params
+            const update = await User.findByIdAndUpdate(
+                id,
                 {
                     "more.qual.qualName": qualName,
                     "more.qual.qualInstitution": qualInstitution,
@@ -301,15 +272,16 @@ class authController {
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
         }
     }
+
     async editAbout(req, res) {
         try {
             const { aboutMe } = req.body
-
-            const update = await User.findOneAndUpdate(
-                {},
+            const {id} = req.params
+            const update = await User.findByIdAndUpdate(
+                id,
                 {
                     "more.about.aboutMe": aboutMe,
                 },
@@ -317,7 +289,44 @@ class authController {
             )
             return res.json(update)
         } catch (e) {
-            res.status(500).json({ message: e })
+            return res.status(500).json({ message: e })
+        }
+    }
+
+    async editNumber(req, res) {
+        try {
+            const { number, currentPhone } = req.body
+            const {id} = req.params
+        if (number === currentPhone) {
+            return res.status(400).json({ message: "Пароль не совпадает" })
+        }
+            const update = await User.findByIdAndUpdate(
+                id,
+                {
+                    "phoneNumber": number,
+                },
+                { new: true }
+            )
+            return res.json(update);
+        } catch (e) {
+            return res.status(500).json({ message: e })
+        }
+    }
+
+    async editTimeZone(req, res) {
+        try {
+            const { timeZone } = req.body
+            const {id} = req.params
+            const update = await User.findByIdAndUpdate(
+                id,
+                {
+                    "timeZone": timeZone,
+                },
+                { new: true }
+            )
+            return res.json(update);
+        } catch (e) {
+            return res.status(500).json({ message: e })
         }
     }
 }

@@ -18,11 +18,13 @@ function Profile() {
   };
 
   useEffect(() => {
+    const ID = JSON.parse(localStorage.getItem("userData"));
+    const userId = ID.userID
     axios
-      .get("/api/auth/get")
+    .get(`/api/auth/${userId}/get`)
       .then((items) => {
         User(items.data);
-        Skills(items.data.more.job.skills)
+        Skills(items.data.more.job.skills);
         console.log(items.data);
       })
       .catch((e) => {
@@ -31,14 +33,14 @@ function Profile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const startEdu = data.more?.edu?.startEdu;
+  const startEdu = data?.more?.edu?.startEdu;
   const startE = startEdu?.slice(0, 10);
-  const endEdu = data.more?.edu?.endEdu;
+  const endEdu = data?.more?.edu?.endEdu;
   const endE = endEdu?.slice(0, 10);
 
-  const startQual = data.more?.qual?.startQual;
+  const startQual = data?.more?.qual?.startQual;
   const startQ = startQual?.slice(0, 10);
-  const endQual = data.more?.qual?.endQual;
+  const endQual = data?.more?.qual?.endQual;
   const endQ = endQual?.slice(0, 10);
 
   return (

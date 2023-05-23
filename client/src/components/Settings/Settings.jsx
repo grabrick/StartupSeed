@@ -6,7 +6,6 @@ import {
   activePassword,
 } from "../../redux/slices/popupSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useHttp } from "../../hooks/http.hook";
 import axios from "axios";
 import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
 import NavBar from "../NavBar/NavBar";
@@ -22,12 +21,13 @@ function Settings() {
   const isVisibleEmail = useSelector((state) => state.popup.visibleEmail);
   const isVisiblePassword = useSelector((state) => state.popup.visiblePassword);
   const isVisibleNumber = useSelector((state) => state.popup.visibleNumber);
-  const { loading, request } = useHttp();
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID?.userID
   const dispatch = useDispatch();
   const [timeZone, setTimeZone] = useState("");
   const [number, setNumber] = useState("");
+  console.log(data);
 
-  console.log(timeZone);
   const handlePopupEmailClick = () => {
     dispatch(activeEmail(false));
   };
@@ -54,24 +54,22 @@ function Settings() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/auth/get")
+    .get(`/api/auth/${userId}/get`)
       .then((items) => {
         User(items.data);
-        console.log(items.data);
       })
       .catch((e) => {
         console.log(e);
       });
-    handlePopupCloseNumberClick();
+      handlePopupCloseNumberClick()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateNumber = () => {
     axios
-      .get("http://localhost:3000/api/auth/get")
+      .get(`/api/auth/${userId}/get`)
       .then((items) => {
         User(items.data);
-        console.log(items.data);
       })
       .catch((e) => {
         console.log(e);
@@ -92,20 +90,18 @@ function Settings() {
   const onClickChangeNumber = async () => {
     const currentPhone = data.phoneNumber;
     try {
-      const data = await request("/api/auth/edit/number", "PUT", {
-        number,
-        currentPhone,
-      });
-      console.log("data", data);
-      handlePopupCloseNumberClick();
-      updateNumber();
+      axios.put(`/api/auth/${userId}/edit/number`, {number, currentPhone}).then(response => {
+        if (response.status === 200) {
+          handlePopupCloseNumberClick();
+          updateNumber();
+        }
+      })
     } catch (e) {}
   };
 
   const ChangeTimeZone = async () => {
     try {
-      const data = await request("/api/auth/edit/utc", "PUT", { timeZone });
-      console.log("data", data);
+      axios.put(`/api/auth/${userId}/edit/utc`, {timeZone})
     } catch (e) {}
   };
 
@@ -124,8 +120,8 @@ function Settings() {
               className={m.avatar}
             ></img>
             <p className={m.name}>
-              <span>{data.more?.pers?.fname}</span>{" "}
-              <span>{data.more?.pers?.lname}</span>
+              <span>{data?.fname}</span>{" "}
+              <span>{data?.lname}</span>
             </p>
             <div className={m.littleWrapp}>
               <p className={m.genderText}>{data.more?.pers?.gender}</p>
@@ -176,7 +172,6 @@ function Settings() {
             ) : (
               <button
                 className={m.btn}
-                disabled={loading}
                 onClick={() => onClickChangeNumber()}
               >
                 Сохранить
@@ -234,7 +229,6 @@ function Settings() {
             </div>
             <button
               className={m.btn}
-              disabled={loading}
               onClick={ChangeTimeZone}
               type="submit"
             >

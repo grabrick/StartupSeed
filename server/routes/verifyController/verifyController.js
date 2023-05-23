@@ -35,14 +35,15 @@ class verifyController {
     async changeEmail(req, res) {
         try {
             const { inputCode, email } = req.body
+            const { id } = req.params
             const convertInputCode = parseInt(inputCode)
 
             if (convertInputCode !== code) {
                 return res.status(400).json("The code doesn't match")
             }
 
-            const update = await User.findOneAndUpdate(
-                {},
+            const update = await User.findByIdAndUpdate(
+                id,
                 {
                     "email": email,
                 },
@@ -51,7 +52,7 @@ class verifyController {
 
             return res.status(200).json(update)
         } catch (e) {
-            res.status(500).json({ message: e })
+            res.status(500).json({ message: "Этот email уже занят" })
         }
 
 

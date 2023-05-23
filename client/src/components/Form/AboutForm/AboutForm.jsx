@@ -9,6 +9,8 @@ function AboutForm() {
     "text-field__input-reg6 auth__main_input-name32 text-input__textarea";
   const errorInputArea =
     "text-field__input-reg_error auth__main_input-name_error text-input__textarea";
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
 
   const validate = (e) => {
     const errors = {};
@@ -21,7 +23,7 @@ function AboutForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put("/api/auth/edit/about", { ...value })
+    axios.put(`/api/auth/${userId}/edit/about`, { ...value })
   };
   return (
     <div className={m.infoBar}>
@@ -53,9 +55,8 @@ function AboutForm() {
                   </Field>
                 </div>
                 <button
-                  type="submit"ß
+                  type="submit"
                   className="popup__button_register-save6"
-                  name="submit"
                 >
                   Сохранить
                 </button>

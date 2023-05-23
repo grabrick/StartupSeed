@@ -1,34 +1,39 @@
-import {useState, useCallback, useEffect} from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const storageName = 'userData'
 
 export const useAuth = () => {
     const [token, setToken] = useState(null)
-    const [userId, setUserId] = useState(null)
+    const [userID, setUserID] = useState(null)
 
     const login = useCallback((jwtToken, id) => {
         setToken(jwtToken)
-        setUserId(id)
+        setUserID(id)
 
         localStorage.setItem(storageName, JSON.stringify({
-            userId: id,
+            userID: id,
             token: jwtToken
         }))
     }, [])
 
     const logout = useCallback(() => {
         setToken(null)
-        setUserId(null)
+        setUserID(null)
         localStorage.removeItem(storageName)
     }, [])
 
     useEffect(() => {
-        const data = JSON.parse(localStorage.getItem(storageName))
+        try {
+            const data = JSON.parse(localStorage.getItem(storageName))
 
-        if (data && data.token) {
-            login(data.token, data.userId)
+            if (data && data.token) {
+                login(data.token, data.userID)
+            }
+        } catch (error) {
+            localStorage.removeItem(storageName);
         }
-    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    return {login, logout, token, userId}
+    return { login, logout, token, userID }
 }

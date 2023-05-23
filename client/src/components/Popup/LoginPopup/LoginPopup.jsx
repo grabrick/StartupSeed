@@ -30,11 +30,12 @@ const Popup = ({ close }) => {
     return errors;
   };
 
-  const onSubmit = (value) => {
+  const onSubmit = async (value) => {
     axios.post("/api/auth/login", { ...value }).then((response) => {
       const login = response.data;
-      auth.login(login.token, login.userId);
-    });
+      console.log(login);
+      auth.login(login.token, login.userID);
+    })
   };
 
   return (

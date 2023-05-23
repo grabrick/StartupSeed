@@ -23,17 +23,17 @@ router.post(
 )
 
 router.put(
-    '/edit/password',
+    '/:id/edit/password',
     controller.editPassword
 )
 
 router.put(
-    '/edit/number',
+    '/:id/edit/number',
     controller.editNumber
 )
 
 router.put(
-    '/edit/utc',
+    '/:id/edit/utc',
     controller.editTimeZone
 )
 
@@ -44,37 +44,37 @@ router.put(
 // )
 
 router.get(
-    '/get',
+    '/:id/get',
     controller.getPerson
 )
 
 router.put(
-    '/upload',
+    '/:id/upload',
     controller.uploadImage
 )
 
 router.put(
-    '/edit/person',
+    '/:id/edit/person',
     controller.editPerson
 )
 router.put(
-    '/edit/prof',
+    '/:id/edit/prof',
     controller.editProf
 )
 router.put(
-    '/edit/exp',
+    '/:id/edit/exp',
     controller.editExp
 )
 router.put(
-    '/edit/edu',
+    '/:id/edit/edu',
     controller.editEdu
 )
 router.put(
-    '/edit/qual',
+    '/:id/edit/qual',
     controller.editQual
 )
 router.put(
-    '/edit/about',
+    '/:id/edit/about',
     controller.editAbout
 )
 

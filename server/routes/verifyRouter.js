@@ -8,7 +8,7 @@ router.post(
 )
 
 router.put(
-    '/change',
+    '/:id/change',
     controller.changeEmail
 )
 

@@ -12,6 +12,7 @@ import NavBar from "../NavBar/NavBar";
 import { useEffect } from "react";
 import { getSkills } from "../../redux/slices/skillsSlice";
 import axios from "axios";
+import { getUser } from "../../redux/slices/userSlice";
 
 function EditProfile() {
   const dispatch = useDispatch()
@@ -29,15 +30,22 @@ function EditProfile() {
     dispatch(changeQual(false))
   }
 
+  const User = (items) => {
+    dispatch(getUser(items));
+  };
+
   const Skills = (items) => {
     dispatch(getSkills(items));
   };
 
   useEffect(() => {
+    const ID = JSON.parse(localStorage.getItem("userData"));
+    const userId = ID.userID
     axios
-      .get("/api/auth/get")
+    .get(`/api/auth/${userId}/get`)
       .then((items) => {
-        Skills(items.data.more.job.skills)
+        User(items.data);
+        Skills(items.data.more.job.skills);
         console.log(items.data);
       })
       .catch((e) => {

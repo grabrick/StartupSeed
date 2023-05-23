@@ -13,6 +13,8 @@ function EducationForm() {
   const normalLable = "text-field__label-reg4 text-lable2";
   const errorLable = "text-field__label-reg__error2 text-lable2";
   const normalInputDate = "text-field__input-reg4 auth__main_input-date4";
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
   const dispatch = useDispatch();
 
   const submit = () => {
@@ -38,7 +40,7 @@ function EducationForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put("/api/auth/edit/edu", { ...value })
+    axios.put(`/api/auth/${userId}/edit/edu`, { ...value })
   };
   return (
     <div className={m.infoBar}>

@@ -17,17 +17,20 @@ function ModifiedMainPage() {
   };
 
   useEffect(() => {
-    axios.get("/api/auth/get")
+    const ID = JSON.parse(localStorage.getItem("userData"));
+    const userId = ID.userID
+    axios
+      .get(`/api/auth/${userId}/get`)
       .then((items) => {
         User(items.data);
-        Skills(items.data.more.job.skills)
+        Skills(items.data.more.job.skills);
         console.log(items.data);
       })
       .catch((e) => {
         console.log(e);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  }, []);
 
   return (
     <>

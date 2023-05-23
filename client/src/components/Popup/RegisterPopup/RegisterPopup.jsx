@@ -62,7 +62,7 @@ const Popup = ({ close }) => {
             })
             .then(response => {
               const login = response.data
-              auth.login(login.token, login.userId);
+              auth.login(login.token, login.userID);
             })
           }
         });

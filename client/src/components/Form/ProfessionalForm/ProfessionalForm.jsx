@@ -14,6 +14,8 @@ function ProfessionalForm() {
   const errorLable = "text-field__label-reg__error2 text-lable2";
   const data = useSelector((state) => state.skills.skills);
   const dispatch = useDispatch();
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
   const addTags = (items) => {
     dispatch(addTag(items));
   };
@@ -55,7 +57,7 @@ function ProfessionalForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put("/api/auth/edit/prof", "PUT", { ...value, skills: data })
+    axios.put(`/api/auth/${userId}/edit/prof`, { ...value, skills: data })
   };
 
   return (
@@ -184,7 +186,6 @@ function ProfessionalForm() {
                 <button
                   type="submit"
                   className="popup__button_register-save2"
-                  name="submit"
                 >
                   Сохранить
                 </button>
