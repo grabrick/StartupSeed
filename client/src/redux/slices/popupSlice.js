@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   visibleEmail: true,
   visibleNumber: true,
-  visiblePassword: true
+  visiblePassword: true,
+  visibleUTC: true
 };
 
 const popupSlice = createSlice({
@@ -18,10 +19,13 @@ const popupSlice = createSlice({
     },
     activePassword(state, actions) {
         state.visiblePassword = actions.payload
-    }
+    },
+    activeUTC(state, actions) {
+      state.visibleUTC = actions.payload
+  }
   }
 });
 
-export const { activeEmail, activeNumber, activePassword } = popupSlice.actions;
+export const { activeEmail, activeNumber, activePassword, activeUTC } = popupSlice.actions;
 
 export default popupSlice.reducer;
