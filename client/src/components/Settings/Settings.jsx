@@ -133,13 +133,17 @@ function Settings() {
             <p className={m.name}>
               <span>{data?.fname}</span> <span>{data?.lname}</span>
             </p>
-            <div className={m.littleWrapp}>
-              <p className={m.genderText}>{data.more?.pers?.gender}</p>
-              <p className={m.location}>
-                <span>{data.more?.pers?.country}</span>,{" "}
-                <span>{data.more?.pers?.city}</span>
-              </p>
-            </div>
+            {data.more?.pers?.gender ? (
+              <div className={m.littleWrapp}>
+                <p className={m.genderText}>{data.more?.pers?.gender}</p>
+                <p className={m.location}>
+                  <span>{data.more?.pers?.country}, </span>
+                  <span>{data.more?.pers?.city}</span>
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <select className={m.selector} name="" id="">
             <option value="В поиске проекта">В поиске проекта</option>

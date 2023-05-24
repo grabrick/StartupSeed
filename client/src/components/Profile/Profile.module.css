@@ -12,7 +12,7 @@
     font-size: 36px;
     font-family: 'Montserrat';
     font-style: normal;
-    margin: 0 0 30px 410px;
+    margin: 0 0 30px 385px;
 }
 
 .image {
@@ -156,7 +156,8 @@
 }
 
 .infoBar {
-    width: 881px;
+    width: 838px;
+    margin-right: 54px;
     display: flex;
     flex-direction: column;
 }
