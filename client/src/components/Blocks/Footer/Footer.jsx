@@ -9,8 +9,8 @@ import Insta from "../../../assets/images/instagram.svg";
 
 function Footer() {
   return (
-    <div className={m.container}>
-      <div className={m.wrapper}>
+    <footer className={m.container}>
+      <div className={m.containerWrapper}>
         <div className={m.infoWrapp}>
             <img className={m.logo} src={Logo} alt="" />
           <div className={m.textWrapper}>
@@ -52,7 +52,7 @@ function Footer() {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 

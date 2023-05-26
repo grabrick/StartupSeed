@@ -6,6 +6,7 @@ import { getUser } from "../../redux/slices/userSlice";
 import { useEffect } from "react";
 import axios from "axios";
 import { getSkills } from "../../redux/slices/skillsSlice";
+import "./AuthRoute.css";
 
 function ModifiedMainPage() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function ModifiedMainPage() {
 
   useEffect(() => {
     const ID = JSON.parse(localStorage.getItem("userData"));
-    const userId = ID.userID
+    const userId = ID.userID;
     axios
       .get(`/api/auth/${userId}/get`)
       .then((items) => {
@@ -33,11 +34,13 @@ function ModifiedMainPage() {
   }, []);
 
   return (
-    <>
+    <div className="content">
       <ModifiedHeader />
-      <AboutInfo />
+      <div className="wrapper">
+        <AboutInfo />
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

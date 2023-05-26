@@ -1,6 +1,11 @@
 .container {
+    max-width: 100%;
+    padding-top: 30px;
+}
+
+.containerWrapper {
     margin-left: 130px;
-    width: 1376px;
+    max-width: 1376px;
     height: 46px;
     display: flex;
     align-items: center;
@@ -12,8 +17,6 @@
     width: 278px;
     height: 43px;
 }
-
-.wrapper {}
 
 .link {
     text-decoration: none;

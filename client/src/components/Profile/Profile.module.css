@@ -1,9 +1,14 @@
 .container {
+    max-width: 100%;
+    /* width: 1376px; */
+}
+
+.containerwrapper {
     background-image: url(../../assets/images/384\ 1.svg);
     background-repeat: no-repeat;
     margin: 0 auto;
-    padding-bottom: 105px;
-    /* width: 1376px; */
+    padding-bottom: 150px;
+    max-width: 1920px;
 }
 
 .title {

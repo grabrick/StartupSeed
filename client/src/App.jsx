@@ -14,9 +14,9 @@ function App() {
     <AuthContext.Provider value={{
       token, login, logout, userID, isAuthenticated
     }}>
-      <div className="App">
+      <>
         { routes }
-      </div>
+      </>
     </AuthContext.Provider>
   );
 }

@@ -1,4 +1,4 @@
-const { validationResult } = require('express-validator')
+// const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const User = require('../../modals/User')
@@ -13,14 +13,6 @@ const createToken = (id) => {
 class authController {
     async register(req, res) {
         try {
-            const errors = validationResult(req)
-
-            if (!errors.isEmpty()) {
-                return res.status(400).json({
-                    errors: errors.array(),
-                    message: 'Некорректные данные'
-                })
-            }
 
             const { fname, lname, email, password } = req.body
 
@@ -48,16 +40,8 @@ class authController {
     async login(req, res) {
         try {
             const { email, password } = req.body
-            const errors = validationResult(req)
 
-            if (!errors.isEmpty()) {
-                return res.status(400).json({
-                    errors: errors.array(),
-                    message: 'Некорректные данные'
-                })
-            }
-
-            const user = await User.findOne({ email: { $regex: new RegExp('^' + email + '$', 'i') } }).exec()
+            const user = await User.findOne({ email })
 
             if (!user) {
                 return res.status(400).json({ message: 'Пользователь не найден' })

@@ -1,9 +1,22 @@
 .container {
+    max-width: 100%;
+    height: 100%;
+    /* width: 1376px; */
+}
+
+.containerWrapper {
     background-image: url(../../assets/images/384\ 1.svg);
     background-repeat: no-repeat;
     margin: 0 auto;
+    min-height: 100%;
+    max-width: 1920px;
+}
+
+.wrapper {
+    display: flex;
+    grid-column-gap: 50px;
+    justify-content: center;
     padding-bottom: 105px;
-    /* width: 1376px; */
 }
 
 .title {
@@ -118,12 +131,6 @@
 
 .personalInfo {
     margin-bottom: 50px;
-}
-
-.wrapper {
-    display: flex;
-    grid-column-gap: 50px;
-    justify-content: center;
 }
 
 .profileWrapp {

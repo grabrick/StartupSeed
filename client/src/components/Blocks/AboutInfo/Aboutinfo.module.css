@@ -1,8 +1,14 @@
 .container {
+    max-width: 100%;
+}
+
+.containerWrapper {
     display: flex;
     align-items: center;
     flex-direction: column;
     height: 1052px;
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
 .titleWrapp {

@@ -1,11 +1,15 @@
 .container {
+    max-width: 100%;
+}
+
+.containerWrapper {
     background-image: url(../../../assets/images/Frame4.svg);
     background-repeat: no-repeat;
+    background-position: center;
+    height: 656px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    display: flex;
-    height: 656px;
 }
 
 .span {

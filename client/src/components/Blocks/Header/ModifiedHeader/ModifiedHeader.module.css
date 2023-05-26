@@ -1,6 +1,11 @@
 .container {
+    max-width: 100%;
+}
+
+.containerWrapper {
+    padding-top: 20px;
     margin: 0 auto;
-    width: 1376px;
+    max-width: 1376px;
     height: 46px;
     display: flex;
     align-items: center;

@@ -1,9 +1,17 @@
 .container {
+    max-width: 100%;
+}
+
+.containerWrapper {
+    width: 1920px;
+    height: 1137px;
+    margin: 0 auto;
     background-image: url(../../../assets/images/Frame.svg);
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 1137px;
 }
 
 .titleWrapp {

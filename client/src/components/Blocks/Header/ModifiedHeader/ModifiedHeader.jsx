@@ -1,13 +1,13 @@
 import m from "./ModifiedHeader.module.css";
 import Logo from "../../../../assets/images/logo.svg";
-import message from "../../../../assets/images/mail-line.svg"
-import profile from "../../../../assets/images/user-line.svg"
+import message from "../../../../assets/images/mail-line.svg";
+import profile from "../../../../assets/images/user-line.svg";
 import { NavLink } from "react-router-dom";
 
 function ModifiedHeader() {
   return (
-    <>
-      <div className={m.container}>
+    <header className={m.container}>
+      <div className={m.containerWrapper}>
         <div className={m.wrapper}>
           <NavLink to="/home">
             <img src={Logo} alt="" className={m.logo} />
@@ -21,12 +21,12 @@ function ModifiedHeader() {
 
         <div className={m.wrapper}>
           <img className={m.image} src={message} alt="" />
-          <NavLink to="/profile"> 
+          <NavLink to="/profile">
             <img className={m.image} src={profile} alt="" />
           </NavLink>
         </div>
       </div>
-    </>
+    </header>
   );
 }
 
