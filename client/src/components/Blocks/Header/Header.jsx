@@ -1,20 +1,22 @@
 import m from "./Header.module.css";
 import Logo from "../../../assets/images/logo.svg";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
 import RegisterPopup from "../../Popup/RegisterPopup/RegisterPopup";
 import LoginPopup from "../../Popup/LoginPopup/LoginPopup";
+import { useDispatch, useSelector } from "react-redux";
+import { activeLogin, activeRegister } from "../../../redux/slices/popupSlice";
 
 function Header() {
-  const [isPopupReg, setIsPopupReg] = useState(false);
-  const [isPopupLog, setIsPopupLog] = useState(false);
+  const isVisibleLogin = useSelector((state) => state.popup.visibleLogin);
+  const isVisibleRegister = useSelector((state) => state.popup.visibleRegister);
+  const dispatch = useDispatch()
 
   const handlePopupRegistrClick = () => {
-    setIsPopupReg(true);
+    dispatch(activeRegister(true));
   };
 
   const handlePopupLoginClick = () => {
-    setIsPopupLog(true);
+    dispatch(activeLogin(true));
   };
 
   return (
@@ -39,8 +41,8 @@ function Header() {
               Регистрация
             </button>
           </div>
-          {isPopupLog === true && <LoginPopup close={setIsPopupLog} />}
-          {isPopupReg === true && <RegisterPopup close={setIsPopupReg} />}
+          {isVisibleLogin ? <LoginPopup /> : ''}
+          {isVisibleRegister === true && <RegisterPopup />}
         </div>
       </header>
     </>

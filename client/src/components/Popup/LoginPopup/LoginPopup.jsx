@@ -1,18 +1,25 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { Form, Field } from "react-final-form";
+import eyeOpen from "../../../assets/images/eye-line.svg";
+import eyeClose from "../../../assets/images/eye-off-line.svg";
+import m from "./LoginPopup.module.css";
 import "./LoginPopup.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { activeLogin } from "../../../redux/slices/popupSlice";
 
-const Popup = ({ close }) => {
-  const normalInput = "text-field__input-reg auth__main_input-bio";
-  const errorInput = "text-field__input-reg__error auth__main_input-bio__error";
-  const normalLable = "text-field__label-reg text-lable";
-  const errorLable = "text-field__label-reg__error text-lable";
-  const inactive = "popup__register";
-  const active = "popup__register_opened";
-  const [popup] = useState(false);
+const LoginPopup = () => {
+  const isVisibleLogin = useSelector((state) => state.popup.visibleLogin);
   const auth = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const [currentPas, setCurrentPas] = useState(false);
+  const normalInput = `${m.Input}`;
+  const errorInput = `${m.InputError}`;
+  const normalInputPassword = `${m.InputPass}`;
+  const errorInputPassword = `${m.InputErrorPass}`;
+  const inactive = "popup";
+  const active = "popupOpen";
 
   const validate = (e) => {
     const errors = {};
@@ -30,97 +37,90 @@ const Popup = ({ close }) => {
     return errors;
   };
 
+  const showPassword = () => {
+    setCurrentPas(true);
+    if (currentPas === true) {
+      setCurrentPas(false);
+    }
+  };
+
+  const closePopup = () => {
+    dispatch(activeLogin(false));
+  };
+
   const onSubmit = async (value) => {
     axios.post("/api/auth/login", { ...value }).then((response) => {
       const login = response.data;
       console.log(login);
       auth.login(login.token, login.userID);
-    })
+    });
   };
 
   return (
     <>
-      <div className={popup ? active : inactive} onClick={() => close(false)}>
-        <div
-          className="auth__popup_register_container"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="popup__register_container-wrapper">
-            <div className="auth__popup_register-wrapp_fixed">
-              <div className="auth__popup_register-wrapper">
-                <div className="auth__popup_wrapp-wrapper">
-                  <h2 className="popup__title">Вход</h2>
-                </div>
-              </div>
+      <div
+        className={isVisibleLogin ? inactive : active}
+        onClick={() => closePopup()}
+      >
+        <div className={m.popup} onClick={(e) => e.stopPropagation()}>
+          <div className={m.popupWrapper}>
+            <div className={m.titleWrapper}>
+              <h2 className={m.title}>Вход</h2>
             </div>
             <Form
               onSubmit={onSubmit}
               validate={validate}
               render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit} className="popup__form">
-                  <div className="auth__main_register-input__user_wrapper">
-                    <div className="auth__main_reg-input__user_wrapper">
-                      <div className="text-field-reg text-field_floating-reg auth__main_input-email_wrapper">
-                        <Field name="email">
-                          {({ input, meta }) => (
-                            <>
-                              <input
-                                type="text"
-                                placeholder=" "
-                                className={
-                                  meta.error ? errorInput : normalInput
-                                }
-                                {...input}
-                              />
-                              <label
-                                className={
-                                  meta.error ? errorLable : normalLable
-                                }
-                              >
-                                Email
-                              </label>
-                              {meta.touched && meta.error && (
-                                <span className="error-text">{meta.error}</span>
-                              )}
-                            </>
-                          )}
-                        </Field>
-                      </div>
-                      <div className="text-field-reg text-field_floating-reg auth__main_input-email_wrapper">
-                        <Field name="password">
-                          {({ input, meta }) => (
-                            <>
-                              <input
-                                type="text"
-                                placeholder=" "
-                                className={
-                                  meta.error ? errorInput : normalInput
-                                }
-                                {...input}
-                              />
-                              <label
-                                className={
-                                  meta.error ? errorLable : normalLable
-                                }
-                              >
-                                Пароль
-                              </label>
-                              {meta.touched && meta.error && (
-                                <span className="error-text">{meta.error}</span>
-                              )}
-                            </>
-                          )}
-                        </Field>
-                      </div>
+                <form onSubmit={handleSubmit} className={m.form}>
+                  <div className={m.formWrapper}>
+                    <div className={m.inputWrapper}>
+                      <Field name="email">
+                        {({ input, meta }) => (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Email"
+                              className={meta.error ? errorInput : normalInput}
+                              {...input}
+                            />
+                            {meta.touched && meta.error && (
+                              <span className="error-text">{meta.error}</span>
+                            )}
+                          </>
+                        )}
+                      </Field>
                     </div>
-                    <button
-                      type="submit"
-                      className="popup__button_register-save"
-                      name="submit"
-                    >
-                      Войти
-                    </button>
+                    <div className={m.inputWrapper}>
+                      <Field name="password">
+                        {({ input, meta }) => (
+                          <>
+                            <img
+                              src={currentPas ? eyeOpen : eyeClose}
+                              onClick={() => showPassword()}
+                              className={m.eye}
+                              alt=""
+                            />
+                            <input
+                              type={currentPas ? "text" : "password"}
+                              placeholder="Пароль"
+                              className={
+                                meta.error
+                                  ? errorInputPassword
+                                  : normalInputPassword
+                              }
+                              {...input}
+                            />
+                            {meta.touched && meta.error && (
+                              <span className="error-text">{meta.error}</span>
+                            )}
+                          </>
+                        )}
+                      </Field>
+                    </div>
                   </div>
+                  <button type="submit" className={m.loginButton}>
+                    Войти
+                  </button>
                 </form>
               )}
             />
@@ -131,4 +131,4 @@ const Popup = ({ close }) => {
   );
 };
 
-export default Popup;
+export default LoginPopup;

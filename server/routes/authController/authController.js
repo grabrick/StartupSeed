@@ -41,7 +41,7 @@ class authController {
         try {
             const { email, password } = req.body
 
-            const user = await User.findOne({ email })
+            const user = await User.findOne({ email: { $regex: new RegExp('^' + email + '$', 'i') } }).exec()
 
             if (!user) {
                 return res.status(400).json({ message: 'Пользователь не найден' })

@@ -1,21 +1,38 @@
 import React, { useContext, useState } from "react";
-import "./RegisterPopup.css";
 import { Form, Field } from "react-final-form";
 import { AuthContext } from "../../../context/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { activeRegister } from "../../../redux/slices/popupSlice";
 import axios from "axios";
+import "./RegisterPopup.css";
+import m from "./RegisterPopup.module.css";
+import eyeOpen from "../../../assets/images/eye-line.svg";
+import eyeClose from "../../../assets/images/eye-off-line.svg";
 
-const Popup = ({ close }) => {
-  const normalInput = "text-field__input-reg auth__main_input-bio";
-  const errorInput = "text-field__input-reg__error auth__main_input-bio__error";
-  const normalInputEmail = "text-field__input-reg auth__main_input-email";
-  const errorInputEmail =
-    "text-field__input-reg__error auth__main_input-email__error";
-  const normalLable = "text-field__label-reg text-lable";
-  const errorLable = "text-field__label-reg__error text-lable";
-  const inactive = "popup__register";
-  const active = "popup__register_opened";
+const Popup = () => {
+  const normalInput = `${m.Input}`;
+  const errorInput = `${m.InputError}`;
+  const normalInputPassword = `${m.InputPass}`;
+  const errorInputPassword = `${m.InputErrorPass}`;
+  // const normalInputEmail = `${m.InputEmail}`;
+  // const errorInputEmail = `${m.InputErrorEmail}`;
+  const inactive = "popup";
+  const active = "popupOpen";
+  const isVisibleRegister = useSelector((state) => state.popup.visibleRegister);
+  const dispatch = useDispatch();
+  const [currentPas, setCurrentPas] = useState(false);
   const auth = useContext(AuthContext);
-  const [popup] = useState(false);
+
+  const showPassword = () => {
+    setCurrentPas(true);
+    if (currentPas === true) {
+      setCurrentPas(false);
+    }
+  };
+
+  const closePopup = () => {
+    dispatch(activeRegister(false));
+  };
 
   const validate = (e) => {
     const errors = {};
@@ -56,14 +73,15 @@ const Popup = ({ close }) => {
         })
         .then((response) => {
           if (response.status === 201) {
-            axios.post("/api/auth/login", {
-              email: value.email,
-              password: value.password,
-            })
-            .then(response => {
-              const login = response.data
-              auth.login(login.token, login.userID);
-            })
+            axios
+              .post("/api/auth/login", {
+                email: value.email,
+                password: value.password,
+              })
+              .then((response) => {
+                const login = response.data;
+                auth.login(login.token, login.userID);
+              });
           }
         });
     }
@@ -71,167 +89,136 @@ const Popup = ({ close }) => {
 
   return (
     <>
-      <div className={popup ? active : inactive} onClick={() => close(false)}>
-        <div
-          className="auth__popup_register_container"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="popup__register_container-wrapper">
-            <div className="auth__popup_register-wrapp_fixed">
-              <div className="auth__popup_register-wrapper">
-                <div className="auth__popup_wrapp-wrapper">
-                  <h2 className="popup__title">Регистрация</h2>
-                </div>
-              </div>
+      <div
+        className={isVisibleRegister ? inactive : active}
+        onClick={() => closePopup()}
+      >
+        <div className={m.popup} onClick={(e) => e.stopPropagation()}>
+          <div className={m.popupWrapper}>
+            <div className={m.titleWrapper}>
+              <h2 className={m.title}>Регистрация</h2>
             </div>
             <Form
               onSubmit={onSubmit}
               validate={validate}
               render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit} className="popup__form">
-                  <div className="auth__main_register-input__user_wrapper">
-                    <div className="auth__main_reg-input__user_wrapper">
-                      <div className="text-field-reg text-field_floating-reg auth__main_input-email_wrapper">
-                        <Field name="fname">
-                          {({ input, meta }) => (
-                            <>
-                              <input
-                                type="text"
-                                placeholder=" "
-                                className={
-                                  meta.error ? errorInput : normalInput
-                                }
-                                {...input}
-                              />
-                              <label
-                                className={
-                                  meta.error ? errorLable : normalLable
-                                }
-                              >
-                                Имя
-                              </label>
-                              {meta.touched && meta.error && (
-                                <span className="error-text">{meta.error}</span>
-                              )}
-                            </>
-                          )}
-                        </Field>
-                      </div>
-                      <div className="text-field-reg text-field_floating-reg auth__main_input-email_wrapper">
-                        <Field name="lname">
-                          {({ input, meta }) => (
-                            <>
-                              <input
-                                type="text"
-                                placeholder=" "
-                                className={
-                                  meta.error ? errorInput : normalInput
-                                }
-                                {...input}
-                              />
-                              <label
-                                className={
-                                  meta.error ? errorLable : normalLable
-                                }
-                              >
-                                Фамилия
-                              </label>
-                              {meta.touched && meta.error && (
-                                <span className="error-text">{meta.error}</span>
-                              )}
-                            </>
-                          )}
-                        </Field>
-                      </div>
-                      <div className="text-field-reg text-field_floating-reg auth__main_input-email_wrapper">
-                        <Field name="email">
-                          {({ input, meta }) => (
-                            <>
-                              <input
-                                type="text"
-                                placeholder=" "
-                                className={
-                                  meta.error
-                                    ? errorInputEmail
-                                    : normalInputEmail
-                                }
-                                {...input}
-                              />
-                              <label
-                                className={
-                                  meta.error ? errorLable : normalLable
-                                }
-                              >
-                                Email
-                              </label>
-                              {meta.touched && meta.error && (
-                                <span className="error-text">{meta.error}</span>
-                              )}
-                            </>
-                          )}
-                        </Field>
-                      </div>
-                      <div className="text-field-reg text-field_floating-reg auth__main_input-email_wrapper">
-                        <Field name="password">
-                          {({ input, meta }) => (
-                            <>
-                              <input
-                                type="text"
-                                placeholder=" "
-                                className={
-                                  meta.error ? errorInput : normalInput
-                                }
-                                {...input}
-                              />
-                              <label
-                                className={
-                                  meta.error ? errorLable : normalLable
-                                }
-                              >
-                                Пароль
-                              </label>
-                              {meta.touched && meta.error && (
-                                <span className="error-text">{meta.error}</span>
-                              )}
-                            </>
-                          )}
-                        </Field>
-                      </div>
-                      <div className="text-field-reg text-field_floating-reg auth__main_input-email_wrapper">
-                        <Field name="repeatPassword">
-                          {({ input, meta }) => (
-                            <>
-                              <input
-                                type="text"
-                                placeholder=" "
-                                className={
-                                  meta.error ? errorInput : normalInput
-                                }
-                                {...input}
-                              />
-                              <label
-                                className={
-                                  meta.error ? errorLable : normalLable
-                                }
-                              >
-                                Повтор пароля
-                              </label>
-                              {meta.touched && meta.error && (
-                                <span className="error-text">{meta.error}</span>
-                              )}
-                            </>
-                          )}
-                        </Field>
-                      </div>
+                <form onSubmit={handleSubmit} className={m.form}>
+                  <div className={m.formWrapper}>
+                    <div className={m.inputWrapper}>
+                      <Field name="fname">
+                        {({ input, meta }) => (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Имя"
+                              className={meta.error ? errorInput : normalInput}
+                              {...input}
+                            />
+                            {meta.touched && meta.error && (
+                              <span className="error-text">{meta.error}</span>
+                            )}
+                          </>
+                        )}
+                      </Field>
                     </div>
-                    <button
-                      type="submit"
-                      className="popup__button_register-save"
-                      name="submit"
-                    >
-                      Регистрация
-                    </button>
+                    <div className={m.inputWrapper}>
+                      <Field name="lname">
+                        {({ input, meta }) => (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Фамилия"
+                              className={meta.error ? errorInput : normalInput}
+                              {...input}
+                            />
+
+                            {meta.touched && meta.error && (
+                              <span className="error-text">{meta.error}</span>
+                            )}
+                          </>
+                        )}
+                      </Field>
+                    </div>
+                    <div className={m.inputWrapperEmail}>
+                      <Field name="email">
+                        {({ input, meta }) => (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="Email"
+                              className={
+                                meta.error ? errorInput : normalInput
+                              }
+                              {...input}
+                            />
+
+                            {meta.touched && meta.error && (
+                              <span className="error-text">{meta.error}</span>
+                            )}
+                          </>
+                        )}
+                      </Field>
+                    </div>
+                    <div className={m.inputWrapper}>
+                      <Field name="password">
+                        {({ input, meta }) => (
+                          <>
+                          <img
+                              src={currentPas ? eyeOpen : eyeClose}
+                              onClick={() => showPassword()}
+                              className={m.eye}
+                              alt=""
+                            />
+                            <input
+                              type={currentPas ? "text" : "password"}
+                              placeholder="Пароль"
+                              className={
+                                meta.error
+                                  ? errorInputPassword
+                                  : normalInputPassword
+                              }
+                              {...input}
+                            />
+
+                            {meta.touched && meta.error && (
+                              <span className="error-text">{meta.error}</span>
+                            )}
+                          </>
+                        )}
+                      </Field>
+                    </div>
+                    <div className={m.inputWrapper}>
+                      <Field name="repeatPassword">
+                        {({ input, meta }) => (
+                          <>
+                          <img
+                              src={currentPas ? eyeOpen : eyeClose}
+                              onClick={() => showPassword()}
+                              className={m.eye}
+                              alt=""
+                            />
+                            <input
+                              type={currentPas ? "text" : "password"}
+                              placeholder="Повтор пароля"
+                              className={
+                                meta.error
+                                  ? errorInputPassword
+                                  : normalInputPassword
+                              }
+                              {...input}
+                            />
+
+                            {meta.touched && meta.error && (
+                              <span className="error-text">{meta.error}</span>
+                            )}
+                          </>
+                        )}
+                      </Field>
+                    </div>
                   </div>
+                  <button type="submit" className={m.loginButton}>
+                    Регистрация
+                  </button>
                 </form>
               )}
             />

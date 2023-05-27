@@ -16,7 +16,6 @@ import PhoneInput from "react-phone-number-input";
 import m from "./Settings.module.css";
 import "react-phone-number-input/style.css";
 import "./Settings.css";
-import Footer from "../Blocks/Footer/Footer";
 
 function Settings() {
   const data = useSelector((state) => state.users.user);
