@@ -3,7 +3,7 @@
 }
 
 .containerWrapper {
-    width: 1920px;
+    max-width: 1920px;
     height: 1137px;
     margin: 0 auto;
     background-image: url(../../../assets/images/Frame.svg);
