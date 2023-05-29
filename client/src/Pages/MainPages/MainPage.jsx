@@ -11,15 +11,15 @@ import Submit from "../../components/Blocks/Submit/Submit";
 function MainPage() {
     return (
         <>
-            <Intro />
-            <About />
+            {/* <Intro />
+            <About /> */}
             <AboutWork />
-            <AboutInfo />
+            {/* <AboutInfo />
             <AboutProject />
             <Registration />
             <Slider />
             <Submit />
-            <Footer />
+            <Footer /> */}
         </>
     );
 }

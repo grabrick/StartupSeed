@@ -9,7 +9,7 @@ function Intro() {
           <Header />
           <div className={m.wrapper}>
             <div className={m.wrapp}>
-              <p className={m.title}>Придумайте собвственную идею!</p>
+              <p className={m.title}>Придумайте собственную идею!</p>
               <h1 className={m.discription}>
                 Запусти свою <span className={m.span}>бизнес идею</span>
                 <br /> найди свою команду
