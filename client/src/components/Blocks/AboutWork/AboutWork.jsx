@@ -8,8 +8,7 @@ function AboutWork() {
       <div className={m.containerWrapper}>
         <div className={m.titleWrapp}>
           <p className={m.title}>
-            <span className={m.span}>Startup seed</span> - быстрый запуск
-            <br /> цифровых идей
+            <span className={m.span}>Startup seed</span> - быстрый запуск цифровых идей
           </p>
           <h3 className={m.text}>Как это работает?</h3>
         </div>
@@ -19,7 +18,7 @@ function AboutWork() {
             <div className={m.blockWrapp}>
               <h1 className={m.numb}>1</h1>
               <p className={m.numbText}>
-                Зарегистрируйтесь и<br /> заполните профиль в<br /> личном
+                Зарегистрируйтесь и заполните профиль в личном
                 кабинете
               </p>
             </div>
@@ -27,14 +26,14 @@ function AboutWork() {
               <h1 className={m.numb}>2</h1>
               <p className={m.numbText}>
                 Размещайте или
-                <br /> находите интересные
-                <br /> проекты
+                находите интересные
+                проекты
               </p>
             </div>
             <div className={m.blockWrapp}>
               <h1 className={m.numb}>3</h1>
               <p className={m.numbText}>
-                Просоединяйтесь к<br /> команде
+                Просоединяйтесь к команде
               </p>
             </div>
             <div className={m.blockWrapp}>

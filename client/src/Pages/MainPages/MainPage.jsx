@@ -11,8 +11,8 @@ import Submit from "../../components/Blocks/Submit/Submit";
 function MainPage() {
     return (
         <>
-            {/* <Intro />
-            <About /> */}
+            <Intro />
+            <About />
             <AboutWork />
             {/* <AboutInfo />
             <AboutProject />

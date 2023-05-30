@@ -15,16 +15,16 @@
     .containerWrapper {
         background-image: url(../../../assets/images/384\ 1.svg);
         max-width: 820px;
-        height: 772px;
+        height: 530px;
         margin: 0 auto;
     }
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 425px) {
     .containerWrapper {
         background-image: url(../../../assets/images/384\ 1.svg);
         height: 467px;
-        max-width: 414px;
+        max-width: 425px;
         margin: 0;
     }
 }
@@ -103,7 +103,7 @@
     }
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 425px) {
     .discription {
         height: 80px;
         margin: 0 0 20px 0;
@@ -162,7 +162,7 @@
     margin-right: 29px;
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 425px) {
     .button {
         text-decoration: none;
         cursor: pointer;
