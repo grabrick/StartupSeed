@@ -12,11 +12,13 @@ function AboutInfo() {
           <h3 className={m.text}>Как это работает для молодых специалистов</h3>
         </div>
 
-        <div className={m.blockWrapper}>
-          <p className={m.blockText}>Зарегестрируйся</p>
-          <p className={m.blockText}>Найди проект</p>
-          <p className={m.blockText}>Прояви себя</p>
-          <p className={m.blockText}>Получи ведущую должность</p>
+        <div className={m.blockContainer}>
+          <div className={m.blockWrapper}>
+            <p className={m.blockText}>Зарегестрируйся</p>
+            <p className={m.blockText}>Найди проект</p>
+            <p className={m.blockText}>Прояви себя</p>
+            <p className={m.blockText}>Получи ведущую должность</p>
+          </div>
         </div>
 
         <div className={m.wrapper}>
@@ -24,8 +26,7 @@ function AboutInfo() {
             <h1 className={m.numb}>1</h1>
             <ol className={m.numbWrapp}>
               <li value="1" className={m.numbText}>
-                Зарегестрируйся на
-                <br /> платформе Укажи свои навыки
+                Зарегестрируйся на платформе Укажи свои навыки
               </li>
               <li value="2" className={m.numbText}>
                 Укажи свои навыки
@@ -39,8 +40,7 @@ function AboutInfo() {
                 Найди проект.
               </li>
               <li value="2" className={m.numbText}>
-                Выбери свой проект и<br /> направление по которому
-                <br /> хочешь развиваться
+                Выбери свой проект и направление по которому хочешь развиваться
               </li>
             </ol>
           </div>
@@ -51,8 +51,7 @@ function AboutInfo() {
                 Прояви себя!
               </li>
               <li value="2" className={m.numbText}>
-                Раскрой свой потенциал и<br /> докажи всем на что ты
-                <br /> способен
+                Раскрой свой потенциал и докажи всем на что ты способен
               </li>
             </ol>
           </div>
@@ -63,7 +62,7 @@ function AboutInfo() {
                 Пройди практику
               </li>
               <li value="2" className={m.numbText}>
-                Займи достойное место в<br /> быстроразвивающих проектах
+                Займи достойное место в быстроразвивающих проектах
               </li>
             </ol>
           </div>

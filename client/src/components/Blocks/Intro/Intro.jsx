@@ -8,17 +8,15 @@ function Intro() {
         <div className={m.containerWrapper}>
           <Header />
           <div className={m.wrapper}>
-            <div className={m.wrapp}>
-              <p className={m.title}>Придумайте собственную идею!</p>
-              <h1 className={m.discription}>
-                Запусти свою <span className={m.span}>бизнес идею</span>
-                <br /> найди свою команду
-              </h1>
-              <p className={m.text}>
-                Расскажи нам о своей бизнесс идеии и мы поможем вам
-                <br /> воплотить ваши идеии в реальность
-              </p>
-            </div>
+            <p className={m.title}>Придумайте собственную идею!</p>
+            <h1 className={m.discription}>
+              Запусти свою <span className={m.span}>бизнес идею</span>
+              <br /> найди свою команду
+            </h1>
+            <p className={m.text}>
+              Расскажи нам о своей бизнесс идеии и мы поможем вам
+              <br /> воплотить ваши идеии в реальность
+            </p>
 
             <div className={m.wrappBtn}>
               <button className={m.button}>Смотреть</button>

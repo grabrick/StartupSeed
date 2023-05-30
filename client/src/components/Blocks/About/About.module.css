@@ -8,7 +8,6 @@
     background-repeat: no-repeat;
     margin: 0 auto;
     max-width: 1920px;
-    height: 900px;
 }
 
 .title {
@@ -109,8 +108,6 @@
         align-items: center; */
         background-image: none;
         margin: 0 auto;
-        max-width: 414px;
-        height: 500px;
     }
 
     .wrappInfo {
@@ -118,7 +115,7 @@
         height: 300px;
         margin-left: 0;
         justify-content: center;
-        grid-column-gap: 130px;
+        grid-column-gap: 100px;
         grid-row-gap: 0;
     }
 
@@ -181,7 +178,6 @@
         align-items: center; */
         background-image: none;
         margin: 0 auto;
-        height: 400px;
     }
 
     .wrappInfo {

@@ -12,11 +12,11 @@ function MainPage() {
     return (
         <>
             <Intro />
-            <About />
+            <About /> 
             <AboutWork />
-            {/* <AboutInfo />
-            <AboutProject />
-            <Registration />
+            <AboutInfo />
+            {/*<AboutProject />
+             <Registration />
             <Slider />
             <Submit />
             <Footer /> */}
