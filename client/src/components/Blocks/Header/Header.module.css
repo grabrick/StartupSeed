@@ -50,7 +50,148 @@
     display: block;
 }
 
+.logo {
+    cursor: pointer;
+    width: 278px;
+    height: 43px;
+}
+
+.link {
+    text-decoration: none;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    text-decoration: none;
+    margin-left: 50px;
+}
+
+.link:nth-child(1) {
+    text-decoration: none;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    text-decoration: none;
+    margin-left: 0;
+}
+
+.buttonLog {
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 23px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #D0FF49;
+    border-radius: 10px;
+    width: 94px;
+    height: 37px;
+}
+
+.buttonReg {
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background-color: #D0FF49;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 10px;
+    width: 159px;
+    height: 42px;
+}
+
+@media screen and (max-width: 1024px) {
+    .containerWrapper {
+        margin-left: 30px;
+        max-width: 1376px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 0 20px;
+    }
+
+    .logo {
+        width: 200px;
+    }
+
+    .link {
+        margin-left: 20px;
+    }
+
+    .link:nth-child(2) {
+        margin-left: 20px;
+        width: 47px;
+    }
+
+    .wrapperLink {
+        display: flex;
+        align-items: center;
+    }
+
+    .wrapperButton {
+        margin-left: 5px;
+    }
+
+    .buttonReg {
+        width: 130px;
+    }
+
+    .buttonLog {
+        width: 70px;
+        margin-right: 10px;
+    }
+}
+
 @media screen and (max-width: 820px) {
+    .buttonLog {
+        text-decoration: none;
+        cursor: pointer;
+        margin-right: 0;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        background-color: rgba(0, 0, 0, 0);
+        border: 1px solid #D0FF49;
+        border-radius: 10px;
+        width: 94px;
+        height: 37px;
+    }
+
+    .link {
+        text-decoration: none;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000000;
+        text-decoration: none;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .logo {
+        cursor: pointer;
+        width: 260px;
+        height: 43px;
+    }
+
     .containerWrapper {
         margin-left: 20px;
         max-width: 1376px;
@@ -95,9 +236,7 @@
         align-items: center;
         justify-content: space-between;
     }
-}
 
-@media screen and (max-width: 425px) {
     .burgerMenuWrapper {
         width: 100px;
         padding-right: 20px;
@@ -112,117 +251,5 @@
         cursor: pointer;
         width: 200px;
         height: 43px;
-    }
-}
-
-.logo {
-    cursor: pointer;
-    width: 278px;
-    height: 43px;
-}
-
-@media screen and (max-width: 820px) {
-    .logo {
-        cursor: pointer;
-        width: 260px;
-        height: 43px;
-    }
-}
-
-@media screen and (max-width: 425px) {
-    .logo {
-        cursor: pointer;
-        width: 200px;
-        height: 43px;
-    }
-}
-
-.link {
-    text-decoration: none;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #000000;
-    text-decoration: none;
-    margin-left: 50px;
-}
-
-.link:nth-child(1) {
-    text-decoration: none;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #000000;
-    text-decoration: none;
-    margin-left: 0;
-}
-
-@media screen and (max-width: 820px) {
-    .link {
-        text-decoration: none;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
-        color: #000000;
-        text-decoration: none;
-        margin-left: 0;
-        margin-bottom: 10px;
-    }
-}
-
-.buttonLog {
-    text-decoration: none;
-    cursor: pointer;
-    margin-right: 23px;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 1px solid #D0FF49;
-    border-radius: 10px;
-    width: 94px;
-    height: 37px;
-}
-
-.buttonReg {
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    background-color: #D0FF49;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    border-radius: 10px;
-    width: 159px;
-    height: 42px;
-}
-
-@media screen and (max-width: 820px) {
-    .buttonLog {
-        text-decoration: none;
-        cursor: pointer;
-        margin-right: 0;
-        margin-bottom: 20px;
-        margin-top: 20px;
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
-        background-color: rgba(0, 0, 0, 0);
-        border: 1px solid #D0FF49;
-        border-radius: 10px;
-        width: 94px;
-        height: 37px;
     }
 }

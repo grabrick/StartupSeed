@@ -12,34 +12,22 @@ function About() {
           <div className={m.wrappInfo}>
             <div className={m.wrappText}>
               <h1 className={m.about}>42</h1>
-              <p className={m.smallAbout}>
-                Лучших
-                <br /> спикеров
-              </p>
+              <p className={m.smallAbout}>Лучших спикеров</p>
             </div>
 
             <div className={m.wrappText}>
               <h1 className={m.about}>60+</h1>
-              <p className={m.smallAbout}>
-                Стартапов
-                <br /> и инсайтов
-              </p>
+              <p className={m.smallAbout}>Стартапов и инсайтов</p>
             </div>
 
             <div className={m.wrappText}>
               <h1 className={m.about}>{">"}500</h1>
-              <p className={m.smallAbout}>
-                Полезных
-                <br /> контактов
-              </p>
+              <p className={m.smallAbout}>Полезных контактов</p>
             </div>
 
             <div className={m.wrappText}>
               <h1 className={m.about}>35</h1>
-              <p className={m.smallAbout}>
-                Часов потока
-                <br /> информации
-              </p>
+              <p className={m.smallAbout}>Часов потока информации</p>
             </div>
           </div>
         </div>

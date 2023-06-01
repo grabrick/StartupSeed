@@ -10,7 +10,6 @@ function AboutProject() {
             Для кого этот <span className={m.span}>проект</span>
           </h1>
         </div>
-
         <div className={m.wrapper}>
           <div className={m.element}>
             <div className={m.elementWrapper}>

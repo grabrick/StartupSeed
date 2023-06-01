@@ -15,9 +15,9 @@ function MainPage() {
             <About /> 
             <AboutWork />
             <AboutInfo />
-            {/*<AboutProject />
-             <Registration />
-            <Slider />
+            <AboutProject />
+            <Registration />
+            {/*<Slider />
             <Submit />
             <Footer /> */}
         </>

@@ -6,12 +6,12 @@
     background-image: url(../../../assets/images/Frame2.svg);
     background-repeat: no-repeat;
     background-position: center;
-    height: 1009px;
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 1920px;
     margin: 0 auto;
+    padding: 10px 0;
 }
 
 .title {
@@ -59,16 +59,16 @@
 
 .element {
     border: 1px solid #D0FF49;
-    width: 540px;
     height: 245px;
     border-radius: 7px;
+    padding: 10px;
 }
 
 .wrapper {
-    width: 1660px;
-    height: 510px;
+    max-width: 1660px;
     display: grid;
     grid-template-columns: repeat(3, 540px);
+    padding: 10px;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
 }
@@ -104,6 +104,261 @@
     color: #D0FF49;
 }
 
-.elementWrapper {
-    margin-left: 33px;
+@media screen and (max-width: 1440px) {
+    .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 50px 10px 10px 10px;
+    }
+
+    .element {
+        min-width: 430px;
+    }
+
+    .titleWrapp {
+        margin: 0;
+    }
+
+    .textTitle {
+        font-size: 70px;
+    }
+}
+
+
+@media screen and (max-width: 1024px) {
+    .element {
+        max-width: 295px;
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .numb {
+        font-size: 44px;
+    }
+
+    .numbText {
+        font-size: 20px;
+    }
+
+    .element:nth-child(4) {
+        padding: 10px 5px 10px 10px;
+    }
+
+    .textTitle {
+        font-size: 70px;
+        height: 70px;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .containerWrapper {
+        background-color: #383838;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .title {
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 67px;
+        text-align: center;
+        color: #FFFFFF;
+    }
+    
+    .span {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 67px;
+        text-align: center;
+        color: #D0FF49;
+    }
+    
+    .textTitle {
+        margin-top: 50px;
+        height: 55px;
+        margin: 0;
+        text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+        -webkit-text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+        -moz-text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+        color: #383838;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 128px;
+        text-align: center;
+    }
+    
+    .titleWrapp {
+        margin: 0;
+        padding-bottom: 30px;
+        height: 100px;
+    }
+    
+    .element {
+        border: 1px solid #D0FF49;
+        width: 350px;
+        border-radius: 7px;
+    }
+    
+    .wrapper {
+        max-width: 1660px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-bottom: 30px;
+    }
+
+    .numbText {
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 28px;
+        color: #FFFFFF;
+    }
+    
+    .smallNumbText {
+        padding-top: 14px;
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        color: #FFFFFF;
+    }
+    
+    .numb {
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 130.9%;
+        color: #D0FF49;
+    }
+    
+    .elementWrapper {
+        margin-left: 33px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .containerWrapper {
+        background-color: #383838;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+    }
+    
+    .title {
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 67px;
+        text-align: center;
+        color: #FFFFFF;
+    }
+    
+    .span {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 67px;
+        text-align: center;
+        color: #D0FF49;
+    }
+    
+    .textTitle {
+        margin-top: 50px;
+        height: 55px;
+        margin: 0;
+        text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+        -webkit-text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+        -moz-text-shadow: 0px 1px 0 rgba(87, 89, 95, 0.37), 0px -1px 0 rgba(87, 89, 95, 0.37), 1px 0px 0 rgb(87, 89, 95, 0.37), -1px 0px 0 rgb(87, 89, 95, 0.37), 1px 1px 0 rgb(87, 89, 95, 0.37), 1px -1px 0 rgb(87, 89, 95, 0.37), -1px 1px 0 rgb(87, 89, 95, 0.37), -1px -1px 0 rgb(87, 89, 95, 0.37);
+        color: #383838;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 128px;
+        text-align: center;
+    }
+    
+    .titleWrapp {
+        margin: 0;
+        padding-bottom: 30px;
+        height: 100px;
+    }
+    
+    .element {
+        border: 1px solid #D0FF49;
+        margin-bottom: 10px;
+        border-radius: 7px;
+    }
+    
+    .wrapper {
+        max-width: 1660px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .numbText {
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 28px;
+        color: #FFFFFF;
+    }
+    
+    .smallNumbText {
+        padding-top: 14px;
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        color: #FFFFFF;
+    }
+    
+    .numb {
+        margin: 0;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 130.9%;
+        color: #D0FF49;
+    }
+    
+    .elementWrapper {
+        margin-left: 33px;
+    }
 }

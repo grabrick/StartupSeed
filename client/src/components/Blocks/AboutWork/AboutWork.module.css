@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 20px 0;
 }
 
 .titleWrapp {
@@ -67,13 +68,14 @@
     grid-column-gap: 10px;
     grid-row-gap: 1em;
     margin-top: 114px;
+    padding: 20px;
 }
 
 .blockWrapp {
     padding-left: 28px;
     border-left: 1px solid #FFFFFF;
-    max-width: 313px;
-    height: 294px;
+    max-width: 205px;
+    /* height: 294px; */
 }
 
 .numb {
@@ -110,6 +112,52 @@
     width: 256px;
     height: 48px;
     margin-top: 121px;
+}
+
+@media screen and (max-width: 1440px) {
+    .titleWrapp {
+        margin-top: 30px;
+    }
+
+    .text {
+        margin-top: 20px;
+    }
+
+    .blockWrapp {
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .wrapper {
+        padding: 0 10px;
+        grid-column-gap: 0;
+        margin: 0;
+    }
+
+    .blockWrapp {
+        padding: 10px;
+    }
+
+    .numb {
+        font-size: 70px;
+    }
+
+    .numbText {
+        font-size: 18px;
+    }
+
+    .titleWrapp {
+        margin-top: 30px;
+    }
+
+    .text {
+        margin-top: 30px;
+    }
+
+    .button {
+        margin: 20px 0 0 0;
+    }
 }
 
 @media screen and (max-width: 820px) {
@@ -156,6 +204,7 @@
         max-width: 700px;
         grid-row-gap: 3rem;
         max-height: 500px;
+        justify-content: space-between;
         margin: 0;
     }
 
@@ -170,31 +219,30 @@
     }
 
     .blockWrapp {
-        max-width: 250px;
+        width: 250px;
         height: 95px;
         margin-right: 0;
-        padding-left: 20px;
     }
 
     .blockWrapp:nth-child(4) {
-        max-width: 250px;
+        width: 250px;
         height: 70px;
         margin-right: 0;
-        padding-left: 20px;
+
     }
 
     .blockWrapp:nth-child(3) {
-        max-width: 250px;
+        width: 250px;
         height: 73px;
         margin-right: 0;
-        padding-left: 20px;
+
     }
 
     .blockWrapp:nth-child(2) {
-        max-width: 250px;
+        width: 250px;
         height: 95px;
         margin-right: 0;
-        padding-left: 20px;
+
     }
 
     .content {
@@ -262,33 +310,33 @@
         max-width: 250px;
         height: 115px;
         margin-right: 80px;
-        padding-left: 20px;
+
     }
 
     .blockWrapp:nth-child(4) {
         max-width: 250px;
         height: 70px;
         margin-right: 90px;
-        padding-left: 20px;
+
     }
 
     .blockWrapp:nth-child(3) {
         max-width: 250px;
         height: 90px;
         margin-right: 98px;
-        padding-left: 20px;
+
     }
 
     .blockWrapp:nth-child(2) {
         max-width: 250px;
         height: 120px;
         margin-right: 77px;
-        padding-left: 20px;
+
     }
 
     .content {
-        height: 580px;
-        max-width: 400px;
+        height: 610px;
+        max-width: 330px;
     }
 
     .button {
