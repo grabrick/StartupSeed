@@ -18,7 +18,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 175px;
     max-width: 828px;
     height: 298px;
 }
@@ -74,7 +73,6 @@
 .blockWrapp {
     padding-left: 28px;
     border-left: 1px solid #FFFFFF;
-    max-width: 205px;
     /* height: 294px; */
 }
 
@@ -115,9 +113,6 @@
 }
 
 @media screen and (max-width: 1440px) {
-    .titleWrapp {
-        margin-top: 30px;
-    }
 
     .text {
         margin-top: 20px;
@@ -145,10 +140,6 @@
 
     .numbText {
         font-size: 18px;
-    }
-
-    .titleWrapp {
-        margin-top: 30px;
     }
 
     .text {

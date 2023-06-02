@@ -8,10 +8,10 @@
     flex-direction: column;
     max-width: 1920px;
     margin: 0 auto;
+    padding: 15px 0;
 }
 
 .titleWrapp {
-    margin-top: 175px;
     max-width: 1660px;
     height: 298px;
 }
@@ -48,6 +48,7 @@
 
 .text {
     margin: 0;
+    padding-top: 20px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -125,6 +126,12 @@
     line-height: 130.9%;
     color: #000000;
     padding-bottom: 20px;
+}
+
+@media screen and (max-width: 1680px) {
+    .wrapper {
+        padding: 0 20px 10px;
+    }
 }
 
 @media screen and (max-width: 1440px) {

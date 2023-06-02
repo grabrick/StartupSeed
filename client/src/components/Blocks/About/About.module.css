@@ -101,6 +101,12 @@
     flex-direction: column;
 }
 
+@media screen and (max-width: 1680px) {
+    .containerWrapper {
+        background-position: left;
+    }
+}
+
 @media screen and (max-width: 1440px) {
     .containerWrapper {
         background-image: none;

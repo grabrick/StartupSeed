@@ -17,9 +17,7 @@ function MainPage() {
             <AboutInfo />
             <AboutProject />
             <Registration />
-            {/*<Slider />
-            <Submit />
-            <Footer /> */}
+            <Footer />
         </>
     );
 }

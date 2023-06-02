@@ -12,7 +12,7 @@ function Footer() {
     <footer className={m.container}>
       <div className={m.containerWrapper}>
         <div className={m.infoWrapp}>
-            <img className={m.logo} src={Logo} alt="" />
+          <img className={m.logo} src={Logo} alt="" />
           <div className={m.textWrapper}>
             <h3 className={m.title}>О проекте</h3>
             <span className={m.text}>
@@ -44,11 +44,13 @@ function Footer() {
             <p className={m.numbMail}>frolenkov.d@internet.ru</p>
           </div>
           <button className={m.button}>Оставить заявку</button>
-          <p className={m.numbText}>Следи за нами в соц сетях:</p>
-          <div className={m.socWrapper}>
-            <img className={m.image} src={Telega} alt="" />
-            <img className={m.image} src={VK} alt="" />
-            <img className={m.image}  src={Insta} alt="" />
+          <div className={m.socWrap}>
+            <p className={m.numbText}>Следи за нами в соц сетях:</p>
+            <div className={m.socWrapper}>
+              <img className={m.image} src={Telega} alt="" />
+              <img className={m.image} src={VK} alt="" />
+              <img className={m.image} src={Insta} alt="" />
+            </div>
           </div>
         </div>
       </div>
