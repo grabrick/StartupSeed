@@ -1,0 +1,329 @@
+.container {
+    max-width: 100%;
+    /* width: 1376px; */
+}
+
+.containerwrapper {
+    background-image: url(../../assets/images/384\ 1.svg);
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    padding-bottom: 150px;
+    max-width: 1920px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formWrapper {
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+
+.title {
+    margin: 0 0 0 420px;
+}
+
+.formContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar1 {
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.avatar1:hover {
+    opacity: .7;
+    transition: .4s ease;
+    background-color: black;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    border: 2px solid #93b633;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.avatar1 input[type="button"] {
+    display: none;
+}
+
+.avatar1:hover input[type="button"] {
+    position: absolute;
+    top: 25px;
+    left: 27px;
+    display: block;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    background-image: url('../../assets/images/camera-2-line.svg'); 
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}
+
+.profilePic {
+    width: 100px;
+    height: 100px; 
+    border-radius: 7px;
+    object-fit: cover;
+}
+
+.avatar1 input[type="file"] {
+    width: 100px;
+    height: 100px; 
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.camera {
+    width: 20px;
+    height: 20px;
+}
+
+.formContent {
+    margin-left: 150px;
+    display: flex;
+}
+
+.jobPostWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputTeam {
+    width: 300px;
+    height: 20px;
+    font-size: 15px;
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid black;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.inputTeam:hover {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.inputTeam:focus {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.input {
+    width: 630px;
+    height: 20px;
+    font-size: 15px;
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid black;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.selector {
+    width: 300px;
+    height: 34px;
+    background-color: transparent;
+}
+
+.buttonAdd {
+    cursor: pointer;
+    position: relative;
+    bottom: 27px;
+    left: 770px;
+    width: 20px;
+    height: 20px;
+}
+
+.skillsInput {
+    width: 785px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.skillsInput:hover {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.skillsInput:focus {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.input:hover {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.input:focus {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.inputArea {
+    width: 630px;
+    height: 70px;
+    font-size: 15px;
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid black;
+    padding: 5px;
+    margin: 0;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.inputAreaTeam {
+    width: 785px;
+    height: 70px;
+    font-size: 15px;
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid black;
+    padding: 5px;
+    margin: 0;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.inputAreaTeam:hover {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.inputAreaTeam:focus {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+
+.inputArea:hover {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.inputArea:focus {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.inputErrorArea {
+
+}
+
+.inputErrorTeam {
+    width: 300px;
+    height: 20px;
+    font-size: 15px;
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid red;
+    padding: 5px;
+}
+
+.inputErrorTeam:hover {
+    border: 2px solid red;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(250, 0, 0);
+}
+
+.errorInput {
+    width: 700px;
+    height: 20px;
+    font-size: 15px;
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid red;
+    padding: 5px;
+}
+
+.errorInput:hover {
+    border: 2px solid red;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(250, 0, 0);
+}
+
+.buttonWrapper {
+    display: flex;
+}
+
+.addJobPost {
+    height: 25px;
+    background-color: transparent;
+    margin-right: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+}
+
+.addJobPost:hover {
+    transition: .2s ease;
+    border: 2px solid #93b633;
+}
+
+.buttonSave {
+    height: 25px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+}
+
+.buttonSave:hover {
+    transition: .2s ease;
+    border: 2px solid #93b633;
+}

@@ -111,8 +111,12 @@
         padding: 50px 10px 10px 10px;
     }
 
-    .element {
-        min-width: 375px;
+    .element:nth-child(1) {
+        width: 365px;
+    }
+
+    .element:nth-child(2) {
+        width: 350px;
     }
 
     .titleWrapp {
@@ -127,12 +131,19 @@
 
 @media screen and (max-width: 1024px) {
     .element {
-        max-width: 295px;
+        width: 295px;
+    }
+
+    .element:nth-child(1) {
+        width: 295px;
+    }
+
+    .element:nth-child(2) {
+        width: 295px;
     }
 
     .wrapper {
         display: flex;
-        justify-content: space-between;
         flex-wrap: wrap;
     }
 
@@ -149,7 +160,7 @@
     }
 
     .textTitle {
-        font-size: 70px;
+        font-size: 60px;
         height: 70px;
     }
 }
@@ -210,7 +221,7 @@
     
     .element {
         border: 1px solid #D0FF49;
-        width: 350px;
+        max-width: 330px;
         border-radius: 7px;
     }
     
@@ -251,10 +262,6 @@
         font-size: 50px;
         line-height: 130.9%;
         color: #D0FF49;
-    }
-    
-    .elementWrapper {
-        margin-left: 33px;
     }
 }
 
@@ -358,6 +365,6 @@
     }
     
     .elementWrapper {
-        margin-left: 33px;
+        margin-left: 0;
     }
 }

@@ -229,7 +229,6 @@ function PersonalForm() {
                 <button
                   type="submit"
                   className="popup__button_register-save1"
-                  name="submit"
                 >
                   Сохранить
                 </button>

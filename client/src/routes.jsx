@@ -6,6 +6,8 @@ import ModifiedMainPage from "./Pages/AuthMainPage/AuthMainPage";
 import MainProfile from "./Pages/MainProfile/MainProfile";
 import EditPages from "./Pages/EditPages/EditPages";
 import MainSettings from "./Pages/MainSettings/MainSettings";
+import MainProject from "./Pages/MainProject/MainProject";
+import MainCreateProject from "./Pages/MainCreateProject/MainCreateProject";
 
 function useRoutes(isAuthticated) {
   if (isAuthticated) {
@@ -15,7 +17,10 @@ function useRoutes(isAuthticated) {
           <Route path="/home" element={<ModifiedMainPage />} />
           <Route path="/profile" element={<MainProfile />} />
           <Route path="/profile/edit" element={<EditPages />} />
+          <Route path="/profile/project" element={<MainProject />} />
+          <Route path="/profile/create" element={<MainCreateProject />} />
           <Route path="/profile/settings" element={<MainSettings />} />
+
 
           {/* --------- Redirect------- */}
         <Route path="/" element={<Navigate to="/home" replace />} />

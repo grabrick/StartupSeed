@@ -53,7 +53,7 @@ function NavBar(props) {
               </NavLink>
             </button>
           </NavLink>
-          <NavLink className={m.buttonLink} to="">
+          <NavLink className={m.buttonLink} to="/profile/project">
             <button className={show === "Project" ? activeColor : inactiveColor} onClick={handleProjectClick}>
               <div className={m.btnWrapp}>
                 <img className={m.image} src={cases} alt="" />

@@ -2,6 +2,7 @@ import m from "./ProfessionalForm.module.css";
 import React, { useState } from "react";
 import "./ProfessionalForm.css";
 import closeIcn from "../../../assets/images/close-line.svg";
+import addIcn from "../../../assets/images/add-line.svg"
 import { Field, Form } from "react-final-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addTag, removeTag } from "../../../redux/slices/skillsSlice";
@@ -41,6 +42,14 @@ function ProfessionalForm() {
     setSkills([])
     setForm({ skills: "" })
   };
+
+  const clickAddTag = () => {
+    if (!form.skills.trim()) return;
+    setSkills([...skills, form.skills])
+    addTags([...skills, form.skills])
+    setSkills([])
+    setForm({ skills: "" })
+  }
 
   const validate = (e) => {
     const errors = {};
@@ -169,6 +178,7 @@ function ProfessionalForm() {
                   <label className="text-field__label-reg2 text-lable2">
                     Навыки
                   </label>
+                    <img src={addIcn} className={m.buttonAdd} onClick={() => clickAddTag()} alt="" />
                 </div>
                 <div className={m.tagsWrapper}>
                     {data.map((tag, i) => (

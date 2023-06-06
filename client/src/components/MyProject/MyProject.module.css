@@ -1,0 +1,262 @@
+.container {
+    max-width: 100%;
+    /* width: 1376px; */
+}
+
+.containerwrapper {
+    background-image: url(../../assets/images/384\ 1.svg);
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    padding-bottom: 150px;
+    max-width: 1920px;
+}
+
+.title {
+    width: 1096px;
+    font-weight: 700;
+    font-size: 36px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin: 0 0 30px 385px;
+}
+
+.image {
+    width: 24px;
+    height: 24px;
+}
+
+.editPen {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.bar {
+    width: 210px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    cursor: pointer;
+    text-decoration: none;
+    height: 30px;
+    width: 210px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnWrapp {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.span {
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.button:nth-last-child(1) {
+    margin-bottom: 0px;
+}
+
+.selector {
+    width: 210px;
+    margin: 28px 0;
+}
+
+.avatar {
+    border: 2px solid black;
+    border-radius: 100px;
+    width: 124px;
+    height: 124px;
+    object-fit: cover;
+}
+
+.tagsWrapper {
+    display: flex;
+    overflow-wrap: break-word;
+}
+
+.postTitle {
+    margin: 0;
+    margin-top: 30px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.eduTitle {
+    margin: 0;
+    margin-top: 30px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.tags {
+    background-color: silver;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: default;
+}
+
+.tag {
+    font-family: 'Montserrat';
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.postLevel {
+    width: 60px;
+}
+
+.personalInfo {
+    margin-bottom: 50px;
+}
+
+.wrapper {
+    display: flex;
+    grid-column-gap: 50px;
+    justify-content: center;
+}
+
+.profileWrapp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 210px;
+    height: 241px;
+}
+
+.littleWrapp {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.genderText {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    margin: 0;
+}
+
+.location {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    margin: 0;
+}
+
+.infoBar {
+    width: 838px;
+    margin-right: 54px;
+    display: flex;
+    flex-direction: column;
+}
+
+.persWrapp {
+    margin-bottom: 25px;
+    border-radius: 15px;
+    padding: 20px;
+    width: 838px;
+    height: 200px;
+    border: 2px solid black;
+}
+
+.expWrapp {
+    margin-bottom: 25px;
+    border-radius: 15px;
+    padding: 20px;
+    width: 838px;
+    min-height: auto;
+    border: 2px solid black;
+}
+
+.progress {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+.date {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+}
+
+.companyWrapp {
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+.instWrapp {
+    margin: 0;
+}
+
+.aboutInfo {
+    margin-top: 20px;
+}
+
+.aboutText {
+    
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+.infoTitle {
+    margin: 0;
+}
+
+.name {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.createBtn {
+    cursor: pointer;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1.5px solid black;
+}
+
+.createBtn:hover {
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1.5px solid #93B633;
+}
+
+.warningTitle {
+    font-family: 'Montserrat';
+    font-size: 20px;
+}
+
+.warningInfo {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
