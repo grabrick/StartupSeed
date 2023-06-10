@@ -8,6 +8,8 @@ import EditPages from "./Pages/EditPages/EditPages";
 import MainSettings from "./Pages/MainSettings/MainSettings";
 import MainProject from "./Pages/MainProject/MainProject";
 import MainCreateProject from "./Pages/MainCreateProject/MainCreateProject";
+import MainFindProject from "./Pages/MainFindProject/MainFindProject";
+import HomeSpecialists from "./Pages/HomeSpecialists/HomeSpecialists";
 
 function useRoutes(isAuthticated) {
   if (isAuthticated) {
@@ -15,7 +17,9 @@ function useRoutes(isAuthticated) {
       <div className="container">
         <Routes>
           <Route path="/home" element={<ModifiedMainPage />} />
+          <Route path="/project" element={<MainFindProject />} />
           <Route path="/profile" element={<MainProfile />} />
+          <Route path="/specialists" element={<HomeSpecialists />} />
           <Route path="/profile/edit" element={<EditPages />} />
           <Route path="/profile/project" element={<MainProject />} />
           <Route path="/profile/create" element={<MainCreateProject />} />

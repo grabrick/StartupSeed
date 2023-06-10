@@ -14,8 +14,8 @@ function ModifiedHeader() {
           </NavLink>
 
           <div className={m.wrapper}>
-            <NavLink className={m.link}>Проекты</NavLink>
-            <NavLink className={m.link}>Специалисты</NavLink>
+            <NavLink to="/project" className={m.link}>Проекты</NavLink>
+            <NavLink to="/specialists" className={m.link}>Специалисты</NavLink>
           </div>
         </div>
 

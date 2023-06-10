@@ -26,13 +26,10 @@ function CreateProject() {
     skills: [],
   });
   const [skills, setSkills] = useState([]);
-  const [formID, setformID] = useState({
-    id: ''  
-  })
   const data = useSelector((state) => state.project.projectSkills);
   const dispatch = useDispatch();
-  const addTags = (items, formId) => {
-    dispatch(addTag({items, formId}));
+  const addTags = (items) => {
+    dispatch(addTag(items));
   };
   const removeTags = (i, formId) => {
     dispatch(removeTag(i, formId));
@@ -49,7 +46,7 @@ function CreateProject() {
     setSkills([...skills, value]);
     // addTags({...skills, skills: form.skills}, formID);
     // addTags([...skills], formID);
-    addTags(skills, formID);
+    addTags(...skills, form.skills);
     setSkills([]);
     setForm({ skills: "" });
   };
@@ -89,7 +86,6 @@ function CreateProject() {
 
     return errors;
   };
-  console.log(data);
   const onSubmit = async (value) => {
     console.log(value);
     axios
@@ -128,11 +124,11 @@ function CreateProject() {
               <form className={m.form} onSubmit={handleSubmit}>
                 <div className={m.formWrapper}>
                   <div className={m.avatar1}>
-                    <img
+                    {/* <img
                       className={m.profilePic}
                       src={data ? image?.image : data.more?.pers?.profilePic}
                       alt=""
-                    />
+                    /> */}
                     <input type="button" className={m.cameraBtn} />
                     <input
                       className={m.camera}
@@ -187,8 +183,7 @@ function CreateProject() {
                   <FieldArray name="projectPost">
                     {({ fields }) =>
                       fields.map((name, index) => (
-                        <div key={name} className={m.formWrapper}>
-                          {setformID(index)}
+                        <div key={index} className={m.formWrapper}>
                           <div className={m.jobPostWrapper}>
                             <Field name={`${name}.jobPost`}>
                               {({ input, meta }) => (
@@ -276,7 +271,13 @@ function CreateProject() {
                           <div className={m.tagsWrapper}>
                             {data.map((tag, i) => (
                               <div key={i} className={m.tags}>
-                                <span className={m.tag}>{tag.items[0].skills}</span>
+                                {/* <span className={m.tag}>{tag.skills}</span> */}
+                                {/* <span className={m.tag}>{tag[1].skills}</span> */}
+                                {
+                                  // tag[1].skills
+                                  console.log(tag)
+                                  // console.log(index === tag[0].id)
+                                }
                                 <img
                                   className={m.tagBtn}
                                   onClick={() => removeTags(i)}

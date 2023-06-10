@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUUID } from '../../assets/utils/getUUID';
 
 const initialState = {
   projectSkills: []
@@ -21,19 +22,8 @@ const projectSkillsSlice = createSlice({
     getSkills(state, actions) {
       state.projectSkills = actions.payload;
     },
-    // addTag(state, actions) {
-    //   const value = actions.payload
-    //   state.projectSkills.push(...value.items)
-    // },
-    addTag: (state, action) => {
-      const newItem = action.payload;
-      const existingItemIndex = state.projectSkills.findIndex(item => item.formId === newItem.formId);
-
-      if (existingItemIndex !== -1) {
-        state[existingItemIndex] = newItem;
-      } else {
-        state.projectSkills.push(newItem);
-      }
+    addTag(state, actions) {
+      state.projectSkills.push({id: getUUID(), skills: actions.payload})
     },
     removeTag(state, actions) {
       const { formId, index } = actions.payload;

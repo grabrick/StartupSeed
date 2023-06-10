@@ -1,0 +1,82 @@
+.container {
+    max-width: 100%;
+    /* width: 1376px; */
+}
+
+.containerwrapper {
+    background-image: url(../../assets/images/384\ 1.svg);
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    padding-bottom: 150px;
+    max-width: 1920px;
+}
+
+.title {
+    width: 940px;
+    font-weight: 700;
+    font-size: 36px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    /* margin: 0 0 30px 385px; */
+}
+
+.navbarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbarWrapper {
+    margin: 0 auto;
+    display: flex;
+    width: 1060px;
+    height: 30px;
+    justify-content: space-evenly;
+}
+
+.findInput {
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-family: 'Montserrat';
+    font-size: 12px;
+    padding: 0 10px;
+    height: 28px;
+}
+
+.findInput:hover {
+    border: 1px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.findInput:focus {
+    border: 1px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.selector {
+    width: 180px;
+    height: 30px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.findButton {
+    width: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #CFFF49;
+    border: none;
+    height: 30px;
+}
+
+.createButton {
+    width: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #CFFF49;
+    border: none;
+    height: 30px;
+}
