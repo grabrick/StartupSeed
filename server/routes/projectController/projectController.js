@@ -22,7 +22,7 @@ class projectController {
                 // ...post,
                 // skills: [...post.skills, ...skills],
                 ...post,
-                skills: [...skills]
+                value: [...skills]
             }));
             
             const project = new Project({
