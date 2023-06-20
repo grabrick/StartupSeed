@@ -1,13 +1,16 @@
-import m from "./CreateProject.module.css";
+import m from "./EditProject.module.css";
 import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
 import { Field, Form } from "react-final-form";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useState } from "react";
-import { onAdd } from "../../redux/slices/createProjectSlice";
-import PositionForm from "../Form/PositionForm/PositionForm";
+import { useEffect, useState } from "react";
+import { onAdd } from "../../redux/slices/userSlice";
+import { getProject } from "../../redux/slices/userSlice";
+import EditPositionForm from "../Form/EditPositionForm/EditPositionForm";
 
-function CreateProject() {
+function EditProject() {
+  const currentLink = window.location.href;
+  const findProjectID = currentLink.toString().slice(38, 62);
   const normalInput = `${m.input}`;
   const errorInput = `${m.inputError}`;
   const normalInputArea = `${m.inputArea}`;
@@ -15,12 +18,35 @@ function CreateProject() {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const [image, setImage] = useState();
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const data = useSelector((state) => state.createProject.projectPosition);
-
+  const project = useSelector((state) => state.users.myProject);
   const addForm = () => {
-    dispath(onAdd());
+    dispatch(onAdd(findProjectID));
   };
+
+  const Project = (items) => {
+    dispatch(getProject(items));
+  };
+
+  useEffect(() => {
+    axios
+      .get(`/api/${userId}/project`)
+      .then((items) => {
+        Project(items.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const findCurrentObject = project?.find(
+    (object) => object._id === findProjectID
+  );
+
+  // const findCurrentObject = []
+
 
   const converter = (e) => {
     let reader = new FileReader();
@@ -68,7 +94,7 @@ function CreateProject() {
     <div className={m.container}>
       <div className={m.containerwrapper}>
         <ModifiedHeader />
-        <h1 className={m.title}>Создать проект</h1>
+        <h1 className={m.title}>Редактирование</h1>
         <div className={m.wrapper}>
           <Form
             onSubmit={onSubmit}
@@ -79,7 +105,11 @@ function CreateProject() {
                   <div className={m.avatar1}>
                     <img
                       className={m.profilePic}
-                      src={data ? image?.image : data.more?.pers?.profilePic}
+                      src={
+                        findCurrentObject
+                          ? image?.image
+                          : findCurrentObject?.projectImage
+                      }
                       alt=""
                     />
                     <input type="button" className={m.cameraBtn} />
@@ -133,8 +163,12 @@ function CreateProject() {
                 </div>
                 <div className={m.wrap}>
                   <p className={m.text}>Команда проекта</p>
-                  {data.map((form, index) => (
-                    <PositionForm items={form} key={form.id} formIndex={index + 1} />
+                  {findCurrentObject?.projectPost?.map((form, index) => (
+                    <EditPositionForm
+                      items={form}
+                      key={form.id}
+                      formIndex={index + 1}
+                    />
                   ))}
                   <div className={m.buttonWrapper}>
                     <button
@@ -158,4 +192,4 @@ function CreateProject() {
   );
 }
 
-export default CreateProject;
+export default EditProject;

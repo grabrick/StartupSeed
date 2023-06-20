@@ -1,4 +1,4 @@
-import m from "./PositionForm.module.css";
+import m from "./EditPositionForm.module.css";
 import addIcn from "../../../assets/images/add-line.svg";
 import closeIcn from "../../../assets/images/close-line.svg";
 import { useDispatch } from "react-redux";
@@ -9,9 +9,9 @@ import {
   addText,
   deletePosition,
   removeTag,
-} from "../../../redux/slices/createProjectSlice";
+} from "../../../redux/slices/userSlice";
 
-function PositionForm(items) {
+function EditPositionForm(items) {
   const normalInputTeam = `${m.inputTeam}`;
   const errorInputTeam = `${m.inputErrorTeam}`;
   const normalInputAreaTeam = `${m.inputAreaTeam}`;
@@ -203,4 +203,4 @@ function PositionForm(items) {
   );
 }
 
-export default PositionForm;
+export default EditPositionForm;

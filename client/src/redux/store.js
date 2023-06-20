@@ -3,14 +3,14 @@ import form from "./slices/formSlice"
 import users from "./slices/userSlice";
 import popup from "./slices/popupSlice"
 import skills from "./slices/skillsSlice"
-import project from "./slices/projectPositionSlice"
+import createProject from "./slices/createProjectSlice"
 
 export const store = configureStore({
   reducer: {
     form,
     popup,
     skills,
-    project,
+    createProject,
     users,
   },
 })

@@ -1,0 +1,47 @@
+.container {
+    max-width: 100%;
+}
+
+.wrapper {
+    border: 2px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    max-width: 838px;
+    display: flex;
+    cursor: pointer;
+}
+
+.wrapper:hover {
+    border: 2px solid #93B633;
+    outline: 0;
+    transition: .2s ease;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.avatar {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+}
+
+.titleWrapper {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.editButton {
+    width: 100px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.editButton:hover {
+    transition: .2s ease;
+    border: 2px solid #93B633;
+}

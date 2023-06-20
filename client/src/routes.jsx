@@ -10,6 +10,7 @@ import MainProject from "./Pages/MainProject/MainProject";
 import MainCreateProject from "./Pages/MainCreateProject/MainCreateProject";
 import MainFindProject from "./Pages/MainFindProject/MainFindProject";
 import HomeSpecialists from "./Pages/HomeSpecialists/HomeSpecialists";
+import MainProjectEdit from "./Pages/MainProjectEdit/MainProjectEdit";
 
 function useRoutes(isAuthticated) {
   if (isAuthticated) {
@@ -22,6 +23,7 @@ function useRoutes(isAuthticated) {
           <Route path="/specialists" element={<HomeSpecialists />} />
           <Route path="/profile/edit" element={<EditPages />} />
           <Route path="/profile/project" element={<MainProject />} />
+          <Route path="/profile/project/:id/edit" element={<MainProjectEdit />} />
           <Route path="/profile/create" element={<MainCreateProject />} />
           <Route path="/profile/settings" element={<MainSettings />} />
 

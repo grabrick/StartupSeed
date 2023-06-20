@@ -4,8 +4,8 @@ class projectController {
     async getProject(req, res) {
         try {
             const { id } = req.params
-
-            const find = await Project.findById(id)
+            const projectOwner = id
+            const find = await Project.find({projectOwner})
             return res.json(find)
         } catch (e) {
             return res.status(500).json(e)
@@ -15,22 +15,15 @@ class projectController {
     async createProject(req, res) {
         try {
             const { id } = req.params
-            const { projectName, projectImage, projectDesc, projectPost, skills } = req.body
+            const { projectName, projectImage, projectDesc, projectPost} = req.body
             const projectOwner = id
 
-            const updatedProjectPost = projectPost.map((post) => ({
-                // ...post,
-                // skills: [...post.skills, ...skills],
-                ...post,
-                value: [...skills]
-            }));
-            
             const project = new Project({
                 projectName,
                 projectImage,
                 projectDesc,
                 projectOwner,
-                projectPost: updatedProjectPost,
+                projectPost,
             })
 
             await project.save()

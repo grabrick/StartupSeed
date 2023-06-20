@@ -5,11 +5,11 @@ const initialState = {
   projectPosition: []
 };
 
-const projectPositionSlice = createSlice({
-  name: "projectPosition",
+const createPojectSlice = createSlice({
+  name: "createPoject",
   initialState,
   reducers: {
-    getSkills(state, actions) {
+    getPosition(state, actions) {
       state.projectPosition = actions.payload;
     },
 
@@ -29,13 +29,9 @@ const projectPositionSlice = createSlice({
         return item;
       });
     
-      console.log(updatedProjectPosition);
-      console.log(state.projectPosition);
-    
       return {
         ...state,
         projectPosition: updatedProjectPosition,
-        openPort: false
       };
     },
 
@@ -58,9 +54,9 @@ const projectPositionSlice = createSlice({
         projectPosition: updatedProjectPosition,
       };
     },
-
+    
     onAdd(state, actions) {
-      state.projectPosition.push({ id: getUUID(), jobPost: '', postLevel: '', jobTask: '', skills: [] })
+      state.projectPosition.push({ id: getUUID(), jobPost: '', postLevel: 'Любой', jobTask: '', skills: [] })
     },
 
     deletePosition(state, actions) {
@@ -89,6 +85,6 @@ const projectPositionSlice = createSlice({
   }
 })
 
-export const { getSkills, addText, addTag, removeTag, onAdd, deletePosition } = projectPositionSlice.actions;
+export const { getPosition, addText, addTag, removeTag, onAdd, deletePosition } = createPojectSlice.actions;
 
-export default projectPositionSlice.reducer;
+export default createPojectSlice.reducer;

@@ -7,6 +7,8 @@ const schema = Schema({
     projectDesc: { type: String },
     projectPost: [
         {
+            _id: false,
+            id: {type: String},
             jobPost: { type: String },
             postLevel: { type: String },
             jobTask: { type: String },
