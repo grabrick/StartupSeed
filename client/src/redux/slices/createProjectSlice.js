@@ -21,9 +21,9 @@ const createPojectSlice = createSlice({
         if (item.id === id) {
           return {
             ...item,
-            jobPost: value.jobPost,
-            postLevel: value.postLevel,
-            jobTask: value.jobTask,
+            jobPost: value.jobPost !== undefined ? value.jobPost : item.jobPost,
+            postLevel: value.postLevel !== undefined ? value.postLevel : item.postLevel,
+            jobTask: value.jobTask !== undefined ? value.jobTask : item.jobTask,
           };
         }
         return item;

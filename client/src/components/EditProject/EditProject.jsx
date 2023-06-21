@@ -45,9 +45,6 @@ function EditProject() {
     (object) => object._id === findProjectID
   );
 
-  // const findCurrentObject = []
-
-
   const converter = (e) => {
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -73,12 +70,12 @@ function EditProject() {
 
     return errors;
   };
+
   const onSubmit = async (value) => {
-    console.log(value);
     axios
-      .post(`/api/${userId}/create`, {
+      .put(`/api/${findProjectID}/project/edit`, {
         ...value,
-        projectPost: data,
+        projectPost: findCurrentObject.projectPost,
         projectImage: image?.image,
       })
       .then((response) => {
@@ -163,7 +160,7 @@ function EditProject() {
                 </div>
                 <div className={m.wrap}>
                   <p className={m.text}>Команда проекта</p>
-                  {findCurrentObject?.projectPost?.map((form, index) => (
+                  {findCurrentObject?.projectPost.map((form, index) => (
                     <EditPositionForm
                       items={form}
                       key={form.id}

@@ -142,7 +142,7 @@ class authController {
     async editPerson(req, res) {
         try {
             const { fname, lname, gender, country, hb, city } = req.body;
-            const {id} = req.params
+            const {id} = req.params;
             const update = await User.findByIdAndUpdate(
                 id,
                 {

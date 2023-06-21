@@ -50,7 +50,7 @@ function CreateProject() {
   const onSubmit = async (value) => {
     console.log(value);
     axios
-      .post(`/api/${userId}/create`, {
+      .post(`/api/${userId}/project/create`, {
         ...value,
         projectPost: data,
         projectImage: image?.image,

@@ -20,22 +20,30 @@ const userSlice = createSlice({
     addText(state, actions) {
       const { value, id } = actions.payload;
       console.log({ value, id });
+      const findPosition = state.myProject.find((item) => item)
 
-      const updatedProjectPosition = state.myProject.map(item => {
+      const updatedProjectPosition = findPosition.projectPost.map(item => {
         if (item.id === id) {
-          return {
+          return {   
             ...item,
-            jobPost: value.jobPost,
-            postLevel: value.postLevel,
-            jobTask: value.jobTask,
+            jobPost: value.jobPost !== undefined ? value.jobPost : item.jobPost,
+            postLevel: value.postLevel !== undefined ? value.postLevel : item.postLevel,
+            jobTask: value.jobTask !== undefined ? value.jobTask : item.jobTask,
           };
         }
         return item;
       });
-
       return {
         ...state,
-        myProject: updatedProjectPosition,
+        myProject: state.myProject.map(project => {
+          if (project.id === findPosition.id) {
+            return {
+              ...project,
+              projectPost: updatedProjectPosition,
+            };
+          }
+          return project;
+        }),
       };
     },
 

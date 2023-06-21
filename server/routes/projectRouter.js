@@ -8,8 +8,13 @@ router.get(
 )
 
 router.post(
-    '/:id/create',
+    '/:id/project/create',
     controller.createProject
+)
+
+router.put(
+    '/:id/project/edit',
+    controller.editProject
 )
 
 module.exports = router
