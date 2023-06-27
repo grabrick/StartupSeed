@@ -1,0 +1,64 @@
+.container {
+    max-width: 100%;
+    /* width: 1376px; */
+}
+
+.wrapper {
+    padding-bottom: 150px;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.messengerContainer {
+    height: 700px;
+}
+
+.messengerWrapper {
+    width: 1000px;
+    height: 700px;
+    margin: 0 auto;
+    display: flex;
+    grid-column-gap: 50px;
+}
+
+.userList {
+    border: 1px solid red;
+    width: 400px;
+}
+
+.dialog {
+    height: 630px;
+    border: 2px solid black;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.inputContainer {
+    
+}
+
+.input {
+    width: 550px;
+    height: 20px;
+    resize: none;
+    font-size: 14px;
+    font-family: 'Montserrat';
+    padding: 5px 40px 5px 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.imageWrapper {
+    cursor: pointer;
+    position: relative;
+    left: 565px;
+    bottom: 32px;
+}
+
+.sendImage {
+    cursor: pointer;
+}
+
+.dialogContainer {
+    width: 600px;
+}

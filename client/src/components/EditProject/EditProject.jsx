@@ -19,7 +19,6 @@ function EditProject() {
   const userId = ID.userID;
   const [image, setImage] = useState();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.createProject.projectPosition);
   const project = useSelector((state) => state.users.myProject);
   const addForm = () => {
     dispatch(onAdd(findProjectID));

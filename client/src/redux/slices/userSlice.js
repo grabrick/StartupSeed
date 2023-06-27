@@ -3,7 +3,7 @@ import { getUUID } from "../../assets/utils/getUUID";
 
 const initialState = {
   user: [],
-  myProject: []
+  myProject: [],
 };
 
 const userSlice = createSlice({
@@ -112,23 +112,6 @@ const userSlice = createSlice({
         myProject: updatedProjects,
       };
     },
-
-    // removeTag(state, actions) {
-    //   const { index, formID } = actions.payload;
-    //   console.log(index, formID);
-    //   const findPosition = state.myProject.find((item) => {
-    //     return item
-    //   })
-    //   const currentID = findPosition.projectPost.find((item) => item.id === formID)
-    //   if (currentID.id === formID) {
-    //     const positionIndex = findPosition.projectPost.findIndex((item) => item.id === formID);
-    //     console.log(positionIndex);
-
-    //     if (positionIndex !== -1) {
-    //       findPosition.projectPost[positionIndex].skills.splice(index, 1);
-    //     }
-    //   }
-    // }
 
     removeTag(state, actions) {
       const { index, formID } = actions.payload;

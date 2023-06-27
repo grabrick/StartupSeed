@@ -1,0 +1,18 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    width: 890px;
+}
+
+.nav {
+    display: flex;
+}
+
+.ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    align-items: center;
+}

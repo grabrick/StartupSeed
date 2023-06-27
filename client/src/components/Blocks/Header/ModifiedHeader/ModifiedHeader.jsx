@@ -14,13 +14,19 @@ function ModifiedHeader() {
           </NavLink>
 
           <div className={m.wrapper}>
-            <NavLink to="/project" className={m.link}>Проекты</NavLink>
-            <NavLink to="/specialists" className={m.link}>Специалисты</NavLink>
+            <NavLink to="/project" className={m.link}>
+              Проекты
+            </NavLink>
+            <NavLink to="/specialists" className={m.link}>
+              Специалисты
+            </NavLink>
           </div>
         </div>
 
         <div className={m.wrapper}>
-          <img className={m.image} src={message} alt="" />
+          <NavLink to="/messenger">
+            <img className={m.image} src={message} alt="" />
+          </NavLink>
           <NavLink to="/profile">
             <img className={m.image} src={profile} alt="" />
           </NavLink>

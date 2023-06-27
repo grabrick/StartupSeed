@@ -4,6 +4,7 @@ import users from "./slices/userSlice";
 import popup from "./slices/popupSlice"
 import skills from "./slices/skillsSlice"
 import createProject from "./slices/createProjectSlice"
+import pagination from "./slices/paginationSlice"
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     skills,
     createProject,
     users,
+    pagination,
   },
 })

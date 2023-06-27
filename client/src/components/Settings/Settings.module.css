@@ -5,8 +5,6 @@
 }
 
 .containerWrapper {
-    background-image: url(../../assets/images/384\ 1.svg);
-    background-repeat: no-repeat;
     margin: 0 auto;
     min-height: 100%;
     max-width: 1920px;

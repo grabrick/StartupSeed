@@ -34,6 +34,11 @@ router.put(
 // )
 
 router.get(
+    '/:id/getAll',
+    controller.getAllPerson
+)
+
+router.get(
     '/:id/get',
     controller.getPerson
 )

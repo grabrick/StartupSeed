@@ -109,6 +109,30 @@ class authController {
 
     // Form controllers //
 
+    async getAllPerson(req, res) {
+        try {
+          const { id } = req.params;
+          const perPage = parseInt(req.query.perPage) || 10; // Значение по умолчанию: 10
+          const page = parseInt(req.query.page) || 1; // Значение по умолчанию: 1
+      
+          const skip = (page - 1) * perPage;
+      
+          const count = await User.countDocuments({_id: { $ne: id }});
+          const totalPages = Math.ceil(count / perPage);
+      
+          const find = await User.find({_id: { $ne: id }}).skip(skip).limit(perPage);
+      
+          return res.json({
+            data: find,
+            totalPages: totalPages,
+            currentPage: page,
+            perPage: perPage
+          });
+        } catch (e) {
+          return res.status(500).json(e);
+        }
+      }
+
     async getPerson(req, res) {
         try {
             const {id} = req.params

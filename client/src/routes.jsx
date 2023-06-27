@@ -11,6 +11,7 @@ import MainCreateProject from "./Pages/MainCreateProject/MainCreateProject";
 import MainFindProject from "./Pages/MainFindProject/MainFindProject";
 import HomeSpecialists from "./Pages/HomeSpecialists/HomeSpecialists";
 import MainProjectEdit from "./Pages/MainProjectEdit/MainProjectEdit";
+import MainMessenger from "./Pages/MainMessenger/MainMessenger";
 
 function useRoutes(isAuthticated) {
   if (isAuthticated) {
@@ -21,6 +22,7 @@ function useRoutes(isAuthticated) {
           <Route path="/project" element={<MainFindProject />} />
           <Route path="/profile" element={<MainProfile />} />
           <Route path="/specialists" element={<HomeSpecialists />} />
+          <Route path="/messenger" element={<MainMessenger />} />
           <Route path="/profile/edit" element={<EditPages />} />
           <Route path="/profile/project" element={<MainProject />} />
           <Route path="/profile/project/:id/edit" element={<MainProjectEdit />} />
