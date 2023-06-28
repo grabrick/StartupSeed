@@ -1,18 +1,27 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
 import m from "./Specialists.module.css";
 import SpecialistsComponent from "./SpecialistsComponent/SpecialistsComponent";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getProject } from "../../redux/slices/userSlice";
+import { setSearchQuery } from "../../redux/slices/paginationSlice";
 import Pagination from "../Pagination/Pagination";
 
 function Specialists({ users }) {
-  console.log(users);
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const dispatch = useDispatch();
+  const allUsers = useSelector((state) => state.pagination.users);
+  const [searchInput, setSearchInput] = useState({
+    input: "",
+    postLevel: "Любой",
+  });
   const [currentPage, setCurrentPage] = useState(1);
+
+  const changeHandler = (event) => {
+    setSearchInput({ ...searchInput, [event.target.name]: event.target.value });
+  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -23,6 +32,26 @@ function Specialists({ users }) {
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
   );
+
+  const handleSearch = () => {
+    const value = {
+      input: searchInput.input,
+      postLevel: searchInput.postLevel,
+    };
+    const { input, postLevel } = value;
+    if (input || postLevel) {
+      const filteredUsers = allUsers.filter((user) => {
+        return user.more.job.post;
+      });
+      dispatch(
+        setSearchQuery({
+          filtered: filteredUsers,
+          input: value.input,
+          postLevel: value.postLevel,
+        })
+      );
+    }
+  };
 
   const Project = (items) => {
     dispatch(getProject(items));
@@ -51,11 +80,16 @@ function Specialists({ users }) {
                 className={m.findInput}
                 placeholder="Должность"
                 type="text"
+                name="input"
+                value={searchInput.input}
+                onChange={changeHandler}
               />
               <select
                 className={m.selector}
                 defaultValue="Любой"
                 name="postLevel"
+                value={searchInput.postLevel}
+                onChange={changeHandler}
               >
                 <option value="Любой">Любой</option>
                 <option value="Junior">Junior</option>
@@ -63,7 +97,9 @@ function Specialists({ users }) {
                 <option value="Senior">Senior</option>
                 <option value="Lead">Lead</option>
               </select>
-              <button className={m.findButton}>Найти</button>
+              <button className={m.findButton} onClick={() => handleSearch()}>
+                Найти
+              </button>
             </div>
 
             <div className={m.usersContainer}>
