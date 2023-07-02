@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 function Messenger() {
   const dispatch = useDispatch();
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState("");
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
 
@@ -30,24 +30,33 @@ function Messenger() {
     <div className={m.container}>
       <div className={m.wrapper}>
         <ModifiedHeader />
-        <div className={m.messengerContainer}>
-          <div className={m.messengerWrapper}>
-            <div className={m.userList}>
+        <div className={m.messengerWrapper}>
+          <div className={m.userList}>
+            {user.map((users) => {
+              return <div></div>;
+            })}
+          </div>
+          <div className={m.dialogContainer}>
+            <div className={m.dialog}>
               {user.map((users) => {
                 return <div></div>;
               })}
             </div>
-            <div className={m.dialogContainer}>
-              <div className={m.dialog}>
-                {user.map((users) => {
-                  return <div></div>;
-                })}
-              </div>
-              <div className={m.inputContainer}>
-                <textarea className={m.input} name="input" value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={handleKeyDown}></textarea>
-                <div className={m.imageWrapper}>
-                  <img src={sendImage} className={m.sendImage} onClick={() => clickAddTag()} alt="" />
-                </div>
+            <div className={m.inputContainer}>
+              <textarea
+                className={m.input}
+                name="input"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+              ></textarea>
+              <div className={m.imageWrapper}>
+                <img
+                  src={sendImage}
+                  className={m.sendImage}
+                  onClick={() => clickAddTag()}
+                  alt=""
+                />
               </div>
             </div>
           </div>

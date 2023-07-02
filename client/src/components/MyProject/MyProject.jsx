@@ -85,7 +85,7 @@ function MyProject() {
           </div>
           <div className={m.infoBar}>
             <div className={m.warningInfo}>
-              {project ? (
+              {project.length > 0 ? (
                 <div className={m.projectContainer}>
                   <h3 className={m.projectTitle}>Мои проекты</h3>
                   <div className={m.projectWrapper}>

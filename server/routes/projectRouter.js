@@ -17,4 +17,9 @@ router.put(
     controller.editProject
 )
 
+router.get(
+    '/:id/users/project',
+    controller.getUsersProject
+)
+
 module.exports = router

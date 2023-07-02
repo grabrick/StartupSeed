@@ -57,9 +57,9 @@ function CreateProject() {
       })
       .then((response) => {
         if (response.status === 201) {
-          // setTimeout(() => {
-          //   window.location.replace("/profile/project");
-          // }, 500);
+          setTimeout(() => {
+            window.location.replace("/profile/project");
+          }, 500);
         }
       });
   };
