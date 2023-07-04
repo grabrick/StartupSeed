@@ -5,8 +5,24 @@ const schema = Schema({
     lname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    phoneNumber: {type: String},
-    timeZone: {type: String},
+    phoneNumber: { type: String },
+    timeZone: { type: String },
+    favorites: {
+        users: [
+            {
+                _id: false,
+                userID: {type: String},
+                isFavorite: {type: Boolean}
+            }
+        ],
+        project: [
+            {
+                _id: false,
+                projectID: {type: String},
+                isFavorite: {type: Boolean}
+            }
+        ],
+    },
     more: {
         pers: {
             gender: { type: String },
@@ -45,7 +61,7 @@ const schema = Schema({
         },
         about: {
             aboutMe: { type: String }
-        }
+        },
     }
 })
 

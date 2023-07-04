@@ -31,7 +31,7 @@ function WatchProjectPage() {
   return (
     <div className="content">
       <div className="wrapper">
-        <WatchProject items={currentProject} />
+        <WatchProject items={currentProject} projectId={findProjectID} />
       </div>
       <Footer />
     </div>

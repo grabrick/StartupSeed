@@ -2,7 +2,7 @@ import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
 import PositionProject from "./PositionProject/PositionProject";
 import m from "./WatchProject.module.css";
 
-function WatchProject({ items }) {
+function WatchProject({ items, projectId }) {
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
@@ -27,7 +27,7 @@ function WatchProject({ items }) {
                 <div className={m.positionWrapper}>
                     <h2 className={m.posTitle}>Открытые позиции</h2>
                     {items?.projectPost?.map((pos) => (
-                        <PositionProject item={pos} />
+                        <PositionProject item={pos} projectId={projectId} />
                     ))}
                 </div>
             </div>

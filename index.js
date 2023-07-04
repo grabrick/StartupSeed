@@ -25,6 +25,7 @@ app.use('/api/auth', require('./server/routes/authRouter'))
 app.use('/api', require('./server/routes/verifyRouter'))
 app.use('/api', require('./server/routes/projectRouter'))
 app.use('/api', require('./server/routes/specialistRouter'))
+app.use('/api', require('./server/routes/favoriteRouter'))
 
 // DEPLOY //
 // app.use('/auth', require('./server/routes/authRouter'))

@@ -3,7 +3,7 @@
 }
 
 .wrapper {
-    max-width: 1920px;
+    /* max-width: 1920px; */
 }
 
 .specialistContainer {
@@ -12,6 +12,17 @@
     height: 400px;
     margin: 0 auto 50px auto;
     border-radius: 5px;
+}
+
+.activeWrapper {
+    border: 2px solid #93B633;
+    outline: 0;
+    transition: .2s ease;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+    border-radius: 5px;
+    max-width: 1096px;
+    height: 400px;
+    margin: 0 auto 50px auto;
 }
 
 .specialistWrapper {

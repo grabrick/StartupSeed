@@ -31,7 +31,7 @@ function WatchSpecialistPage() {
   return (
     <div className="content">
       <div className="wrapper">
-        <WatchSpecialist />
+        <WatchSpecialist userID={findProjectID} />
       </div>
       <Footer />
     </div>

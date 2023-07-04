@@ -2,15 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
 import m from "./Specialists.module.css";
 import SpecialistsComponent from "./SpecialistsComponent/SpecialistsComponent";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { getProject } from "../../redux/slices/userSlice";
+import { useState } from "react";
 import { setSearchQuery } from "../../redux/slices/paginationSlice";
 import Pagination from "../Pagination/Pagination";
 
-function Specialists({ users }) {
-  const ID = JSON.parse(localStorage.getItem("userData"));
-  const userId = ID.userID;
+function Specialists({ users, project }) {
+  console.log(project);
+  // const ID = JSON.parse(localStorage.getItem("userData"));
+  // const userId = ID.userID;
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.pagination.users);
   const [searchInput, setSearchInput] = useState({
@@ -53,27 +52,11 @@ function Specialists({ users }) {
     }
   };
 
-  const Project = (items) => {
-    dispatch(getProject(items));
-  };
-
-  useEffect(() => {
-    axios
-      .get(`/api/${userId}/project`)
-      .then((items) => {
-        Project(items.data.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className={m.container}>
       <div className={m.containerwrapper}>
         <ModifiedHeader />
-        {users.length > 0 ? (
+        {project !== undefined ? (
           <div className={m.SpecialistsContainer}>
             <div className={m.navbarWrapper}>
               <input
