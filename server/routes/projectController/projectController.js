@@ -1,5 +1,4 @@
 const Project = require('../../modals/Project')
-const User = require('../../modals/User')
 
 class projectController {
     async getProject(req, res) {

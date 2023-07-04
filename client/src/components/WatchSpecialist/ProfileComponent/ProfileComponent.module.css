@@ -1,0 +1,60 @@
+.wrapper {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    border: 3px solid #CFFF49;
+    margin: 0;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+}
+
+.nameWrapp {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.nameWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.isActive {
+    text-align: center;
+    margin: 0;
+}
+
+.name {
+    font-size: 19px;
+    font-weight: 700;
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin: 0;
+}
+
+.moreInfoWrapper {
+    width: 300px;
+}
+
+.list {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.maleWrapper {
+    display: flex;
+    flex-direction: column;
+}

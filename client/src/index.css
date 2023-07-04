@@ -20,7 +20,7 @@ body {
     background-image: url('./assets/images/384\ 1.svg');
     background-position: top;
     background-repeat: no-repeat;
-    background-size: contain;
+    /* background-size: contain; */
   }
 }
 

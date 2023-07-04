@@ -1,0 +1,51 @@
+.skillsWrapper {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+.tags {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: silver;
+}
+
+.title {
+    font-size: 19px;
+    font-weight: 700;
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin: 0 0 15px 0;
+}
+
+.post {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin: 0;
+}
+
+.postLevel {
+    font-size: 17px;
+    /* font-weight: 700; */
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin: 0;
+}
+
+.lang {
+    font-size: 17px;
+    /* font-weight: 700; */
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin: 0;
+}
+
+.langLevel {
+    font-size: 17px;
+    /* font-weight: 700; */
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin: 0;
+}

@@ -1,26 +1,36 @@
 const bodyParser = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
+
+
 const app = express()
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const cors = require('cors');
+// const io = require('socket.io')(http);
 var port = process.env.PORT
 const PORT = port || 5000
 const MongoUrl = "mongodb+srv://startupseed:fPfsQ4SLYHxbGv2Q@startupseed.rlvehoj.mongodb.net/test"
 
-app.use(bodyParser.json({limit: '50mb', extended: true}))
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}))
+
+
+app.use(bodyParser.json({ limit: '50mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(bodyParser.text({ limit: '200mb' }))
+app.use(cors());
+
+
 
 // Localhost
-// app.use('/api/auth', require('./server/routes/authRouter'))
-// app.use('/api', require('./server/routes/verifyRouter'))
-// app.use('/api', require('./server/routes/projectRouter'))
+app.use('/api/auth', require('./server/routes/authRouter'))
+app.use('/api', require('./server/routes/verifyRouter'))
+app.use('/api', require('./server/routes/projectRouter'))
+app.use('/api', require('./server/routes/specialistRouter'))
 
 // DEPLOY //
-app.use('/auth', require('./server/routes/authRouter'))
-app.use('/', require('./server/routes/verifyRouter'))
-app.use('/', require('./server/routes/projectRouter'))
+// app.use('/auth', require('./server/routes/authRouter'))
+// app.use('/', require('./server/routes/verifyRouter'))
+// app.use('/', require('./server/routes/projectRouter'))
+// app.use('/', require('./server/routes/specialistRouter'))
 
 async function start() {
   try {
@@ -28,9 +38,28 @@ async function start() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-    io.on('connection', (socket) => {console.log('a user connected')});
+    const socketIO = require('socket.io')(http, {
+      cors: {
+        origin: "http://localhost:3000"
+      }
+    });
+
+    //Add this before the app.get() block
+    socketIO.on('connection', (socket) => {
+      console.log(`⚡: ${socket.id} user just connected!`);
+
+      //Listens and logs the message to the console
+      socket.on('sendMessage', (data) => {
+        console.log(data);
+      });
+
+      socket.on('disconnect', () => {
+        console.log('🔥: A user disconnected');
+      });
+    });
+
     http.listen(PORT, () => console.log(`app started, ${PORT}`))
-  } catch(e) {
+  } catch (e) {
     console.log('error', e.message);
     process.exit(1)
   }
