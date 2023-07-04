@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import Footer from "../../components/Blocks/Footer/Footer";
 import WatchSpecialist from "../../components/WatchSpecialist/WatchSpecialist";

@@ -7,6 +7,11 @@ router.get(
     controller.getProject
 )
 
+router.get(
+    '/get/currentProject/:id',
+    controller.getCurrentProject
+)
+
 router.post(
     '/:id/project/create',
     controller.createProject

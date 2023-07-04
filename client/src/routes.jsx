@@ -13,6 +13,7 @@ import HomeSpecialists from "./Pages/HomeSpecialists/HomeSpecialists";
 import MainProjectEdit from "./Pages/MainProjectEdit/MainProjectEdit";
 import MainMessenger from "./Pages/MainMessenger/MainMessenger";
 import WatchSpecialistPage from "./Pages/WatchSpecialistPage/WatchSpecialistPage";
+import WatchProjectPage from "./Pages/WatchProjectPage/WatchProjectPage";
 
 function useRoutes(isAuthticated) {
   if (isAuthticated) {
@@ -21,6 +22,7 @@ function useRoutes(isAuthticated) {
         <Routes>
           <Route path="/home" element={<ModifiedMainPage />} />
           <Route path="/project" element={<MainFindProject />} />
+          <Route path="/project/:id" element={<WatchProjectPage />} />
           <Route path="/profile" element={<MainProfile />} />
           <Route path="/specialists" element={<HomeSpecialists />} />
           <Route path="/specialist/:id" element={<WatchSpecialistPage />} />

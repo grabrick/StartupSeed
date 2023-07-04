@@ -1,0 +1,74 @@
+.container {
+    padding-bottom: 20px;
+}
+
+.wrapper {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.postTitle {
+    margin: 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid black;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'Montserrat';
+    font-style: normal;
+}
+
+.postDesc {
+    margin: 0;
+    padding: 15px 0;
+    overflow-wrap: break-word;
+    border-bottom: 2px solid black;
+    font-size: 20px;
+    font-family: 'Montserrat';
+    font-style: normal;
+}
+
+.buttonWrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.addMessage {
+    width: 200px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 2px solid black;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Montserrat';
+    font-style: normal;
+}
+
+.addFavorite {
+    width: 200px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 2px solid black;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Montserrat';
+    font-style: normal;
+}
+
+.addFavorite:hover {
+    border: 2px solid #696969;
+    outline: 0;
+    transition: .2s ease;
+    box-shadow: 0 0 0 0.1rem rgb(115, 115, 115);
+}
+
+.addMessage:hover {
+    border: 2px solid #93B633;
+    outline: 0;
+    transition: .2s ease;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}

@@ -12,6 +12,16 @@ class projectController {
         }
     }
 
+    async getCurrentProject(req, res) {
+        try {
+            const { id } = req.params
+            const find = await Project.findById(id)
+            return res.json(find)
+        } catch (e) {
+            return res.status(500).json(e)
+        }
+    }
+
     async getUsersProject(req, res) {
         try {
             const { id } = req.params;
