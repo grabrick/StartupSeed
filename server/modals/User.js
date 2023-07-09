@@ -11,15 +11,24 @@ const schema = Schema({
         users: [
             {
                 _id: false,
-                userID: {type: String},
-                isFavorite: {type: Boolean}
+                userID: { type: String, unique: true },
+                fname: { type: String },
+                lname: { type: String },
+                post: { type: String },
+                postLevel: { type: String },
+                profilePic: { type: String },
+                isFavorite: { type: Boolean }
             }
         ],
         project: [
             {
                 _id: false,
-                projectID: {type: String},
-                isFavorite: {type: Boolean}
+                projectID: { type: String, unique: true },
+                projectName: { type: String },
+                jobPost: { type: String },
+                postLevel: { type: String },
+                profilePic: { type: String },
+                isFavorite: { type: Boolean }
             }
         ],
     },

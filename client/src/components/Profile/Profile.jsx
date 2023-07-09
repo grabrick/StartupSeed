@@ -11,7 +11,7 @@ function Profile() {
   const data = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
   const ID = JSON.parse(localStorage.getItem("userData"));
-  const userId = ID.userID;
+  const userId = ID?.userID;
   const User = (items) => {
     dispatch(getUser(items));
   };

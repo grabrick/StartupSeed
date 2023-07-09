@@ -93,7 +93,6 @@ class projectController {
                 },
                 {new: true}
             )
-            console.log(update);
             return res.json(update)
             // return res.send('123')
         } catch (e) {

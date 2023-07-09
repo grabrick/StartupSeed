@@ -11,15 +11,47 @@ function PositionProject({ item, projectId }) {
   const userId = ID.userID;
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.currentProject.isFavorite);
+  const projectData = useSelector(
+    (state) => state.currentProject.currentProject
+  );
+  const findPost = projectData.projectPost.find((items) => items);
   const [value, setValue] = useState({
     projectID: projectId,
+    projectName: projectData.projectName,
+    jobPost: findPost.jobPost,
+    postLevel: findPost.postLevel,
+    profilePic: projectData?.projectImage,
     isFavorite: favorites,
   });
 
-  const upload = () => {
-    const updatedFavorites = !favorites; // Инвертировать текущее значение
-    dispatch(addFavorites(updatedFavorites));
-    axios.put(`/api/${userId}/addProjectFavorites`, { ...value, isFavorite: updatedFavorites });
+  const upload = (updatedFavorites) => {
+    axios
+      .post(`/api/${userId}/addProjectFavorites`, { ...value })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(addFavorites(updatedFavorites));
+        }
+      });
+  };
+
+  const removeFavorite = (updatedFavorites) => {
+    axios
+    .delete(`/api/${userId}/removeFavorites`)
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch(addFavorites(updatedFavorites));
+      }
+    });
+  };
+
+  const toggler = () => {
+    if (favorites === false) {
+      const updatedFavorites = !favorites;
+      upload(updatedFavorites);
+    } else {
+      const updatedFavorites = !favorites;
+      removeFavorite(updatedFavorites);
+    }
   };
 
   return (
@@ -31,7 +63,7 @@ function PositionProject({ item, projectId }) {
         </h2>
         <p className={m.postDesc}>{item?.jobTask}</p>
         <div className={m.buttonWrapper}>
-          <button className={m.addFavorite} onClick={() => upload()}>
+          <button className={m.addFavorite} onClick={() => toggler()}>
             {favorites ? "Убрать из избранного" : "Добавить в избранное"}
           </button>
           <button className={m.addMessage}>Откликнуться</button>

@@ -13,7 +13,7 @@ function WatchProject({ items, projectId }) {
             <div className={m.avatar}>
               <img
                 className={m.image}
-                src={items.more?.pers?.projectImage}
+                src={items.projectImage}
                 alt=""
               />
             </div>
@@ -22,7 +22,7 @@ function WatchProject({ items, projectId }) {
               <p className={m.desc}>{items.projectDesc}</p>
             </div>
           </div>
-          {items?.projectPost ? (
+          {items?.projectPost?.length > 0 ? (
             <div className={m.positionContainer}>
                 <div className={m.positionWrapper}>
                     <h2 className={m.posTitle}>Открытые позиции</h2>
@@ -31,8 +31,12 @@ function WatchProject({ items, projectId }) {
                     ))}
                 </div>
             </div>
-          ) : (
-            ""
+          ) : (   
+            <div className={m.positionContainer}>
+                <div className={m.positionWrapper}>
+                    <h2 className={m.posTitle}>Открытых позиций нет</h2>
+                </div>
+            </div>
           )}
         </div>
       </div>

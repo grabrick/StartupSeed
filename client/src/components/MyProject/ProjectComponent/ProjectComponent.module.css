@@ -26,16 +26,88 @@
     height: 100px;
 }
 
+.popup {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+/* .popupWrapper {
+    position: absolute;
+    bottom: 70px;
+    left: 670px;
+} */
+
+.desc {
+    overflow-wrap: break-word;
+    max-width: 690px;
+    margin: 20px 0 0 15px;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+}
+
+.popupContainerOpen {
+    border: 2px solid #93B633;
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    width: 150px;
+    height: 118px;
+    pointer-events: all;
+    position: absolute;
+    left: -130px;
+    top: 35px;
+    transition: .4s;
+    z-index: 3;
+}
+
+.popupContainerClose {
+    display: none;
+}
+
 .titleWrapper {
     margin-left: 15px;
+    width: 700px;
+    height: 30px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.popupWrapper {
+    /* display: flex;
+    align-items: center; */
+    position: relative;
+}
+
+.popup {
+    padding-bottom: 30px;
+}
+
+.title {
+    margin: 0;
+}
+
+.NavLink {
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    text-decoration: none;
+}
+
+.NavLink:nth-child(3) {
+    border: none;
 }
 
 .editButton {
-    width: 100px;
-    height: 30px;
-    border: 2px solid black;
+    width: 150px;
+    height: 40px;
+    border: none;
     border-radius: 5px;
     background-color: transparent;
     cursor: pointer;
@@ -43,5 +115,5 @@
 
 .editButton:hover {
     transition: .2s ease;
-    border: 2px solid #93B633;
+    color: #93B633;
 }
