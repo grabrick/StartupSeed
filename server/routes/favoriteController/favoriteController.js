@@ -15,64 +15,30 @@ class favoriteController {
         try {
             const { id } = req.params
             const value = req.body;
-            const update = await User.findByIdAndUpdate(
-                id,
-                {
-                    "favorites.users": value
-                },
-                { new: true }
-            )
-            return res.status(200).json(update)
-            // return res.send("dewfw")
+            const userID = value.userID
+            const user = await User.findById(id);
+            const newUser = {
+                userID: value.userID,
+                fname: value.fname,
+                lname: value.lname, 
+                post: value.post, 
+                postLevel: value.postLevel,
+                isFavorite: true
+            };
+
+            const findCopyProject = user.favorites.users
+            if (findCopyProject.userID !== userID) {
+                user.favorites.users.push(newUser);
+                await user.save();
+
+                return res.status(200).json({ message: 'Done!' })
+            } else {
+                return res.status(400).json({ message: 'Проект уже добален' })
+            }
         } catch (e) {
             return res.status(500).json({ message: e })
         }
     }
-
-    // async addProjectFavorite(req, res) {
-    //     try {
-    //         const { id } = req.params
-    //         const value = req.body;
-    //         const projectID = value.projectID
-    //         const update = await User.findByIdAndUpdate(
-    //             id,
-    //             {
-    //                 "favorites.project": value
-    //             },
-    //             { new: true }
-    //         )
-
-    //         if (value.isFavorite === false) {
-    //             const deleter = await User.findByIdAndRemove(projectID)
-    //             // findByIdAndRemove(projectID)
-    //             return console.log(deleter);
-    //             // return res.json(deleter)
-    //         }
-
-    //         return res.status(200).json(update)
-    //     } catch (e) {
-    //         return res.status(500).json({ message: e })
-    //     }
-    // }
-
-    // async addProjectFavorite(req, res) {
-    //     try {
-    //         const { id } = req.params
-    //         const value = req.body;
-    //         const projectID = value.projectID
-    //         const update = await User.findByIdAndUpdate(
-    //             id,
-    //             {
-    //                 "favorites.project": value
-    //             },
-    //             { new: true }
-    //         )
-
-    //         return res.status(200).json(update)
-    //     } catch (e) {
-    //         return res.status(500).json({ message: e })
-    //     }
-    // }
 
     async addProjectFavorite(req, res) {
         try {
@@ -81,6 +47,7 @@ class favoriteController {
             const projectID = value.projectID
             const project = await User.findById(id);
             const newProject = {
+                postID: value.postID,
                 projectID: projectID,
                 projectName: value.projectName,
                 jobPost: value.jobPost,
@@ -110,27 +77,39 @@ class favoriteController {
             const { id } = req.params
             const value = req.body;
             const projectID = value.projectID
-            // const currentProject = await User.findById(id);
+            const updatedProject = await User.findOneAndUpdate(
+                { _id: id },
+                { $pull: { 'favorites.project': { projectID: projectID } } },
+                { new: true }
+            );
 
-            // Находим объекты, где isFavorite равно false по пути favorites.project
-            // const projects = await User.find({ 'favorites.project.projectID': projectID });
-            // const projects = currentProject.favorites.project
-
-            // Удаляем каждый объект, удовлетворяющий условию
-            const projects = await User.find({ 'favorites.project.isFavorite': true });
-
-            // Удаляем каждый объект, удовлетворяющий условию
-            const deletedProjects = [];
-            for (const project of projects) {
-                const index = project.favorites.project.findIndex(p => p.isFavorite === true);
-                if (index !== -1) {
-                    project.favorites.project.splice(index, 1);
-                    const deletedProject = await project.save();
-                    deletedProjects.push(deletedProject);
-                }
+            if (updatedProject) {
+                res.status(200).json({ message: 'Удалено успешно', deletedProject: updatedProject });
+            } else {
+                res.status(404).json({ message: 'Проект не найден' });
             }
+        } catch (e) {
+            return res.status(500).json({ message: 'Произошла ошибка сервера' });
+        }
+    }
 
-            res.status(200).json({ message: 'Удалено успешно', deletedProjects });
+    async deleteUserFavorite(req, res) {
+        try {
+            const { id } = req.params
+            const value = req.body;
+            console.log(value, id);
+            const userID = value.userID
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: id },
+                { $pull: { 'favorites.users': { userID: userID } } },
+                { new: true }
+            );
+
+            if (updatedUser) {
+                res.status(200).json({ message: 'Удалено успешно', deletedProject: updatedUser });
+            } else {
+                res.status(404).json({ message: 'Проект не найден' });
+            }
         } catch (e) {
             return res.status(500).json({ message: 'Произошла ошибка сервера' });
         }

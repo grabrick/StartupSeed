@@ -3,6 +3,7 @@ import PositionProject from "./PositionProject/PositionProject";
 import m from "./WatchProject.module.css";
 
 function WatchProject({ items, projectId }) {
+  console.log(items);
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
@@ -27,7 +28,7 @@ function WatchProject({ items, projectId }) {
                 <div className={m.positionWrapper}>
                     <h2 className={m.posTitle}>Открытые позиции</h2>
                     {items?.projectPost?.map((pos) => (
-                        <PositionProject item={pos} projectId={projectId} />
+                        <PositionProject item={pos} post={items} projectId={projectId} />
                     ))}
                 </div>
             </div>

@@ -1,0 +1,67 @@
+.container {
+    padding: 10px 10px 0 10px;
+    width: 1000px;
+}
+
+.wrapper {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.projectName {
+    margin: 0 0 10px 0;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.post {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 16px;
+    color: #93B633;
+}
+
+.postLevel {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 16px;
+    color: #93B633;
+}
+
+.postWrapper {
+    color: #93B633;
+}
+
+.starImg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.wrapp {
+    display: flex;
+    justify-content: space-between;
+    max-width: 700px;
+}
+
+.textWrapper {
+    width: 700px;
+}

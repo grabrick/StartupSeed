@@ -5,23 +5,36 @@ import './WatchProjectPage.css'
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import WatchProject from "../../components/WatchProject/WatchProject";
-import { getCurrentProject } from "../../redux/slices/currentProject";
+import { getCurrentProject, getFavorite } from "../../redux/slices/currentProjectSlice";
 
 function WatchProjectPage() {
   const currentLink = window.location.href;
   const findProjectID = currentLink.toString().slice(30, 62);
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
   const currentProject = useSelector((state) => state.currentProject.currentProject);
   const dispatch = useDispatch()
   const getProject = (items) => {
     dispatch(getCurrentProject(items));
   };
 
+  const getFavoriteProject = (items) => {
+    dispatch(getFavorite(items));
+  };
+
+  useEffect(() => {
+    axios.get(`/api/${userId}/getFavorite`).then((items) => {
+      getFavoriteProject(items.data.favorites.project)
+      // console.log(items.data.favorites.project);
+    });
+  }, []);
+  
   useEffect(() => {
     axios
     .get(`/api/get/currentProject/${findProjectID}`)
     .then((items) => {
       getProject(items.data)
-      console.log(items.data);
+      // console.log(items.data);
     })
     .catch((e) => {
       console.log(e);

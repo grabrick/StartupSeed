@@ -23,6 +23,7 @@ const schema = Schema({
         project: [
             {
                 _id: false,
+                postID: { type: String },
                 projectID: { type: String, unique: true },
                 projectName: { type: String },
                 jobPost: { type: String },

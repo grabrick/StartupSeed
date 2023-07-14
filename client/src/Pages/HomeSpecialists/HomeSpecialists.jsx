@@ -21,28 +21,12 @@ function HomeSpecialists() {
     // dispatch(setTotalPages(data.totalPages));
     // dispatch(setIsFetching(false));
   }
-
-  const Project = (items) => {
-    dispatch(getProject(items));
-  };
   
   useEffect(() => {
     axios
       .get(`/api/auth/${userId}/getAll?page=${currentPage}&perPage=${usersPerPage}`)
       .then((items) => {
         UpdataData(items.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`/api/${userId}/project`)
-      .then((items) => {
-        Project(items.data);
       })
       .catch((e) => {
         console.log(e);

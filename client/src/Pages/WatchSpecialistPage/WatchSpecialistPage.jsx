@@ -4,24 +4,34 @@ import Footer from "../../components/Blocks/Footer/Footer";
 import WatchSpecialist from "../../components/WatchSpecialist/WatchSpecialist";
 import './WatchSpecialistPage.css'
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { getUser } from "../../redux/slices/currentUser";
+import { useDispatch, useSelector } from "react-redux";
+import { getFavorite, getUser } from "../../redux/slices/currentUser";
 
 function WatchSpecialistPage() {
   const currentLink = window.location.href;
-  const findProjectID = currentLink.toString().slice(33, 62);
-  // console.log(findProjectID);
+  const findUserID = currentLink.toString().slice(33, 62);
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
   const dispatch = useDispatch()
   const getUsers = (items) => {
     dispatch(getUser(items));
   };
+  const getFavoriteProject = (items) => {
+    dispatch(getFavorite(items));
+  };
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
+
+  useEffect(() => {
+    axios.get(`/api/${userId}/getFavorite`).then((items) => {
+      getFavoriteProject(items.data.favorites.users)
+    });
+  }, []);
 
   useEffect(() => {
     axios
-    .get(`/api/get/currentUser/${findProjectID}`)
+    .get(`/api/get/currentUser/${findUserID}`)
     .then((items) => {
       getUsers(items.data)
-      console.log(items.data);
     })
     .catch((e) => {
       console.log(e);
@@ -31,7 +41,7 @@ function WatchSpecialistPage() {
   return (
     <div className="content">
       <div className="wrapper">
-        <WatchSpecialist userID={findProjectID} />
+        <WatchSpecialist userID={findUserID} items={currentUser} />
       </div>
       <Footer />
     </div>

@@ -61,7 +61,7 @@ function NavBar(props) {
               </div>
             </button>
           </NavLink>
-          <NavLink className={m.buttonLink} to="">
+          <NavLink className={m.buttonLink} to="/favorites">
             <button className={show === "Favorite" ? activeColor : inactiveColor} onClick={handleFavoriteClick}>
               <div className={m.btnWrapp}>
                 <img className={m.image} src={star} alt="" />

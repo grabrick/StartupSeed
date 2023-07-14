@@ -14,6 +14,7 @@ import MainProjectEdit from "./Pages/MainProjectEdit/MainProjectEdit";
 import MainMessenger from "./Pages/MainMessenger/MainMessenger";
 import WatchSpecialistPage from "./Pages/WatchSpecialistPage/WatchSpecialistPage";
 import WatchProjectPage from "./Pages/WatchProjectPage/WatchProjectPage";
+import MainFavorite from "./Pages/MainFavorite/MainFavorite";
 
 function useRoutes(isAuthticated) {
   if (isAuthticated) {
@@ -21,6 +22,7 @@ function useRoutes(isAuthticated) {
       <div className="container">
         <Routes>
           <Route path="/home" element={<ModifiedMainPage />} />
+          <Route path="/favorites" element={<MainFavorite />} />
           <Route path="/project" element={<MainFindProject />} />
           <Route path="/project/:id" element={<WatchProjectPage />} />
           <Route path="/profile" element={<MainProfile />} />

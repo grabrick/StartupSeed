@@ -1,62 +1,73 @@
 import { useDispatch, useSelector } from "react-redux";
 import m from "./PositionProject.module.css";
-import { addFavorites } from "../../../redux/slices/currentProject";
+import { addFavoritesProject, getFavorite, removeProjectFavorite } from "../../../redux/slices/currentProjectSlice";
 import axios from "axios";
 import { useState } from "react";
 
-function PositionProject({ item, projectId }) {
+function PositionProject({ item, projectId, post }) {
   const stock = `${m.wrapper}`;
   const isActive = `${m.activeWrapper}`;
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.currentProject.isFavorite);
   const projectData = useSelector(
     (state) => state.currentProject.currentProject
   );
+  const favoriteProject = useSelector(
+    (state) => state.currentProject.favoritesProject
+  );
+  const favorites = favoriteProject.find((items) => items.isFavorite);
   const findPost = projectData.projectPost.find((items) => items);
+  const isCurrentId = post.projectPost.find((items) => items);
+  
   const [value, setValue] = useState({
+    postID: isCurrentId.id,
     projectID: projectId,
     projectName: projectData.projectName,
     jobPost: findPost.jobPost,
     postLevel: findPost.postLevel,
     profilePic: projectData?.projectImage,
-    isFavorite: favorites,
+    isFavorite: true,
   });
 
-  const upload = (updatedFavorites) => {
+  const getFavoriteProject = (items) => {
+    dispatch(getFavorite(items));
+  };
+
+  const upload = () => {
     axios
       .post(`/api/${userId}/addProjectFavorites`, { ...value })
       .then((response) => {
         if (response.status === 200) {
-          dispatch(addFavorites(updatedFavorites));
+          dispatch(addFavoritesProject({ value }));
+          axios.get(`/api/${userId}/getFavorite`).then((items) => {
+            getFavoriteProject(items.data.favorites.project)
+          });
         }
       });
   };
 
-  const removeFavorite = (updatedFavorites) => {
+  const removeFavorite = () => {
     axios
-    .delete(`/api/${userId}/removeFavorites`)
-    .then((response) => {
-      if (response.status === 200) {
-        dispatch(addFavorites(updatedFavorites));
-      }
-    });
+      .put(`/api/${userId}/removeFavorites`, { ...value })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(removeProjectFavorite({ projectID: value.projectID }));
+        }
+      });
   };
 
   const toggler = () => {
-    if (favorites === false) {
-      const updatedFavorites = !favorites;
-      upload(updatedFavorites);
+    if (favorites === undefined) {
+      upload();
     } else {
-      const updatedFavorites = !favorites;
-      removeFavorite(updatedFavorites);
+      removeFavorite();
     }
   };
 
   return (
     <div className={m.container}>
-      <div className={favorites ? isActive : stock}>
+      <div className={item.id === favorites?.postID ? isActive : stock}>
         <h2 className={m.postTitle}>
           {item?.jobPost},{" "}
           <span className={m.postLevel}>{item?.postLevel}</span>
@@ -64,7 +75,9 @@ function PositionProject({ item, projectId }) {
         <p className={m.postDesc}>{item?.jobTask}</p>
         <div className={m.buttonWrapper}>
           <button className={m.addFavorite} onClick={() => toggler()}>
-            {favorites ? "Убрать из избранного" : "Добавить в избранное"}
+            {item.id === favorites?.postID
+              ? "Убрать из избранного"
+              : "Добавить в избранное"}
           </button>
           <button className={m.addMessage}>Откликнуться</button>
         </div>

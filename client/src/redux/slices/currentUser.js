@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     currentUser: [],
-    isFavorite: false
+    favoritesUser: [],
 }
 
 const currentUser = createSlice({
@@ -13,12 +13,33 @@ const currentUser = createSlice({
             state.currentUser = actions.payload
         },
 
-        addFavorites(state, actions) {
-            state.isFavorite = actions.payload
-        }
+        getFavorite(state, actions) {
+            state.favoritesUser = actions.payload
+        },
+
+        addFavoritesUser(state, actions) {
+            const value = actions.payload
+            state.favoritesUser.push({
+                userID: value.userID,
+                fname: value.fname,
+                lname: value.lname,
+                post: value.post,
+                postLevel: value.postLevel,
+                profilePic: value.profilePic,
+                isFavorite: value.isFavorite,
+            })
+        },
+
+        removeUserFavorite(state, actions) {
+            const value = actions.payload
+
+            state.favoritesUser = state.favoritesUser.filter(
+                (user) => user.userID !== value.userID
+            );
+        },
     },
 })
 
 
-export const { getUser, addFavorites } = currentUser.actions;
+export const { getUser, getFavorite, addFavoritesUser, removeUserFavorite } = currentUser.actions;
 export default currentUser.reducer;

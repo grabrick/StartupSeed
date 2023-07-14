@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import m from "./ProjectComponent.module.css";
 
 function ProjectComponent({ items }) {
-  console.log(items);
   return (
     <NavLink className={m.link} to={`/project/${items._id}`}>
       <div className={m.container}>

@@ -6,7 +6,7 @@ import skills from "./slices/skillsSlice"
 import createProject from "./slices/createProjectSlice"
 import pagination from "./slices/paginationSlice"
 import currentUser from "./slices/currentUser";
-import currentProject from "./slices/currentProject";
+import currentProject from "./slices/currentProjectSlice";
 
 export const store = configureStore({
   reducer: {
