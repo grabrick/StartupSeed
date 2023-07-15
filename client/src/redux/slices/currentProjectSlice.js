@@ -32,9 +32,8 @@ const currentProjectSlice = createSlice({
 
         removeProjectFavorite(state, actions) {
             const value = actions.payload
-
             state.favoritesProject = state.favoritesProject.filter(
-                (user) => user.projectID !== value.projectID
+                (user) => user.postID !== value.postID
             );
         },
     },

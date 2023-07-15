@@ -3,7 +3,6 @@ import PositionProject from "./PositionProject/PositionProject";
 import m from "./WatchProject.module.css";
 
 function WatchProject({ items, projectId }) {
-  console.log(items);
   return (
     <div className={m.container}>
       <div className={m.wrapper}>

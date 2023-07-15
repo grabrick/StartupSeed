@@ -253,6 +253,11 @@
     border: 1.5px solid #93B633;
 }
 
+.projectLink {
+    text-decoration: none;
+    color: #93B633;
+}
+
 .warningTitle {
     font-family: 'Montserrat';
     font-size: 20px;

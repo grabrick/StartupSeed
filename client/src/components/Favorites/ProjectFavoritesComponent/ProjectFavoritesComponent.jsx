@@ -1,8 +1,11 @@
 import m from "./ProjectFavoritesComponent.module.css";
 import favorite from "../../../assets/images/star-line.svg";
-import active from "../../../assets/images/star-line-active.svg"
+import active from "../../../assets/images/star-line-active.svg";
+import { useState } from "react";
+import WarningProjectPopup from "../../Popup/WarningProjectPopup/WarningProjectPopup";
 
 function ProjectFavoritesComponent({ projectItems }) {
+  const [isVisible, setIsVisible] = useState(false);
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
@@ -13,7 +16,12 @@ function ProjectFavoritesComponent({ projectItems }) {
           <div className={m.wrapp}>
             <p className={m.projectName}>{projectItems?.projectName}</p>
             <div className={m.buttonWrapper}>
-              <img src={projectItems.isFavorite === true ? active : favorite} className={m.starImg} alt="" />
+              <img
+                src={projectItems.isFavorite === true ? active : favorite}
+                onClick={() => setIsVisible(!isVisible)}
+                className={m.starImg}
+                alt=""
+              />
             </div>
           </div>
           <div className={m.postWrapper}>
@@ -23,6 +31,7 @@ function ProjectFavoritesComponent({ projectItems }) {
           </div>
         </div>
       </div>
+      {isVisible ? <WarningProjectPopup postID={projectItems.postID} close={setIsVisible} /> : ""}
     </div>
   );
 }

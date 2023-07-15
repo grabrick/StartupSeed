@@ -57,6 +57,17 @@
     height: 28px;
 }
 
+.createProject {
+    text-decoration: none;
+    font-family: 'Montserrat';
+    color: #93b633;
+}
+
+.warningWrapper {
+    width: 1000px;
+    margin: 0 auto;
+}
+
 .findInput:hover {
     border: 1px solid #93b633;
     outline: 0;

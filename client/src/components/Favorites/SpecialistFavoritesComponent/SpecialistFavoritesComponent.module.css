@@ -1,6 +1,5 @@
 .container {
     padding: 10px 10px 0 10px;
-    width: 1000px;
 }
 
 .wrapper {
@@ -9,6 +8,16 @@
     border-radius: 10px;
     display: flex;
     gap: 20px;
+}
+
+.wrapp {
+    display: flex;
+    flex-direction: column;
+}
+
+.nameWrapper {
+    display: flex;
+    justify-content: space-between;
 }
 
 .avatar {
@@ -27,6 +36,12 @@
 
 .projectName {
     margin: 0 0 10px 0;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.name {
     font-family: 'Montserrat';
     font-weight: 700;
     font-size: 16px;
@@ -58,10 +73,13 @@
 
 .wrapp {
     display: flex;
-    justify-content: space-between;
-    max-width: 700px;
+    width: 700px;
 }
 
 .textWrapper {
     width: 700px;
+}
+
+.WrapperWrapper {
+    margin-bottom: 10px;
 }

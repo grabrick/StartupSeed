@@ -96,8 +96,11 @@ function MyProject() {
                 </div>
               ) : (
                 <p className={m.warningTitle}>
-                  У вас нет активных проектов. Для их поиска перейдите в раздел
-                  “Проекты” или создайте свой
+                  У вас нет активных проектов. Для их поиска перейдите в раздел{" "}
+                  <NavLink className={m.projectLink} to="/project">
+                    “Проекты”
+                  </NavLink>{" "}
+                  или создайте свой
                 </p>
               )}
               <NavLink className={m.linkWrapper} to="/profile/create">

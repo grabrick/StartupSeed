@@ -5,11 +5,9 @@ import SpecialistsComponent from "./SpecialistsComponent/SpecialistsComponent";
 import { useState } from "react";
 import { setSearchQuery } from "../../redux/slices/paginationSlice";
 import Pagination from "../Pagination/Pagination";
+import { NavLink } from "react-router-dom";
 
-function Specialists({ users, project }) {
-  console.log(project);
-  // const ID = JSON.parse(localStorage.getItem("userData"));
-  // const userId = ID.userID;
+function Specialists({ users }) {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.pagination.users);
   const [searchInput, setSearchInput] = useState({
@@ -56,7 +54,7 @@ function Specialists({ users, project }) {
     <div className={m.container}>
       <div className={m.containerwrapper}>
         <ModifiedHeader />
-        {project !== undefined ? (
+        {users.length > 0 ? (
           <div className={m.SpecialistsContainer}>
             <div className={m.navbarWrapper}>
               <input
@@ -104,11 +102,13 @@ function Specialists({ users, project }) {
           </div>
         ) : (
           <div className={m.warning}>
+            <div className={m.warningWrapper}>
             <h1 className={m.title}>Специалисты</h1>
             <p className={m.text}>
-              Для доступа к специалистам, пожалуйста, создайте свой проект в
-              личном кабинете и добавьте минимум одну позицию специалиста.
+              Для доступа к специалистам, пожалуйста, <NavLink to="/profile/create" className={m.createProject}>создайте свой проект в
+              личном кабинете</NavLink> и добавьте минимум одну позицию специалиста.
             </p>
+            </div>
           </div>
         )}
       </div>

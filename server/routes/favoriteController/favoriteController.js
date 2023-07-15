@@ -76,10 +76,10 @@ class favoriteController {
         try {
             const { id } = req.params
             const value = req.body;
-            const projectID = value.projectID
+            const postID = value.postID
             const updatedProject = await User.findOneAndUpdate(
                 { _id: id },
-                { $pull: { 'favorites.project': { projectID: projectID } } },
+                { $pull: { 'favorites.project': { postID: postID } } },
                 { new: true }
             );
 
@@ -97,7 +97,6 @@ class favoriteController {
         try {
             const { id } = req.params
             const value = req.body;
-            console.log(value, id);
             const userID = value.userID
             const updatedUser = await User.findOneAndUpdate(
                 { _id: id },

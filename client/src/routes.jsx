@@ -9,7 +9,7 @@ import MainSettings from "./Pages/MainSettings/MainSettings";
 import MainProject from "./Pages/MainProject/MainProject";
 import MainCreateProject from "./Pages/MainCreateProject/MainCreateProject";
 import MainFindProject from "./Pages/MainFindProject/MainFindProject";
-import HomeSpecialists from "./Pages/HomeSpecialists/HomeSpecialists";
+import MainSpecialistsPage from "./Pages/MainSpecialistsPage/MainSpecialistsPage";
 import MainProjectEdit from "./Pages/MainProjectEdit/MainProjectEdit";
 import MainMessenger from "./Pages/MainMessenger/MainMessenger";
 import WatchSpecialistPage from "./Pages/WatchSpecialistPage/WatchSpecialistPage";
@@ -26,7 +26,7 @@ function useRoutes(isAuthticated) {
           <Route path="/project" element={<MainFindProject />} />
           <Route path="/project/:id" element={<WatchProjectPage />} />
           <Route path="/profile" element={<MainProfile />} />
-          <Route path="/specialists" element={<HomeSpecialists />} />
+          <Route path="/specialists" element={<MainSpecialistsPage />} />
           <Route path="/specialist/:id" element={<WatchSpecialistPage />} />
           <Route path="/messenger" element={<MainMessenger />} />
           <Route path="/profile/edit" element={<EditPages />} />

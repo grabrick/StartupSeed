@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import m from "./PositionProject.module.css";
-import { addFavoritesProject, getFavorite, removeProjectFavorite } from "../../../redux/slices/currentProjectSlice";
+import {
+  addFavoritesProject,
+  getFavorite,
+  removeProjectFavorite,
+} from "../../../redux/slices/currentProjectSlice";
 import axios from "axios";
 import { useState } from "react";
 
@@ -16,12 +20,15 @@ function PositionProject({ item, projectId, post }) {
   const favoriteProject = useSelector(
     (state) => state.currentProject.favoritesProject
   );
-  const favorites = favoriteProject.find((items) => items.isFavorite);
-  const findPost = projectData.projectPost.find((items) => items);
-  const isCurrentId = post.projectPost.find((items) => items);
-  
-  const [value, setValue] = useState({
-    postID: isCurrentId.id,
+  const findCurrentFavorites = favoriteProject.find(
+    (i) => i.postID === item.id
+  );
+  const findPost = projectData.projectPost.find((items) => items.id === item.id);
+  const currentID = post.projectPost.find((i) => i.id === item.id);
+  const findID = favoriteProject.find(i => i.postID === currentID.id)
+
+  const [value] = useState({
+    postID: item.id,
     projectID: projectId,
     projectName: projectData.projectName,
     jobPost: findPost.jobPost,
@@ -52,22 +59,26 @@ function PositionProject({ item, projectId, post }) {
       .put(`/api/${userId}/removeFavorites`, { ...value })
       .then((response) => {
         if (response.status === 200) {
-          dispatch(removeProjectFavorite({ projectID: value.projectID }));
+          dispatch(removeProjectFavorite({ postID: value.postID }));
         }
       });
   };
 
+  console.log(favoriteProject);
+
   const toggler = () => {
-    if (favorites === undefined) {
+    if (!findID) {
       upload();
-    } else {
+    } else if(findID) {
       removeFavorite();
     }
   };
 
   return (
     <div className={m.container}>
-      <div className={item.id === favorites?.postID ? isActive : stock}>
+      <div
+        className={item.id === findCurrentFavorites?.postID ? isActive : stock}
+      >
         <h2 className={m.postTitle}>
           {item?.jobPost},{" "}
           <span className={m.postLevel}>{item?.postLevel}</span>
@@ -75,7 +86,7 @@ function PositionProject({ item, projectId, post }) {
         <p className={m.postDesc}>{item?.jobTask}</p>
         <div className={m.buttonWrapper}>
           <button className={m.addFavorite} onClick={() => toggler()}>
-            {item.id === favorites?.postID
+            {item.id === findCurrentFavorites?.postID
               ? "Убрать из избранного"
               : "Добавить в избранное"}
           </button>

@@ -7,7 +7,7 @@ import SpecialistFavoritesComponent from "./SpecialistFavoritesComponent/Special
 
 function Favorites({ userData }) {
   const [isProject, setIsProject] = useState("Проекты");
-  console.log(isProject);
+  console.log(userData.favorites);
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
@@ -44,51 +44,135 @@ function Favorites({ userData }) {
               <NavBar currentBtn={"Favorite"} />
             </>
           </div>
-          <div className={m.FavoritesContainer}>
-            <div className={m.buttonWrapper}>
-              {userData.favorites?.project.length > 0 ? (
-                <button
-                  className={m.button}
-                  onClick={() => setIsProject("Проекты")}
-                >
-                  Проекты
-                </button>
+          {userData.favorites?.project.length !== 0 &&
+          userData.favorites?.users.length !== 0 ? (
+            <div className={m.FavoritesContainer}>
+              <div className={m.buttonWrapper}>
+                {userData.favorites?.project.length > 0 ? (
+                  <button
+                    className={m.button}
+                    onClick={() => setIsProject("Проекты")}
+                  >
+                    Проекты
+                  </button>
+                ) : (
+                  ""
+                )}
+                {userData.favorites?.users.length > 0 ? (
+                  <button
+                    className={m.button}
+                    onClick={() => setIsProject("Специалисты")}
+                  >
+                    Специалисты
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+              {userData.favorites?.project.length > 0 &&
+              userData.favorites?.users.length > 0 ? (
+                <p className={m.currentPosition}>
+                  {isProject === "Проекты" ? "Проекты" : "Специалисты"}
+                </p>
               ) : (
                 ""
               )}
-              {userData.favorites?.users.length > 0 ? (
-                <button
-                  className={m.button}
-                  onClick={() => setIsProject("Специалисты")}
-                >
-                  Специалисты
-                </button>
-              ) : (
-                ""
-              )}
+              <div className={m.finder}>
+                {isProject === "Проекты"
+                  ? userData.favorites?.project.map((items) => (
+                      <ProjectFavoritesComponent
+                        key={items.postID}
+                        projectItems={items}
+                      />
+                    ))
+                  : userData.favorites?.users.map((items) => (
+                      <SpecialistFavoritesComponent
+                        key={items.userID}
+                        userItems={items}
+                      />
+                    ))}
+              </div>
             </div>
-            <p className={m.currentPosition}>
-              {isProject === "Проекты" ? "Проекты" : "Специалисты"}
-            </p>
-            <div className={m.finder}>
-              {isProject === "Проекты"
-                ? userData.favorites?.project.map((items) => (
-                    <ProjectFavoritesComponent
-                      key={items.postID}
-                      projectItems={items}
-                    />
-                  ))
-                : ""}
-              {isProject === "Специалисты"
-                ? userData.favorites?.users.map((items) => (
-                    <SpecialistFavoritesComponent
-                      key={items.userID}
-                      userItems={items}
-                    />
-                  ))
-                : ""}
+          ) : (
+            ""
+          )}
+          {/* Only Project */}
+          {userData.favorites?.project.length !== 0 &&
+          userData.favorites?.users.length === 0 ? (
+            <div className={m.FavoritesContainer}>
+              <div className={m.buttonWrapper}>
+                {userData.favorites?.project.length > 0 ? (
+                  <button
+                    className={m.button}
+                    onClick={() => setIsProject("Проекты")}
+                  >
+                    Проекты
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+              <p className={m.currentPosition}>
+                {isProject === "Специалисты" ? "Проекты" : "Специалисты"}
+              </p>
+              <div className={m.finder}>
+                {isProject === "Специалисты"
+                  ? userData.favorites?.project.map((items) => (
+                      <ProjectFavoritesComponent
+                        key={items.postID}
+                        projectItems={items}
+                      />
+                    ))
+                  : userData.favorites?.users.map((items) => (
+                      <SpecialistFavoritesComponent
+                        key={items.userID}
+                        userItems={items}
+                      />
+                    ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
+
+          {/* Only Users */}
+          {userData.favorites?.project.length === 0 &&
+          userData.favorites?.users.length !== 0 ? (
+            <div className={m.FavoritesContainer}>
+              <div className={m.buttonWrapper}>
+                {userData.favorites?.users.length > 0 ? (
+                  <button
+                    className={m.button}
+                    onClick={() => setIsProject("Специалисты")}
+                  >
+                    Специалисты
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+              <p className={m.currentPosition}>
+                {isProject === "Проекты" ? "Специалисты" : "Проекты"}
+              </p>
+              <div className={m.finder}>
+                {isProject === "Проекты"
+                  ? userData.favorites?.users.map((items) => (
+                      <SpecialistFavoritesComponent
+                        key={items.userID}
+                        userItems={items}
+                      />
+                    ))
+                  : userData.favorites?.project.map((items) => (
+                      <ProjectFavoritesComponent
+                        key={items.postID}
+                        projectItems={items}
+                      />
+                    ))}
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
