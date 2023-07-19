@@ -7,7 +7,7 @@ import { setSearchQuery } from "../../redux/slices/paginationSlice";
 import Pagination from "../Pagination/Pagination";
 import { NavLink } from "react-router-dom";
 
-function Specialists({ users }) {
+function Specialists({ users, project }) {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.pagination.users);
   const [searchInput, setSearchInput] = useState({
@@ -54,7 +54,20 @@ function Specialists({ users }) {
     <div className={m.container}>
       <div className={m.containerwrapper}>
         <ModifiedHeader />
-        {users.length > 0 ? (
+        {project.length === 0 ? (
+          <div className={m.warning}>
+            <div className={m.warningWrapper}>
+              <h1 className={m.title}>Специалисты</h1>
+              <p className={m.text}>
+                Для доступа к специалистам, пожалуйста,{" "}
+                <NavLink to="/profile/create" className={m.createProject}>
+                  создайте свой проект в личном кабинете
+                </NavLink>{" "}
+                и добавьте минимум одну позицию специалиста.
+              </p>
+            </div>
+          </div>
+        ) : (
           <div className={m.SpecialistsContainer}>
             <div className={m.navbarWrapper}>
               <input
@@ -99,16 +112,6 @@ function Specialists({ users }) {
             ) : (
               ""
             )}
-          </div>
-        ) : (
-          <div className={m.warning}>
-            <div className={m.warningWrapper}>
-            <h1 className={m.title}>Специалисты</h1>
-            <p className={m.text}>
-              Для доступа к специалистам, пожалуйста, <NavLink to="/profile/create" className={m.createProject}>создайте свой проект в
-              личном кабинете</NavLink> и добавьте минимум одну позицию специалиста.
-            </p>
-            </div>
           </div>
         )}
       </div>

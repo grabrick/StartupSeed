@@ -79,7 +79,7 @@ function WatchSpecialist({ userID, items }) {
     <div className={m.container}>
       <div className={m.wrapper}>
         <ModifiedHeader />
-        <div className={find?.isFavorite === true ? isActive : stock}>
+        <div className={find?.userID === userID ? isActive : stock}>
           <div className={m.specialistWrapper}>
             <div className={m.infoWrapper}>
               <div className={m.profileWindow}>
@@ -91,7 +91,7 @@ function WatchSpecialist({ userID, items }) {
             </div>
             <div className={m.buttonWrapper}>
               <button className={m.addFavorite} onClick={() => toggler()}>
-                {find?.isFavorite === true
+                {find?.userID === userID
                   ? "Убрать из избранного"
                   : "Добавить в избранное"}
               </button>

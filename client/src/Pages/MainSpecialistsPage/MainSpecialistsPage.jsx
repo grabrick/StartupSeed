@@ -5,6 +5,7 @@ import "./MainSpecialistsPage.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsFetching, setTotalPages, getUsers } from "../../redux/slices/paginationSlice";
+import { getProject } from "../../redux/slices/userSlice";
 
 function MainSpecialistsPage() {
   const ID = JSON.parse(localStorage.getItem("userData"));
@@ -12,6 +13,7 @@ function MainSpecialistsPage() {
   const currentPage = useSelector((state) => state.pagination.currentPage);
   const usersPerPage = useSelector((state) => state.pagination.usersPerPage);
   const users = useSelector((state) => state.pagination.users);
+  const findProject = useSelector((state) => state.users.myProject)
   const dispatch = useDispatch()
 
   const UpdataData = (items) => {
@@ -19,6 +21,10 @@ function MainSpecialistsPage() {
     // dispatch(setTotalPages(data.totalPages));
     // dispatch(setIsFetching(false));
   }
+
+  const Project = (items) => {
+    dispatch(getProject(items));
+  };
   
   useEffect(() => {
     axios
@@ -32,10 +38,22 @@ function MainSpecialistsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`/api/${userId}/project`)
+      .then((items) => {
+        Project(items.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="content">
       <div className="wrapper">
-        <Specialists users={users} />
+        <Specialists users={users} project={findProject} />
       </div>
       <Footer />
     </div>
