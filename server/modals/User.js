@@ -6,6 +6,7 @@ const schema = Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     phoneNumber: { type: String },
+    isVerification: { type: Boolean, default: false },
     timeZone: { type: String },
     favorites: {
         users: [

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getUser } from "../../../redux/slices/userSlice";
 import { Field, Form } from "react-final-form";
+// import gop from '../../../assets/'
 
 function PersonalForm() {
   const normalInput = "text-field__input-reg1 auth__main_input-name1";
@@ -18,9 +19,6 @@ function PersonalForm() {
   const User = (items) => {
     dispatch(getUser(items));
   };
-  let avatar = {
-    profilePic: "",
-  };
 
   const update = () => {
     axios
@@ -33,21 +31,31 @@ function PersonalForm() {
       });
   }
 
+  // const converter = (e) => {
+  //   let reader = e.target.files[0]
+  //   axios.put(`/api/auth/${userId}/upload`, { ...avatar, profilePic: reader.name });
+  //   // let reader = new FileReader();
+  //   // reader.readAsDataURL(e.target.files[0]);
+  //   // reader.onload = () => {
+  //   //   const uploadImage = async () => {
+  //   //     axios.put(`/api/auth/${userId}/upload`, { ...avatar, profilePic: reader.result });
+  //   //   };
+  //   //   uploadImage();
+  //   // };
+  //   // setTimeout(() => {
+  //   //   update()
+  //   //   reader.onerror = (error) => {
+  //   //     console.log({ message: error });
+  //   //   };
+  //   // }, 1000);
+  // };
+
   const converter = (e) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      const uploadImage = async () => {
-        axios.put(`/api/auth/${userId}/upload`, { ...avatar, profilePic: reader.result });
-      };
-      uploadImage();
-    };
-    setTimeout(() => {
-      update()
-      reader.onerror = (error) => {
-        console.log({ message: error });
-      };
-    }, 1000);
+    let file = e.target.files[0];
+    let formData = new FormData();
+    formData.append('upload', file);
+    
+    axios.put(`/api/auth/${userId}/upload`, formData);
   };
 
   const validate = (e) => {
@@ -75,9 +83,10 @@ function PersonalForm() {
   const onSubmit = async (value) => {
     axios.put(`/api/auth/${userId}/edit/person`, { ...value });
   };
-
+  console.log(`${window.location.origin}/${data.more?.pers?.profilePic}`);
   return (
     <div className={m.infoBar}>
+      {/* <img src="http://localhost:5000/uploads/image.png" alt="" /> */}
       <div className={m.infoWrapp}>
         <h3 className={m.titleSmall}>Личная информация</h3>
         <Form
@@ -89,12 +98,25 @@ function PersonalForm() {
               name="register"
               onSubmit={handleSubmit}
               method="post"
+              action={`/${userId}/upload`}
+              encType="multipart/form-data"
             >
               <div className={m.avatar1}>
                 <img
                   className={m.profilePic}
-                  src={data.more?.pers?.profilePic}
-                  alt=""
+                  src={`http://localhost:5000/${data.more?.pers?.profilePic}`}
+                  alt="locallhost"
+                />
+                <img
+                  className={m.profilePic}
+                  src={`${data.more?.pers?.profilePic}`}
+                  alt="base"
+                />
+                <img
+                  className={m.profilePic}
+                  // src={`http://localhost:5000/${data.more?.pers?.profilePic}`}
+                  src={`http://startupseed.ru/${data.more?.pers?.profilePic}`}
+                  alt="domain"
                 />
                 <input type="button" className={m.cameraBtn} />
                 <input

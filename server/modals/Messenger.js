@@ -1,15 +1,28 @@
 const { Schema, model } = require('mongoose')
 
-const schema = Schema({
-    yourID: {type: String},
-    InterlocutorID: {type: String},
-    content: [
+const schema = Schema({ 
+    yourObject: {
+        myID: { type: String },
+        fname: { type: String },
+        lname: { type: String },
+        profilePic: { type: String },
+        jobPost: { type: String },
+    },
+    projectOwnerObject: {
+        ownerID: { type: String },
+        fname: { type: String },
+        lname: { type: String },
+        profilePic: { type: String },
+        jobPost: { type: String },
+    },
+    message: [
         {
-            _id: false,
-            sendTime: {type: Date, default: Date.now},
-            isEdit: {type: Boolean, default: false},
-            message: {type: String},
-            messageID: {type: String}
+            authorID: { type: String },
+            sendTime: { type: Date, default: Date.now() },
+            message: { type: String },
+            isEdit: { type: Boolean, default: false },
+            isRead: { type: Boolean, default: false },
+            
         }
     ],
 })

@@ -24,8 +24,7 @@ function WatchProjectPage() {
 
   useEffect(() => {
     axios.get(`/api/${userId}/getFavorite`).then((items) => {
-      getFavoriteProject(items.data.favorites.project)
-      // console.log(items.data.favorites.project);
+      getFavoriteProject(items.data.project)
     });
   }, []);
   

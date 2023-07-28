@@ -8,15 +8,22 @@ import {
   removeUserFavorite,
 } from "../../redux/slices/currentUser";
 import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function WatchSpecialist({ userID, items }) {
   const stock = `${m.specialistContainer}`;
   const isActive = `${m.activeWrapper}`;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const favorites = useSelector((state) => state.currentUser.favoritesUser);
   const find = favorites.find((items) => items);
+  const [value] = useState({
+    yourID: userId,
+    InterlocutorID: userID,
+  });
   const upload = () => {
     axios
       .post(`/api/${userId}/addUserFavorites`, {
@@ -45,6 +52,15 @@ function WatchSpecialist({ userID, items }) {
       });
   };
 
+  const sendMessage = () => {
+    axios.post(`/api/${userId}/createMessage`, { ...value, items: items })
+      .then((response) => {
+        if (response.status === 200) {
+          navigate('/messenger')
+        }
+      })
+  };
+
   const removeFavorite = () => {
     axios
       .put(`/api/${userId}/removeUserFavorites`, {
@@ -71,7 +87,7 @@ function WatchSpecialist({ userID, items }) {
     if (find?.isFavorite === undefined) {
       upload();
     } else {
-      removeFavorite()
+      removeFavorite();
     }
   };
 
@@ -95,7 +111,9 @@ function WatchSpecialist({ userID, items }) {
                   ? "Убрать из избранного"
                   : "Добавить в избранное"}
               </button>
-              <button className={m.addMessage}>Отправить приглашение</button>
+              <button className={m.addMessage} onClick={() => sendMessage()}>
+                Отправить приглашение
+              </button>
             </div>
           </div>
         </div>

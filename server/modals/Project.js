@@ -5,10 +5,11 @@ const schema = Schema({
     projectName: { type: String },
     projectImage: { type: String },
     projectDesc: { type: String },
+    isVerification: { type: Boolean, default: false },
     projectPost: [
         {
             _id: false,
-            id: {type: String},
+            id: { type: String },
             jobPost: { type: String },
             postLevel: { type: String },
             jobTask: { type: String },

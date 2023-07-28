@@ -8,7 +8,6 @@ import { setSearchProjectQuery } from "../../redux/slices/paginationSlice";
 import { NavLink } from "react-router-dom";
 
 function Project({ project }) {
-  console.log(project);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState({
     input: "",

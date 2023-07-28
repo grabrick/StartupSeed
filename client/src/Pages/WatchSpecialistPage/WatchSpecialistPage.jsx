@@ -23,11 +23,8 @@ function WatchSpecialistPage() {
 
   useEffect(() => {
     axios.get(`/api/${userId}/getFavorite`).then((items) => {
-      getFavoriteProject(items.data.favorites.users)
+      getFavoriteProject(items.data.users)
     });
-  }, []);
-
-  useEffect(() => {
     axios
     .get(`/api/get/currentUser/${findUserID}`)
     .then((items) => {
@@ -36,7 +33,7 @@ function WatchSpecialistPage() {
     .catch((e) => {
       console.log(e);
     });
-  }, [])
+  }, []);
 
   return (
     <div className="content">

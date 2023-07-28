@@ -144,24 +144,46 @@ class authController {
         }
     }
 
+    // async uploadImage(req, res) {
+    //     try {
+    //         const { profilePic } = req.body;
+    //         const {id} = req.params
+
+    //         // const update = await User.findByIdAndUpdate(
+    //         //     id,
+    //         //     {
+    //         //         "more.pers.profilePic": profilePic,
+    //         //     },
+    //         //     { new: true }
+    //         // )
+
+    //         // // const updatedUser = await update.save();
+    //         // return res.json(update);
+    //         console.log(profilePic);
+    //     } catch (e) {
+    //         return res.status(500).json(e)
+    //     }
+    // }
+
     async uploadImage(req, res) {
         try {
-            const { profilePic } = req.body;
-            const {id} = req.params
-            const update = await User.findByIdAndUpdate(
-                id,
-                {
-                    "more.pers.profilePic": profilePic,
-                },
-                { new: true }
-            )
+          const { id } = req.params;
 
-            // const updatedUser = await update.save();
-            return res.json(update);
+          if (!req.file) {
+            return res.status(400).json({ error: 'Файл не был загружен.' });
+          }
+    
+          const update = await User.findByIdAndUpdate(
+            id,
+            { 'more.pers.profilePic': req.file.path }, // Путь к файлу сохраняется в поле 'path' объекта req.file
+            { new: true }
+          );
+    
+          return res.json(update);
         } catch (e) {
-            return res.status(500).json(e)
+          return res.status(500).json(e);
         }
-    }
+      }
 
     async editPerson(req, res) {
         try {

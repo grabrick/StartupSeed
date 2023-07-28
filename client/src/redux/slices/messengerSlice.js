@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    dialog: []
+  catalog: [],
+  dialog: []
 };
 
 const formSlice = createSlice({
@@ -11,10 +12,13 @@ const formSlice = createSlice({
     newMessage(state, actions) {
         const { value, userID } = actions.payload
         console.log(value, userID);
+    },
+    getCatalog(state, actions) {
+      state.catalog = actions.payload
     }
   }
 });
 
-export const { changeExp, changeProf, changeQual, } = formSlice.actions;
+export const { newMessage, getCatalog } = formSlice.actions;
 
 export default formSlice.reducer;

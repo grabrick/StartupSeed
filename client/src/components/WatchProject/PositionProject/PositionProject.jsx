@@ -7,13 +7,15 @@ import {
 } from "../../../redux/slices/currentProjectSlice";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function PositionProject({ item, projectId, post }) {
+function PositionProject({ item, projectId, post, projectOwner }) {
   const stock = `${m.wrapper}`;
   const isActive = `${m.activeWrapper}`;
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const projectData = useSelector(
     (state) => state.currentProject.currentProject
   );
@@ -64,7 +66,14 @@ function PositionProject({ item, projectId, post }) {
       });
   };
 
-  console.log(favoriteProject);
+  const sendMessage = () => {
+    axios.post(`/api/${userId}/createMessage`, { projectOwner: projectOwner })
+      .then((response) => {
+        if (response.status === 200) {
+          navigate('/messenger')
+        }
+      })
+  };
 
   const toggler = () => {
     if (!findID) {
@@ -90,7 +99,7 @@ function PositionProject({ item, projectId, post }) {
               ? "Убрать из избранного"
               : "Добавить в избранное"}
           </button>
-          <button className={m.addMessage}>Откликнуться</button>
+          <button className={m.addMessage} onClick={() => sendMessage()}>Откликнуться</button>
         </div>
       </div>
     </div>

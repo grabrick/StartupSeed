@@ -8,6 +8,7 @@ import cases from "../../assets/images/briefcase-line.svg";
 import m from "./NavBar.module.css";
 import './NavBar.css'
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 const logout = () => {
@@ -15,10 +16,11 @@ const logout = () => {
   setTimeout(() => {
     window.location.reload()
     window.location.replace('/')
-  }, 2000);
+  }, 500);
 }
 
 function NavBar(props) {
+  const navigate = useNavigate();
   const [show, setShow] = useState(props.currentBtn)
 
   const handleProfileClick = () => {

@@ -1,7 +1,18 @@
 const {Router} = require('express')
 const router = Router()
 const controller = require('../routes/authController/authController')
+const multer = require('multer');
 
+
+const fileStorage = multer({
+    storage: multer.diskStorage({
+      destination: 'uploads',
+      filename: (req, file, cb) => {
+        cb(null, file.originalname);
+      }
+    })
+});
+    
 router.post(
     '/register',
     controller.register
@@ -45,6 +56,7 @@ router.get(
 
 router.put(
     '/:id/upload',
+    fileStorage.single('upload'),
     controller.uploadImage
 )
 

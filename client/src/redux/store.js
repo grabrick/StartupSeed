@@ -7,6 +7,7 @@ import createProject from "./slices/createProjectSlice"
 import pagination from "./slices/paginationSlice"
 import currentUser from "./slices/currentUser";
 import currentProject from "./slices/currentProjectSlice";
+import messenger from "./slices/messengerSlice"
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     pagination,
     currentUser,
     currentProject,
+    messenger
   },
 })

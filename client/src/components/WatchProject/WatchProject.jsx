@@ -27,7 +27,7 @@ function WatchProject({ items, projectId }) {
                 <div className={m.positionWrapper}>
                     <h2 className={m.posTitle}>Открытые позиции</h2>
                     {items?.projectPost?.map((pos) => (
-                        <PositionProject item={pos} post={items} projectId={projectId} />
+                        <PositionProject item={pos} post={items} projectOwner={items.projectOwner} projectId={projectId} />
                     ))}
                 </div>
             </div>

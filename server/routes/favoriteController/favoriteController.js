@@ -5,7 +5,7 @@ class favoriteController {
         try {
             const { id } = req.params
             const find = await User.findById(id)
-            return res.json(find)
+            return res.json(find.favorites)
         } catch (e) {
             return res.status(500).json(e)
         }
