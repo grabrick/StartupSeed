@@ -1,14 +1,31 @@
 import { NavLink } from "react-router-dom";
 import m from "./ProjectComponent.module.css";
 import { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getProject } from "../../../redux/slices/userSlice";
 
 function ProjectComponent(items) {
   const data = items.items;
   const [toggler, setToggler] = useState(true);
+  const dispatch = useDispatch();
+  const ID = JSON.parse(localStorage.getItem("userData"));
+  const userId = ID.userID;
   const isActive = `${m.popupContainerOpen}`;
   const stock = `${m.popupContainerClose}`;
-  const Desc = data.projectDesc
-  const slicedDesc = Desc.slice(0, 600)
+  const Desc = data?.projectDesc
+  const slicedDesc = Desc?.slice(0, 600)  
+
+  const onClickDelete = () => {
+    axios.delete(`/api/profile/project/${data._id}/delete`).then(response => {
+      if(response.status === 200) {
+        axios.get(`/api/${userId}/project`)
+        .then((items) => {
+          dispatch(getProject(items.data))
+        })
+      }})
+  }
+
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
@@ -35,12 +52,11 @@ function ProjectComponent(items) {
                 >
                   <button className={m.editButton}>Посмотреть</button>
                 </NavLink>
-                <NavLink
+                <div
                   className={m.NavLink}
-                  to={`/profile/project/${data._id}/edit`}
                 >
-                  <button className={m.editButton}>Удалить</button>
-                </NavLink>
+                  <button onClick={() => onClickDelete()} className={m.editButton}>Удалить</button>
+                </div>
               </div>
             </div>
           </div>

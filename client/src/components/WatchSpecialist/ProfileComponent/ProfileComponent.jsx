@@ -12,7 +12,7 @@ function ProfileComponent({ items }) {
           <div className={m.avatar}>
             <img
               className={m.image}
-              src={items?.more?.pers?.profilePic}
+              src={`http://startupseed.ru/${items.more?.pers?.profilePic}`}
               alt=""
             />
           </div>

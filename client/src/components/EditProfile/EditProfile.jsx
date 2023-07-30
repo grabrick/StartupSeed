@@ -46,7 +46,6 @@ function EditProfile() {
       .then((items) => {
         User(items.data);
         Skills(items.data.more.job.skills);
-        console.log(items.data);
       })
       .catch((e) => {
         console.log(e);

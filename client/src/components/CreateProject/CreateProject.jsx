@@ -14,28 +14,13 @@ function CreateProject() {
   const errorInputArea = `${m.inputErrorArea}`;
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
+  const [visualImage, setVisualImage] = useState();
   const [image, setImage] = useState();
   const dispath = useDispatch();
   const data = useSelector((state) => state.createProject.projectPosition);
 
   const addForm = () => {
     dispath(onAdd());
-  };
-
-  const converter = (e) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      const uploadImage = async () => {
-        setImage({ ...image, image: reader.result });
-      };
-      uploadImage();
-    };
-    setTimeout(() => {
-      reader.onerror = (error) => {
-        console.log({ message: error });
-      };
-    }, 1000);
   };
 
   const validate = (e) => {
@@ -48,20 +33,35 @@ function CreateProject() {
     return errors;
   };
   const onSubmit = async (value) => {
-    console.log(value);
-    axios
-      .post(`/api/${userId}/project/create`, {
-        ...value,
-        projectPost: data,
-        projectImage: image?.image,
-      })
-      .then((response) => {
-        if (response.status === 201) {
-          setTimeout(() => {
-            window.location.replace("/profile/project");
-          }, 500);
-        }
-      });
+    axios.post(`/api/${userId}/project/create`, image)
+    .then((response => {
+      const projectID = response.data._id
+      if(response.status === 201) {
+        axios.put(`/api/${userId}/project/${projectID}/preCreate`, { ...value, projectPost: data })
+        .then((response) => {
+            if (response.status === 201) {
+              setTimeout(() => {
+                window.location.replace("/profile/project");
+              }, 500);
+            }
+          });
+      }
+    }))
+  };
+
+  const converter = (e) => {
+    let file = e.target.files[0];
+    let formData = new FormData();
+    let reader = new FileReader();
+    formData.append("upload", file);
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      const uploadImage = async () => {
+        setVisualImage({ ...visualImage, image: reader.result });
+        setImage(formData);
+      };
+      uploadImage();
+    };
   };
 
   return (
@@ -74,12 +74,19 @@ function CreateProject() {
             onSubmit={onSubmit}
             validate={validate}
             render={({ handleSubmit }) => (
-              <form className={m.form} onSubmit={handleSubmit}>
+              <form
+                className={m.form}
+                onSubmit={handleSubmit}
+                action={`/api/${userId}/project/create`}
+                encType="multipart/form-data"
+              >
                 <div className={m.formWrapper}>
                   <div className={m.avatar1}>
                     <img
                       className={m.profilePic}
-                      src={data ? image?.image : data.more?.pers?.profilePic}
+                      src={
+                        data ? visualImage?.image : data.more?.pers?.profilePic
+                      }
                       alt=""
                     />
                     <input type="button" className={m.cameraBtn} />
@@ -134,7 +141,11 @@ function CreateProject() {
                 <div className={m.wrap}>
                   <p className={m.text}>Команда проекта</p>
                   {data.map((form, index) => (
-                    <PositionForm items={form} key={form.id} formIndex={index + 1} />
+                    <PositionForm
+                      items={form}
+                      key={form.id}
+                      formIndex={index + 1}
+                    />
                   ))}
                   <div className={m.buttonWrapper}>
                     <button

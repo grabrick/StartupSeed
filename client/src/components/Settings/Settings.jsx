@@ -128,7 +128,7 @@ function Settings() {
             <div className={m.profileWrapp}>
               <img
                 alt=""
-                src={data.more?.pers?.profilePic}
+                src={`http://startupseed.ru/${data.more?.pers?.profilePic}`}
                 className={m.avatar}
               ></img>
               <p className={m.name}>

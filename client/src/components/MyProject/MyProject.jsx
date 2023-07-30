@@ -32,11 +32,8 @@ function MyProject() {
       .catch((e) => {
         console.log(e);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    axios
+      
+      axios
       .get(`/api/${userId}/project`)
       .then((items) => {
         Project(items.data);
@@ -46,6 +43,7 @@ function MyProject() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div className={m.container}>
       <div className={m.containerwrapper}>
@@ -57,7 +55,7 @@ function MyProject() {
             <div className={m.profileWrapp}>
               <img
                 alt=""
-                src={data.more?.pers?.profilePic}
+                src={`http://startupseed.ru/${data.more?.pers?.profilePic}`}
                 className={m.avatar}
               ></img>
               <p className={m.name}>

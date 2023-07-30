@@ -7,7 +7,6 @@ import SpecialistFavoritesComponent from "./SpecialistFavoritesComponent/Special
 
 function Favorites({ userData }) {
   const [isProject, setIsProject] = useState("Проекты");
-  console.log(userData.favorites);
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
@@ -18,7 +17,7 @@ function Favorites({ userData }) {
             <div className={m.profileWrapp}>
               <img
                 alt=""
-                src={userData.more?.pers?.profilePic}
+                src={`http://startupseed.ru/${userData.more?.pers?.profilePic}`}
                 className={m.avatar}
               />
               <p className={m.name}>

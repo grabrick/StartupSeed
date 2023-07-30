@@ -263,8 +263,12 @@
     font-size: 20px;
 }
 
+.projectTitle {
+    margin: 0 0 20px 0;
+}
+
 .warningInfo {
-    height: 300px;
+    /* height: 300px; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -1,6 +1,7 @@
 // const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const fs = require('fs');
 const User = require('../../modals/User')
 
 
@@ -172,18 +173,31 @@ class authController {
           if (!req.file) {
             return res.status(400).json({ error: 'Файл не был загружен.' });
           }
+
+          const user = await User.findById(id);
+          const prevProfilePic = user?.more?.pers?.profilePic;
     
           const update = await User.findByIdAndUpdate(
             id,
             { 'more.pers.profilePic': req.file.path }, // Путь к файлу сохраняется в поле 'path' объекта req.file
             { new: true }
           );
+
+          if (prevProfilePic) {
+            fs.unlink(prevProfilePic, (err) => {
+              if (err) {
+                console.error('Ошибка при удалении предыдущей картинки:', err);
+              } else {
+                console.log('Предыдущая картинка успешно удалена.');
+              }
+            });
+          }
     
           return res.json(update);
         } catch (e) {
           return res.status(500).json(e);
         }
-      }
+    }
 
     async editPerson(req, res) {
         try {

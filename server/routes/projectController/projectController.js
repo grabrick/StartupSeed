@@ -6,17 +6,17 @@ class projectController {
             const { id } = req.params
             const projectOwner = id
             const find = await Project.find({projectOwner})
-            return res.json(find)
+            return res.status(200).json(find)
         } catch (e) {
             return res.status(500).json(e)
         }
     }
-
+    
     async getCurrentProject(req, res) {
         try {
             const { id } = req.params
             const find = await Project.findById(id)
-            return res.json(find)
+            return res.status(200).json(find)
         } catch (e) {
             return res.status(500).json(e)
         }
@@ -26,7 +26,8 @@ class projectController {
         try {
             const { id } = req.params
             const find = await Project.findByIdAndDelete(id)
-            return res.json(find)
+
+            return res.status(200).json(find)
         } catch (e) {
             return res.status(500).json(e)
         }
@@ -57,22 +58,77 @@ class projectController {
           }
     }
 
+    async uploadImage(req, res) {
+        try {
+          const { id } = req.params;
+          console.log(req.file.path);
+        //   if (!req.file) {
+        //     return res.status(400).json({ error: 'Файл не был загружен.' });
+        //   }
+
+        //   const project = await Project.findById(id);
+        // //   const prevProfilePic
+    
+        //   const update = await Project.findByIdAndUpdate(
+        //     id,
+        //     { 'projectImage': req.file.path }, // Путь к файлу сохраняется в поле 'path' объекта req.file
+        //     { new: true }
+        //   );
+
+        //   if (prevProfilePic) {
+        //     fs.unlink(prevProfilePic, (err) => {
+        //       if (err) {
+        //         console.error('Ошибка при удалении предыдущей картинки:', err);
+        //       } else {
+        //         console.log('Предыдущая картинка успешно удалена.');
+        //       }
+        //     });
+        //   }
+    
+        //   return res.json(update);
+        } catch (e) {
+            return res.status(500).json({ message: e })
+        }
+    }
+
     async createProject(req, res) {
         try {
-            const { id } = req.params
-            const { projectName, projectImage, projectDesc, projectPost} = req.body
-            const projectOwner = id
-
+            const { id } = req.params;
+            const projectImage = req.file.path;
+            const { projectName, projectDesc, projectPost } = req.body;
+            const projectOwner = id;
+        
             const project = new Project({
-                projectName,
-                projectImage,
-                projectDesc,
-                projectOwner,
-                projectPost,
-            })
+              projectName,
+              projectImage,
+              projectDesc,
+              projectOwner,
+              projectPost,
+            });
+        
+            await project.save();
+            return res.status(201).json(project);
+          } catch (e) {
+            return res.status(500).json({ message: e });
+          }
+    }
 
-            await project.save()
-            return res.status(201).send('Проект создан')
+    async preCreateProject(req, res) {
+        try {
+            const { id } = req.params
+            const { projectName, projectDesc, projectPost} = req.body
+
+            const update = await Project.findByIdAndUpdate(
+                id,
+                {
+                    "projectName": projectName,
+                    "projectDesc": projectDesc,
+                    "projectPost": projectPost,
+                    
+                },
+                {new: true}
+            )
+            return res.status(201).json(update)
         } catch (e) {
             return res.status(500).json({ message: e })
         }
