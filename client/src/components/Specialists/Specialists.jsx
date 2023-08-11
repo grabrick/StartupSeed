@@ -4,7 +4,7 @@ import m from "./Specialists.module.css";
 import SpecialistsComponent from "./SpecialistsComponent/SpecialistsComponent";
 import { useState } from "react";
 import { setSearchQuery } from "../../redux/slices/paginationSlice";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../utils/Pagination/Pagination";
 import { NavLink } from "react-router-dom";
 
 function Specialists({ users, project }) {

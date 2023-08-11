@@ -8,8 +8,6 @@ import cases from "../../assets/images/briefcase-line.svg";
 import m from "./NavBar.module.css";
 import './NavBar.css'
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-
 
 const logout = () => {
   localStorage.removeItem("userData")
@@ -20,7 +18,6 @@ const logout = () => {
 }
 
 function NavBar(props) {
-  const navigate = useNavigate();
   const [show, setShow] = useState(props.currentBtn)
 
   const handleProfileClick = () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../utils/Pagination/Pagination";
 import m from "./Project.module.css";
 import ProjectComponent from "./ProjectComponent/ProjectComponent";
 import { useDispatch, useSelector } from "react-redux";

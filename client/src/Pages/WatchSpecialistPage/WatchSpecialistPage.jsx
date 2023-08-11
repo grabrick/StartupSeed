@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../components/Blocks/Footer/Footer";
 import WatchSpecialist from "../../components/WatchSpecialist/WatchSpecialist";
 import './WatchSpecialistPage.css'
@@ -13,6 +13,7 @@ function WatchSpecialistPage() {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const dispatch = useDispatch()
+  const [project, setProject] = useState([])
   const getUsers = (items) => {
     dispatch(getUser(items));
   };
@@ -25,20 +26,18 @@ function WatchSpecialistPage() {
     axios.get(`/api/${userId}/getFavorite`).then((items) => {
       getFavoriteProject(items.data.users)
     });
-    axios
-    .get(`/api/get/currentUser/${findUserID}`)
-    .then((items) => {
+    axios.get(`/api/get/currentUser/${findUserID}`).then((items) => {
       getUsers(items.data)
     })
-    .catch((e) => {
-      console.log(e);
-    });
+    axios.get(`/api/${userId}/project`).then(items => {
+      setProject(items.data);
+    })
   }, []);
 
   return (
     <div className="content">
       <div className="wrapper">
-        <WatchSpecialist userID={findUserID} items={currentUser} />
+        <WatchSpecialist project={project} userID={findUserID} items={currentUser} />
       </div>
       <Footer />
     </div>

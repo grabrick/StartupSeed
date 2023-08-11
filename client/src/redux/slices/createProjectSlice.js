@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUUID } from '../../assets/utils/getUUID';
+import { getUUID } from "../../components/utils/getUUID";
 
 const initialState = {
   projectPosition: []

@@ -10,12 +10,14 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SendInvitationPopup from "../Popup/SendInvitationPopup/SendInvitationPopup";
 
-function WatchSpecialist({ userID, items }) {
+function WatchSpecialist({ userID, items, project }) {
   const stock = `${m.specialistContainer}`;
   const isActive = `${m.activeWrapper}`;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const favorites = useSelector((state) => state.currentUser.favoritesUser);
@@ -50,15 +52,6 @@ function WatchSpecialist({ userID, items }) {
           );
         }
       });
-  };
-
-  const sendMessage = () => {
-    axios.post(`/api/${userId}/createMessage`, { ...value, items: items })
-      .then((response) => {
-        if (response.status === 200) {
-          navigate('/messenger')
-        }
-      })
   };
 
   const removeFavorite = () => {
@@ -111,12 +104,13 @@ function WatchSpecialist({ userID, items }) {
                   ? "Убрать из избранного"
                   : "Добавить в избранное"}
               </button>
-              <button className={m.addMessage} onClick={() => sendMessage()}>
+              <button className={m.addMessage} onClick={() => setIsVisible(!isVisible)}>
                 Отправить приглашение
               </button>
             </div>
           </div>
         </div>
+        {isVisible ? <SendInvitationPopup project={project} items={items} userID={userId} close={setIsVisible} /> : ""}
       </div>
     </div>
   );

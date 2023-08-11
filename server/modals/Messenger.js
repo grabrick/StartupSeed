@@ -19,7 +19,7 @@ const schema = Schema({
         {
             authorID: { type: String },
             sendTime: { type: Date, default: Date.now() },
-            message: { type: String },
+            message: { type: Object },
             isEdit: { type: Boolean, default: false },
             isRead: { type: Boolean, default: false },
             

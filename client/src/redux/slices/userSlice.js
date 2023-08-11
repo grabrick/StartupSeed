@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUUID } from "../../assets/utils/getUUID";
+import { getUUID } from "../../components/utils/getUUID";
 
 const initialState = {
   user: [],
@@ -19,7 +19,6 @@ const userSlice = createSlice({
 
     addText(state, actions) {
       const { value, id } = actions.payload;
-      console.log({ value, id });
       const findPosition = state.myProject.find((item) => item)
 
       const updatedProjectPosition = findPosition.projectPost.map(item => {
@@ -49,7 +48,6 @@ const userSlice = createSlice({
 
     addTag(state, actions) {
       const { value, id } = actions.payload;
-      console.log({ value, id });
       const findPosition = state.myProject.find((item) => item)
       const updatedProjectPosition = state.myProject.map((project) => {
         if (project.id === findPosition.id) {

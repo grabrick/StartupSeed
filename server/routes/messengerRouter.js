@@ -12,4 +12,14 @@ router.get(
     controller.getMyCatalog
 )
 
+router.post(
+    '/:id/sendInvite',
+    controller.sendInvate
+)
+
+router.delete(
+    '/:id/deleteUser/:id',
+    controller.deleteUser
+)
+
 module.exports = router
