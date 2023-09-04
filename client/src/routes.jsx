@@ -11,30 +11,31 @@ import MainCreateProject from "./Pages/MainCreateProject/MainCreateProject";
 import MainFindProject from "./Pages/MainFindProject/MainFindProject";
 import MainSpecialistsPage from "./Pages/MainSpecialistsPage/MainSpecialistsPage";
 import MainProjectEdit from "./Pages/MainProjectEdit/MainProjectEdit";
-import MainMessenger from "./Pages/MainMessenger/MainMessenger";
 import WatchSpecialistPage from "./Pages/WatchSpecialistPage/WatchSpecialistPage";
 import WatchProjectPage from "./Pages/WatchProjectPage/WatchProjectPage";
 import MainFavorite from "./Pages/MainFavorite/MainFavorite";
+import AdminMainPage from "./Pages/Admin/AdminMainPage/AdminMainPage";
 
-function useRoutes(isAuthticated) {
+function useRoutes(isAuthticated, isAdmin) {
   if (isAuthticated) {
     return (
       <div className="container">
         <Routes>
-          <Route path="/home" element={<ModifiedMainPage />} />
-          <Route path="/favorites" element={<MainFavorite />} />
-          <Route path="/project" element={<MainFindProject />} />
-          <Route path="/project/:id" element={<WatchProjectPage />} />
-          <Route path="/profile" element={<MainProfile />} />
-          <Route path="/specialists" element={<MainSpecialistsPage />} />
-          <Route path="/specialist/:id" element={<WatchSpecialistPage />} />
-          <Route path="/messenger" element={<MainMessenger />} />
-          <Route path="/profile/edit" element={<EditPages />} />
-          <Route path="/profile/project" element={<MainProject />} />
-          <Route path="/profile/project/:id/edit" element={<MainProjectEdit />} />
-          <Route path="/profile/create" element={<MainCreateProject />} />
-          <Route path="/profile/settings" element={<MainSettings />} />
-
+          {isAdmin && (
+            <Route path="/admin/control" element={<AdminMainPage isAdmin={isAdmin} />} />
+          )}
+          <Route path="/home" element={<ModifiedMainPage isAdmin={isAdmin} />} />
+          <Route path="/favorites" element={<MainFavorite isAdmin={isAdmin} />} />
+          <Route path="/project" element={<MainFindProject isAdmin={isAdmin} />} />
+          <Route path="/project/:id" element={<WatchProjectPage isAdmin={isAdmin} />} />
+          <Route path="/profile" element={<MainProfile isAdmin={isAdmin} />} />
+          <Route path="/specialists" element={<MainSpecialistsPage isAdmin={isAdmin} />} />
+          <Route path="/specialist/:id" element={<WatchSpecialistPage isAdmin={isAdmin} />} />
+          <Route path="/profile/edit" element={<EditPages isAdmin={isAdmin} />} />
+          <Route path="/profile/project" element={<MainProject isAdmin={isAdmin} />} />
+          <Route path="/profile/project/:id/edit" element={<MainProjectEdit isAdmin={isAdmin} />} />
+          <Route path="/profile/create" element={<MainCreateProject isAdmin={isAdmin} />} />
+          <Route path="/profile/settings" element={<MainSettings isAdmin={isAdmin} />} />
 
           {/* --------- Redirect------- */}
         <Route path="/" element={<Navigate to="/home" replace />} />

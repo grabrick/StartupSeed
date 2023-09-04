@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import m from "./WatchSpecialist.module.css";
 import ProfileComponent from "./ProfileComponent/ProfileComponent";
 import InfoComponent from "./InfoComponent/InfoComponent";
@@ -10,9 +10,9 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SendInvitationPopup from "../Popup/SendInvitationPopup/SendInvitationPopup";
+import SendInvitationPopup from "../UI/Popup/SendInvitationPopup/SendInvitationPopup";
 
-function WatchSpecialist({ userID, items, project }) {
+function WatchSpecialist({ userID, items, project, isAdmin }) {
   const stock = `${m.specialistContainer}`;
   const isActive = `${m.activeWrapper}`;
   const dispatch = useDispatch();
@@ -87,7 +87,7 @@ function WatchSpecialist({ userID, items, project }) {
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
-        <ModifiedHeader />
+        <ModifiedHeader isAdmin={isAdmin} />
         <div className={find?.userID === userID ? isActive : stock}>
           <div className={m.specialistWrapper}>
             <div className={m.infoWrapper}>

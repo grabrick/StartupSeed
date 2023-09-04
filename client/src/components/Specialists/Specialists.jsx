@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import m from "./Specialists.module.css";
 import SpecialistsComponent from "./SpecialistsComponent/SpecialistsComponent";
 import { useState } from "react";
 import { setSearchQuery } from "../../redux/slices/paginationSlice";
-import Pagination from "../utils/Pagination/Pagination";
+import Pagination from "../UI/Pagination/Pagination";
 import { NavLink } from "react-router-dom";
 
-function Specialists({ users, project }) {
+function Specialists({ users, project, isAdmin }) {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.pagination.users);
   const [searchInput, setSearchInput] = useState({
@@ -29,7 +29,7 @@ function Specialists({ users, project }) {
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
   );
-
+  console.log(usersOnCurrentPage);
   const handleSearch = () => {
     const value = {
       input: searchInput.input,
@@ -53,7 +53,7 @@ function Specialists({ users, project }) {
   return (
     <div className={m.container}>
       <div className={m.containerwrapper}>
-        <ModifiedHeader />
+        <ModifiedHeader isAdmin={isAdmin} />
         {project.length === 0 ? (
           <div className={m.warning}>
             <div className={m.warningWrapper}>

@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import Footer from "../../components/Blocks/Footer/Footer";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
 import Project from "../../components/Project/Project";
 import "./MainFindProject.css";
 import { getProject } from "../../redux/slices/paginationSlice";
 import { useEffect } from "react";
 import axios from "axios";
 
-function MainFindProject() {
+function MainFindProject({isAdmin}) {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const currentPage = useSelector((state) => state.pagination.currentPage);
@@ -36,7 +36,7 @@ function MainFindProject() {
   return (
     <div className="content">
       <div className="wrapper">
-        <Project project={project} />
+        <Project isAdmin={isAdmin} project={project} />
       </div>
       <Footer />
     </div>

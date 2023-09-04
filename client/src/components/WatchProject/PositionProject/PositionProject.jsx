@@ -67,12 +67,12 @@ function PositionProject({ item, projectId, post, projectOwner }) {
   };
 
   const sendMessage = () => {
-    axios.post(`/api/${userId}/createMessage`, { projectOwner: projectOwner })
-      .then((response) => {
-        if (response.status === 200) {
-          navigate('/messenger')
-        }
-      })
+    // axios.post(`/api/${userId}/createMessage`, { projectOwner: projectOwner })
+    //   .then((response) => {
+    //     if (response.status === 200) {
+    //       navigate('/messenger')
+    //     }
+    //   })
   };
 
   const toggler = () => {

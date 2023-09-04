@@ -6,7 +6,6 @@ const compression = require('compression')
 const app = express()
 const http = require('http').Server(app);
 const cors = require('cors');
-// const io = require('socket.io')(http);
 var port = process.env.PORT
 const PORT = port || 5000
 const MongoUrl = "mongodb+srv://startupseed:fPfsQ4SLYHxbGv2Q@startupseed.rlvehoj.mongodb.net/test"
@@ -19,20 +18,22 @@ app.use(compression());
 app.use(cors());
 
 // Localhost
-// app.use('/api/auth', require('./server/routes/authRouter'))
-// app.use('/api', require('./server/routes/verifyRouter'))
-// app.use('/api', require('./server/routes/projectRouter'))
-// app.use('/api', require('./server/routes/specialistRouter'))
-// app.use('/api', require('./server/routes/favoriteRouter'))
-// app.use('/api', require('./server/routes/messengerRouter'))
+app.use('/api/auth', require('./server/routes/authRouter'))
+app.use('/api', require('./server/routes/verifyRouter'))
+app.use('/api', require('./server/routes/projectRouter'))
+app.use('/api', require('./server/routes/specialistRouter'))
+app.use('/api', require('./server/routes/favoriteRouter'))
+app.use('/api', require('./server/routes/messengerRouter'))
+app.use('/api', require('./server/routes/adminRouter'))
 
 // DEPLOY //
-app.use('/auth', require('./server/routes/authRouter'))
-app.use('/', require('./server/routes/verifyRouter'))
-app.use('/', require('./server/routes/projectRouter'))
-app.use('/', require('./server/routes/specialistRouter'))
-app.use('/', require('./server/routes/favoriteRouter'))
-app.use('/', require('./server/routes/messengerRouter'))
+// app.use('/auth', require('./server/routes/authRouter'))
+// app.use('/', require('./server/routes/verifyRouter'))
+// app.use('/', require('./server/routes/projectRouter'))
+// app.use('/', require('./server/routes/specialistRouter'))
+// app.use('/', require('./server/routes/favoriteRouter'))
+// app.use('/', require('./server/routes/messengerRouter'))
+// app.use('/', require('./server/routes/adminRouter'))
 
 async function start() {
   try {
@@ -40,25 +41,6 @@ async function start() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-    const socketIO = require('socket.io')(http, {
-      cors: {
-        origin: "http://localhost:3000"
-      }
-    });
-
-    //Add this before the app.get() block
-    socketIO.on('connection', (socket) => {
-      console.log(`⚡: ${socket.id} user just connected!`);
-
-      //Listens and logs the message to the console
-      socket.on('sendMessage', (data) => {
-        console.log(data);
-      });
-
-      socket.on('disconnect', () => {
-        console.log('🔥: A user disconnected');
-      });
-    });
 
     http.listen(PORT, () => console.log(`app started, ${PORT}`))
   } catch (e) {

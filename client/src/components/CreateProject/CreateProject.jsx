@@ -1,13 +1,13 @@
 import m from "./CreateProject.module.css";
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import { Field, Form } from "react-final-form";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
 import { onAdd } from "../../redux/slices/createProjectSlice";
-import PositionForm from "../Form/PositionForm/PositionForm";
+import PositionForm from "../UI/Form/PositionForm/PositionForm";
 
-function CreateProject() {
+function CreateProject({isAdmin}) {
   const normalInput = `${m.input}`;
   const errorInput = `${m.inputError}`;
   const normalInputArea = `${m.inputArea}`;
@@ -67,7 +67,7 @@ function CreateProject() {
   return (
     <div className={m.container}>
       <div className={m.containerwrapper}>
-        <ModifiedHeader />
+        <ModifiedHeader isAdmin={isAdmin} />
         <h1 className={m.title}>Создать проект</h1>
         <div className={m.wrapper}>
           <Form

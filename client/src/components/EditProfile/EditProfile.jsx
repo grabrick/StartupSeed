@@ -1,20 +1,20 @@
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import m from "./EditProfile.module.css";
-import PersonalForm from "../Form/PersonalForm/PersonalForm";
-import ProfessionalForm from "../Form/ProfessionalForm/ProfessionalForm";
-import ExperienceForm from "../Form/ExperienceForm/ExperienceForm";
-import EducationForm from "../Form/EducationForm/EducationForm";
-import QualificationsForm from "../Form/QualificationsForm/QualificationsForm";
-import AboutForm from "../Form/AboutForm/AboutForm";
+import PersonalForm from "../UI/Form/PersonalForm/PersonalForm";
+import ProfessionalForm from "../UI/Form/ProfessionalForm/ProfessionalForm";
+import ExperienceForm from "../UI/Form/ExperienceForm/ExperienceForm";
+import EducationForm from "../UI/Form/EducationForm/EducationForm";
+import QualificationsForm from "../UI/Form/QualificationsForm/QualificationsForm";
+import AboutForm from "../UI/Form/AboutForm/AboutForm";
 import { useDispatch, useSelector } from "react-redux";
 import { changeExp, changeProf, changeQual } from "../../redux/slices/formSlice";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../UI/NavBar/NavBar";
 import { useEffect } from "react";
 import { getSkills } from "../../redux/slices/skillsSlice";
 import axios from "axios";
 import { getUser } from "../../redux/slices/userSlice";
 
-function EditProfile() {
+function EditProfile({isAdmin}) {
   const dispatch = useDispatch()
   const isVisibleExp = useSelector((state) => state.form.visibleExp);
   const isVisibleEdu = useSelector((state) => state.form.visibleProf);
@@ -55,7 +55,7 @@ function EditProfile() {
 
   return (
     <div className={m.container}>
-      <ModifiedHeader />
+      <ModifiedHeader isAdmin={isAdmin} />
 
       <h1 className={m.title}>Личный кабинет</h1>
 

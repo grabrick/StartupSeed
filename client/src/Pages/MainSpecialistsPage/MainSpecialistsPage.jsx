@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Footer from "../../components/Blocks/Footer/Footer";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
 import Specialists from "../../components/Specialists/Specialists";
 import "./MainSpecialistsPage.css";
 import axios from "axios";
@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsFetching, setTotalPages, getUsers } from "../../redux/slices/paginationSlice";
 import { getProject } from "../../redux/slices/userSlice";
 
-function MainSpecialistsPage() {
+function MainSpecialistsPage({isAdmin}) {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const currentPage = useSelector((state) => state.pagination.currentPage);
@@ -18,8 +18,6 @@ function MainSpecialistsPage() {
 
   const UpdataData = (items) => {
     dispatch(getUsers(items.data));
-    // dispatch(setTotalPages(data.totalPages));
-    // dispatch(setIsFetching(false));
   }
 
   const Project = (items) => {
@@ -53,7 +51,7 @@ function MainSpecialistsPage() {
   return (
     <div className="content">
       <div className="wrapper">
-        <Specialists users={users} project={findProject} />
+        <Specialists isAdmin={isAdmin} users={users} project={findProject} />
       </div>
       <Footer />
     </div>

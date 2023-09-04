@@ -1,0 +1,104 @@
+.container {
+    max-width: 100%;
+}
+
+.containerWrapper {
+    background-image: url(../../../../assets/images/Frame4.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 656px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.span {
+    color: #D0FF49;
+}
+
+.title {
+    height: 107px;
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 120px;
+    line-height: 163px;
+    text-shadow: 0px 1px 0 rgb(0, 0, 0, 0.1), 0px -1px 0 rgb(0, 0, 0, 0.1), 1px 0px 0 rgb(0, 0, 0, 0.1), -1px 0px 0 rgb(0, 0, 0, 0.1), 1px 1px 0 rgb(0, 0, 0, 0.1), 1px -1px 0 rgb(0, 0, 0, 0.1), -1px 1px 0 rgb(0, 0, 0, 0.1), -1px -1px 0 rgb(0, 0, 0, 0.1);
+    -webkit-text-shadow: 0px 1px 0 rgb(0, 0, 0, 0.1), 0px -1px 0 rgb(0, 0, 0, 0.1), 1px 0px 0 rgb(0, 0, 0, 0.1), -1px 0px 0 rgb(0, 0, 0, 0.1), 1px 1px 0 rgb(0, 0, 0, 0.1), 1px -1px 0 rgb(0, 0, 0, 0.1), -1px 1px 0 rgb(0, 0, 0, 0.1), -1px -1px 0 rgb(0, 0, 0, 0.1);
+    -moz-text-shadow: 0px 1px 0 rgb(0, 0, 0, 0.1), 0px -1px 0 rgb(0, 0, 0, 0.1), 1px 0px 0 rgb(0, 0, 0, 0.1), -1px 0px 0 rgb(0, 0, 0, 0.1), 1px 1px 0 rgb(0, 0, 0, 0.1), 1px -1px 0 rgb(0, 0, 0, 0.1), -1px 1px 0 rgb(0, 0, 0, 0.1), -1px -1px 0 rgb(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255);
+}
+
+.lowTitle {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 67px;
+    color: #57595F;
+    margin-left: 442px;
+}
+
+.aboutWrapp {
+    display: flex;
+    flex-direction: column;
+}
+
+.regWrapp {
+    margin-top: 118px;
+    width: 1660px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    margin: 37px 0 0 0;
+}
+
+.button {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 28px;
+    text-align: center;
+    color: #000000;
+    border: none;
+    border-radius: 7px;
+    background-color: #D0FF49;
+    width: 540px;
+    height: 98px;
+    margin-left: 20px;
+}
+
+.input {
+    padding-left: 35px;
+    margin-left: 20px;
+    width: 540px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 28px;
+    color: #000000;
+    border-radius: 7px;
+    border: 1px solid #383838;
+}
+
+.input:nth-child(1) {
+    margin-left: 0;
+}
+
+.formWrapper {
+    display: flex;
+}

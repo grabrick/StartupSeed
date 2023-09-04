@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import Footer from "../../components/Blocks/Footer/Footer";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
 import WatchSpecialist from "../../components/WatchSpecialist/WatchSpecialist";
 import './WatchSpecialistPage.css'
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavorite, getUser } from "../../redux/slices/currentUser";
 
-function WatchSpecialistPage() {
+function WatchSpecialistPage({isAdmin}) {
   const currentLink = window.location.href;
   const findUserID = currentLink.toString().slice(33, 62);
   const ID = JSON.parse(localStorage.getItem("userData"));
@@ -37,7 +37,7 @@ function WatchSpecialistPage() {
   return (
     <div className="content">
       <div className="wrapper">
-        <WatchSpecialist project={project} userID={findUserID} items={currentUser} />
+        <WatchSpecialist isAdmin={isAdmin} project={project} userID={findUserID} items={currentUser} />
       </div>
       <Footer />
     </div>

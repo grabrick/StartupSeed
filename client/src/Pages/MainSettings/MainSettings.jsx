@@ -1,12 +1,12 @@
-import Footer from "../../components/Blocks/Footer/Footer";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
 import Settings from "../../components/Settings/Settings";
 import './MainSettingsRoute.css'
 
-function MainSettings() {
+function MainSettings({isAdmin}) {
   return (
     <div className="content">
       <div className="wrapper">
-        <Settings />
+        <Settings isAdmin={isAdmin} />
       </div>
       <Footer />
     </div>

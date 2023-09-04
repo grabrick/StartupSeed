@@ -1,12 +1,12 @@
-import About from "../../components/Blocks/About/About";
-import AboutInfo from "../../components/Blocks/AboutInfo/AboutInfo";
-import AboutProject from "../../components/Blocks/AboutProject/AboutProject";
-import AboutWork from "../../components/Blocks/AboutWork/AboutWork";
-import Footer from "../../components/Blocks/Footer/Footer";
-import Intro from "../../components/Blocks/Intro/Intro";
-import Registration from "../../components/Blocks/Registration/Registration";
-import Slider from "../../components/Blocks/Slider/Slider";
-import Submit from "../../components/Blocks/Submit/Submit";
+import About from "../../components/UI/Blocks/About/About";
+import AboutInfo from "../../components/UI/Blocks/AboutInfo/AboutInfo";
+import AboutProject from "../../components/UI/Blocks/AboutProject/AboutProject";
+import AboutWork from "../../components/UI/Blocks/AboutWork/AboutWork";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
+import Intro from "../../components/UI/Blocks/Intro/Intro";
+import Registration from "../../components/UI/Blocks/Registration/Registration";
+// import Slider from "../../components/UI/Blocks/Slider/Slider";
+// import Submit from "../../components/UI/Blocks/Submit/Submit";
 
 function MainPage() {
     return (

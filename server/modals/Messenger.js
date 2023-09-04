@@ -15,9 +15,16 @@ const schema = Schema({
         profilePic: { type: String },
         jobPost: { type: String },
     },
+    inviteMessage: {
+        authorID: { type: String },
+        interlocutorID: { type: String },
+        sendTime: { type: Date },
+        message: { type: Object },
+    },
     message: [
         {
             authorID: { type: String },
+            interlocutorID: { type: String },
             sendTime: { type: Date, default: Date.now() },
             message: { type: Object },
             isEdit: { type: Boolean, default: false },

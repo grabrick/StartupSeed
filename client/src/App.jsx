@@ -1,18 +1,18 @@
 import "./App.css";
 import useRoutes from "./routes";
-import {useAuth} from "./hooks/auth.hook";
-import {AuthContext} from "./context/AuthContext";
+import { useAuth } from "./hooks/auth.hook";
+import { AuthContext } from "./context/AuthContext";
 import React from "react";
 
 function App() {
-  const {token, login, logout, userID} = useAuth()
+  const {token, login, logout, userID, admin} = useAuth()
   const isAuthenticated = !!token
-  const routes = useRoutes(isAuthenticated)
+  const isAdmin = !!admin
+  const routes = useRoutes(isAuthenticated, isAdmin)
 
   return (
-    
     <AuthContext.Provider value={{
-      token, login, logout, userID, isAuthenticated
+      token, login, logout, userID, isAuthenticated, isAdmin
     }}>
       <>
         { routes }

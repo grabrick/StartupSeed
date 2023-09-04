@@ -7,7 +7,17 @@ const schema = Schema({
     password: { type: String, required: true },
     phoneNumber: { type: String },
     isVerification: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false },
     timeZone: { type: String },
+    mySendInvite: [
+        {
+            authorID: { type: String },
+            interlocutorID: { type: String },
+            interlocutorEmail: {type: String},
+            authorEmail: {tpye: String},
+            message: { type: Object },
+        }
+    ],
     favorites: {
         users: [
             {

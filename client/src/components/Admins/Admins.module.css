@@ -1,0 +1,53 @@
+.container {
+    width: 100%;
+}
+
+.wrapper {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+}
+
+.navCatalog {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+    /* overflow-x: scroll; */
+}
+
+.button {
+    padding: 5px;
+    width: 150px;
+    justify-content: center;
+    display: flex;
+    flex: 0 0 auto;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid black;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.button:hover {
+    border: 2px solid #93b633;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+    transition: linear .2s;
+    outline: 0;
+}
+
+.active {
+    border: 2px solid #93b633;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+    outline: 0;
+}
+
+.content {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

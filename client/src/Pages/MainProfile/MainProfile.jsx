@@ -1,13 +1,13 @@
-import Footer from "../../components/Blocks/Footer/Footer";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
 // import ModifiedHeader from "../../components/Header/ModifiedHeader/ModifiedHeader";
 import Profile from "../../components/Profile/Profile";
 import "./MainProfileRoute.css";
 
-function MainProfile() {
+function MainProfile({isAdmin}) {
   return (
     <div className="content">
       <div className="wrapper">
-        <Profile />
+        <Profile isAdmin={isAdmin} />
       </div>
       <Footer />
     </div>

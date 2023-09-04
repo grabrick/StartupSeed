@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import Footer from "../../components/Blocks/Footer/Footer";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
 import Favorites from "../../components/Favorites/Favorites";
 import axios from "axios";
 import { getUser } from "../../redux/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-function MainFavorite() {
+function MainFavorite({isAdmin}) {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function MainFavorite() {
   return (
     <div className="content">
       <div className="wrapper">
-        <Favorites userData={data} />
+        <Favorites isAdmin={isAdmin} userData={data} />
       </div>
       <Footer />
     </div>

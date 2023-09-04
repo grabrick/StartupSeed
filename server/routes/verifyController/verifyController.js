@@ -18,8 +18,8 @@ class verifyController {
                 from, to,
                 subject: 'Заголовок письма',
                 html: `
-         <h1>Security code: ${code}</h1>
-        `
+                    <h1>Security code: ${code}</h1>
+                `
             }, (err, data) => {
                 if (err) {
                     console.error('Ошибка при отправке:', err)

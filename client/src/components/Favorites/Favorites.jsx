@@ -1,16 +1,17 @@
 import m from "./Favorites.module.css";
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
-import NavBar from "../NavBar/NavBar";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
+import NavBar from "../UI/NavBar/NavBar";
 import { useState } from "react";
 import ProjectFavoritesComponent from "./ProjectFavoritesComponent/ProjectFavoritesComponent";
 import SpecialistFavoritesComponent from "./SpecialistFavoritesComponent/SpecialistFavoritesComponent";
+import { NavLink } from "react-router-dom";
 
-function Favorites({ userData }) {
+function Favorites({ userData, isAdmin }) {
   const [isProject, setIsProject] = useState("Проекты");
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
-        <ModifiedHeader />
+        <ModifiedHeader isAdmin={isAdmin} />
         <h1 className={m.title}>Личный кабинет</h1>
         <div className={m.contentWrapper}>
           <div className={m.bar}>
@@ -93,7 +94,20 @@ function Favorites({ userData }) {
               </div>
             </div>
           ) : (
-            ""
+            <div className={m.FavoritesContainer}>
+              <p className={m.textError}>
+                У вас нет добавленных проектов или специалистов, перейдите в
+                раздел с поиском{" "}
+                <NavLink className={m.link} to="/project">
+                  проeкта
+                </NavLink>{" "}
+                или{" "}
+                <NavLink className={m.link} to="/specialists">
+                  специалиста
+                </NavLink>
+                .
+              </p>
+            </div>
           )}
           {/* Only Project */}
           {userData.favorites?.project.length !== 0 &&

@@ -1,12 +1,12 @@
 import EditProfile from "../../components/EditProfile/EditProfile";
-import Footer from "../../components/Blocks/Footer/Footer";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
 import './EditPagesRoute.css'
 
-function EditPages() {
+function EditPages({isAdmin}) {
   return (
     <div className="content">
       <div className="wrapper">
-        <EditProfile />
+        <EditProfile isAdmin={isAdmin} />
       </div>
       <Footer />
     </div>

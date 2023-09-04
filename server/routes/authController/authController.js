@@ -56,7 +56,7 @@ class authController {
 
             const token = createToken(user.id)
 
-            return res.json({ token, userID: user.id })
+            return res.json({ token, userID: user.id, isAdmin: user.isAdmin })
         } catch (e) {
             return res.status(500).json({ message: e })
         }
@@ -121,7 +121,7 @@ class authController {
           const count = await User.countDocuments({_id: { $ne: id }});
           const totalPages = Math.ceil(count / perPage);
       
-          const find = await User.find({_id: { $ne: id }}).skip(skip).limit(perPage);
+          const find = await User.find({_id: { $ne: id }, isAdmin: false}).skip(skip).limit(perPage);
       
           return res.json({
             data: find,

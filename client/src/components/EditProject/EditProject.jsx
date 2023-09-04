@@ -1,14 +1,14 @@
 import m from "./EditProject.module.css";
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import { Field, Form } from "react-final-form";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { onAdd } from "../../redux/slices/userSlice";
 import { getProject } from "../../redux/slices/userSlice";
-import EditPositionForm from "../Form/EditPositionForm/EditPositionForm";
+import EditPositionForm from "../UI/Form/EditPositionForm/EditPositionForm";
 
-function EditProject() {
+function EditProject({isAdmin}) {
   const currentLink = window.location.href;
   const findProjectID = currentLink.toString().slice(38, 62);
   const normalInput = `${m.input}`;
@@ -89,7 +89,7 @@ function EditProject() {
   return (
     <div className={m.container}>
       <div className={m.containerwrapper}>
-        <ModifiedHeader />
+        <ModifiedHeader isAdmin={isAdmin} />
         <h1 className={m.title}>Редактирование</h1>
         <div className={m.wrapper}>
           <Form

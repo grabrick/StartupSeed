@@ -2,7 +2,7 @@ import m from "./ProjectFavoritesComponent.module.css";
 import favorite from "../../../assets/images/star-line.svg";
 import active from "../../../assets/images/star-line-active.svg";
 import { useState } from "react";
-import WarningProjectPopup from "../../Popup/WarningProjectPopup/WarningProjectPopup";
+import WarningProjectPopup from "../../UI/Popup/WarningProjectPopup/WarningProjectPopup";
 
 function ProjectFavoritesComponent({ projectItems }) {
   const [isVisible, setIsVisible] = useState(false);

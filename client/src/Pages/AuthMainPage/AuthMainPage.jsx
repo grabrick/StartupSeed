@@ -1,14 +1,14 @@
 import { useDispatch } from "react-redux";
-import AboutInfo from "../../components/Blocks/AboutInfo/AboutInfo";
-import Footer from "../../components/Blocks/Footer/Footer";
-import ModifiedHeader from "../../components/Blocks/Header/ModifiedHeader/ModifiedHeader";
+import AboutInfo from "../../components/UI/Blocks/AboutInfo/AboutInfo";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
+import ModifiedHeader from "../../components/UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import { getUser } from "../../redux/slices/userSlice";
 import { useEffect } from "react";
 import axios from "axios";
 import { getSkills } from "../../redux/slices/skillsSlice";
 import "./AuthRoute.css";
 
-function ModifiedMainPage() {
+function ModifiedMainPage({isAdmin}) {
   const dispatch = useDispatch();
   const User = (items) => {
     dispatch(getUser(items));
@@ -25,7 +25,6 @@ function ModifiedMainPage() {
       .then((items) => {
         User(items.data);
         Skills(items.data.more.job.skills);
-        console.log(items.data);
       })
       .catch((e) => {
         console.log(e);
@@ -35,7 +34,7 @@ function ModifiedMainPage() {
 
   return (
     <div className="content">
-      <ModifiedHeader />
+      <ModifiedHeader isAdmin={isAdmin} />
       <div className="wrapper">
         <AboutInfo />
       </div>

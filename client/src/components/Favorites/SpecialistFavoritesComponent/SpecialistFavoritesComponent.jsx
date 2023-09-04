@@ -2,7 +2,7 @@ import m from "./SpecialistFavoritesComponent.module.css";
 import favorite from "../../../assets/images/star-line.svg";
 import active from "../../../assets/images/star-line-active.svg";
 import { useState } from "react";
-import WarningUserPopup from "../../Popup/WarningUserPopup/WarningUserPopup";
+import WarningUserPopup from "../../UI/Popup/WarningUserPopup/WarningUserPopup";
 
 function SpecialistFavoritesComponent({ userItems }) {
   const [isVisible, setIsVisible] = useState(false);

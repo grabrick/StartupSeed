@@ -1,12 +1,12 @@
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import PositionProject from "./PositionProject/PositionProject";
 import m from "./WatchProject.module.css";
 
-function WatchProject({ items, projectId }) {
+function WatchProject({ items, projectId, isAdmin }) {
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
-        <ModifiedHeader />
+        <ModifiedHeader isAdmin={isAdmin} />
 
         <div className={m.project}>
           <div className={m.projectWrapper}>

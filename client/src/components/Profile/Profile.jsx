@@ -1,13 +1,13 @@
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import m from "./Profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { getUser } from "../../redux/slices/userSlice";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../UI/NavBar/NavBar";
 import { getSkills } from "../../redux/slices/skillsSlice";
 
-function Profile() {
+function Profile({isAdmin}) {
   const data = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
   const ID = JSON.parse(localStorage.getItem("userData"));
@@ -46,7 +46,7 @@ function Profile() {
   return (
     <div className={m.container}>
       <div className={m.containerwrapper}>
-      <ModifiedHeader />
+      <ModifiedHeader isAdmin={isAdmin} />
         <h1 className={m.title}>Личный кабинет</h1>
 
         <div className={m.wrapper}>

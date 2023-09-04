@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
-import NavBar from "../NavBar/NavBar";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
+import NavBar from "../UI/NavBar/NavBar";
 import m from "./MyProject.module.css";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
@@ -8,7 +8,7 @@ import axios from "axios";
 import { getProject, getUser } from "../../redux/slices/userSlice";
 import ProjectComponent from "./ProjectComponent/ProjectComponent";
 
-function MyProject() {
+function MyProject({isAdmin}) {
   const data = useSelector((state) => state.users.user);
   const project = useSelector((state) => state.users.myProject);
   const ID = JSON.parse(localStorage.getItem("userData"));
@@ -47,7 +47,7 @@ function MyProject() {
   return (
     <div className={m.container}>
       <div className={m.containerwrapper}>
-        <ModifiedHeader />
+        <ModifiedHeader isAdmin={isAdmin} />
         <h1 className={m.title}>Личный кабинет</h1>
 
         <div className={m.wrapper}>

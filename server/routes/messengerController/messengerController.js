@@ -1,110 +1,73 @@
 const Message = require('../../modals/Messenger')
 const User = require('../../modals/User')
+const email = require('@emailjs/nodejs');
 
 class messengerController {
-    async createMessenger(req, res) {
+    async sendInvite(req, res) {
         try {
             const { id } = req.params
             const value = req.body
-
             const findMe = await User.findById(id)
-            const findProjectOwner = await User.findOne({_id: value.projectOwner})
-            const findCopyMessage = await Message.findOne({ "projectOwnerObject.ownerID": value.projectOwner })
 
             const data = {
-                yourObject: {
-                    myID: findMe._id,
-                    fname: findMe.fname,
-                    lname: findMe.lname,
-                    profilePic: findMe.more.pers.profilePic,
-                    jobPost: findMe.more.job.post,
-                },
-                projectOwnerObject: {
-                    ownerID: findProjectOwner._id,
-                    fname: findProjectOwner.fname,
-                    lname: findProjectOwner.lname,
-                    profilePic: findProjectOwner.more.pers.profilePic,
-                    jobPost: findProjectOwner.more.job.post,
-                },
+                authorID: id,
+                authorEmail: findMe.email,
+                interlocutorID: value.interlocutor._id,
+                interlocutorEmail: value.interlocutor.email,
+                message: value.sendValue
             }
 
-            if (findCopyMessage && findCopyMessage.projectOwnerObject.ownerID === findProjectOwner._id.toString()) {
-                return res.status(400).json({ message: 'Вы уже откликнулись' });
+            if (data) {
+                findMe.mySendInvite.push(data);
+                await findMe.save();
+
+                return res.status(200).json({ message: 'Done!' })
+            } else {
+                return res.status(400).json({ message: 'Проект уже добален' })
             }
-
-            const newMessage = new Message(data)
-
-            await newMessage.save()
-            return res.status(200).json({ message: 'Done!', data: newMessage })
         } catch (e) {
-            return res.status(500).json({message: e})
+            return res.status(500).json(e)
         }
     }
 
-    async sendInvate(req, res) {
+    async sendEmailInvite(req, res) {
         try {
+            // const { id } = req.params
             const value = req.body
-            const { id } = req.params
-            const findMe = await User.findById(id)
-            const findProjectOwner = await User.findOne({_id: value.projectOwnerObject._id})
-            const findCopyMessage = await Message.findOne({ "projectOwnerObject.ownerID": value.projectOwnerObject._id })
+            // const findMe = await User.findById(id)
+            const fromHost = 'mail.my';
+            const from = `Mail@${fromHost}`; // Придумайте свой адрес отправителя (может быть несуществующим)
+            const to = `Кому отправить: ${value.interlocutor.interlocutorEmail}`.trim();
 
-            const data = {
-                yourObject: {
-                    myID: findMe._id,
-                    fname: findMe.fname,
-                    lname: findMe.lname,
-                    profilePic: findMe.more.pers.profilePic,
-                    jobPost: findMe.more.job.post,
-                },
-                projectOwnerObject: {
-                    ownerID: value.projectOwnerObject._id,
-                    fname: value.projectOwnerObject.fname,
-                    lname: value.projectOwnerObject.lname,
-                    profilePic: value.projectOwnerObject.more.pers.profilePic,
-                    jobPost: value.projectOwnerObject.more.job.post,
-                },
-                message: [
-                    {
-                        authorID: id,
-                        message: value.sendValue
-                    }
-                ]
-            }
+            // Создайте объект для отправки письма
+            const message = email.message({
+                from: from,
+                to: to,
+                subject: 'Заголовок письма'
+            });
 
-            if (findCopyMessage && findCopyMessage.projectOwnerObject.ownerID === findProjectOwner._id.toString()) {
-                return res.status(400).json({ message: 'Вы уже откликнулись' });
-            }
-            
-            const newMessage = new Message(data)
+            // Добавьте HTML-содержимое письма
+            message.html = `<h1>Security code: ${fromHost}</h1>`;
 
-            await newMessage.save()
+            // Создайте SMTP клиента для отправки письма
+            const client = email.server.connect({
+                user: 'startup-seed@mail.ru',
+                password: 'yUEuo3LU^ri2',
+                host: 'smtp.your-email-provider.com',
+            });
 
-            return res.status(200).json({ message: 'Done!' })
+            // Отправьте письмо
+            client.send(message, (err, message) => {
+                if (err) {
+                    console.error('Ошибка при отправке:', err);
+                    return res.status(500).json({ message: 'Ошибка при отправке письма' });
+                } else {
+                    console.log('Письмо отправлено');
+                    return res.status(201).send('testing');
+                }
+            });
         } catch (e) {
-            return res.status(500).json(e)
-        }
-    }
-
-    async getMyCatalog(req, res) {
-        try {
-            const { id } = req.params
-            // МБ в будущем будут проблемы с 48 строкой
-            const findObject = await Message.find({ "yourObject.myID": id })
-            return res.status(200).json({findObject: findObject})
-        } catch (e) {
-            return res.status(500).json(e)
-        }
-    }
-
-    async deleteUser(req, res) {
-        try {
-            const { id } = req.params
-
-            const update = await Message.findByIdAndDelete(id)
-            return res.status(200).json({ message: "Пользователь удален",  update: update})
-        } catch (e) {
-            return res.status(500).json(e)
+            res.status(500).json({ message: e });
         }
     }
 }

@@ -8,16 +8,16 @@ import {
 } from "../../redux/slices/popupSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import ModifiedHeader from "../Blocks/Header/ModifiedHeader/ModifiedHeader";
-import NavBar from "../NavBar/NavBar";
-import EditEmail from "../Popup/EditEmail/EditEmail";
-import EditPassword from "../Popup/EditPassword/EditPassword";
+import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
+import NavBar from "../UI/NavBar/NavBar";
+import EditEmail from "../UI/Popup/EditEmail/EditEmail";
+import EditPassword from "../UI/Popup/EditPassword/EditPassword";
 import PhoneInput from "react-phone-number-input";
 import m from "./Settings.module.css";
 import "react-phone-number-input/style.css";
 import "./Settings.css";
 
-function Settings() {
+function Settings({isAdmin}) {
   const data = useSelector((state) => state.users.user);
   const isVisibleEmail = useSelector((state) => state.popup.visibleEmail);
   const isVisiblePassword = useSelector((state) => state.popup.visiblePassword);
@@ -119,7 +119,7 @@ function Settings() {
   return (
     <div className={m.container}>
       <div className={m.containerWrapper}>
-        <ModifiedHeader />
+        <ModifiedHeader isAdmin={isAdmin} />
 
         {/* <h1 className={m.title}>Личный кабинет</h1> */}
 

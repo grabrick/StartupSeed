@@ -1,12 +1,12 @@
-import Footer from "../../components/Blocks/Footer/Footer";
+import Footer from "../../components/UI/Blocks/Footer/Footer";
 import MyProject from "../../components/MyProject/MyProject";
 import "./MainProject.css";
 
-function MainProject() {
+function MainProject({isAdmin}) {
   return (
     <div className="content">
       <div className="wrapper">
-        <MyProject />
+        <MyProject isAdmin={isAdmin} />
       </div>
       <Footer />
     </div>
