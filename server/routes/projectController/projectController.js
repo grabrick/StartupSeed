@@ -37,15 +37,16 @@ class projectController {
         try {
             const { id } = req.params;
             const projectOwner = id
+            const isVerification = false
             const perPage = parseInt(req.query.perPage) || 10; // Значение по умолчанию: 10
             const page = parseInt(req.query.page) || 1; // Значение по умолчанию: 1
-        
+            
             const skip = (page - 1) * perPage;
         
             const count = await Project.countDocuments({_id: { $ne: id }});
             const totalPages = Math.ceil(count / perPage);
         
-            const find = await Project.find({projectOwner: { $ne: projectOwner }}).skip(skip).limit(perPage);
+            const find = await Project.find({projectOwner: { $ne: projectOwner }, isVerification: {$ne: isVerification}}).skip(skip).limit(perPage);
         
             return res.json({
               data: find,
@@ -61,31 +62,31 @@ class projectController {
     async uploadImage(req, res) {
         try {
           const { id } = req.params;
-          console.log(req.file.path);
-        //   if (!req.file) {
-        //     return res.status(400).json({ error: 'Файл не был загружен.' });
-        //   }
+        //   console.log(req.file.path);
+          if (!req.file) {
+            return res.status(400).json({ error: 'Файл не был загружен.' });
+          }
 
-        //   const project = await Project.findById(id);
-        // //   const prevProfilePic
+          const project = await Project.findById(id);
+        //   const prevProfilePic
     
-        //   const update = await Project.findByIdAndUpdate(
-        //     id,
-        //     { 'projectImage': req.file.path }, // Путь к файлу сохраняется в поле 'path' объекта req.file
-        //     { new: true }
-        //   );
+          const update = await Project.findByIdAndUpdate(
+            id,
+            { 'projectImage': req.file.path },
+            { new: true }
+          );
 
-        //   if (prevProfilePic) {
-        //     fs.unlink(prevProfilePic, (err) => {
-        //       if (err) {
-        //         console.error('Ошибка при удалении предыдущей картинки:', err);
-        //       } else {
-        //         console.log('Предыдущая картинка успешно удалена.');
-        //       }
-        //     });
-        //   }
+          if (prevProfilePic) {
+            fs.unlink(prevProfilePic, (err) => {
+              if (err) {
+                console.error('Ошибка при удалении предыдущей картинки:', err);
+              } else {
+                console.log('Предыдущая картинка успешно удалена.');
+              }
+            });
+          }
     
-        //   return res.json(update);
+          return res.json(update);
         } catch (e) {
             return res.status(500).json({ message: e })
         }
@@ -94,23 +95,23 @@ class projectController {
     async createProject(req, res) {
         try {
             const { id } = req.params;
-            const projectImage = req.file.path;
+            const projectImage = req.file;
             const { projectName, projectDesc, projectPost } = req.body;
             const projectOwner = id;
         
             const project = new Project({
               projectName,
-              projectImage,
+              projectImage: projectImage === undefined ? '' : projectImage.path,
               projectDesc,
               projectOwner,
               projectPost,
             });
-        
+            console.log(req.file);
             await project.save();
             return res.status(201).json(project);
-          } catch (e) {
-            return res.status(500).json({ message: e });
-          }
+        } catch (e) {
+            return res.status(500).json({ message: 'Ошибка при создании проекта' });
+        }
     }
 
     async preCreateProject(req, res) {

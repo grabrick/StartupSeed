@@ -8,6 +8,8 @@ import pagination from "./slices/paginationSlice"
 import currentUser from "./slices/currentUser";
 import currentProject from "./slices/currentProjectSlice";
 import messenger from "./slices/messengerSlice"
+import usersThanks from "./thanks/userSlice"
+import projectThanks from "./thanks/projectSlice"
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +21,10 @@ export const store = configureStore({
     pagination,
     currentUser,
     currentProject,
-    messenger
+    messenger,
+    
+    // Thanks
+    usersThanks,
+    projectThanks
   },
 })

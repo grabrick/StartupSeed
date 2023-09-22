@@ -3,6 +3,7 @@ import m from "./ProjectComponent.module.css";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import baseImage from '../../../assets/images/NotFound.svg'
 import { getProject } from "../../../redux/slices/userSlice";
 
 function ProjectComponent(items) {
@@ -30,7 +31,7 @@ function ProjectComponent(items) {
     <div className={m.container}>
       <div className={m.wrapper}>
         <div className={m.avatar}>
-          <img className={m.image} src={data.projectImage} alt="" />
+          <img className={m.image} src={data.projectImage ? data.projectImage : baseImage} alt="" />
         </div>
         <div className={m.titleContainer}>
           <div className={m.titleWrapper}>

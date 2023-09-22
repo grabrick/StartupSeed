@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import m from "./ProjectComponent.module.css";
+import baseImg from "../../../assets/images/NotFound.svg"
 
 function ProjectComponent({ items }) {
   return (
@@ -8,7 +9,7 @@ function ProjectComponent({ items }) {
         <div className={m.wrapper}>
           <div className={m.projectContainer}>
             <div className={m.avatar}>
-              <img className={m.image} src={`http://startupseed.ru/${items?.projectImage}`} alt="" />
+              <img className={m.image} src={items?.projectImage ? `http://startupseed.ru/${items?.projectImage}` : baseImg} alt="" />
             </div>
             <div className={m.infoWrapper}>
               <h4 className={m.title}>{items?.projectName}</h4>

@@ -1,4 +1,5 @@
 import m from "./ProfileComponent.module.css";
+import baseImage from '../../../assets/images/NotFound.svg'
 
 function ProfileComponent({ items }) {
   const hb = items?.more?.pers?.hb;

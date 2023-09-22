@@ -35,7 +35,6 @@ const pagination = createSlice({
     },
     setSearchQuery: (state, action) => {
       const { filtered, input, postLevel } = action.payload
-      console.log({ filtered, input, postLevel });
       if (input || postLevel !== 'Любой') {
         state.users = filtered
       } else if (input === "" || postLevel === 'Любой') {
@@ -44,7 +43,6 @@ const pagination = createSlice({
     },
     setSearchProjectQuery: (state, action) => {
       const { filtered, input, postLevel } = action.payload
-      console.log({ filtered, input, postLevel });
       if (input || postLevel !== 'Любой') {
         state.project = filtered
       } else if (input === "" || postLevel === 'Любой') {
@@ -56,7 +54,18 @@ const pagination = createSlice({
     },
     setReserveProject: (state, action) => {
       state.reserveUsers = action.payload
-    }
+    },
+    searchResult: (state, action) => {
+      const query = action.payload.toLowerCase();
+      const filteredUsers = state.reserveUsers.filter((user) =>
+        `${user.fname} ${user.lname}`.toLowerCase().indexOf(query) !== -1
+      );
+      state.users = filteredUsers;
+      
+      if (query.length === 0) {
+        state.users = state.reserveUsers;
+      }
+    },
   },
 });
 
@@ -69,6 +78,7 @@ export const {
   setTotalPages,
   setIsFetching,
   setSearchQuery,
-  setSearchProjectQuery } = pagination.actions;
+  setSearchProjectQuery,
+  searchResult } = pagination.actions;
 
 export default pagination.reducer;

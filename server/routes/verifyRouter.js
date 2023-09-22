@@ -12,4 +12,14 @@ router.put(
     controller.changeEmail
 )
 
+router.put(
+    '/:id/changeVerefy',
+    controller.changeVerification
+)
+
+router.put(
+    '/:id/changeProjectVerefy',
+    controller.changeProjectVerification
+)
+
 module.exports = router

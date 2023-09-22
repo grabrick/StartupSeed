@@ -1,5 +1,6 @@
 import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import PositionProject from "./PositionProject/PositionProject";
+import baseImage from '../../assets/images/NotFound.svg'
 import m from "./WatchProject.module.css";
 
 function WatchProject({ items, projectId, isAdmin }) {
@@ -13,7 +14,7 @@ function WatchProject({ items, projectId, isAdmin }) {
             <div className={m.avatar}>
               <img
                 className={m.image}
-                src={items.projectImage}
+                src={items.projectImage ? items.projectImage : baseImage}
                 alt=""
               />
             </div>

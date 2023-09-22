@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const User = require('../../modals/User')
 const directTransport = require('nodemailer-direct-transport');
+const Project = require('../../modals/Project');
 const code = Math.floor(1000 + Math.random() * 9000);
 
 class verifyController {
@@ -32,6 +33,7 @@ class verifyController {
             res.status(500).json({ message: e })
         }
     }
+
     async changeEmail(req, res) {
         try {
             const { inputCode, email } = req.body
@@ -54,8 +56,60 @@ class verifyController {
         } catch (e) {
             res.status(500).json({ message: "Этот email уже занят" })
         }
+    }
 
+    async changeVerification(req, res) {
+        try {
+            const value = req.body
+            if (value.config === 'access') {
+                const update = await User.findByIdAndUpdate(
+                    value.userID,
+                    {
+                        "isVerification": true
+                    },
+                    { new: true }
+                )
+                return res.status(200).json(update)
+            } else {
+                const update = await User.findByIdAndUpdate(
+                    value.userID,
+                    {
+                        "isVerification": false
+                    },
+                    { new: true }
+                )
+                return res.status(200).json(update)
+            }
+        } catch (e) {
+            res.status(500).json({ message: "Ошиибка верефикации" })
+        }
+    }
 
+    async changeProjectVerification(req, res) {
+        try {
+            const value = req.body
+            if (value.config === 'access') {
+                const update = await Project.findByIdAndUpdate(
+                    value.userID,
+                    {
+                        "isVerification": true
+                    },
+                    { new: true }
+                )
+                return res.status(200).json(update)
+            } else {
+                const update = await Project.findByIdAndUpdate(
+                    value.userID,
+                    {
+                        "isVerification": false
+                    },
+                    { new: true }
+                )
+                return res.status(200).json(update)
+            }
+        } catch (e) {
+            res.status(500).json({ message: "Ошиибка верефикации" })
+        }
     }
 }
 

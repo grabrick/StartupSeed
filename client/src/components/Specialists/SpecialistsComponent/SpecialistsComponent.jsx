@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import m from "./SpecialistsComponent.module.css";
+import baseImage from '../../../assets/images/NotFound.svg'
 
 function SpecialistsComponent(items) {
   const data = items.items;
@@ -8,7 +9,7 @@ function SpecialistsComponent(items) {
       <div className={m.container}>
         <div className={m.wrapper}>
           <div className={m.avatar}>
-            <img className={m.image} src={`http://startupseed.ru/${data.more?.pers?.profilePic}`} alt="" />
+            <img className={m.image} src={data.more?.pers?.profilePic ? `http://startupseed.ru/${data.more?.pers?.profilePic}` : baseImage} alt="" />
           </div>
           <div className={m.info}>
             <p className={m.title}>

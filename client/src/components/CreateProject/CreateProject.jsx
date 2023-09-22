@@ -32,6 +32,7 @@ function CreateProject({isAdmin}) {
 
     return errors;
   };
+
   const onSubmit = async (value) => {
     axios.post(`/api/${userId}/project/create`, image)
     .then((response => {
@@ -52,16 +53,15 @@ function CreateProject({isAdmin}) {
   const converter = (e) => {
     let file = e.target.files[0];
     let formData = new FormData();
-    let reader = new FileReader();
-    formData.append("upload", file);
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      const uploadImage = async () => {
-        setVisualImage({ ...visualImage, image: reader.result });
-        setImage(formData);
-      };
-      uploadImage();
-    };
+    formData.append('upload', file);
+    setImage(formData)
+    setVisualImage(file)
+    // axios.put(`/api/auth/${userId}/upload`, formData)
+    // .then(response => {
+    //   if(response.status === 200) {
+    //     update()
+    //   }
+    // });
   };
 
   return (

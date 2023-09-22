@@ -25,16 +25,16 @@ function PositionProject({ item, projectId, post, projectOwner }) {
   const findCurrentFavorites = favoriteProject.find(
     (i) => i.postID === item.id
   );
-  const findPost = projectData.projectPost.find((items) => items.id === item.id);
-  const currentID = post.projectPost.find((i) => i.id === item.id);
-  const findID = favoriteProject.find(i => i.postID === currentID.id)
+  const findPost = projectData?.projectPost?.find((items) => items.id === item.id);
+  const currentID = post?.projectPost?.find((i) => i.id === item.id);
+  const findID = favoriteProject?.find(i => i.postID === currentID.id)
 
   const [value] = useState({
     postID: item.id,
     projectID: projectId,
-    projectName: projectData.projectName,
-    jobPost: findPost.jobPost,
-    postLevel: findPost.postLevel,
+    projectName: projectData?.projectName,
+    jobPost: findPost?.jobPost,
+    postLevel: findPost?.postLevel,
     profilePic: projectData?.projectImage,
     isFavorite: true,
   });

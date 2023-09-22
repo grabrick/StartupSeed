@@ -113,6 +113,7 @@ class authController {
     async getAllPerson(req, res) {
         try {
           const { id } = req.params;
+          const isVerification = false
           const perPage = parseInt(req.query.perPage) || 10; // Значение по умолчанию: 10
           const page = parseInt(req.query.page) || 1; // Значение по умолчанию: 1
       
@@ -121,7 +122,7 @@ class authController {
           const count = await User.countDocuments({_id: { $ne: id }});
           const totalPages = Math.ceil(count / perPage);
       
-          const find = await User.find({_id: { $ne: id }, isAdmin: false}).skip(skip).limit(perPage);
+          const find = await User.find({_id: { $ne: id }, isAdmin: false, isVerification: {$ne: isVerification}}).skip(skip).limit(perPage);
       
           return res.json({
             data: find,
@@ -132,7 +133,7 @@ class authController {
         } catch (e) {
           return res.status(500).json(e);
         }
-      }
+    }
 
     async getPerson(req, res) {
         try {

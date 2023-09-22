@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import m from "./Search.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setSearchProjectQuery } from "../../../redux/slices/paginationSlice";
 
 function ProjectSearch() {
@@ -43,6 +43,15 @@ function ProjectSearch() {
       );
     }
   };
+
+  useEffect(() => {
+    dispatch(setSearchProjectQuery({
+      filtered: [],
+      input: '',
+      postLevel: 'Любой'
+    }))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchInput?.input?.length === 0])
   return (
     <div className={m.navbarWrapper}>
       <input
