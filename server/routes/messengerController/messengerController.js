@@ -1,25 +1,48 @@
-const Message = require('../../modals/Messenger')
+const Chat = require('../../modals/Chat')
 const User = require('../../modals/User')
-const email = require('@emailjs/nodejs');
+const Message = require('../../modals/Messege')
+
 
 class messengerController {
-    async sendInvite(req, res) {
+    async sendRespond(req, res) {
         try {
             const { id } = req.params
             const value = req.body
-            const findMe = await User.findById(id)
+            const findAuthor = await User.findById(id)
+            const findInterlocator = await User.findById(value.interlocutorID)
+            const findCopyChat = await Chat.find({ 'users.interlocutor.interlocutorID': value.interlocutorID })
 
             const data = {
-                authorID: id,
-                authorEmail: findMe.email,
-                interlocutorID: value.interlocutor._id,
-                interlocutorEmail: value.interlocutor.email,
-                message: value.sendValue
+                respond: {
+                    position: {
+                        jobPost: value.jobPost,
+                        jobTask: value.jobTask,
+                        postLevel: value.postLevel,
+                        skills: value.skills,
+                    },
+                    respondMessage: value.respondMessage
+                },
+                users: {
+                    author: {
+                        authorID: id,
+                        fname: findAuthor.fname,
+                        lname: findAuthor.lname,
+                        post: findAuthor.more.job.post ? findAuthor.more.job.post : null,
+                        profilePic: findAuthor.more.pers.profilePic ? findAuthor.more.pers.profilePic : null,
+                    },
+                    interlocutor: {
+                        interlocutorID: value.interlocutorID,
+                        fname: findInterlocator.fname,
+                        lname: findInterlocator.lname,
+                        post: findInterlocator.more.job.post ? findInterlocator.more.job.post : null,
+                        profilePic: findInterlocator.more.pers.profilePic ? findInterlocator.more.pers.profilePic : null,
+                    }
+                }
             }
 
-            if (data) {
-                findMe.mySendInvite.push(data);
-                await findMe.save();
+            if (findCopyChat.length === 0) {
+                const update = new Chat(data)
+                await update.save()
 
                 return res.status(200).json({ message: 'Done!' })
             } else {
@@ -30,44 +53,55 @@ class messengerController {
         }
     }
 
-    async sendEmailInvite(req, res) {
+    async fetchCatalog(req, res) {
+        const { id } = req.params;
+
         try {
-            // const { id } = req.params
+            const findAuthorIDChats = await Chat.find({ 'users.author.authorID': id });
+
+            const findInterlocutorIDChats = await Chat.find({ 'users.interlocutor.interlocutorID': id });
+
+            const allChats = [...findAuthorIDChats, ...findInterlocutorIDChats];
+
+            if (allChats.length > 0) {
+                return res.json(allChats);
+            } else {
+                // Чаты не найдены
+                return res.status(404).json({ message: 'Чаты не найдены' });
+            }
+        } catch (error) {
+            return res.status(500).json({ message: 'Произошла ошибка сервера' });
+        }
+    }
+
+    async sendMessage(req, res) {
+        try {
+            const { id } = req.params;
             const value = req.body
-            // const findMe = await User.findById(id)
-            const fromHost = 'mail.my';
-            const from = `Mail@${fromHost}`; // Придумайте свой адрес отправителя (может быть несуществующим)
-            const to = `Кому отправить: ${value.interlocutor.interlocutorEmail}`.trim();
-
-            // Создайте объект для отправки письма
-            const message = email.message({
-                from: from,
-                to: to,
-                subject: 'Заголовок письма'
-            });
-
-            // Добавьте HTML-содержимое письма
-            message.html = `<h1>Security code: ${fromHost}</h1>`;
-
-            // Создайте SMTP клиента для отправки письма
-            const client = email.server.connect({
-                user: 'startup-seed@mail.ru',
-                password: 'yUEuo3LU^ri2',
-                host: 'smtp.your-email-provider.com',
-            });
-
-            // Отправьте письмо
-            client.send(message, (err, message) => {
-                if (err) {
-                    console.error('Ошибка при отправке:', err);
-                    return res.status(500).json({ message: 'Ошибка при отправке письма' });
-                } else {
-                    console.log('Письмо отправлено');
-                    return res.status(201).send('testing');
-                }
-            });
+            const data = {
+                authorID: id,
+                chatID: value.chatID,
+                message: {
+                    msg: value.msg,
+                    sendTime: value.sendTime,
+                },
+            }
+            // console.log(data);
+            const update = new Message(data)
+            await update.save()
+            return res.status(200).json({ message: '' })
         } catch (e) {
-            res.status(500).json({ message: e });
+            return res.status(500).json({ message: 'Произошла ошибка сервера' });
+        }
+    }
+
+    async getChatMesseges(req, res) {
+        try {
+            const update = await Message.find()
+
+            res.status(200).json(update)
+        } catch (e) {
+            return res.status(500).json({ message: 'Произошла ошибка сервера' });
         }
     }
 }

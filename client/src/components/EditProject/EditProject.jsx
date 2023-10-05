@@ -18,6 +18,7 @@ function EditProject({isAdmin}) {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const [image, setImage] = useState();
+  const [visualImage, setVisualImage] = useState();
   const dispatch = useDispatch();
   const project = useSelector((state) => state.users.myProject);
   const addForm = () => {
@@ -44,12 +45,17 @@ function EditProject({isAdmin}) {
     (object) => object._id === findProjectID
   );
 
-  const converter = (e) => {
+  const converter = async (e) => {
+    let file = e.target.files[0];
+    let formData = new FormData();
+    formData.append('upload', file);
+    setImage(formData)
+
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       const uploadImage = async () => {
-        setImage({ ...image, image: reader.result });
+        setVisualImage({...visualImage, image: reader.result})
       };
       uploadImage();
     };
@@ -59,6 +65,13 @@ function EditProject({isAdmin}) {
       };
     }, 1000);
   };
+
+  useEffect(() => {
+    if (image?.has('upload')) {
+      axios.put(`/api/${findProjectID}/projectImage/upload`, image)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [image])
 
   const validate = (e) => {
     const errors = {};
@@ -72,11 +85,7 @@ function EditProject({isAdmin}) {
 
   const onSubmit = async (value) => {
     axios
-      .put(`/api/${findProjectID}/project/edit`, {
-        ...value,
-        projectPost: findCurrentObject.projectPost,
-        projectImage: image?.image,
-      })
+      .put(`/api/${findProjectID}/project/edit`, { ...value, projectPost: findCurrentObject.projectPost})
       .then((response) => {
         if (response.status === 201) {
           // setTimeout(() => {
@@ -103,8 +112,8 @@ function EditProject({isAdmin}) {
                       className={m.profilePic}
                       src={
                         findCurrentObject
-                          ? image?.image
-                          : findCurrentObject?.projectImage
+                          ? visualImage?.image
+                          : `http://localHost:3000/${findCurrentObject?.projectImage}`
                       }
                       alt=""
                     />

@@ -45,14 +45,18 @@
 }
 
 .button {
-    width: 80px;
     background-color: transparent;
     border: 2px solid black;
     border-radius: 5px;
     cursor: pointer;
+    padding: 5px 30px;
+    font-size: 18px;
 }
 
 .button:hover {
     border: 2px solid #93B633;
     transition: linear 0.3s;
+    outline: 0;
+    transition: .2s ease;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
 }

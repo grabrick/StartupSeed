@@ -49,7 +49,7 @@ function ProjectComponent(items) {
                 </NavLink>
                 <NavLink
                   className={m.NavLink}
-                  to={`/profile/project/${data._id}/edit`}
+                  to={`/project/view/${data._id}`}
                 >
                   <button className={m.editButton}>Посмотреть</button>
                 </NavLink>

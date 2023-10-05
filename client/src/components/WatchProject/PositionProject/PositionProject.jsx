@@ -7,15 +7,15 @@ import {
 } from "../../../redux/slices/currentProjectSlice";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-function PositionProject({ item, projectId, post, projectOwner }) {
+function PositionProject({ item, projectId, setIsActive, post, setSubmitValue, projectOwner }) {
   const stock = `${m.wrapper}`;
   const isActive = `${m.activeWrapper}`;
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const projectData = useSelector(
     (state) => state.currentProject.currentProject
   );
@@ -39,9 +39,9 @@ function PositionProject({ item, projectId, post, projectOwner }) {
     isFavorite: true,
   });
 
-  const getFavoriteProject = (items) => {
-    dispatch(getFavorite(items));
-  };
+  // const getFavoriteProject = (items) => {
+  //   dispatch(getFavorite(items));
+  // };
 
   const upload = () => {
     axios
@@ -49,9 +49,10 @@ function PositionProject({ item, projectId, post, projectOwner }) {
       .then((response) => {
         if (response.status === 200) {
           dispatch(addFavoritesProject({ value }));
-          axios.get(`/api/${userId}/getFavorite`).then((items) => {
-            getFavoriteProject(items.data.favorites.project)
-          });
+          // axios.get(`/api/${userId}/getFavorite`).then((items) => {
+          //   getFavoriteProject(items.data.favorites.project)
+          //   // console.log(items.data.favorites.project);
+          // });
         }
       });
   };
@@ -66,15 +67,6 @@ function PositionProject({ item, projectId, post, projectOwner }) {
       });
   };
 
-  const sendMessage = () => {
-    // axios.post(`/api/${userId}/createMessage`, { projectOwner: projectOwner })
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       navigate('/messenger')
-    //     }
-    //   })
-  };
-
   const toggler = () => {
     if (!findID) {
       upload();
@@ -82,6 +74,11 @@ function PositionProject({ item, projectId, post, projectOwner }) {
       removeFavorite();
     }
   };
+
+  const handleClick = (value) => {
+    setSubmitValue(value)
+    setIsActive(true)
+  }
 
   return (
     <div className={m.container}>
@@ -99,7 +96,7 @@ function PositionProject({ item, projectId, post, projectOwner }) {
               ? "Убрать из избранного"
               : "Добавить в избранное"}
           </button>
-          <button className={m.addMessage} onClick={() => sendMessage()}>Откликнуться</button>
+          <button className={m.addMessage} onClick={() => handleClick(item)}>Откликнуться</button>
         </div>
       </div>
     </div>

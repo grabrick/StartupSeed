@@ -16,7 +16,6 @@ function ProjectProfilePopup({
     axios
       .put(`/api/${userId}/changeProjectVerefy`, { userID: id, config: config })
       .then((res) => {
-        // console.log(res.data);
         setCurrentProjectData(res.data)
         setIsCurrentProjectAction(config)
       });
@@ -90,10 +89,12 @@ function ProjectProfilePopup({
               <div className={m.positionWrapper}>
                 <h2 className={m.posTitle}>Открытые позиции</h2>
                 {currentProjectData?.projectPost?.map((pos, i) => (
-                  // console.log(pos)
                   <div key={i} className={m.posContainer}>
                     <div className={m.posWrapper}>
-                      <h3 className={m.jobPost}>{pos.jobPost}</h3>
+                      <div className={m.posJobWrapper}>
+                        <h3 className={m.jobPost}>{pos.jobPost}</h3>
+                        <h3 className={m.jobPostLevel}>{pos.postLevel}</h3>
+                      </div>
                       <p className={m.jobTask}>{pos.jobTask}</p>
                       <div className={m.skillsWrapper}>
                         {pos.skills.map((skills) => (

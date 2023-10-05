@@ -1,0 +1,103 @@
+.container {
+    max-width: 100%;
+}
+
+.wrapper {
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.projectWrapper {
+    max-width: 1000px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 15px;
+    display: flex;
+    gap: 20px;
+}
+
+.positionWrapper {
+    max-width: 1034px;
+    margin: 0 auto 20px auto;
+}
+
+.title {
+    margin: 0;
+    font-size: 35px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    margin-bottom: 20px;
+}
+
+.desc {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Montserrat';
+    font-style: normal;
+    overflow-wrap: break-word;
+    max-width: 850px;
+}
+
+/* .textWrapper {
+    display: flex;
+} */
+
+.avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+.image {
+    width: 130px;
+    height: 130px;
+    border-radius: 5px;
+}
+
+.posContainer {
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.posJob {
+    margin: 0;
+}
+
+.jobPostWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.posLevel {
+    font-weight: 300;
+    margin: 0;
+}
+
+.posTitle {
+    margin: 20px 0 0 0;
+}
+
+.posWrapper {
+    padding: 10px;
+}
+
+.skillsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skills {
+    background-color: silver;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.skillsTags {
+    margin: 0;
+}

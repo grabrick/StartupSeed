@@ -3,17 +3,17 @@ import m from "./Admins.module.css";
 import { useEffect, useState } from "react";
 // import axios from "axios";
 // import { getProject, getUsers } from "../../redux/slices/paginationSlice";
-import { searchResult, setClearData } from "../../redux/thanks/userSlice";
+import { searchResult, setClearData } from "../../redux/thunk/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import ProjectComponent from "../Project/ProjectComponent/ProjectComponent";
 // import SpecialistsComponent from "../Specialists/SpecialistsComponent/SpecialistsComponent";
 import SpecialistControl from "./SpecialistControl/SpecialistControl";
 import UserProfilePopup from "../UI/Popup/UserProfilePopup/UserProfilePopup";
 import PreLoader from "../UI/PreLoader/PreLoader";
-import { fetchUsersData } from "../../redux/thanks/userSlice";
+import { fetchUsersData } from "../../redux/thunk/userSlice";
 import ProjectProfilePopup from "../UI/Popup/ProjectProfilePopup/ProjectProfilePopup";
 import ProjectControl from "./ProjectControl/ProjectControl";
-import { fetchProjectData, searchProjectResult, setProjectClearData } from "../../redux/thanks/projectSlice";
+import { fetchProjectData, searchProjectResult, setProjectClearData } from "../../redux/thunk/projectSlice";
 
 function Admins() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function Admins() {
   const [isActiveProfile, setIsActiveProfile] = useState(false);
   const [isActiveProject, setIsActiveProject] = useState(false);
   const [currentProjectData, setCurrentProjectData] = useState(null);
-  const [subCategory, setSubCategory] = useState(null)
+  // const [subCategory, setSubCategory] = useState(null)
   const [inputValue, setInputValue] = useState("");
   const [currentProfileData, setCurrentProfileData] = useState(null);
   const [isCurrentAction, setIsCurrentAction] = useState(null);
@@ -30,8 +30,8 @@ function Admins() {
   const currentPage = useSelector((state) => state.pagination.currentPage);
   const usersPerPage = useSelector((state) => state.pagination.usersPerPage);
   // const project = useSelector((state) => state.pagination.project);
-  const { userData, userLoading, userError } = useSelector(state => state.usersThanks);
-  const {projectData, projectLoading, projectError} = useSelector(state => state.projectThanks)
+  const { userData, userLoading, userError } = useSelector(state => state.usersThunks);
+  const {projectData, projectLoading, projectError} = useSelector(state => state.projectThunks);
   const catalog = [{ category: "Проекты" }, { category: "Специалисты" }];
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;

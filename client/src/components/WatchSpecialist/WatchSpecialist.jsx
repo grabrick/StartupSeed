@@ -21,12 +21,13 @@ function WatchSpecialist({ userID, items, project, isAdmin }) {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const favorites = useSelector((state) => state.currentUser.favoritesUser);
-  const find = favorites.find((items) => items);
+  const find = favorites.find((items) => items.userID === items._id);
+  const findFavorites = favorites.find((items) => items.userID === userID);
   const [value] = useState({
     yourID: userId,
     InterlocutorID: userID,
   });
-  const upload = () => {
+  const addFavorite = () => {
     axios
       .post(`/api/${userId}/addUserFavorites`, {
         userID: userID,
@@ -77,9 +78,9 @@ function WatchSpecialist({ userID, items, project, isAdmin }) {
   };
 
   const toggler = () => {
-    if (find?.isFavorite === undefined) {
-      upload();
-    } else {
+    if (findFavorites?.userID !== userID) {
+      addFavorite();
+    } else if (findFavorites?.userID === userID) {
       removeFavorite();
     }
   };
@@ -88,7 +89,7 @@ function WatchSpecialist({ userID, items, project, isAdmin }) {
     <div className={m.container}>
       <div className={m.wrapper}>
         <ModifiedHeader isAdmin={isAdmin} />
-        <div className={find?.userID === userID ? isActive : stock}>
+        <div className={findFavorites?.userID === userID ? isActive : stock}>
           <div className={m.specialistWrapper}>
             <div className={m.infoWrapper}>
               <div className={m.profileWindow}>
@@ -100,7 +101,7 @@ function WatchSpecialist({ userID, items, project, isAdmin }) {
             </div>
             <div className={m.buttonWrapper}>
               <button className={m.addFavorite} onClick={() => toggler()}>
-                {find?.userID === userID
+                {findFavorites?.userID === userID
                   ? "Убрать из избранного"
                   : "Добавить в избранное"}
               </button>

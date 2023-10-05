@@ -1,0 +1,200 @@
+.container {
+    width: 100%;
+    /* width: 1376px; */
+}
+
+.wrapper {
+    padding-bottom: 150px;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.messengerWrapper {
+    max-width: 1000px;
+    height: 700px;
+    display: flex;
+    grid-column-gap: 50px;
+    margin: 0 auto;
+}
+
+.userList {
+    max-width: 400px;
+}
+
+.userListWarning {
+    width: 400px;
+}
+
+.warningText {
+    font-size: 24px;
+    margin: 0;
+}
+
+.dialog {
+    height: 630px;
+    border: 2px solid black;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    /* width: 100%; */
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.respond {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.respondWrapper {
+    padding: 10px;
+    background-color: #A5CA3B;
+    /* width: 450px; */
+    /* height: 200px; */
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.inputContainer {
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.input {
+    width: 515px;
+    resize: none;
+    font-size: 17px;
+    font-family: 'Montserrat';
+    /* padding: 5px 40px 5px 5px; */
+    /* border: 2px solid black; */
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.tagsContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0 0 0;
+}
+
+.elementWrapper {
+    margin-top: 10px;
+}
+
+.elementWrapper:nth-child(1) {
+    margin-top: 0;
+}
+
+.lable {
+    margin: 0;
+}
+
+.tagsWrapper {
+    background-color: #989898;
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.tags {
+    margin: 0;
+}
+
+.postWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.postTask {
+    margin: 10px 0 0 0;
+}
+
+.postJob {
+    margin: 0;
+}
+
+.postLevel {
+    margin: 0;
+}
+
+.input:focus {
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+.message {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.myMessage {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.text {
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.time {
+    font-size: 14px;
+}
+
+.myMsgWrapper {
+    background-color: #A5CA3B;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 415px;
+}
+
+.timeWrapper {
+    display: flex;
+    margin-top: 5px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+}
+
+.slice {
+    display: flex;
+    gap: 10px;
+}
+
+.msgWrapper {
+    background-color: #989898;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 600px;
+}
+
+.imageWrapper {
+    cursor: pointer;
+    /* position: relative; */
+    width: 25px;
+    height: 25px;
+    /* left: 565px;
+    bottom: 32px; */
+}
+
+.sendImage {
+    cursor: pointer;
+}
+
+.dialogContainer {
+    width: 600px;
+}

@@ -1,3 +1,5 @@
 {
-    "BASE_URL": "http://localHost:3000/"
+    "BASE_URL1": "http://localHost:3000/",
+    "BASE_URL": "http://startupseed.ru",
+    "MONGO_URI": "mongodb+srv://startupseed:fPfsQ4SLYHxbGv2Q@startupseed.rlvehoj.mongodb.net/test"
 }

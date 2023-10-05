@@ -70,6 +70,18 @@
 .posContainer {
     border: 2px solid black;
     border-radius: 10px;
+    margin-top: 10px;
+}
+
+.posJobWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.jobPostLevel {
+    margin: 0;
+    font-weight: 300;
 }
 
 .skillsTags {

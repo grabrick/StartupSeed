@@ -2,6 +2,7 @@ import m from "./ModifiedHeader.module.css";
 import Logo from "../../../../../assets/images/logo.svg";
 import profile from "../../../../../assets/images/user-line.svg";
 import shield from "../../../../../assets/images/shield-star-line.svg"
+import message from "../../../../../assets/images/mail-line.svg";
 import { NavLink } from "react-router-dom";
 
 function ModifiedHeader({isAdmin}) {
@@ -29,6 +30,9 @@ function ModifiedHeader({isAdmin}) {
               <img className={m.image} src={shield} alt="" />
             </NavLink>
           )}
+          <NavLink to="/messenger">
+            <img className={m.image} src={message} alt="" />
+          </NavLink>
           <NavLink to="/profile">
             <img className={m.image} src={profile} alt="" />
           </NavLink>

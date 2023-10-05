@@ -15,6 +15,8 @@ import WatchSpecialistPage from "./Pages/WatchSpecialistPage/WatchSpecialistPage
 import WatchProjectPage from "./Pages/WatchProjectPage/WatchProjectPage";
 import MainFavorite from "./Pages/MainFavorite/MainFavorite";
 import AdminMainPage from "./Pages/Admin/AdminMainPage/AdminMainPage";
+import WatchMyProjectPage from "./Pages/WatchMyProjectPage/WatchMyProjectPage";
+import MainMessenger from "./Pages/MainMessenger/MainMessenger";
 
 function useRoutes(isAuthticated, isAdmin) {
   if (isAuthticated) {
@@ -27,7 +29,9 @@ function useRoutes(isAuthticated, isAdmin) {
           <Route path="/home" element={<ModifiedMainPage isAdmin={isAdmin} />} />
           <Route path="/favorites" element={<MainFavorite isAdmin={isAdmin} />} />
           <Route path="/project" element={<MainFindProject isAdmin={isAdmin} />} />
+          <Route path="/messenger" element={<MainMessenger isAdmin={isAdmin} />} />
           <Route path="/project/:id" element={<WatchProjectPage isAdmin={isAdmin} />} />
+          <Route path="/project/view/:id" element={<WatchMyProjectPage isAdmin={isAdmin} />} />
           <Route path="/profile" element={<MainProfile isAdmin={isAdmin} />} />
           <Route path="/specialists" element={<MainSpecialistsPage isAdmin={isAdmin} />} />
           <Route path="/specialist/:id" element={<WatchSpecialistPage isAdmin={isAdmin} />} />

@@ -1,4 +1,5 @@
 const Project = require('../../modals/Project')
+const fs = require('fs');
 
 class projectController {
     async getProject(req, res) {
@@ -62,17 +63,18 @@ class projectController {
     async uploadImage(req, res) {
         try {
           const { id } = req.params;
-        //   console.log(req.file.path);
+          const projectImage = req.file
+
           if (!req.file) {
             return res.status(400).json({ error: 'Файл не был загружен.' });
           }
 
           const project = await Project.findById(id);
-        //   const prevProfilePic
+          const prevProfilePic = project?.projectImage
     
           const update = await Project.findByIdAndUpdate(
             id,
-            { 'projectImage': req.file.path },
+            { 'projectImage': projectImage.path },
             { new: true }
           );
 
@@ -138,12 +140,11 @@ class projectController {
     async editProject(req, res) {
         try {
             const { id } = req.params
-            const { projectName, projectImage, projectDesc, projectPost} = req.body
+            const { projectName, projectDesc, projectPost} = req.body
             const update = await Project.findByIdAndUpdate(
                 id,
                 {
                     "projectName": projectName,
-                    "projectImage": projectImage,
                     "projectDesc": projectDesc,
                     "projectPost": projectPost,
                     
@@ -151,7 +152,6 @@ class projectController {
                 {new: true}
             )
             return res.json(update)
-            // return res.send('123')
         } catch (e) {
             return res.status(500).json({ message: e })
         }

@@ -1,13 +1,20 @@
 import m from "./Favorites.module.css";
 import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import NavBar from "../UI/NavBar/NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProjectFavoritesComponent from "./ProjectFavoritesComponent/ProjectFavoritesComponent";
 import SpecialistFavoritesComponent from "./SpecialistFavoritesComponent/SpecialistFavoritesComponent";
 import { NavLink } from "react-router-dom";
 
 function Favorites({ userData, isAdmin }) {
   const [isProject, setIsProject] = useState("Проекты");
+  console.log(userData);
+
+  useEffect(() => {
+    if (userData?.favorites?.project.length === 0) {
+      setIsProject("Специалисты")
+    }
+  }, [userData?.favorites?.project])
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
@@ -44,13 +51,13 @@ function Favorites({ userData, isAdmin }) {
               <NavBar currentBtn={"Favorite"} />
             </>
           </div>
-          {userData.favorites?.project.length !== 0 &&
+          {userData.favorites?.project.length !== 0 ||
           userData.favorites?.users.length !== 0 ? (
             <div className={m.FavoritesContainer}>
               <div className={m.buttonWrapper}>
                 {userData.favorites?.project.length > 0 ? (
                   <button
-                    className={m.button}
+                    className={isProject === "Проекты" ? m.active : m.button}
                     onClick={() => setIsProject("Проекты")}
                   >
                     Проекты
@@ -60,7 +67,7 @@ function Favorites({ userData, isAdmin }) {
                 )}
                 {userData.favorites?.users.length > 0 ? (
                   <button
-                    className={m.button}
+                    className={isProject === "Специалисты" ? m.active : m.button}
                     onClick={() => setIsProject("Специалисты")}
                   >
                     Специалисты
@@ -69,13 +76,15 @@ function Favorites({ userData, isAdmin }) {
                   ""
                 )}
               </div>
-              {userData.favorites?.project.length > 0 &&
-              userData.favorites?.users.length > 0 ? (
+              {userData.favorites?.project.length > 0 && (
                 <p className={m.currentPosition}>
-                  {isProject === "Проекты" ? "Проекты" : "Специалисты"}
+                  {isProject === "Проекты" && "Проекты"}
                 </p>
-              ) : (
-                ""
+              )}
+              {userData.favorites?.users.length > 0 && (
+                <p className={m.currentPosition}>
+                  {isProject === "Специалисты" && "Специалисты"}
+                </p>
               )}
               <div className={m.finder}>
                 {isProject === "Проекты"
@@ -110,7 +119,7 @@ function Favorites({ userData, isAdmin }) {
             </div>
           )}
           {/* Only Project */}
-          {userData.favorites?.project.length !== 0 &&
+          {/* {userData.favorites?.project.length !== 0 &&
           userData.favorites?.users.length === 0 ? (
             <div className={m.FavoritesContainer}>
               <div className={m.buttonWrapper}>
@@ -146,10 +155,10 @@ function Favorites({ userData, isAdmin }) {
             </div>
           ) : (
             ""
-          )}
+          )} */}
 
           {/* Only Users */}
-          {userData.favorites?.project.length === 0 &&
+          {/* {userData.favorites?.project.length === 0 &&
           userData.favorites?.users.length !== 0 ? (
             <div className={m.FavoritesContainer}>
               <div className={m.buttonWrapper}>
@@ -185,7 +194,7 @@ function Favorites({ userData, isAdmin }) {
             </div>
           ) : (
             ""
-          )}
+          )} */}
         </div>
       </div>
     </div>

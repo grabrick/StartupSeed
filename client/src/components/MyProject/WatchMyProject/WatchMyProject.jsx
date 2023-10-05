@@ -1,13 +1,8 @@
-import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
-import PositionProject from "./PositionProject/PositionProject";
-import baseImage from "../../assets/images/NotFound.svg";
-import m from "./WatchProject.module.css";
-import { useState } from "react";
-import SendRespond from "../UI/Popup/SendRespond/SendRespond";
+import ModifiedHeader from "../../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
+import baseImage from "../../../assets/images/NotFound.svg";
+import m from "./WatchMyProject.module.css";
 
-function WatchProject({ items, projectId, isAdmin }) {
-  const [isActive, setIsActive] = useState(false);
-  const [submitValue, setSubmitValue] = useState(null);
+function WatchMyProject({ items, projectId, isAdmin }) {
   return (
     <div className={m.container}>
       <div className={m.wrapper}>
@@ -31,16 +26,23 @@ function WatchProject({ items, projectId, isAdmin }) {
             <div className={m.positionContainer}>
               <div className={m.positionWrapper}>
                 <h2 className={m.posTitle}>Открытые позиции</h2>
-                {items?.projectPost?.map((pos, i) => (
-                  <PositionProject
-                    key={i}
-                    item={pos}
-                    post={items}
-                    setSubmitValue={setSubmitValue}
-                    setIsActive={setIsActive}
-                    projectOwner={items.projectOwner}
-                    projectId={projectId}
-                  />
+                {items?.projectPost?.map((pos) => (
+                  <div className={m.posContainer}>
+                    <div className={m.posWrapper}>
+                        <div className={m.jobPostWrapper}>
+                            <h3 className={m.posJob}>{pos.jobPost}</h3>
+                            <h3 className={m.posLevel}>{pos.postLevel}</h3>
+                        </div>
+                        <p className={m.posTask}>{pos.jobTask}</p>
+                        <div className={m.skillsWrapper}>
+                            {pos.skills.map((item, i) => (
+                                <div className={m.skills} key={i}>
+                                    <h4 className={m.skillsTags}>{item}</h4>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -53,17 +55,8 @@ function WatchProject({ items, projectId, isAdmin }) {
           )}
         </div>
       </div>
-      {isActive && (
-        <SendRespond
-          isActive={isActive}
-          submitValue={submitValue}
-          setSubmitValue={setSubmitValue}
-          setIsActive={setIsActive}
-          projectOwner={items?.projectOwner}
-        />
-      )}
     </div>
   );
 }
 
-export default WatchProject;
+export default WatchMyProject;
