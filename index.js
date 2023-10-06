@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 app.use(bodyParser.text({ limit: '200mb' }))
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(compression());
-app.use(cors());
+app.use(cors({origin:['http://www.localhost:3000', 'http://localhost:3000', 'http://startupseed.ru', 'https://startupseed.ru' ], credentials: true}));
 
 // Localhost
 // app.use('/api/auth', require('./server/routes/authRouter'))
@@ -51,7 +51,8 @@ async function start() {
       cors: {
         origin: "http://startupseed.ru",
         serveClient: false
-      }
+      },
+      path: '/socket.io'
     });
 
     socketIO.on('connection', (socket) => {
@@ -73,6 +74,10 @@ async function start() {
         console.log(data);
       })
 
+    });
+
+    socketIO.on('connect_error', (error) => {
+      console.error('Connection error:', error);
     });
 
     http.listen(PORT, () => console.log(`app started, ${PORT}`))
