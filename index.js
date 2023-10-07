@@ -43,42 +43,42 @@ async function start() {
       useUnifiedTopology: true
     })
 
-    const socketIO = require('socket.io')(http, {
-      // cors: {
-      //   origin: "http://localhost:3000",
-      //   serveClient: false
-      // }
-      cors: {
-        origin: "http://startupseed.ru",
-        serveClient: false
-      },
-      path: '/socket.io'
-    });
+    // const socketIO = require('socket.io')(http, {
+    //   cors: {
+    //     origin: "http://localhost:3000",
+    //     serveClient: false
+    //   },
+    //   // cors: {
+    //   //   origin: "http://startupseed.ru",
+    //   //   serveClient: false
+    //   // },
+    //   // path: '/socket.io'
+    // });
 
-    socketIO.on('connection', (socket) => {
-      // console.log(`⚡: ${socket.id} user just connected!`);
+    // socketIO.on('connection', (socket) => {
+    //   // console.log(`⚡: ${socket.id} user just connected!`);
 
-      socket.on('sendMessage', (data) => {
-        socketIO.emit('receiveMessage', {message: {authorID: data.myID, msg: data.msg, chatID: data.chatID, sendTime: data.sendTime}});
-      });
+    //   socket.on('sendMessage', (data) => {
+    //     socketIO.emit('receiveMessage', {message: {authorID: data.myID, msg: data.msg, chatID: data.chatID, sendTime: data.sendTime}});
+    //   });
 
-      socket.on('connectChat', (data) => {
-        socket.join(data._id)
-      })
+    //   socket.on('connectChat', (data) => {
+    //     socket.join(data._id)
+    //   })
 
-      socket.on('leaveChat', () => {  
-        socket.leave()
-      })
+    //   socket.on('leaveChat', () => {  
+    //     socket.leave()
+    //   })
 
-      socket.on('notification', (data) => {
-        console.log(data);
-      })
+    //   socket.on('notification', (data) => {
+    //     console.log(data);
+    //   })
 
-    });
+    // });
 
-    socketIO.on('connect_error', (error) => {
-      console.error('Connection error:', error);
-    });
+    // socketIO.on('connect_error', (error) => {
+    //   console.error('Connection error:', error);
+    // });
 
     http.listen(PORT, () => console.log(`app started, ${PORT}`))
   } catch (e) {

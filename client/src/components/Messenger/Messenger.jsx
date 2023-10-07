@@ -1,7 +1,5 @@
 import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import sendImage from "../../assets/images/send-plane-line.svg";
-import notReadImage from "../../assets/images/check-line.svg";
-import isReadImage from "../../assets/images/check-double-line.svg";
 import m from "./Messenger.module.css";
 import { useEffect, useState } from "react";
 import UsersCatalog from "./UsersCatalog/UsersCatalog";
@@ -13,10 +11,8 @@ import {
   sendNewMessageSocket,
   leaveFromChatSocket,
 } from "../../sockets/chatSocket";
-import Skills from "../UI/Skills/Skills";
 import { socket } from "../../sockets/socket";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
 
 function Messenger({ isAdmin }) {
   const dispatch = useDispatch();
@@ -49,7 +45,12 @@ function Messenger({ isAdmin }) {
   };
 
   const shadowSetMessage = async (value) => {
-    axios.post(`/api/${userId}/sendNewMessage`, value);
+    axios.post(`/api/${userId}/sendNewMessage`, value)
+      .then(res => {
+        if(res.status === 200) {
+          syncChatMessages(moveToChat?._id)
+        }
+      })
   };
 
   const syncChatMessages = (chatId) => {
