@@ -9,24 +9,24 @@ import {
 } from "../../redux/slices/currentUser";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import SendInvitationPopup from "../UI/Popup/SendInvitationPopup/SendInvitationPopup";
 
 function WatchSpecialist({ userID, items, project, isAdmin }) {
   const stock = `${m.specialistContainer}`;
   const isActive = `${m.activeWrapper}`;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const favorites = useSelector((state) => state.currentUser.favoritesUser);
-  const find = favorites.find((items) => items.userID === items._id);
+  // const find = favorites.find((items) => items.userID === items._id);
   const findFavorites = favorites.find((items) => items.userID === userID);
-  const [value] = useState({
-    yourID: userId,
-    InterlocutorID: userID,
-  });
+  // const [value] = useState({
+  //   yourID: userId,
+  //   InterlocutorID: userID,
+  // });
   const addFavorite = () => {
     axios
       .post(`/api/${userId}/addUserFavorites`, {

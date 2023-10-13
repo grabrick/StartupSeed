@@ -1,6 +1,7 @@
 .container {
     margin: 0 auto;
     padding-bottom: 105px;
+    width: 100%;
     /* width: 1376px; */
 }
 
@@ -9,12 +10,15 @@
     height: 24px;
 }
 
+.content {
+    display: flex;
+    grid-column-gap: 50px;
+}
+
 .title {
-    width: 1096px;
     font-weight: 700;
     font-size: 36px;
     font-style: normal;
-    margin: 0 0 30px 390px;
 }
 
 .editPen {
@@ -61,8 +65,11 @@
 
 .wrapper {
     display: flex;
-    grid-column-gap: 50px;
-    justify-content: center;
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    flex-direction: column;
+    /* justify-content: center; */
 }
 
 .profileWrapp {

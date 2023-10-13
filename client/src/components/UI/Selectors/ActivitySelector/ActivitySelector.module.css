@@ -1,0 +1,75 @@
+.container {
+    margin: 28px 0;
+    border: 2px solid black;
+    border-radius: 7px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+}
+
+.acitveContainer {
+    margin: 28px 0;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    border-radius: 7px 7px 0 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+}
+
+.container:hover {
+    border: 2px solid #93b633;
+    transition: linear 0.2s;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.selectList {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    top: 30px;
+    left: -2px;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 0 0 7px 7px;
+}
+
+.listItem {
+    cursor: pointer;
+    margin: 0;
+}
+
+.selectListWrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 210px;
+    padding: 10px;
+    gap: 10px;
+}
+
+.notActive {
+    list-style: none;
+    display: none;
+}
+
+.selectHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+}
+
+.text {
+    margin: 0;
+}

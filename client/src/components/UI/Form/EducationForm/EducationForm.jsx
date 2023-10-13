@@ -1,12 +1,12 @@
 import m from "./EducationForm.module.css";
-import React from "react";
+import React, { useState } from "react";
 import "./EducationForm.css";
 import { changeProf } from "../../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
 import { Field, Form } from "react-final-form";
 import axios from "axios";
 
-function EducationForm() {
+function EducationForm({userData}) {
   const normalInput = "text-field__input-reg4 auth__main_input-name4";
   const errorInput =
     "text-field__input-reg__error2 auth__main_input-name_error4";
@@ -16,10 +16,12 @@ function EducationForm() {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const dispatch = useDispatch();
+  const [save, setSave] = useState(false)
 
   const submit = () => {
     dispatch(changeProf(true));
   };
+
 
   const validate = (e) => {
     const errors = {};
@@ -40,15 +42,26 @@ function EducationForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put(`/api/auth/${userId}/edit/edu`, { ...value })
+    axios.put(`/api/auth/${userId}/edit/edu`, { ...value }).then(res => {
+      if(res.status === 200) {
+        setSave(true)
+      }
+    })
   };
+
   return (
     <div className={m.infoBar}>
-      <div className={m.infoWrapp}>
+      <div className={save === true ? m.saved : m.infoWrapp}>
         <h3 className={m.titleSmall}>Образование</h3>
         <Form
           onSubmit={onSubmit}
           validate={validate}
+          initialValues={{
+            specialization: userData?.more?.edu?.specialization || '',
+            institution: userData?.more?.edu?.institution || '',
+            startEdu: userData?.more?.edu?.startEdu.slice(0, 10) || '',
+            endEdu: userData?.more?.edu?.endEdu.slice(0, 10) || '',
+          }}
           render={({ handleSubmit }) => (
             <form className="popup__form4" onSubmit={handleSubmit}>
               <div className="auth__main_reg-input__user_wrapper4">

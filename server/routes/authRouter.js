@@ -61,6 +61,11 @@ router.put(
 )
 
 router.put(
+    '/:id/changeActivity',
+    controller.changeActivity
+)
+
+router.put(
     '/:id/edit/person',
     controller.editPerson
 )

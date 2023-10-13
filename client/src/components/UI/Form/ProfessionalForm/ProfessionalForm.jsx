@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTag, removeTag } from "../../../../redux/slices/skillsSlice";
 import axios from "axios";
 
-function ProfessionalForm() {
+function ProfessionalForm({userData}) {
   const normalInput = "text-field__input-reg2 auth__main_input-name2";
   const errorInput = "text-field__input-reg__error2 auth__main_input-bio__error2";
   const normalLable = "text-field__label-reg2 text-lable2";
   const errorLable = "text-field__label-reg__error2 text-lable2";
   const data = useSelector((state) => state.skills.skills);
+  // const userData = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
@@ -24,6 +25,7 @@ function ProfessionalForm() {
     dispatch(removeTag(i));
   };
   const [skills, setSkills] = useState([]);
+  const [save, setSave] = useState(false)
   const [form, setForm] = useState({
     skills: [],
   });
@@ -66,16 +68,26 @@ function ProfessionalForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put(`/api/auth/${userId}/edit/prof`, { ...value, skills: data })
+    axios.put(`/api/auth/${userId}/edit/prof`, { ...value, skills: data }).then(res => {
+      if(res.status === 200) {
+        setSave(true)
+      }
+    })
   };
 
   return (
     <div className={m.infoBar}>
-      <div className={m.infoWrapp}>
+      <div className={save === true ? m.saved : m.infoWrapp}>
         <h3 className={m.titleSmall}>Профессиональная информация</h3>
         <Form
           onSubmit={onSubmit}
           validate={validate}
+          initialValues={{
+            post: userData?.more?.job?.post || '',
+            postLevel: userData?.more?.job?.postLevel || 'Не указан',
+            lang: userData?.more?.job?.lang || '',
+            langLevel: userData?.more?.job?.langLevel || 'Не указан',
+          }}
           render={({ handleSubmit }) => (
             <form className="popup__form2" onSubmit={handleSubmit}>
               <div className="auth__main_reg-input__user_wrapper2">

@@ -10,12 +10,10 @@
 }
 
 .title {
-    width: 1096px;
     font-weight: 700;
     font-size: 36px;
     font-family: 'Montserrat';
     font-style: normal;
-    margin: 0 0 30px 385px;
 }
 
 .image {
@@ -121,8 +119,15 @@
 
 .wrapper {
     display: flex;
+    max-width: 1150px;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
     grid-column-gap: 50px;
-    justify-content: center;
+
 }
 
 .profileWrapp {
@@ -159,7 +164,6 @@
 }
 
 .infoBar {
-    width: 838px;
     margin-right: 54px;
     display: flex;
     flex-direction: column;

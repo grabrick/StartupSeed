@@ -6,12 +6,12 @@ import UsersCatalog from "./UsersCatalog/UsersCatalog";
 import { fetchCatalogData } from "../../redux/thunk/chatCatalog";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment-timezone";
-import {
-  connectToChatSocket,
-  sendNewMessageSocket,
-  leaveFromChatSocket,
-} from "../../sockets/chatSocket";
-import { socket } from "../../sockets/socket";
+// import {
+//   connectToChatSocket,
+//   sendNewMessageSocket,
+//   leaveFromChatSocket,
+// } from "../../sockets/chatSocket";
+// import { socket } from "../../sockets/socket";
 import axios from "axios";
 
 function Messenger({ isAdmin }) {
@@ -82,37 +82,38 @@ function Messenger({ isAdmin }) {
 
   useEffect(() => {
     if (moveToChat !== null) {
-      leaveFromChatSocket();
-      connectToChatSocket(moveToChat);
+      // leaveFromChatSocket();
+      // connectToChatSocket(moveToChat);
+
       syncChatMessages(moveToChat?._id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moveToChat]);
 
-  useEffect(() => {
-    // Обработка события получения сообщения
-    socket.on("receiveMessage", (message) => {
-      setMessages((prevChatMessages) => {
-        const newChatMessages = { ...prevChatMessages };
-        const chatID = message.message.chatID;
+  // useEffect(() => {
+  //   // Обработка события получения сообщения
+  //   socket.on("receiveMessage", (message) => {
+  //     setMessages((prevChatMessages) => {
+  //       const newChatMessages = { ...prevChatMessages };
+  //       const chatID = message.message.chatID;
 
-        const newMessages = [...(newChatMessages[chatID] || []), message];
+  //       const newMessages = [...(newChatMessages[chatID] || []), message];
 
-        return { ...prevChatMessages, [chatID]: newMessages };
-      });
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //       return { ...prevChatMessages, [chatID]: newMessages };
+  //     });
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const sendMessage = (value) => {
     const momentNow = moment();
     const formattedTime = momentNow.format("HH:mm");
-    sendNewMessageSocket({
-      myID: userId,
-      msg: value,
-      chatID: moveToChat?._id,
-      sendTime: formattedTime,
-    });
+    // sendNewMessageSocket({
+    //   myID: userId,
+    //   msg: value,
+    //   chatID: moveToChat?._id,
+    //   sendTime: formattedTime,
+    // });
     shadowSetMessage({
       msg: value,
       chatID: moveToChat?._id,

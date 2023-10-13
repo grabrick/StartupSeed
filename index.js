@@ -52,7 +52,6 @@ async function start() {
     //   //   origin: "http://startupseed.ru",
     //   //   serveClient: false
     //   // },
-    //   // path: '/socket.io'
     // });
 
     // socketIO.on('connection', (socket) => {

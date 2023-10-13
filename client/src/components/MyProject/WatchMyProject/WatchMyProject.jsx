@@ -1,6 +1,7 @@
 import ModifiedHeader from "../../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import baseImage from "../../../assets/images/NotFound.svg";
 import m from "./WatchMyProject.module.css";
+import Skills from "../../UI/Skills/Skills";
 
 function WatchMyProject({ items, projectId, isAdmin }) {
   return (
@@ -36,9 +37,7 @@ function WatchMyProject({ items, projectId, isAdmin }) {
                         <p className={m.posTask}>{pos.jobTask}</p>
                         <div className={m.skillsWrapper}>
                             {pos.skills.map((item, i) => (
-                                <div className={m.skills} key={i}>
-                                    <h4 className={m.skillsTags}>{item}</h4>
-                                </div>
+                              <Skills key={i} skills={item} />
                             ))}
                         </div>
                     </div>

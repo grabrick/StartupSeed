@@ -6,6 +6,8 @@ import axios from "axios";
 import { getUser } from "../../redux/slices/userSlice";
 import NavBar from "../UI/NavBar/NavBar";
 import { getSkills } from "../../redux/slices/skillsSlice";
+import ActivitySelector from "../UI/Selectors/ActivitySelector/ActivitySelector";
+import SkillsComponent from "../UI/Skills/Skills";
 
 function Profile({isAdmin}) {
   const data = useSelector((state) => state.users.user);
@@ -25,7 +27,6 @@ function Profile({isAdmin}) {
       .then((items) => {
         User(items.data);
         Skills(items.data.more.job.skills);
-        console.log(items.data);
       })
       .catch((e) => {
         console.log(e);
@@ -47,9 +48,11 @@ function Profile({isAdmin}) {
     <div className={m.container}>
       <div className={m.containerwrapper}>
       <ModifiedHeader isAdmin={isAdmin} />
-        <h1 className={m.title}>Личный кабинет</h1>
+        
 
         <div className={m.wrapper}>
+          <h1 className={m.title}>Личный кабинет</h1>
+          <div className={m.content}>
           <div className={m.bar}>
             <div className={m.profileWrapp}>
               <img
@@ -72,10 +75,7 @@ function Profile({isAdmin}) {
                 ""
               )}
             </div>
-            <select className={m.selector} name="" id="">
-              <option value="В поиске проекта">В поиске проекта</option>
-              <option value="Не ищу проект">Не ищу проект</option>
-            </select>
+            <ActivitySelector />
             <>
               <NavBar currentBtn={"Profile"} />
             </>
@@ -102,9 +102,7 @@ function Profile({isAdmin}) {
 
               <div className={m.tagsWrapper}>
                 {data.more?.job?.skills.map((tag, i) => (
-                  <div key={i} className={m.tags}>
-                    <span className={m.tag}>{tag}</span>
-                  </div>
+                  <SkillsComponent skills={tag} key={i} />
                 ))}
               </div>
             </div>
@@ -186,6 +184,7 @@ function Profile({isAdmin}) {
             ) : (
               ""
             )}
+          </div>
           </div>
         </div>
       </div>

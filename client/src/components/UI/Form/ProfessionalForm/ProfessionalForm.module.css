@@ -80,6 +80,16 @@
     margin-bottom: 25px;
 }
 
+.saved {
+    padding: 20px;
+    width: 838px;
+    /* height: 260px; */
+    height: auto;
+    border: 2px solid #93b633;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
 .buttonAdd {
     cursor: pointer;
     position: relative;

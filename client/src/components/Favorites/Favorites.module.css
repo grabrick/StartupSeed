@@ -1,29 +1,36 @@
 .container {
-    max-width: 100%;
+    width: 100%;
     /* width: 1376px; */
 }
 
-.wrapper {
+.containerwrapper {
     margin: 0 auto;
     padding-bottom: 150px;
     max-width: 1920px;
 }
 
-.contentWrapper {
+.wrapper {
     display: flex;
-    grid-column-gap: 50px;
-    justify-content: center;
-    max-width: 1200px;
+    flex-direction: column;
+    max-width: 1150px;
     margin: 0 auto;
 }
 
+.content {
+    display: flex;
+    grid-column-gap: 50px;
+}
+
 .FavoritesContainer {
-    width: 830px;
+    width: 100%;
+    max-width: 830px;
 }
 
 .title {
-    max-width: 1100px;
-    margin: 0 auto 20px;
+    font-weight: 700;
+    font-size: 36px;
+    font-family: 'Montserrat';
+    font-style: normal;
 }
 
 .button {

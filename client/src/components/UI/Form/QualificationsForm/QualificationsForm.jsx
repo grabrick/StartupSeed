@@ -1,12 +1,12 @@
 import m from "./QualificationsForm.module.css";
-import React from "react";
+import React, { useState } from "react";
 import "./QualificationsForm.css";
 import { changeQual } from "../../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
 import { Field, Form } from "react-final-form";
 import axios from "axios";
 
-function QualificationsForm() {
+function QualificationsForm({userData}) {
   const normalInput = "text-field__input-reg5 auth__main_input-name5";
   const errorInput =
     "text-field__input-reg__error2 auth__main_input-bio__error5";
@@ -18,7 +18,7 @@ function QualificationsForm() {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const dispatch = useDispatch()
-
+  const [save, setSave] = useState(false)
   const submit = () => {
     dispatch(changeQual(true))
   }
@@ -42,15 +42,26 @@ function QualificationsForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put(`/api/auth/${userId}/edit/qual`, { ...value })
+    axios.put(`/api/auth/${userId}/edit/qual`, { ...value }).then(res => {
+      if(res.status === 200) {
+        setSave(true)
+      }
+    })
   };
+  
   return (
     <div className={m.infoBar}>
-      <div className={m.infoWrapp}>
+      <div className={save === true ? m.saved : m.infoWrapp}>
         <h3 className={m.titleSmall}>Курсы и повышение квалификации</h3>
         <Form
           onSubmit={onSubmit}
           validate={validate}
+          initialValues={{
+            qualName: userData?.more?.qual?.qualName || "",
+            qualInstitution: userData?.more?.qual?.qualInstitution || "",
+            startQual: userData?.more?.qual?.startQual?.slice(0, 10) || "",
+            endQual: userData?.more?.qual?.endQual?.slice(0, 10) || "",
+          }}
           render={({ handleSubmit }) => (
             <form className="popup__form4" onSubmit={handleSubmit}>
               <div className="auth__main_reg-input__user_wrapper4">

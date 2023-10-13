@@ -8,6 +8,7 @@ const schema = Schema({
     phoneNumber: { type: String },
     isVerification: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false },
+    activity: { type: String, default: 'Не ищу проект' },
     timeZone: { type: String },
     mySendInvite: [
         {

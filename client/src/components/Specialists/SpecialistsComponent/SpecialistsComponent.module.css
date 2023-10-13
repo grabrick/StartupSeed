@@ -58,16 +58,13 @@
 
 .tagsWrapper {
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .tags {
-    margin-left: 15px;
     padding: 5px;
     background-color: silver;
     border-radius: 5px;
     color: black;
-}
-
-.tags:nth-child(1) {
-    margin-left: 0;
 }

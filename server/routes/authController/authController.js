@@ -200,6 +200,24 @@ class authController {
         }
     }
 
+    async changeActivity(req, res) {
+        try {
+            const { id } = req.params;
+            const { value } = req.body;
+            const update = await User.findByIdAndUpdate(
+                id,
+                {
+                    "activity": value
+                },
+                { new: true }
+            )
+            // console.log(value);
+            return res.status(200).json(update);
+        } catch (e) {
+            return res.status(500).json({ message: e })
+        }
+    }
+
     async editPerson(req, res) {
         try {
             const { fname, lname, gender, country, hb, city } = req.body;

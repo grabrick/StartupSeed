@@ -1,3 +1,4 @@
+import Skills from "../../UI/Skills/Skills";
 import m from "./InfoComponent.module.css";
 
 function InfoComponent({ items }) {
@@ -15,9 +16,7 @@ function InfoComponent({ items }) {
 
           <div className={m.skillsWrapper}>
             {items?.more?.job?.skills?.map((tag, index) => (
-              <div key={index} className={m.tags}>
-                <span className={m.tag}>{tag}</span>
-              </div>
+              <Skills key={index} skills={tag} />
             ))}
           </div>
         </div>

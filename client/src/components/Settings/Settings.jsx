@@ -16,8 +16,9 @@ import PhoneInput from "react-phone-number-input";
 import m from "./Settings.module.css";
 import "react-phone-number-input/style.css";
 import "./Settings.css";
+import ActivitySelector from "../UI/Selectors/ActivitySelector/ActivitySelector";
 
-function Settings({isAdmin}) {
+function Settings({ isAdmin }) {
   const data = useSelector((state) => state.users.user);
   const isVisibleEmail = useSelector((state) => state.popup.visibleEmail);
   const isVisiblePassword = useSelector((state) => state.popup.visiblePassword);
@@ -121,157 +122,161 @@ function Settings({isAdmin}) {
       <div className={m.containerWrapper}>
         <ModifiedHeader isAdmin={isAdmin} />
 
-        {/* <h1 className={m.title}>Личный кабинет</h1> */}
-
         <div className={m.wrapper}>
-          <div className={m.bar}>
-            <div className={m.profileWrapp}>
-              <img
-                alt=""
-                src={`http://startupseed.ru/${data.more?.pers?.profilePic}`}
-                className={m.avatar}
-              ></img>
-              <p className={m.name}>
-                <span>{data?.fname}</span> <span>{data?.lname}</span>
-              </p>
-              {data.more?.pers?.gender ? (
-                <div className={m.littleWrapp}>
-                  <p className={m.genderText}>{data.more?.pers?.gender}</p>
-                  <p className={m.location}>
-                    <span>{data.more?.pers?.country}, </span>
-                    <span>{data.more?.pers?.city}</span>
-                  </p>
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-            <select className={m.selector} name="" id="">
-              <option value="В поиске проекта">В поиске проекта</option>
-              <option value="Не ищу проект">Не ищу проект</option>
-            </select>
-            <>
-              <NavBar currentBtn={"Setting"} />
-            </>
-          </div>
-
-          <div className={m.infoBar}>
-            <div className={m.inputWrapper}>
-              <div className={m.textWrapper}>
-                <span className={m.span}>E-mail</span>
-                <p className={m.inputData}>{data?.email}</p>
-              </div>
-              <button className={m.btn} onClick={() => handlePopupEmailClick()}>
-                Изменить
-              </button>
-            </div>
-            <div className={m.inputWrapper}>
-              <div className={m.textWrapper}>
-                <span className={m.span}>Номер телефона</span>
-                {isVisibleNumber ? (
-                  <p className={m.phone}>{data.phoneNumber}</p>
+          <h1 className={m.title}>Личный кабинет</h1>
+          <div className={m.content}>
+            <div className={m.bar}>
+              <div className={m.profileWrapp}>
+                <img
+                  alt=""
+                  src={`http://startupseed.ru/${data.more?.pers?.profilePic}`}
+                  className={m.avatar}
+                ></img>
+                <p className={m.name}>
+                  <span>{data?.fname}</span> <span>{data?.lname}</span>
+                </p>
+                {data.more?.pers?.gender ? (
+                  <div className={m.littleWrapp}>
+                    <p className={m.genderText}>{data.more?.pers?.gender}</p>
+                    <p className={m.location}>
+                      <span>{data.more?.pers?.country}, </span>
+                      <span>{data.more?.pers?.city}</span>
+                    </p>
+                  </div>
                 ) : (
-                  <PhoneInput
-                    className={m.number}
-                    type="text"
-                    value={number}
-                    name="number"
-                    onChange={setNumber}
-                  />
+                  ""
                 )}
               </div>
-              {isVisibleNumber ? (
-                <button className={m.btn} onClick={handlePopupNumberClick}>
+              <ActivitySelector />
+              <>
+                <NavBar currentBtn={"Setting"} />
+              </>
+            </div>
+
+            <div className={m.infoBar}>
+              <div className={m.inputWrapper}>
+                <div className={m.textWrapper}>
+                  <span className={m.span}>E-mail</span>
+                  <p className={m.inputData}>{data?.email}</p>
+                </div>
+                <button
+                  className={m.btn}
+                  onClick={() => handlePopupEmailClick()}
+                >
                   Изменить
                 </button>
-              ) : (
-                <button className={m.btn} onClick={() => onClickChangeNumber()}>
-                  Сохранить
+              </div>
+              <div className={m.inputWrapper}>
+                <div className={m.textWrapper}>
+                  <span className={m.span}>Номер телефона</span>
+                  {isVisibleNumber ? (
+                    <p className={m.phone}>{data.phoneNumber}</p>
+                  ) : (
+                    <PhoneInput
+                      className={m.number}
+                      type="text"
+                      value={number}
+                      name="number"
+                      onChange={setNumber}
+                    />
+                  )}
+                </div>
+                {isVisibleNumber ? (
+                  <button className={m.btn} onClick={handlePopupNumberClick}>
+                    Изменить
+                  </button>
+                ) : (
+                  <button
+                    className={m.btn}
+                    onClick={() => onClickChangeNumber()}
+                  >
+                    Сохранить
+                  </button>
+                )}
+              </div>
+              <div className={m.inputWrapper}>
+                <div className={m.textWrapper}>
+                  <span className={m.span}>Пароль</span>
+                  <p className={m.inputData}>Обновлен</p>
+                </div>
+                <button
+                  className={m.btn}
+                  onClick={() => handlePopupPasswordClick()}
+                >
+                  Изменить
                 </button>
-              )}
-            </div>
-            <div className={m.inputWrapper}>
-              <div className={m.textWrapper}>
-                <span className={m.span}>Пароль</span>
-                <p className={m.inputData}>Обновлен</p>
+              </div>
+              <div className={m.inputWrapper}>
+                <div className={m.textWrapper}>
+                  <span className={m.span}>Часовой пояс</span>
+                  {isVisibleUTC ? (
+                    <p className={m.phone}>{data.timeZone}</p>
+                  ) : (
+                    <select
+                      className={m.selectTime}
+                      defaultValue="UTC 0"
+                      name="timeZone"
+                      value={timeZone}
+                      onChange={handleSelectChange}
+                    >
+                      <option value="UTC -12">UTC -12</option>
+                      <option value="UTC -11">UTC -11</option>
+                      <option value="UTC -10">UTC -10</option>
+                      <option value="UTC -9">UTC -9</option>
+                      <option value="UTC -8">UTC -8</option>
+                      <option value="UTC -7">UTC -7</option>
+                      <option value="UTC -6">UTC -6</option>
+                      <option value="UTC -5">UTC -5</option>
+                      <option value="UTC -4">UTC -4</option>
+                      <option value="UTC -3">UTC -3</option>
+                      <option value="UTC -2">UTC -2</option>
+                      <option value="UTC -1">UTC -1</option>
+                      <option value="UTC 0">UTC 0</option>
+                      <option value="UTC +1">UTC +1</option>
+                      <option value="UTC +2">UTC +2</option>
+                      <option value="UTC +3">UTC +3</option>
+                      <option value="UTC +4">UTC +4</option>
+                      <option value="UTC +5">UTC +5</option>
+                      <option value="UTC +6">UTC +6</option>
+                      <option value="UTC +7">UTC +7</option>
+                      <option value="UTC +8">UTC +8</option>
+                      <option value="UTC +9">UTC +9</option>
+                      <option value="UTC +10">UTC +10</option>
+                      <option value="UTC +11">UTC +11</option>
+                      <option value="UTC +12">UTC +12</option>
+                    </select>
+                  )}
+                </div>
+                {isVisibleUTC ? (
+                  <button
+                    className={m.btn}
+                    onClick={handlePopupUTCClick}
+                    type="button"
+                  >
+                    Изменить
+                  </button>
+                ) : (
+                  <button
+                    className={m.btn}
+                    onClick={() => ChangeTimeZone()}
+                    type="submit"
+                  >
+                    Сохранить
+                  </button>
+                )}
               </div>
               <button
-                className={m.btn}
-                onClick={() => handlePopupPasswordClick()}
+                className={m.deleteBtn}
+                // onClick={() => onClickDeleteUser(data._id)}
               >
-                Изменить
+                Удалить аккаунт
               </button>
             </div>
-            <div className={m.inputWrapper}>
-              <div className={m.textWrapper}>
-                <span className={m.span}>Часовой пояс</span>
-                {isVisibleUTC ? (
-                  <p className={m.phone}>{data.timeZone}</p>
-                ) : (
-                  <select
-                    className={m.selectTime}
-                    defaultValue="UTC 0"
-                    name="timeZone"
-                    value={timeZone}
-                    onChange={handleSelectChange}
-                  >
-                    <option value="UTC -12">UTC -12</option>
-                    <option value="UTC -11">UTC -11</option>
-                    <option value="UTC -10">UTC -10</option>
-                    <option value="UTC -9">UTC -9</option>
-                    <option value="UTC -8">UTC -8</option>
-                    <option value="UTC -7">UTC -7</option>
-                    <option value="UTC -6">UTC -6</option>
-                    <option value="UTC -5">UTC -5</option>
-                    <option value="UTC -4">UTC -4</option>
-                    <option value="UTC -3">UTC -3</option>
-                    <option value="UTC -2">UTC -2</option>
-                    <option value="UTC -1">UTC -1</option>
-                    <option value="UTC 0">UTC 0</option>
-                    <option value="UTC +1">UTC +1</option>
-                    <option value="UTC +2">UTC +2</option>
-                    <option value="UTC +3">UTC +3</option>
-                    <option value="UTC +4">UTC +4</option>
-                    <option value="UTC +5">UTC +5</option>
-                    <option value="UTC +6">UTC +6</option>
-                    <option value="UTC +7">UTC +7</option>
-                    <option value="UTC +8">UTC +8</option>
-                    <option value="UTC +9">UTC +9</option>
-                    <option value="UTC +10">UTC +10</option>
-                    <option value="UTC +11">UTC +11</option>
-                    <option value="UTC +12">UTC +12</option>
-                  </select>
-                )}
-              </div>
-              {isVisibleUTC ? (
-                <button
-                  className={m.btn}
-                  onClick={handlePopupUTCClick}
-                  type="button"
-                >
-                  Изменить
-                </button>
-              ) : (
-                <button
-                  className={m.btn}
-                  onClick={() => ChangeTimeZone()}
-                  type="submit"
-                >
-                  Сохранить
-                </button>
-              )}
-            </div>
-            <button
-              className={m.deleteBtn}
-              // onClick={() => onClickDeleteUser(data._id)}
-            >
-              Удалить аккаунт
-            </button>
           </div>
         </div>
+        {isVisibleEmail ? "" : <EditEmail />}
+        {isVisiblePassword ? "" : <EditPassword />}
       </div>
-      {isVisibleEmail ? "" : <EditEmail />}
-      {isVisiblePassword ? "" : <EditPassword />}
     </div>
   );
 }

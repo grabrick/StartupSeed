@@ -3,12 +3,13 @@ import favorite from "../../../assets/images/star-line.svg";
 import active from "../../../assets/images/star-line-active.svg";
 import { useState } from "react";
 import WarningUserPopup from "../../UI/Popup/WarningUserPopup/WarningUserPopup";
+import { NavLink } from "react-router-dom";
 
 function SpecialistFavoritesComponent({ userItems }) {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <div className={m.container}>
-      <div className={m.wrapper}>
+      <NavLink className={m.wrapper} to={`/specialist/${userItems?.userID}`}>
         <div className={m.avatar}>
           <img src={userItems?.profilePic} className={m.image} alt="" />
         </div>
@@ -22,7 +23,11 @@ function SpecialistFavoritesComponent({ userItems }) {
             <div className={m.imgWrapper}>
               <img
                 src={userItems.isFavorite === true ? active : favorite}
-                onClick={() => setIsVisible(!isVisible)}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  event.preventDefault();
+                  setIsVisible(!isVisible);
+                }}
                 className={m.starImg}
                 alt=""
               />
@@ -35,7 +40,7 @@ function SpecialistFavoritesComponent({ userItems }) {
             <span className={m.postLevel}>{userItems?.postLevel}</span>
           </div>
         </div>
-      </div>
+      </NavLink>
       {isVisible ? <WarningUserPopup userID={userItems.userID} close={setIsVisible} /> : ""}
     </div>
   );

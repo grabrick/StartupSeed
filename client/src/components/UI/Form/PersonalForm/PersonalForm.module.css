@@ -89,6 +89,14 @@
     margin-bottom: 25px;
 }
 
+.saved {
+    padding: 20px;
+    width: 838px;
+    border: 2px solid #93b633;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
 .titleSmall {
     font-family: 'Montserrat';
     margin: 0 0 20px 0;

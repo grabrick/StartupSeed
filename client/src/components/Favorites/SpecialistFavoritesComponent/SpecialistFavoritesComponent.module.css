@@ -8,10 +8,13 @@
     border-radius: 10px;
     display: flex;
     gap: 20px;
+    text-decoration: none;
+    z-index: 1;
 }
 
 .wrapp {
     display: flex;
+    width: 100%;
     flex-direction: column;
 }
 
@@ -45,6 +48,7 @@
     font-family: 'Montserrat';
     font-weight: 700;
     font-size: 16px;
+    color: black;
 }
 
 .post {
@@ -69,11 +73,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-}
-
-.wrapp {
-    display: flex;
-    width: 700px;
+    z-index: 2;
 }
 
 .textWrapper {
@@ -82,4 +82,5 @@
 
 .WrapperWrapper {
     margin-bottom: 10px;
+    text-decoration: none;
 }

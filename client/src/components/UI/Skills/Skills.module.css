@@ -6,4 +6,6 @@
 .skillsTag {
     margin: 0;
     padding: 7px;
+    text-decoration: none;
+    color: black;
 }

@@ -33,13 +33,13 @@ const catalogUserSlice = createSlice({
     reducers: {
         searchResult: (state, action) => {
             const query = action.payload.toLowerCase();
-            const filteredUsers = state.reserveCatalog.data.filter((user) =>
+            const filteredUsers = state?.reserveCatalog?.data?.filter((user) =>
                 `${user.fname} ${user.lname}`.toLowerCase().indexOf(query) !== -1
             );
-            state.catalogData.data = filteredUsers;
+            state.catalogData = filteredUsers;
 
             if (query.length === 0) {
-                state.catalogData.data = state.reserveCatalog.data;
+                state.catalogData = state.reserveCatalog.data;
             }
         },
         setClearData: (state, action) => {

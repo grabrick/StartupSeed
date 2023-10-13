@@ -1,6 +1,7 @@
 import m from "./ProjectProfilePopup.module.css";
 import baseImg from "../../../../assets/images/NotFound.svg";
 import axios from "axios";
+import Skills from "../../Skills/Skills";
 
 function ProjectProfilePopup({
   currentProjectData,
@@ -97,10 +98,8 @@ function ProjectProfilePopup({
                       </div>
                       <p className={m.jobTask}>{pos.jobTask}</p>
                       <div className={m.skillsWrapper}>
-                        {pos.skills.map((skills) => (
-                          <div key={skills} className={m.skills}>
-                            <h4 className={m.skillsTags}>{skills}</h4>
-                          </div>
+                        {pos.skills.map((skills, i) => (
+                          <Skills key={i} skills={skills} />
                         ))}
                       </div>
                     </div>

@@ -8,7 +8,7 @@ import { onAdd } from "../../redux/slices/userSlice";
 import { getProject } from "../../redux/slices/userSlice";
 import EditPositionForm from "../UI/Form/EditPositionForm/EditPositionForm";
 
-function EditProject({isAdmin}) {
+function EditProject({ isAdmin }) {
   const currentLink = window.location.href;
   const findProjectID = currentLink.toString().slice(38, 62);
   const normalInput = `${m.input}`;
@@ -48,14 +48,14 @@ function EditProject({isAdmin}) {
   const converter = async (e) => {
     let file = e.target.files[0];
     let formData = new FormData();
-    formData.append('upload', file);
-    setImage(formData)
+    formData.append("upload", file);
+    setImage(formData);
 
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       const uploadImage = async () => {
-        setVisualImage({...visualImage, image: reader.result})
+        setVisualImage({ ...visualImage, image: reader.result });
       };
       uploadImage();
     };
@@ -67,11 +67,11 @@ function EditProject({isAdmin}) {
   };
 
   useEffect(() => {
-    if (image?.has('upload')) {
-      axios.put(`/api/${findProjectID}/projectImage/upload`, image)
+    if (image?.has("upload")) {
+      axios.put(`/api/${findProjectID}/projectImage/upload`, image);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [image])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [image]);
 
   const validate = (e) => {
     const errors = {};
@@ -85,7 +85,10 @@ function EditProject({isAdmin}) {
 
   const onSubmit = async (value) => {
     axios
-      .put(`/api/${findProjectID}/project/edit`, { ...value, projectPost: findCurrentObject.projectPost})
+      .put(`/api/${findProjectID}/project/edit`, {
+        ...value,
+        projectPost: findCurrentObject.projectPost,
+      })
       .then((response) => {
         if (response.status === 201) {
           // setTimeout(() => {
@@ -99,98 +102,111 @@ function EditProject({isAdmin}) {
     <div className={m.container}>
       <div className={m.containerwrapper}>
         <ModifiedHeader isAdmin={isAdmin} />
-        <h1 className={m.title}>Редактирование</h1>
         <div className={m.wrapper}>
-          <Form
-            onSubmit={onSubmit}
-            validate={validate}
-            render={({ handleSubmit }) => (
-              <form className={m.form} onSubmit={handleSubmit}>
-                <div className={m.formWrapper}>
-                  <div className={m.avatar1}>
-                    <img
-                      className={m.profilePic}
-                      src={
-                        findCurrentObject
-                          ? visualImage?.image
-                          : `http://localHost:3000/${findCurrentObject?.projectImage}`
-                      }
-                      alt=""
-                    />
-                    <input type="button" className={m.cameraBtn} />
-                    <input
-                      className={m.camera}
-                      name="projectImage"
-                      onChange={converter}
-                      type="file"
-                    />
-                  </div>
+          <h1 className={m.title}>Редактирование</h1>
 
-                  <div className={m.formContent}>
-                    <div className={m.inputWraper}>
-                      <Field name="projectName">
-                        {({ input, meta }) => (
-                          <>
-                            <input
-                              type="text"
-                              placeholder="Название"
-                              className={meta.error ? errorInput : normalInput}
-                              {...input}
-                            />
-                            {meta.touched && meta.error && (
-                              <span className="error-text1">{meta.error}</span>
-                            )}
-                          </>
-                        )}
-                      </Field>
+          <div className={m.content}>
+            <Form
+              onSubmit={onSubmit}
+              validate={validate}
+              initialValues={{
+                projectName: findCurrentObject?.projectName || "",
+                projectDesc: findCurrentObject?.projectDesc || "",
+              }}
+              render={({ handleSubmit }) => (
+                <form className={m.form} onSubmit={handleSubmit}>
+                  <div className={m.formWrapper}>
+                    <div className={m.avatar1}>
+                      <img
+                        className={m.profilePic}
+                        src={
+                          findCurrentObject
+                            ? visualImage?.image
+                            : `http://localHost:3000/${findCurrentObject?.projectImage}`
+                        }
+                        alt=""
+                      />
+                      <input type="button" className={m.cameraBtn} />
+                      <input
+                        className={m.camera}
+                        name="projectImage"
+                        onChange={converter}
+                        type="file"
+                      />
                     </div>
 
-                    <div className={m.inputWraper}>
-                      <Field name="projectDesc">
-                        {({ input, meta }) => (
-                          <>
-                            <textarea
-                              type="text"
-                              placeholder="Описание"
-                              className={
-                                meta.error ? errorInputArea : normalInputArea
-                              }
-                              {...input}
-                            />
-                            {meta.touched && meta.error && (
-                              <span className="error-text3">{meta.error}</span>
-                            )}
-                          </>
-                        )}
-                      </Field>
+                    <div className={m.formContent}>
+                      <div className={m.inputWraper}>
+                        <Field name="projectName">
+                          {({ input, meta }) => (
+                            <>
+                              <input
+                                type="text"
+                                placeholder="Название"
+                                className={
+                                  meta.error ? errorInput : normalInput
+                                }
+                                {...input}
+                              />
+                              {meta.touched && meta.error && (
+                                <span className="error-text1">
+                                  {meta.error}
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </Field>
+                      </div>
+
+                      <div className={m.inputWraper}>
+                        <Field name="projectDesc">
+                          {({ input, meta }) => (
+                            <>
+                              <textarea
+                                type="text"
+                                placeholder="Описание"
+                                className={
+                                  meta.error ? errorInputArea : normalInputArea
+                                }
+                                {...input}
+                              />
+                              {meta.touched && meta.error && (
+                                <span className="error-text3">
+                                  {meta.error}
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </Field>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className={m.wrap}>
-                  <p className={m.text}>Команда проекта</p>
-                  {findCurrentObject?.projectPost.map((form, index) => (
-                    <EditPositionForm
-                      items={form}
-                      key={form.id}
-                      formIndex={index + 1}
-                    />
-                  ))}
-                  <div className={m.buttonWrapper}>
-                    <button
-                      type="button"
-                      onClick={() => addForm()}
-                      className={m.addJobPost}
-                    >
-                      Добавить должность
-                    </button>
-                    <button type="submit" className={m.buttonSave}>
-                      Сохранить
-                    </button>
+                  <div className={m.wrap}>
+                    <p className={m.text}>Команда проекта</p>
+                    {findCurrentObject?.projectPost.map((form, index) => (
+                      <EditPositionForm
+                        items={form}
+                        key={form.id}
+                        formIndex={index + 1}
+                      />
+                    ))}
+                    <div className={m.buttonWrapper}>
+                      <button
+                        type="button"
+                        onClick={() => addForm()}
+                        className={m.addJobPost}
+                      >
+                        Добавить должность
+                      </button>
+                      <button type="submit" className={m.buttonSave}>
+                        Сохранить
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </form>
-            )}
-          />
+                </form>
+              )}
+            />
+          </div>
         </div>
       </div>
     </div>

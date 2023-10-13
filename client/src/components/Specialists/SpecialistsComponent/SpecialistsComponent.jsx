@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
 import m from "./SpecialistsComponent.module.css";
 import baseImage from '../../../assets/images/NotFound.svg'
+import Skills from "../../UI/Skills/Skills"
 
-function SpecialistsComponent(items) {
+const SpecialistsComponent = (items) => {
   const data = items.items;
   return (
     <NavLink className={m.link} to={`/specialist/${data._id}`}>
@@ -20,9 +21,7 @@ function SpecialistsComponent(items) {
             </p>
             <div className={m.tagsWrapper}>
               {data.more?.job?.skills?.map((tag, index) => (
-                <div key={index} className={m.tags}>
-                  <span className={m.tag}>{tag}</span>
-                </div>
+                <Skills key={index} skills={tag} />
               ))}
             </div>
           </div>

@@ -1,8 +1,8 @@
 import m from "./ExperienceForm.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ExperienceForm.css";
 import { changeExp } from "../../../../redux/slices/formSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Field, Form } from "react-final-form";
 import axios from "axios";
 
@@ -19,12 +19,14 @@ function ExperienceForm() {
   const dispatch = useDispatch();
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
-  const [active, isActive] = useState(false)
+  const userData = useSelector((state) => state.users.user);
+  const [active, isActive] = useState(false);
+  const [save, setSave] = useState(false)
 
   const submit = () => {
     dispatch(changeExp(true));
   };
-  
+
   const validate = (e) => {
     const errors = {};
 
@@ -42,23 +44,48 @@ function ExperienceForm() {
 
     return errors;
   };
-  
+
+  useEffect(() => {
+    if (userData?.more?.exp?.startJob) {
+      isActive(!active);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userData?.more?.exp?.startJob]);
+
   const onSubmit = async (value) => {
-    if(active === true) {
-      const actualDate = 'По настоящее время'
+    if (active === true) {
+      const actualDate = "По настоящее время";
       // value.endJob = 'По настоящее время'
-      axios.put(`/api/auth/${userId}/edit/exp`, { ...value, endJob: actualDate })
+      axios.put(`/api/auth/${userId}/edit/exp`, {
+        ...value,
+        endJob: actualDate,
+      }).then(res => {
+        if(res.status === 200) {
+          setSave(true)
+        }
+      });
     } else {
-      axios.put(`/api/auth/${userId}/edit/exp`, { ...value })
+      axios.put(`/api/auth/${userId}/edit/exp`, { ...value }).then(res => {
+        if(res.status === 200) {
+          setSave(true)
+        }
+      });
     }
   };
   return (
     <div className={m.infoBar}>
-      <div className={m.infoWrapp}>
+      <div className={save === true ? m.saved :m.infoWrapp}>
         <h3 className={m.titleSmall}>Опыт работы</h3>
         <Form
           onSubmit={onSubmit}
           validate={validate}
+          initialValues={{
+            jobPost: userData?.more?.exp?.jobPost || "",
+            progress: userData?.more?.exp?.progress || "",
+            company: userData?.more?.exp?.company || "",
+            startJob: userData?.more?.exp?.startJob.slice(0, 10) || "",
+            endJob: userData?.more?.exp?.endJob === "По настоящее время" ? userData?.more?.exp?.endJob :  userData?.more?.exp?.endJob.slice(0, 10),
+          }}
           render={({ handleSubmit }) => (
             <form className="popup__form3" onSubmit={handleSubmit}>
               <div className="auth__main_reg-input__user_wrapper3">
@@ -138,7 +165,13 @@ function ExperienceForm() {
                             {...input}
                           />
                           <div className="checkbox">
-                            <input type="checkbox" id="color-1" onChange={() => isActive(!active)} className="custom-checkbox" />
+                            <input
+                              type="checkbox"
+                              id="color-1"
+                              onChange={() => isActive(!active)}
+                              checked={active}
+                              className={"custom-checkbox"}
+                            />
                             <label for="color-1">По настоящее время</label>
                           </div>
                           <label

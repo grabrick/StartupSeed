@@ -40,6 +40,16 @@
     overflow-y: scroll;
 }
 
+.dialog::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dialog::-webkit-scrollbar-thumb {
+    background-color: #989898;
+    width: 5px;
+    border-radius: 5px;
+}
+
 .respond {
     width: 100%;
     margin-bottom: 10px;

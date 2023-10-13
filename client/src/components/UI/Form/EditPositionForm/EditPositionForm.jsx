@@ -11,7 +11,7 @@ import {
   removeTag,
 } from "../../../../redux/slices/userSlice";
 
-function EditPositionForm(items) {
+function EditPositionForm({items}) {
   const normalInputTeam = `${m.inputTeam}`;
   const errorInputTeam = `${m.inputErrorTeam}`;
   const normalInputAreaTeam = `${m.inputAreaTeam}`;
@@ -19,7 +19,7 @@ function EditPositionForm(items) {
   const dispatch = useDispatch();
   const [skills, setSkills] = useState();
   const [inputForm, setinputForm] = useState();
-  const formID = items.items.id;
+  const formID = items.id;
   const addTags = (TagValue) => dispatch(addTag(TagValue));
   const addFormText = (formValue) => dispatch(addText(formValue));
   const removeTags = (index, formID) => dispatch(removeTag({ index, formID }));
@@ -30,13 +30,13 @@ function EditPositionForm(items) {
     e.preventDefault();
     let value = e.target.value;
     if (!value.trim()) return;
-    addTags({ value: skills, id: items.items.id });
+    addTags({ value: skills, id: items.id });
     input.onChange("");
   };
 
   const clickAddTag = (input) => {
     if (!skills?.trim()) return;
-    addTags({ value: skills, id: items.items.id });
+    addTags({ value: skills, id: items.id });
     input.onChange("");
   };
 
@@ -76,7 +76,7 @@ function EditPositionForm(items) {
   };
 
   const uploadData = () => {
-    addFormText({ value: inputForm, id: items.items.id });
+    addFormText({ value: inputForm, id: items.id });
     console.log({ value: inputForm });
   };
 
@@ -87,6 +87,11 @@ function EditPositionForm(items) {
       <Form
         onSubmit={onSubmit}
         validate={validate}
+        initialValues={{
+          jobPost: items?.jobPost || "",
+          postLevel: items?.postLevel || "",
+          jobTask: items?.jobTask || "",
+        }}
         render={({ handleSubmit }) => (
           <form className={m.form} onSubmit={handleSubmit}>
             <div className={m.formWrapper}>
@@ -167,7 +172,7 @@ function EditPositionForm(items) {
                 </Field>
               </div>
               <div className={m.tagsWrapper}>
-                {items.items?.skills?.map((tag, index) => (
+                {items?.skills?.map((tag, index) => (
                   <div key={index} className={m.tags}>
                     <span className={m.tag}>{tag}</span>
                     <img

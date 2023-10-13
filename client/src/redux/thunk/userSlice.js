@@ -33,7 +33,7 @@ const userSlice = createSlice({
     reducers: {
         searchResult: (state, action) => {
             const query = action.payload.toLowerCase();
-            const filteredUsers = state.reserveUsers.data.filter((user) =>
+            const filteredUsers = state?.reserveUsers?.data?.filter((user) =>
                 `${user.fname} ${user.lname}`.toLowerCase().indexOf(query) !== -1
             );
             state.userData.data = filteredUsers;

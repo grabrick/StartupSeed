@@ -8,17 +8,26 @@ import cases from "../../../assets/images/briefcase-line.svg";
 import m from "./NavBar.module.css";
 import './NavBar.css'
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
-const logout = () => {
-  localStorage.removeItem("userData")
-  setTimeout(() => {
-    window.location.reload()
-    window.location.replace('/')
-  }, 500);
-}
 
 function NavBar(props) {
   const [show, setShow] = useState(props.currentBtn)
+  const navigate = useNavigate();
+
+  const navigateToEditProfile = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    navigate('/profile/edit');
+};
+
+  const logout = () => {
+    localStorage.removeItem("userData")
+    setTimeout(() => {
+      window.location.reload()
+      window.location.replace('/')
+    }, 500);
+  }
 
   const handleProfileClick = () => {
     setShow("Profile");
@@ -47,9 +56,9 @@ function NavBar(props) {
                 <img className={m.image} src={lines} alt="" />
                 <span className={m.span}>Профиль</span>
               </div>
-              <NavLink to="/profile/edit">
-                <img className={m.editPen} src={pen} alt="" />
-              </NavLink>
+              {/* <NavLink to="/profile/edit"> */}
+                <img className={m.editPen} onClick={(event) => navigateToEditProfile(event)} src={pen} alt="" />
+              {/* </NavLink> */}
             </button>
           </NavLink>
           <NavLink className={m.buttonLink} to="/profile/project">

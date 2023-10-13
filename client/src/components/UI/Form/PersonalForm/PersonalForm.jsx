@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PersonalForm.css";
 import m from "./PersonalForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +6,13 @@ import axios from "axios";
 import { getUser } from "../../../../redux/slices/userSlice";
 import { Field, Form } from "react-final-form";
 
-function PersonalForm() {
+function PersonalForm({userData}) {
   const normalInput = "text-field__input-reg1 auth__main_input-name1";
   const errorInput = "text-field__input-reg__error1 auth__main_input-bio__error1";
   const normalLable = "text-field__label-reg1 text-lable1";
   const errorLable = "text-field__label-reg__error1 text-lable1";
-  const data = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
+  const [save, setSave] = useState(false)
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
   const User = (items) => {
@@ -65,15 +65,27 @@ function PersonalForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put(`/api/auth/${userId}/edit/person`, { ...value });
+    axios.put(`/api/auth/${userId}/edit/person`, { ...value }).then(res => {
+      if(res.status === 200) {
+        setSave(true)
+      }
+    });
   };
   return (
     <div className={m.infoBar}>
-      <div className={m.infoWrapp}>
+      <div className={save === true ? m.saved : m.infoWrapp}>
         <h3 className={m.titleSmall}>Личная информация</h3>
         <Form
           onSubmit={onSubmit}
           validate={validate}
+          initialValues={{
+            fname: userData?.fname || "",
+            lname: userData?.lname || "",
+            gender: userData?.more?.pers?.gender || "Не указан",
+            hb: userData?.more?.pers?.hb.slice(0, 10) || "",
+            country: userData?.more?.pers?.country || "",
+            city: userData?.more?.pers?.city || ""
+          }}
           render={({ handleSubmit }) => (
             <form
               className="popup__form1"
@@ -86,7 +98,7 @@ function PersonalForm() {
               <div className={m.avatar1}>
                 <img
                   className={m.profilePic}
-                  src={`http://startupseed.ru/${data.more?.pers?.profilePic}`}
+                  src={`http://startupseed.ru/${userData.more?.pers?.profilePic}`}
                   alt=""
                 />
                 <input type="button" className={m.cameraBtn} />

@@ -1,29 +1,33 @@
 .navbarWrapper {
-    margin: 0 auto;
+    /* margin: 0 auto; */
     display: flex;
-    width: 1060px;
-    height: 30px;
-    justify-content: space-evenly;
+    /* width: 1060px; */
+    width: 100%;
+    max-width: 934px;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .findInput {
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 2px solid black;
     font-family: 'Montserrat';
-    font-size: 12px;
+    font-size: 17px;
     padding: 0 10px;
-    height: 28px;
+    height: 31px;
 }
 
 .findInput:hover {
-    border: 1px solid #93b633;
+    border: 2px solid #93b633;
     outline: 0;
     box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
 }
 
 .findInput:focus {
-    border: 1px solid #93b633;
+    border: 2px solid #93b633;
     outline: 0;
     box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
 }
@@ -36,19 +40,23 @@
 }
 
 .findButton {
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
     border-radius: 5px;
     cursor: pointer;
     background-color: #CFFF49;
     border: none;
-    height: 30px;
+    height: 34px;
+    font-size: 17px;
 }
 
 .createButton {
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
     border-radius: 5px;
     cursor: pointer;
     background-color: #CFFF49;
     border: none;
-    height: 30px;
+    height: 34px;
+    font-size: 16px;
 }

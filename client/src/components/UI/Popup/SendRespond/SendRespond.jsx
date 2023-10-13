@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Skills from '../../Skills/Skills';
 import m from './SendRespond.module.css'
 import axios from 'axios';
@@ -59,8 +59,8 @@ function SendRespond({isActive, setIsActive, submitValue, projectOwner, setSubmi
                     <p className={m.jobTask}>{submitValue?.jobTask}</p>
 
                     <div className={m.skillsWrapper}>
-                        {submitValue?.skills.map(skills => (
-                           <Skills key={skills} skills={skills} />
+                        {submitValue?.skills.map((skills, i) => (
+                           <Skills key={i} skills={skills} />
                         ))}
                     </div>
                 </div>

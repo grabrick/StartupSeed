@@ -1,17 +1,17 @@
 import m from "./AboutForm.module.css";
-import React from "react";
+import React, { useState } from "react";
 import "./AboutForm.css";
 import { Field, Form } from "react-final-form";
 import axios from "axios";
 
-function AboutForm() {
+function AboutForm({userData}) {
   const normalInputArea =
     "text-field__input-reg6 auth__main_input-name32 text-input__textarea";
   const errorInputArea =
     "text-field__input-reg_error auth__main_input-name_error text-input__textarea";
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
-
+  const [save, setSave] = useState(false)
   const validate = (e) => {
     const errors = {};
 
@@ -23,15 +23,22 @@ function AboutForm() {
   };
 
   const onSubmit = async (value) => {
-    axios.put(`/api/auth/${userId}/edit/about`, { ...value })
+    axios.put(`/api/auth/${userId}/edit/about`, { ...value }).then(res => {
+      if(res.status === 200) {
+        setSave(true)
+      }
+    })
   };
   return (
     <div className={m.infoBar}>
-      <div className={m.infoWrapp}>
+      <div className={save === true ? m.saved : m.infoWrapp}>
         <h3 className={m.titleSmall}>О себе</h3>
         <Form
           onSubmit={onSubmit}
           validate={validate}
+          initialValues={{
+            aboutMe: userData?.more?.about?.aboutMe || ''
+          }}
           render={({ handleSubmit }) => (
             <form className="popup__form6" onSubmit={handleSubmit}>
               <div className="auth__main_reg-input__user_wrapper6">

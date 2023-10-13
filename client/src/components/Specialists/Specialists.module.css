@@ -1,25 +1,23 @@
 .container {
-    max-width: 100%;
-    /* width: 1376px; */
+    width: 100%;
 }
 
 .containerwrapper {
     margin: 0 auto;
-    padding-bottom: 250px;
+    padding-bottom: 150px;
     max-width: 1920px;
 }
 
 .title {
-    width: 1024px;
+    width: 100%;
     font-weight: 700;
     font-size: 36px;
     font-family: 'Montserrat';
     font-style: normal;
-    /* margin: 0 0 30px 385px; */
 }
 
 .SpecialistsContainer {
-    max-width: 1024px;
+    max-width: 935px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -32,13 +30,16 @@
     align-items: center;
 }
 
+.usersContainer {
+    width: 100%;
+}
+
 .navbarWrapper {
-    margin-right: 250px;
+    width: 100%;
     margin-bottom: 20px;
     display: flex;
-    max-width: 1060px;
     height: 30px;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
 
 .warning {

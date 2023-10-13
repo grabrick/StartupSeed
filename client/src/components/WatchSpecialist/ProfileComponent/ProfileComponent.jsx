@@ -1,5 +1,5 @@
 import m from "./ProfileComponent.module.css";
-import baseImage from '../../../assets/images/NotFound.svg'
+import baseImage from "../../../assets/images/NotFound.svg";
 
 function ProfileComponent({ items }) {
   const hb = items?.more?.pers?.hb;
@@ -27,7 +27,7 @@ function ProfileComponent({ items }) {
               <p className={m.name}>{items?.lname}</p>
             </div>
             <div className={m.activeWrapper}>
-              <p className={m.isActive}>В поиске проекта</p>
+              <p className={m.isActive}>{items?.activity}</p>
             </div>
           </div>
           <div className={m.moreInfoWrapper}>

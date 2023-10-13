@@ -1,0 +1,46 @@
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 934px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.findInput {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 5px;
+    border: 2px solid black;
+    font-family: 'Montserrat';
+    font-size: 17px;
+    padding: 0 10px;
+    height: 31px;
+}
+
+.findInput:hover {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.findInput:focus {
+    border: 2px solid #93b633;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(164, 202, 59);
+}
+
+.findButton {
+    width: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #CFFF49;
+    border: none;
+    height: 34px;
+    font-size: 17px;
+}

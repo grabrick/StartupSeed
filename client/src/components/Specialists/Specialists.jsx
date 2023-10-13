@@ -1,24 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
 import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import m from "./Specialists.module.css";
 import SpecialistsComponent from "./SpecialistsComponent/SpecialistsComponent";
-import { useEffect, useState } from "react";
-import { setSearchQuery } from "../../redux/slices/paginationSlice";
+import { useState } from "react";
 import Pagination from "../UI/Pagination/Pagination";
 import { NavLink } from "react-router-dom";
+import SpecialistSearch from "../UI/Search/SpecialistSearch/SpecialistSearch";
 
 function Specialists({ users, project, isAdmin }) {
-  const dispatch = useDispatch();
-  const allUsers = useSelector((state) => state.pagination.users);
-  const [searchInput, setSearchInput] = useState({
-    input: "",
-    postLevel: "Любой",
-  });
   const [currentPage, setCurrentPage] = useState(1);
-
-  const changeHandler = (event) => {
-    setSearchInput({ ...searchInput, [event.target.name]: event.target.value });
-  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -29,38 +18,6 @@ function Specialists({ users, project, isAdmin }) {
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
   );
-  const handleSearch = () => {
-    const value = {
-      input: searchInput.input,
-      postLevel: searchInput.postLevel,
-    };
-    const { input, postLevel } = value;
-    if (input || postLevel) {
-      const filteredUsers = allUsers.filter((user) => {
-        return user.more.job.post;
-      });
-      dispatch(
-        setSearchQuery({
-          filtered: filteredUsers,
-          input: value.input,
-          postLevel: value.postLevel,
-        })
-      );
-    }
-  };
-
-  console.log(isAdmin);
-
-  useEffect(() => {
-    dispatch(
-      setSearchQuery({
-        filtered: [],
-        input: "",
-        postLevel: "Любой",
-      })
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchInput?.input?.length === 0]);
 
   return (
     <div className={m.container}>
@@ -69,31 +26,9 @@ function Specialists({ users, project, isAdmin }) {
         {isAdmin ? (
           <>
             <div className={m.SpecialistsContainer}>
+              <h1 className={m.title}>Специалисты</h1>
               <div className={m.navbarWrapper}>
-                <input
-                  className={m.findInput}
-                  placeholder="Должность"
-                  type="text"
-                  name="input"
-                  value={searchInput.input}
-                  onChange={changeHandler}
-                />
-                <select
-                  className={m.selector}
-                  defaultValue="Любой"
-                  name="postLevel"
-                  value={searchInput.postLevel}
-                  onChange={changeHandler}
-                >
-                  <option value="Любой">Любой</option>
-                  <option value="Junior">Junior</option>
-                  <option value="Middle">Middle</option>
-                  <option value="Senior">Senior</option>
-                  <option value="Lead">Lead</option>
-                </select>
-                <button className={m.findButton} onClick={() => handleSearch()}>
-                  Найти
-                </button>
+                <SpecialistSearch />
               </div>
 
               <div className={m.usersContainer}>
@@ -132,33 +67,7 @@ function Specialists({ users, project, isAdmin }) {
             ) : (
               <div className={m.SpecialistsContainer}>
                 <div className={m.navbarWrapper}>
-                  <input
-                    className={m.findInput}
-                    placeholder="Должность"
-                    type="text"
-                    name="input"
-                    value={searchInput.input}
-                    onChange={changeHandler}
-                  />
-                  <select
-                    className={m.selector}
-                    defaultValue="Любой"
-                    name="postLevel"
-                    value={searchInput.postLevel}
-                    onChange={changeHandler}
-                  >
-                    <option value="Любой">Любой</option>
-                    <option value="Junior">Junior</option>
-                    <option value="Middle">Middle</option>
-                    <option value="Senior">Senior</option>
-                    <option value="Lead">Lead</option>
-                  </select>
-                  <button
-                    className={m.findButton}
-                    onClick={() => handleSearch()}
-                  >
-                    Найти
-                  </button>
+                  <SpecialistSearch />
                 </div>
 
                 <div className={m.usersContainer}>
