@@ -22,4 +22,9 @@ router.get(
     controller.getChatMesseges
 )
 
+router.put(
+    '/setIsOpen',
+    controller.setIsOpenChat
+)
+
 module.exports = router

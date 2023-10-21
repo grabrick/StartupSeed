@@ -8,6 +8,7 @@ import axios from "axios";
 import { getProject, getUser } from "../../redux/slices/userSlice";
 import ProjectComponent from "./ProjectComponent/ProjectComponent";
 import ActivitySelector from "../UI/Selectors/ActivitySelector/ActivitySelector";
+import ProfileComponent from "../UI/Profile/Profile";
 
 function MyProject({ isAdmin }) {
   const data = useSelector((state) => state.users.user);
@@ -54,27 +55,7 @@ function MyProject({ isAdmin }) {
           <h1 className={m.title}>Личный кабинет</h1>
           <div className={m.content}>
             <div className={m.bar}>
-              <div className={m.profileWrapp}>
-                <img
-                  alt=""
-                  src={`http://startupseed.ru/${data.more?.pers?.profilePic}`}
-                  className={m.avatar}
-                ></img>
-                <p className={m.name}>
-                  <span>{data?.fname}</span> <span>{data?.lname}</span>
-                </p>
-                {data.more?.pers?.gender ? (
-                  <div className={m.littleWrapp}>
-                    <p className={m.genderText}>{data.more?.pers?.gender}</p>
-                    <p className={m.location}>
-                      <span>{data.more?.pers?.country}, </span>
-                      <span>{data.more?.pers?.city}</span>
-                    </p>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
+              <ProfileComponent data={data} />
               <ActivitySelector />
               <>
                 <NavBar currentBtn={"Project"} />

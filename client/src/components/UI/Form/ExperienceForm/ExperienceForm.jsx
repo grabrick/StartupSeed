@@ -83,8 +83,8 @@ function ExperienceForm() {
             jobPost: userData?.more?.exp?.jobPost || "",
             progress: userData?.more?.exp?.progress || "",
             company: userData?.more?.exp?.company || "",
-            startJob: userData?.more?.exp?.startJob.slice(0, 10) || "",
-            endJob: userData?.more?.exp?.endJob === "По настоящее время" ? userData?.more?.exp?.endJob :  userData?.more?.exp?.endJob.slice(0, 10),
+            startJob: userData?.more?.exp?.startJob?.slice(0, 10) || "",
+            endJob: userData?.more?.exp?.endJob === "По настоящее время" ? userData?.more?.exp?.endJob :  userData?.more?.exp?.endJob?.slice(0, 10),
           }}
           render={({ handleSubmit }) => (
             <form className="popup__form3" onSubmit={handleSubmit}>

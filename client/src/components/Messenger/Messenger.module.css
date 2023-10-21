@@ -11,10 +11,21 @@
 
 .messengerWrapper {
     max-width: 1000px;
-    height: 700px;
     display: flex;
     grid-column-gap: 50px;
     margin: 0 auto;
+}
+
+.warningWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.warningTitle {
+    margin: 0;
 }
 
 .userList {
@@ -50,20 +61,6 @@
     border-radius: 5px;
 }
 
-.respond {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.respondWrapper {
-    padding: 10px;
-    background-color: #A5CA3B;
-    /* width: 450px; */
-    /* height: 200px; */
-    margin: 0 auto;
-    border-radius: 10px;
-}
-
 .inputContainer {
     border: 2px solid black;
     border-radius: 10px;
@@ -71,6 +68,16 @@
     align-items: center;
     justify-content: space-between;
     padding-right: 10px;
+}
+
+.inputDisabled {
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+    cursor: not-allowed;
 }
 
 .input {
@@ -85,23 +92,33 @@
     border-radius: 5px;
 }
 
-.tagsContainer {
+.btn {
+    background-color: transparent;
+    border: none;
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0 0 0;
+    justify-content: center;
+    cursor: pointer;
 }
 
-.elementWrapper {
-    margin-top: 10px;
+.disable {
+    width: 515px;
+    resize: none;
+    font-size: 17px;
+    font-family: 'Montserrat';
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
 }
 
-.elementWrapper:nth-child(1) {
-    margin-top: 0;
-}
-
-.lable {
-    margin: 0;
+.disabled {
+    cursor: not-allowed;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tagsWrapper {
@@ -114,28 +131,10 @@
     margin: 0;
 }
 
-.postWrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .link {
     text-decoration: none;
     font-size: 18px;
     font-weight: 500;
-}
-
-.postTask {
-    margin: 10px 0 0 0;
-}
-
-.postJob {
-    margin: 0;
-}
-
-.postLevel {
-    margin: 0;
 }
 
 .input:focus {
@@ -199,10 +198,6 @@
     height: 25px;
     /* left: 565px;
     bottom: 32px; */
-}
-
-.sendImage {
-    cursor: pointer;
 }
 
 .dialogContainer {

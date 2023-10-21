@@ -20,7 +20,8 @@ class messengerController {
                         postLevel: value.postLevel,
                         skills: value.skills,
                     },
-                    respondMessage: value.respondMessage
+                    respondMessage: value.respondMessage,
+                    sendTime: value.sendTime,
                 },
                 users: {
                     author: {
@@ -29,6 +30,7 @@ class messengerController {
                         lname: findAuthor.lname,
                         post: findAuthor.more.job.post ? findAuthor.more.job.post : null,
                         profilePic: findAuthor.more.pers.profilePic ? findAuthor.more.pers.profilePic : null,
+                        isAdmin: findAuthor.isAdmin === true ? true : false
                     },
                     interlocutor: {
                         interlocutorID: value.interlocutorID,
@@ -36,6 +38,7 @@ class messengerController {
                         lname: findInterlocator.lname,
                         post: findInterlocator.more.job.post ? findInterlocator.more.job.post : null,
                         profilePic: findInterlocator.more.pers.profilePic ? findInterlocator.more.pers.profilePic : null,
+                        isAdmin: findInterlocator.isAdmin === true ? true : false
                     }
                 }
             }
@@ -70,6 +73,32 @@ class messengerController {
                 return res.status(404).json({ message: 'Чаты не найдены' });
             }
         } catch (error) {
+            return res.status(500).json({ message: 'Произошла ошибка сервера' });
+        }
+    }
+
+    async setIsOpenChat(req, res) {
+        try {
+            const value = req.body
+            // console.log(value.id);
+            const findObject = await Chat.findById(value.id)
+            if (findObject.isOpen === true) {
+                const update = await Chat.findByIdAndUpdate(
+                    value.id,
+                    {"isOpen": false},
+                    {new: true}
+                )
+                return res.status(200).json(update)
+            } else {
+                const update = await Chat.findByIdAndUpdate(
+                    value.id,
+                    {"isOpen": true},
+                    {new: true}
+                )
+                return res.status(200).json(update)
+            }
+            
+        } catch(e) {
             return res.status(500).json({ message: 'Произошла ошибка сервера' });
         }
     }

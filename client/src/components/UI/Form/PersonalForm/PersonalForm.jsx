@@ -82,7 +82,7 @@ function PersonalForm({userData}) {
             fname: userData?.fname || "",
             lname: userData?.lname || "",
             gender: userData?.more?.pers?.gender || "Не указан",
-            hb: userData?.more?.pers?.hb.slice(0, 10) || "",
+            hb: userData?.more?.pers?.hb?.slice(0, 10) || "",
             country: userData?.more?.pers?.country || "",
             city: userData?.more?.pers?.city || ""
           }}

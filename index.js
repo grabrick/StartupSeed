@@ -43,41 +43,52 @@ async function start() {
       useUnifiedTopology: true
     })
 
-    // const socketIO = require('socket.io')(http, {
-    //   cors: {
-    //     origin: "http://localhost:3000",
-    //     serveClient: false
-    //   },
-    //   // cors: {
-    //   //   origin: "http://startupseed.ru",
-    //   //   serveClient: false
-    //   // },
-    // });
+    const socketIO = require('socket.io')(http, {
+      cors: {
+        origin: "http://localhost:3000",
+        serveClient: false
+      },
+      // cors: {
+      //   origin: "http://startupseed.ru",
+      //   serveClient: false
+      // },
+    });
+    let chatState = false;
 
-    // socketIO.on('connection', (socket) => {
-    //   // console.log(`⚡: ${socket.id} user just connected!`);
+    socketIO.on('connection', (socket) => {
+      // console.log(`⚡: ${socket.id} user just connected!`);
 
-    //   socket.on('sendMessage', (data) => {
-    //     socketIO.emit('receiveMessage', {message: {authorID: data.myID, msg: data.msg, chatID: data.chatID, sendTime: data.sendTime}});
-    //   });
+      socket.on('sendMessage', (data) => {
+        socketIO.emit('receiveMessage', {message: {authorID: data.myID, msg: data.msg, chatID: data.chatID, sendTime: data.sendTime}});
+      });
 
-    //   socket.on('connectChat', (data) => {
-    //     socket.join(data._id)
-    //   })
+      socket.on('connectChat', (data) => {
+        socket.join(data._id)
+      })
 
-    //   socket.on('leaveChat', () => {  
-    //     socket.leave()
-    //   })
+      socket.on('leaveChat', () => {  
+        socket.leave()
+      })
 
-    //   socket.on('notification', (data) => {
-    //     console.log(data);
-    //   })
+      socket.on('setIsOpen', () => {
+        chatState = true;
+        socket.broadcast.emit('chatStatusUpdate', { isOpen: true }); 
+      })
 
-    // });
+      socket.on('setIsClose', () => {
+        chatState = false;
+        socket.broadcast.emit('chatStatusUpdate', { isOpen: false });
+      })
 
-    // socketIO.on('connect_error', (error) => {
-    //   console.error('Connection error:', error);
-    // });
+      socket.on('notification', (data) => {
+        console.log(data);
+      })
+
+    });
+
+    socketIO.on('connect_error', (error) => {
+      console.error('Connection error:', error);
+    });
 
     http.listen(PORT, () => console.log(`app started, ${PORT}`))
   } catch (e) {

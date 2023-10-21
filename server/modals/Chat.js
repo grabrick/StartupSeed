@@ -11,8 +11,9 @@ const schema = Schema({
             ],
         },
         respondMessage: { type: String },
-        sendTime: { type: Date, default: Date.now() }
+        sendTime: { type: String }
     },
+    isOpen: { type: Boolean, default: false },
     users: {
         author: {
             authorID: { type: Schema.Types.ObjectId },
@@ -20,6 +21,7 @@ const schema = Schema({
             lname: { type: String },
             post: { type: String },
             profilePic: { type: String },
+            isAdmin: { type: Boolean }
         },
         interlocutor: {
             interlocutorID: { type: Schema.Types.ObjectId },
@@ -27,6 +29,7 @@ const schema = Schema({
             lname: { type: String },
             post: { type: String },
             profilePic: { type: String },
+            isAdmin: { type: Boolean }
         }
 
     }

@@ -1,26 +1,32 @@
 import ModifiedHeader from "../UI/Blocks/Header/ModifiedHeader/ModifiedHeader";
 import sendImage from "../../assets/images/send-plane-line.svg";
 import m from "./Messenger.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UsersCatalog from "./UsersCatalog/UsersCatalog";
 import { fetchCatalogData } from "../../redux/thunk/chatCatalog";
+import { closeChat, openChat } from "../../redux/slices/messengerSlice"
 import { useDispatch, useSelector } from "react-redux";
+import NotificationSound from "../../assets/sound/Notif.wav";
+// import { audio } from '../../assets/sound/Notif.mp3'
 import moment from "moment-timezone";
-// import {
-//   connectToChatSocket,
-//   sendNewMessageSocket,
-//   leaveFromChatSocket,
-// } from "../../sockets/chatSocket";
-// import { socket } from "../../sockets/socket";
+import {
+  connectToChatSocket,
+  sendNewMessageSocket,
+  leaveFromChatSocket,
+} from "../../sockets/chatSocket";
+import { socket } from "../../sockets/socket";
 import axios from "axios";
+import RespondMessage from "../UI/RespondMessage/RespondMessage";
 
 function Messenger({ isAdmin }) {
   const dispatch = useDispatch();
-  const { catalogData, catalogLoading, catalogError } = useSelector(
+  const { catalogData } = useSelector(
     (state) => state.chatCatalog
   );
+  const isOpen = useSelector(state => state.messenger.isOpen)
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const audioPlayer = useRef(null);
   const [config, setConfig] = useState({
     config: 0,
     height: "100px",
@@ -30,10 +36,19 @@ function Messenger({ isAdmin }) {
   const ID = JSON.parse(localStorage.getItem("userData"));
   const userId = ID.userID;
 
+  const playNotificationSound = () => {
+    audioPlayer.current.play();
+  };
+
   useEffect(() => {
-    dispatch(fetchCatalogData(`api/${userId}/fetchCatalog`));
+    const fetchData = async () => {
+      dispatch(fetchCatalogData(`api/${userId}/fetchCatalog`));
+    }
+    const intervalId = setInterval(fetchData, 10000);
+    fetchData();
+    return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [moveToChat]);
 
   const changer = (value) => {
     setNewMessage(value);
@@ -45,12 +60,11 @@ function Messenger({ isAdmin }) {
   };
 
   const shadowSetMessage = async (value) => {
-    axios.post(`/api/${userId}/sendNewMessage`, value)
-      .then(res => {
-        if(res.status === 200) {
-          syncChatMessages(moveToChat?._id)
-        }
-      })
+    axios.post(`/api/${userId}/sendNewMessage`, value).then((res) => {
+      if (res.status === 200) {
+        syncChatMessages(moveToChat?._id);
+      }
+    });
   };
 
   const syncChatMessages = (chatId) => {
@@ -82,38 +96,58 @@ function Messenger({ isAdmin }) {
 
   useEffect(() => {
     if (moveToChat !== null) {
-      // leaveFromChatSocket();
-      // connectToChatSocket(moveToChat);
-
+      leaveFromChatSocket();
+      connectToChatSocket(moveToChat);
       syncChatMessages(moveToChat?._id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moveToChat]);
 
-  // useEffect(() => {
-  //   // Обработка события получения сообщения
-  //   socket.on("receiveMessage", (message) => {
-  //     setMessages((prevChatMessages) => {
-  //       const newChatMessages = { ...prevChatMessages };
-  //       const chatID = message.message.chatID;
+  useEffect(() => {
+    if(moveToChat?.isOpen === true) {
+      dispatch(openChat())
+    } else if(moveToChat?.isOpen === false) {
+      dispatch(closeChat())
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [moveToChat])
 
-  //       const newMessages = [...(newChatMessages[chatID] || []), message];
+  useEffect(() => {
+    // Обработка события получения сообщения
+    socket.on("receiveMessage", (message) => {
+      playNotificationSound()
+      setMessages((prevChatMessages) => {
+        const newChatMessages = { ...prevChatMessages };
+        const chatID = message.message.chatID;
 
-  //       return { ...prevChatMessages, [chatID]: newMessages };
-  //     });
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+        const newMessages = [...(newChatMessages[chatID] || []), message];
+
+        return { ...prevChatMessages, [chatID]: newMessages };
+      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    socket.on('chatStatusUpdate', (value) => {
+      if(value.isOpen === true) {
+        dispatch(openChat())
+      } else if(value.isOpen === false) {
+        dispatch(closeChat())
+      }
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const sendMessage = (value) => {
     const momentNow = moment();
     const formattedTime = momentNow.format("HH:mm");
-    // sendNewMessageSocket({
-    //   myID: userId,
-    //   msg: value,
-    //   chatID: moveToChat?._id,
-    //   sendTime: formattedTime,
-    // });
+    sendNewMessageSocket({
+      myID: userId,
+      msg: value,
+      chatID: moveToChat?._id,
+      sendTime: formattedTime,
+    });
     shadowSetMessage({
       msg: value,
       chatID: moveToChat?._id,
@@ -137,6 +171,7 @@ function Messenger({ isAdmin }) {
 
   return (
     <div className={m.container}>
+      <audio ref={audioPlayer} src={NotificationSound} />
       <div className={m.wrapper}>
         <ModifiedHeader isAdmin={isAdmin} />
         <div className={m.messengerWrapper}>
@@ -161,34 +196,15 @@ function Messenger({ isAdmin }) {
           <div className={m.dialogContainer}>
             <div className={m.dialog}>
               {moveToChat !== null && (
-                <div className={m.respond}>
-                  <div className={m.respondWrapper}>
-                    <div className={m.elementWrapper}>
-                      <label className={m.lable}>Позиция:</label>
-                      <div className={m.postWrapper}>
-                        <h3 className={m.postJob}>{position?.jobPost}</h3>
-                        <span className={m.postLevel}>
-                          {position?.postLevel}
-                        </span>
-                      </div>
-                    </div>
-                    <div className={m.postTask}>
-                      <div className={m.elementWrapper}>
-                        <label className={m.lable}>Описание:</label>
-                        <p className={m.postTask}>{position?.jobTask}</p>
-                      </div>
-                      <div className={m.elementWrapper}>
-                        <label className={m.lable}>Навыки:</label>
-                        <div className={m.tagsContainer}>
-                          {position?.skills.map((items) => (
-                            <div className={m.tagsWrapper} key={items}>
-                              <h4 className={m.tags}>{items}</h4>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <RespondMessage 
+                  position={position} 
+                  moveToChat={moveToChat} 
+                  setMoveToChat={setMoveToChat}
+                />
+              )}
+              {moveToChat === null && (
+                <div className={m.warningWrapper}>
+                  <h3 className={m.warningTitle}>Выберете чат</h3>
                 </div>
               )}
               {messages[moveToChat?._id]?.map((message, index) => (
@@ -223,9 +239,9 @@ function Messenger({ isAdmin }) {
                 </div>
               ))}
             </div>
-            <div className={m.inputContainer}>
+            <div className={isOpen === false ? m.inputDisabled : m.inputContainer}>
               <textarea
-                className={m.input}
+                className={isOpen === false ? m.disable : m.input}
                 style={
                   config.config === 1
                     ? { height: config.height }
@@ -233,17 +249,16 @@ function Messenger({ isAdmin }) {
                 }
                 name="input"
                 value={newMessage}
+                disabled={isOpen === false ? true : false}
                 onChange={(e) => changer(e.target.value)}
                 onKeyDown={handleKeyDown}
               ></textarea>
-              <div className={m.imageWrapper}>
-                <img
-                  src={sendImage}
-                  className={m.sendImage}
-                  onClick={() => clickAddTag()}
-                  alt=""
-                />
-              </div>
+              <button
+                className={isOpen === false ? m.disabled : m.btn}
+                onClick={() => clickAddTag()}
+              >
+                <img src={sendImage} className={m.sendImage} alt="" />
+              </button>
             </div>
           </div>
         </div>

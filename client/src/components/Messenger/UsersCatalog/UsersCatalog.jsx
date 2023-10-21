@@ -11,6 +11,7 @@ function UsersCatalog({ items, userId, moveToChat, setMoveToChat }) {
     // console.log(items);
   };
 
+
   return (
     <div className={moveToChat?._id === chatID ? m.activeUserList : m.userListWrapper} onClick={() => moveToCurrentChat(items)}>
       {interlocutor?.interlocutorID === userId ? (
@@ -31,7 +32,13 @@ function UsersCatalog({ items, userId, moveToChat, setMoveToChat }) {
             {author?.more?.job?.post.length > 0 ? (
               <p className={m.job}>{author?.more?.job?.post}</p>
             ) : (
-              <div className={m.hidden}></div>
+              <>
+                {author.isAdmin === true ? (
+                  <p className={m.prefix}>Администратор</p>
+                ) : (
+                  <div className={m.hidden}></div>
+                )}
+              </>
             )}
           </div>
         </>
@@ -53,7 +60,13 @@ function UsersCatalog({ items, userId, moveToChat, setMoveToChat }) {
             {interlocutor?.more?.job?.post.length > 0 ? (
               <p className={m.job}>{interlocutor?.more?.job?.post}</p>
             ) : (
-              <div className={m.hidden}></div>
+              <>
+                {interlocutor.isAdmin === true ? (
+                  <p className={m.prefix}>Администратор</p>
+                ) : (
+                  <div className={m.hidden}></div>
+                )}
+              </>
             )}
           </div>
         </>

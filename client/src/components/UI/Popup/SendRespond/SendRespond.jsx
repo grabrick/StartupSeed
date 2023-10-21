@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Skills from '../../Skills/Skills';
 import m from './SendRespond.module.css'
+import moment from "moment-timezone";
 import axios from 'axios';
 
 function SendRespond({isActive, setIsActive, submitValue, projectOwner, setSubmitValue }) {
@@ -29,13 +30,16 @@ function SendRespond({isActive, setIsActive, submitValue, projectOwner, setSubmi
     };
 
     const Send = () => {
+        const momentNow = moment();
+        const formattedTime = momentNow.format("YYYY-MM-DD HH:mm");
         const value = {
             jobPost: submitValue?.jobPost, 
             jobTask: submitValue?.jobTask, 
             postLevel: submitValue?.postLevel, 
             skills: submitValue?.skills,
             interlocutorID: projectOwner,
-            respondMessage: inputValue
+            respondMessage: inputValue,
+            sendTime: formattedTime,
         }
         axios.post(`/api/${userId}/sendRespond`, {...value})
         .then(res => {

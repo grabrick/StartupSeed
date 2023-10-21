@@ -59,8 +59,8 @@ function EducationForm({userData}) {
           initialValues={{
             specialization: userData?.more?.edu?.specialization || '',
             institution: userData?.more?.edu?.institution || '',
-            startEdu: userData?.more?.edu?.startEdu.slice(0, 10) || '',
-            endEdu: userData?.more?.edu?.endEdu.slice(0, 10) || '',
+            startEdu: userData?.more?.edu?.startEdu?.slice(0, 10) || '',
+            endEdu: userData?.more?.edu?.endEdu?.slice(0, 10) || '',
           }}
           render={({ handleSubmit }) => (
             <form className="popup__form4" onSubmit={handleSubmit}>

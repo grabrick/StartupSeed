@@ -1,0 +1,92 @@
+.respond {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.respondWrapper {
+    padding: 10px;
+    background-color: #A5CA3B;
+    /* width: 450px; */
+    /* height: 200px; */
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.elementWrapper {
+    margin-top: 10px;
+}
+
+.elementWrapper:nth-child(1) {
+    margin-top: 0;
+}
+
+.lable {
+    margin: 0;
+}
+
+.postWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.postJob {
+    margin: 0;
+    font-family: 'Montserrat';
+}
+
+.postLevel {
+    margin: 0;
+    font-family: 'Montserrat';
+}
+
+.postTask {
+    margin: 10px 0;
+    font-family: 'Montserrat';
+}
+
+.sendTime {
+    margin: 10px 0;
+    font-family: 'Montserrat';
+}
+
+.timeWrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.msgText {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Montserrat';
+    background-color: silver;
+    padding: 10px;
+    border-radius: 5px;
+    word-wrap: break-word;
+}
+
+.tagsContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0 0 0;
+    flex-wrap: wrap;
+}
+
+.buttonWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: transparent;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid black;
+    font-size: 17px;
+}

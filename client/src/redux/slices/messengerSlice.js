@@ -1,24 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  catalog: [],
-  dialog: []
+  isOpen: false
 };
 
 const formSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
-    newMessage(state, actions) {
-        const { value, userID } = actions.payload
-        console.log(value, userID);
+    openChat: (state) => {
+      state.isOpen = true;
     },
-    getCatalog(state, actions) {
-      state.catalog = actions.payload
+    closeChat: (state) => {
+      state.isOpen = false;
     }
   }
 });
 
-export const { newMessage, getCatalog } = formSlice.actions;
-
+export const { openChat, closeChat } = formSlice.actions;
 export default formSlice.reducer;

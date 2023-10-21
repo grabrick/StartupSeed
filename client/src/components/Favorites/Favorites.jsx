@@ -6,9 +6,12 @@ import ProjectFavoritesComponent from "./ProjectFavoritesComponent/ProjectFavori
 import SpecialistFavoritesComponent from "./SpecialistFavoritesComponent/SpecialistFavoritesComponent";
 import { NavLink } from "react-router-dom";
 import ActivitySelector from "../UI/Selectors/ActivitySelector/ActivitySelector";
+import ProfileComponent from "../UI/Profile/Profile";
+import { useSelector } from "react-redux";
 
 function Favorites({ userData, isAdmin }) {
   const [isProject, setIsProject] = useState("Проекты");
+  const data = useSelector((state) => state.users.user);
 
   useEffect(() => {
     if (userData?.favorites?.project.length === 0) {
@@ -25,29 +28,7 @@ function Favorites({ userData, isAdmin }) {
           
           <div className={m.content}>
             <div className={m.bar}>
-              <div className={m.profileWrapp}>
-                <img
-                  alt=""
-                  src={`http://startupseed.ru/${userData.more?.pers?.profilePic}`}
-                  className={m.avatar}
-                />
-                <p className={m.name}>
-                  <span>{userData?.fname}</span> <span>{userData?.lname}</span>
-                </p>
-                {userData.more?.pers?.gender ? (
-                  <div className={m.littleWrapp}>
-                    <p className={m.genderText}>
-                      {userData.more?.pers?.gender}
-                    </p>
-                    <p className={m.location}>
-                      <span>{userData.more?.pers?.country}, </span>
-                      <span>{userData.more?.pers?.city}</span>
-                    </p>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
+              <ProfileComponent data={data} />
               <ActivitySelector />
               <>
                 <NavBar currentBtn={"Favorite"} />

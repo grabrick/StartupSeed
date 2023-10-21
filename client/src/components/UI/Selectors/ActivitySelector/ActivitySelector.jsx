@@ -36,8 +36,8 @@ function ActiveSelector({}) {
         </div>
         <ul className={isActive === true ? m.selectList : m.notActive}>
             <div className={m.selectListWrapper}>
-            {defaultValue.map(items => (
-                <li className={m.listItem} onClick={() => handleClick(items)}>{items}</li>
+            {defaultValue.map((items, i) => (
+                <li className={m.listItem} key={i} onClick={() => handleClick(items)}>{items}</li>
             ))}
             </div>
         </ul>
